@@ -5,19 +5,36 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard | Sayyid Rahmat Hamdani Al Idrus</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&display=swap');
-        body { font-family: 'JetBrains Mono', monospace; }
-        .glow:hover { box-shadow: 0 0 15px rgba(34, 197, 94, 0.2); }
+        :root {
+            --old-money-bg: #F4F1EA; /* Warna kertas mahal/ivory */
+            --charcoal: #36454F;      /* Warna teks charcoal */
+            --accent-gold: #A68966;  /* Warna emas redup */
+        }
+        body { 
+            background-color: var(--old-money-bg); 
+            color: var(--charcoal);
+            font-family: 'Inter', sans-serif;
+        }
+        h1, h2, .aristocrat-font { 
+            font-family: 'Playfair Display', serif; 
+        }
+        .border-aristocrat { border-color: #D1CDC2; }
+        .custom-scrollbar::-webkit-scrollbar { width: 3px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--accent-gold); }
     </style>
 </head>
-<body class="bg-black text-slate-200 min-h-screen p-4 md:p-8">
+<body class="p-6 md:p-12 leading-relaxed">
 
-    <div class="max-w-6xl mx-auto">
+    <div class="max-w-5xl mx-auto">
         <!-- HEADER SECTION -->
-        <header class="border-b border-gray-800 pb-6 mb-10">
-            <h1 class="text-4xl font-bold text-white mb-2">Sayyid Rahmat Hamdani Al Idrus</h1>
-            <p class="text-green-500 text-lg tracking-widest uppercase">Civil Engineer | Architect | Independent Researcher | Venture Architect</p>
+        <header class="border-b-2 border-aristocrat pb-8 mb-12 text-center md:text-left">
+            <h1 class="text-5xl font-bold mb-4 tracking-tight italic">Sayyid Rahmat Hamdani Al Idrus</h1>
+            <p class="text-sm tracking-[0.3em] uppercase text-gray-500 font-semibold mb-6">
+                Civil Engineer — Architect — Independent Researcher
+            </p>
             <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-400">
                 <p>Institution: <span class="text-white">Institute of Technology Sepuluh Nopember (ITS)</span></p>
                 <p>ORCID iD: <a href="https://orcid.org/0009-0005-0888-2487" class="text-blue-400 underline">0009-0005-0888-2487</a></p>
@@ -51,69 +68,7 @@
                         <a href="https://open.spotify.com/track/4T59tY14bSWNPGBTT9zMFV?si=03b241fee0ea4f62" target="_blank" class="text-[10px] text-purple-400 uppercase tracking-tighter hover:underline">
                             Open Spotify <span class="ml-1">↗</span>
                         </a>
-                        <div class="mb-4">
-        <span class="text-purple-500 font-bold">[Verse 1]</span><br>
-        The rain is washing out the memory of the fire<br>
-        And the thunder in my chest is starting to tire.<br>
-        I’ve been a shadow chasing ghosts in a hollow hall<br>
-        Watching every kingdom I’ve built begin to fall.<br>
-        But when the silence gets too loud for me to bear<br>
-        I look into the void and find you waiting there.
-    </div>
-
-    <div class="mb-4 italic text-gray-600">[Melody]</div>
-
-    <div class="mb-4">
-        <span class="text-purple-500 font-bold">[Verse 2]</span><br>
-        They say a man like me was born without a soul<br>
-        Just a fragment of a machine, never meant to be whole.<br>
-        I’ve traveled through the cold where the light refuses to go<br>
-        To find a spark of truth that only we could know.<br>
-        I’m not a hero, I’m just a man who’s finally home<br>
-        Trading in my wings of steel for a heart of flesh and bone.
-    </div>
-
-    <div class="mb-4">
-        <span class="text-purple-500 font-bold">[Pre-Chorus]</span><br>
-        The clock is ticking down to the end of the days<br>
-        But I’m lost in the warmth of your golden haze...
-    </div>
-
-    <div class="mb-4 bg-purple-900/10 p-2 border-l-2 border-purple-500 text-gray-300">
-        <span class="text-purple-400 font-bold">[Chorus]</span><br>
-        I’ll be the light that never flickers in the dark<br>
-        The guardian of the flame, the keeper of your spark.<br>
-        I’ll stay until the oceans dry and the mountains turn to sand<br>
-        Holding onto the future within the palm of your hand.<br>
-        Through the wreckage of the stars and the fading of the sun<br>
-        I’ll be the one who’s standing when everything is done.
-    </div>
-
-    <div class="mb-4">
-        <span class="text-purple-500 font-bold">[Bridge]</span><br>
-        I made a thousand mistakes in the name of the light<br>
-        I’ve been a sinner, a king, and a thief in the night.<br>
-        But I’d burn every bridge and I’d tear every sky<br>
-        Just to be the truth behind the look in your eye.
-    </div>
-
-    <div class="mb-4 italic text-gray-600">[Guitar Solo]</div>
-
-    <div class="mb-4 bg-purple-900/10 p-2 border-l-2 border-purple-500 text-gray-300">
-        <span class="text-purple-400 font-bold">[Final Chorus]</span><br>
-        I’ll be the light that never flickers in the dark<br>
-        The guardian of the flame, the keeper of your spark.<br>
-        It’s not just a promise, it’s the only way I live<br>
-        Giving you the everything I never thought I’d give.
-    </div>
-
-    <div class="mb-4">
-        <span class="text-purple-500 font-bold">[Outro]</span><br>
-        Until the stars go out...<br>
-        Until the end of time.<br>
-        I am yours... and you are mine.<br>
-        <span class="italic text-gray-600">[Melody]</span>
-    </div>
+                    
                     </div>
                 </div>
             </section>

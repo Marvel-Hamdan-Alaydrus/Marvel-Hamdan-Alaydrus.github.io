@@ -7,30 +7,56 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --old-money-bg: #F4F1EA; /* Warna kertas mahal/ivory */
-            --charcoal: #36454F;      /* Warna teks charcoal */      
-            --gold: #B8860B; /* Dark Goldenrod untuk teks agar terbaca */
-            --burgundy: #800020;  /* Warna merah anggur gelap */
-            --cafe-au-lait: #A67B5B;   /* Cokelat kopi susu yang hangat */
-            --brown-khaki: #7E634E;    /* Cokelat tanah yang dalam */
-            --rosa-de-arena: #D2B48C;  /* Sand Rose / Tan lembut */
-            --camel: #C19A6B;          /* Warna Camel klasik (ikonis) */
-            --cashmere: #E6D5B8;       /* Warna kain Cashmere premium */
-        }
-        body { 
-            background-color: var(--old-money-bg); 
-            color: var(--charcoal);
-            font-family: 'Inter', sans-serif;
-        }
-        h1, h2, .aristocrat-font { 
-            font-family: 'Playfair Display', serif; 
-        }
-        .border-aristocrat { border-color: #D1CDC2; }
-        .custom-scrollbar::-webkit-scrollbar { width: 3px; }
-        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
-        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--accent-gold); }
-    </style>
+:root {
+    --old-money-bg: #F4F1EA;
+    --charcoal: #36454F;
+    --gold: #B8860B;
+    --burgundy: #800020;
+    --cafe-au-lait: #A67B5B;
+    --brown-khaki: #7E634E;
+    --rosa-de-arena: #D2B48C;
+    --camel: #C19A6B;
+    --cashmere: #E6D5B8;
+}
+
+body {
+    background-color: var(--old-money-bg);
+    color: var(--gold); /* Emas sebagai warna tulisan default */
+    font-family: 'Inter', sans-serif;
+}
+
+/* KELAS ARISTOKRAT OTOMATIS */
+.aristocrat-section {
+    background-color: var(--old-money-bg);
+    color: var(--gold); /* Warna tulisan emas */
+    padding: 30px;
+    margin: 40px auto;
+    max-width: 800px;
+    
+    /* LAPIS 1 & 2: Border utama (Burgundy) & Spasi dalam */
+    border: 2px solid var(--burgundy); 
+    
+    /* LAPIS 3, 4, 5, 6: Menggunakan Box Shadow untuk 4 warna border luar */
+    /* Format: box-shadow: 0 0 0 ketebalan WARNA */
+    box-shadow: 
+        0 0 0 4px var(--cafe-au-lait),   /* Lapis luar 1 */
+        0 0 0 8px var(--brown-khaki),    /* Lapis luar 2 */
+        0 0 0 12px var(--rosa-de-arena), /* Lapis luar 3 */
+        0 0 0 16px var(--camel);         /* Lapis luar 4 (Terluar) */
+}
+
+h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--burgundy); /* Judul tetap Burgundy agar elegan */
+    border-bottom: 1px solid var(--gold);
+    margin-bottom: 15px;
+    display: inline-block;
+}
+
+.text-content {
+    color: var(--gold); /* Memastikan teks isi berwarna emas */
+}
+</style>
 </head>
 <body class="p-6 md:p-12 leading-relaxed">
 
@@ -50,8 +76,8 @@
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
             <!-- PERPUSTAKAAN JURNAL -->
-            <section class="bg-zinc-900/50 p-6 rounded-lg border border-[var(--cafe-au-lait)]-800 glow transition-all">
-                <h2 class="text-xl text-Burgundy mb-4 border-l-4 border-[var(--gold)]-600 pl-3 uppercase tracking-tighter">Journals</h2>
+            <section class="bg-zinc-900/50 p-6 rounded-lg border border-cafe-au-lait-800 glow transition-all">
+                <h2 class="text-xl text-Burgundy mb-4 border-l-4 border-gold-600 pl-3 uppercase tracking-tighter">Journals</h2>
                 <div class="space-y-4">
                     <div class="p-3 bg-gold/40 rounded border border-burgundy-800">
                         <p class="font-bold text-gold-200 text-sm">Rich Man, Strong Man. The Godfather in Politics: Bagaimana Uang Menginterupsi Hukum</p>

@@ -7,56 +7,48 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
-:root {
+        :root {
     --old-money-bg: #F4F1EA;
-    --charcoal: #36454F;
-    --gold: #B8860B;
+    --charcoal: #36454F;      /* Warna teks utama (Tajam) */
+    --gold: #866A28;         /* Emas yang lebih gelap biar kontras */
     --burgundy: #800020;
     --cafe-au-lait: #A67B5B;
     --brown-khaki: #7E634E;
     --rosa-de-arena: #D2B48C;
     --camel: #C19A6B;
-    --cashmere: #E6D5B8;
 }
 
 body {
     background-color: var(--old-money-bg);
-    color: var(--gold); /* Emas sebagai warna tulisan default */
+    color: var(--charcoal); /* Default teks ke charcoal biar kebaca! */
     font-family: 'Inter', sans-serif;
+    padding: 40px 20px;
 }
 
-/* KELAS ARISTOKRAT OTOMATIS */
+h1, h2 { font-family: 'Playfair Display', serif; }
+
+/* INI RAHASIA BORDER BERLAPISNYA */
 .aristocrat-section {
-    background-color: var(--old-money-bg);
-    color: var(--gold); /* Warna tulisan emas */
+    background-color: white; /* Putih bersih di dalam kotak */
     padding: 30px;
-    margin: 40px auto;
-    max-width: 800px;
+    margin: 50px auto;
+    max-width: 900px;
+    position: relative;
     
-    /* LAPIS 1 & 2: Border utama (Burgundy) & Spasi dalam */
-    border: 2px solid var(--burgundy); 
+    /* Border utama Burgundy */
+    border: 2px solid var(--burgundy);
     
-    /* LAPIS 3, 4, 5, 6: Menggunakan Box Shadow untuk 4 warna border luar */
-    /* Format: box-shadow: 0 0 0 ketebalan WARNA */
+    /* 4 Lapis Border Luar (Cafe au lait -> Khaki -> Rosa -> Camel) */
     box-shadow: 
-        0 0 0 4px var(--cafe-au-lait),   /* Lapis luar 1 */
-        0 0 0 8px var(--brown-khaki),    /* Lapis luar 2 */
-        0 0 0 12px var(--rosa-de-arena), /* Lapis luar 3 */
-        0 0 0 16px var(--camel);         /* Lapis luar 4 (Terluar) */
+        0 0 0 4px var(--cafe-au-lait),
+        0 0 0 8px var(--brown-khaki),
+        0 0 0 12px var(--rosa-de-arena),
+        0 0 0 16px var(--camel);
 }
 
-h2 {
-    font-family: 'Playfair Display', serif;
-    color: var(--burgundy); /* Judul tetap Burgundy agar elegan */
-    border-bottom: 1px solid var(--gold);
-    margin-bottom: 15px;
-    display: inline-block;
-}
-
-.text-content {
-    color: var(--gold); /* Memastikan teks isi berwarna emas */
-}
-</style>
+.gold-text { color: var(--gold); font-weight: bold; }
+.burgundy-title { color: var(--burgundy); border-bottom: 1px solid var(--gold); }
+    </style>
 </head>
 <body class="p-6 md:p-12 leading-relaxed">
 
@@ -76,24 +68,24 @@ h2 {
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
             
             <!-- PERPUSTAKAAN JURNAL -->
-            <section class="bg-zinc-900/50 p-6 rounded-lg border border-cafe-au-lait-800 glow transition-all">
-                <h2 class="text-xl text-Burgundy mb-4 border-l-4 border-gold-600 pl-3 uppercase tracking-tighter">Journals</h2>
+            <section class="bg-zinc-900/50 p-6 rounded-lg border border-[var(--cafe-au-lait)] glow transition-all">
+                <h2 class="text-xl text-[var(--Burgundy)] mb-4 border-l-4 border-[var(--gold)] pl-3 uppercase tracking-tighter">Journals</h2>
                 <div class="space-y-4">
-                    <div class="p-3 bg-gold/40 rounded border border-burgundy-800">
-                        <p class="font-bold text-gold-200 text-sm">Rich Man, Strong Man. The Godfather in Politics: Bagaimana Uang Menginterupsi Hukum</p>
-                        <p class="text-[10px] text-gold-500 mt-2">DOI: 10.5281/zenodo.19730062 | Repo: Zenodo/CERN</p>
-                        <span class="text-[10px] bg-beige-900/30 text-brown-khaki-500 px-2 py-0.5 rounded mt-2 inline-block">Published</span>
+                    <div class="p-3 bg-gold/40 rounded border border-[var(--burgundy)]">
+                        <p class="font-bold text-[var(--gold)] text-sm">Rich Man, Strong Man. The Godfather in Politics: Bagaimana Uang Menginterupsi Hukum</p>
+                        <p class="text-[10px] text-[var(--gold)] mt-2">DOI: 10.5281/zenodo.19730062 | Repo: Zenodo/CERN</p>
+                        <span class="text-[10px] bg-[var(--camel)]/30 text-[var(--brown-khaki)] px-2 py-0.5 rounded mt-2 inline-block">Published</span>
                     </div>
                 </div>
             </section>
 
             <!-- MUSIC PLAYLIST -->
-            <section class="bg-zinc-900/50 p-6 rounded-lg border border-rosa-de-arena-800 glow transition-all">
-                <h2 class="text-xl text-burgundy mb-4 border-l-4 border-gold-600 pl-3 uppercase tracking-tighter">Music</h2>
-                <div class="flex gap-4 mb-4 items-center bg-gold/40 p-3 rounded border border-burgundy-800">
+            <section class="bg-zinc-900/50 p-6 rounded-lg border border-[var(--rosa-de-arena)] glow transition-all">
+                <h2 class="text-xl text-[var(--burgundy)] mb-4 border-l-4 border-[var(--gold)] pl-3 uppercase tracking-tighter">Music</h2>
+                <div class="flex gap-4 mb-4 items-center bg-[var(--gold)]/40 p-3 rounded border border-[var(--burgundy)]">
                     <div class="w-16 h-16 bg-zinc-800 flex-none flex items-center justify-center text-[10px] overflow-hidden">
                         <!-- Cover Image -->
-                        <img src="https://drive.google.com/file/d/1lZ147tc8u_CEIa4WpVkbosa7lnD67m2s/view?usp=drivesdk" alt="cover" class="opacity-50">
+                        <img src="https://drive.google.com/uc?export=view&id=1lZ147tc8u_CEIa4WpVkbo5a7lnD67m2s" alt="cover" class="opacity-50">
                     </div>
                     <div>
                         <p class="font-bold text-sm">Beyond the Last Eclipse</p>
@@ -106,41 +98,41 @@ h2 {
             </section>
 
             <!-- BISNIS & ETALASE BUKU -->
-            <section class="bg-zinc-900/50 p-6 rounded-lg border border-camel-800 glow transition-all">
-                <h2 class="text-xl text-burgundy mb-4 border-l-4 border-gold-600 pl-3 uppercase tracking-tighter">Business & Store</h2>
+            <section class="bg-zinc-900/50 p-6 rounded-lg border border-[var(--camel)] glow transition-all">
+                <h2 class="text-xl text-[var(--burgundy)] mb-4 border-l-4 border-[var(--gold)] pl-3 uppercase tracking-tighter">Business & Store</h2>
                 <div class="space-y-6">
                     <div>
-                        <p class="text-[10px] text-gold-600 font-bold mb-2 uppercase tracking-[0.2em]">Business</p>
+                        <p class="text-[10px] text-[var(--gold)] font-bold mb-2 uppercase tracking-[0.2em]">Business</p>
                         <div class="grid grid-cols-2 gap-2">
-                            <p class="text-sm text-gold-300 bg-burgundy/30 p-2 rounded">• Orion & Co <span class="text-[9px] block text-gold-500">(Lifestyle & Fashion)</span></p>
-                            <p class="text-sm text-gray-300 bg-burgundy/30 p-2 rounded">• ZENITH <span class="text-[9px] block text-gold-500">(Luxury Goods)</span></p>
+                            <p class="text-sm text-[var(--gold)] bg-[var(--burgundy)]/30 p-2 rounded">• Orion & Co <span class="text-[9px] block text-[var(--gold)]">(Lifestyle & Fashion)</span></p>
+                            <p class="text-sm text-[var(--gold)] bg-[var(--burgundy)]/30 p-2 rounded">• ZENITH <span class="text-[9px] block text-[var(--gold)]">(Luxury Goods)</span></p>
                         </div>
                     </div>
                     <div>
-                        <p class="text-[10px] text-gold-600 font-bold mb-2 uppercase tracking-[0.2em]">Book Store</p>
-                        <div class="p-3 bg-gold/40 rounded border border-dashed border-burgundy-700">
-                            <p class="text-xs text-gold-400 italic text-center text-[10px]">Data is being updated via Secure Link...</p>
+                        <p class="text-[10px] text-[var(--gold)] font-bold mb-2 uppercase tracking-[0.2em]">Book Store</p>
+                        <div class="p-3 bg-[var(--gold)]/40 rounded border border-dashed border-[var(--burgundy)]">
+                            <p class="text-xs text-[var(--gold)] italic text-center text-[10px]">Data is being updated via Secure Link...</p>
                         </div>
                     </div>
                 </div>
             </section>
 
             <!-- ACHIEVEMENTS & LICENSES -->
-            <section class="bg-zinc-900/50 p-6 rounded-lg border border-cashmere-800 glow transition-all">
-                <h2 class="text-xl text-gold mb-4 border-l-4 border-gold-600 pl-3 uppercase tracking-tighter">Registry & Honors</h2>
+            <section class="bg-zinc-900/50 p-6 rounded-lg border border-[var(--cashmere)] glow transition-all">
+                <h2 class="text-xl text-[var(--gold)] mb-4 border-l-4 border-[var(--burgundy)] pl-3 uppercase tracking-tighter">Registry & Honors</h2>
                 <div class="space-y-4 text-sm">
                     <div class="space-y-2">
-                        <p class="text-gold-300 text-xs leading-tight flex items-start">
+                        <p class="text-[var(--gold)] text-xs leading-tight flex items-start">
                             <span class="mr-2">🏆</span> 
-                            <span><span class="font-bold text-gold">2nd Place Lomba Sastra Nasional</span> - Yayasan Masyarakat Indonesia Sehat</span>
+                            <span><span class="font-bold text-[var(--gold)]">2nd Place Lomba Sastra Nasional</span> - Yayasan Masyarakat Indonesia Sehat</span>
                         </p>
-                        <p class="text-gold-300 text-xs leading-tight flex items-start">
+                        <p class="text-[var(--gold)] text-xs leading-tight flex items-start">
                             <span class="mr-2">🏆</span> 
-                            <span><span class="font-bold text-gold">Top 10 Lomba Sastra Nasional</span> - Lembaga Terverifikasi</span>
+                            <span><span class="font-bold text-[var(--gold)]">Top 10 Lomba Sastra Nasional</span> - Lembaga Terverifikasi</span>
                         </p>
                     </div>
-                    <div class="pt-4 border-t border-burgundy-800">
-                        <p class="text-[10px] text-gold-500 uppercase tracking-widest leading-loose">
+                    <div class="pt-4 border-t border-[var(--burgundy)]">
+                        <p class="text-[10px] text-[var(--gold)] uppercase tracking-widest leading-loose">
                             License: Creative Commons Attribution 4.0 International [CC BY 4.0]
                         </p>
                     </div>
@@ -150,8 +142,8 @@ h2 {
         </div>
 
         <footer class="mt-16 pb-8 text-center">
-            <p class="text-charcoal-600 text-[10px] uppercase tracking-[0.5em]">Systems Integrated - Sayyid Rahmat © 2026</p>
-            <div class="mt-2 text-[8px] text-burgundy-900">Encrypted Connection Verified: TLS 1.3</div>
+            <p class="text-[var(--charcoal)] text-[10px] uppercase tracking-[0.5em]">Systems Integrated - Sayyid Rahmat © 2026</p>
+            <div class="mt-2 text-[8px] text-[var(--burgundy)]">Encrypted Connection Verified: TLS 1.3</div>
         </footer>
     </div>
 

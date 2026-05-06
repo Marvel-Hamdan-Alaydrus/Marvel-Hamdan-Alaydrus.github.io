@@ -3,147 +3,135 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard | Sayyid Rahmat Hamdani Al Idrus</title>
+    <title>The Archives | Sayyid Rahmat Hamdani Al Idrus</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-    --old-money-bg: #F4F1EA;
-    --charcoal: #36454F;      /* Warna teks utama (Tajam) */
-    --gold: #866A28;         /* Emas yang lebih gelap biar kontras */
-    --burgundy: #800020;
-    --cafe-au-lait: #A67B5B;
-    --brown-khaki: #7E634E;
-    --rosa-de-arena: #D2B48C;
-    --camel: #C19A6B;
-}
+            /* Palette Aristokrat */
+            --old-money-bg: #F4F1EA;
+            --charcoal: #36454F;
+            --gold: #866A28; /* Emas tajam agar kontras */
+            --burgundy: #800020;
+            --cafe-au-lait: #A67B5B;
+            --brown-khaki: #7E634E;
+            --rosa-de-arena: #D2B48C;
+            --camel: #C19A6B;
+            --cashmere: #E6D5B8;
+        }
 
-body {
-    background-color: var(--old-money-bg);
-    color: var(--charcoal); /* Default teks ke charcoal biar kebaca! */
-    font-family: 'Inter', sans-serif;
-    padding: 40px 20px;
-}
+        body { 
+            background-color: var(--old-money-bg); 
+            color: var(--charcoal);
+            font-family: 'Inter', sans-serif;
+        }
 
-h1, h2 { font-family: 'Playfair Display', serif; }
+        h1, h2, .aristocrat-font { font-family: 'Playfair Display', serif; }
 
-/* INI RAHASIA BORDER BERLAPISNYA */
-.aristocrat-section {
-    background-color: white; /* Putih bersih di dalam kotak */
-    padding: 30px;
-    margin: 50px auto;
-    max-width: 900px;
-    position: relative;
-    
-    /* Border utama Burgundy */
-    border: 2px solid var(--burgundy);
-    
-    /* 4 Lapis Border Luar (Cafe au lait -> Khaki -> Rosa -> Camel) */
-    box-shadow: 
-        0 0 0 4px var(--cafe-au-lait),
-        0 0 0 8px var(--brown-khaki),
-        0 0 0 12px var(--rosa-de-arena),
-        0 0 0 16px var(--camel);
-}
+        /* SISTEM STACKED BORDERS (4 LAPIS LUAR + 1 BURGUNDY DALAM) */
+        .aristocrat-section {
+            background-color: white;
+            padding: 30px;
+            margin: 60px auto; /* Margin besar agar border tidak tabrakan */
+            border: 2px solid var(--burgundy); /* Lapis 1 (Burgundy) */
+            box-shadow: 
+                0 0 0 4px var(--cafe-au-lait),   /* Lapis 2 */
+                0 0 0 8px var(--brown-khaki),    /* Lapis 3 */
+                0 0 0 12px var(--rosa-de-arena), /* Lapis 4 */
+                0 0 0 16px var(--camel);         /* Lapis 5 (Terluar) */
+        }
 
-.gold-text { color: var(--gold); font-weight: bold; }
-.burgundy-title { color: var(--burgundy); border-bottom: 1px solid var(--gold); }
+        .custom-scrollbar::-webkit-scrollbar { width: 4px; }
+        .custom-scrollbar::-webkit-scrollbar-track { background: transparent; }
+        .custom-scrollbar::-webkit-scrollbar-thumb { background: var(--gold); }
+        
+        .lyrics-box {
+            white-space: pre-wrap;
+            font-family: 'Inter', sans-serif;
+            line-height: 1.8;
+        }
     </style>
 </head>
-<body class="p-6 md:p-12 leading-relaxed">
+<body class="p-4 md:p-16">
 
-    <div class="max-w-5xl mx-auto">
-        <!-- HEADER SECTION -->
-        <header class="border-b-2 border-aristocrat pb-8 mb-12 text-center md:text-left">
-            <h1 class="text-5xl font-bold mb-4 tracking-tight italic">Sayyid Rahmat Hamdani Al Idrus</h1>
-            <p class="text-sm tracking-[0.3em] uppercase text-gray-500 font-semibold mb-6">
-                Civil Engineer — Architect — Independent Researcher — Businessman & Entrepreneur
+    <div class="max-w-6xl mx-auto">
+        <header class="text-center mb-20">
+            <h1 class="text-5xl md:text-6xl font-bold mb-4 italic">Sayyid Rahmat Hamdani Al Idrus</h1>
+            <p class="text-[var(--gold)] tracking-[0.3em] uppercase text-sm font-semibold mb-6">
+                Civil Engineer — Architect — Independent Researcher — Venture Architect
             </p>
-            <div class="mt-4 grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-400">
-                <p>Institution: <span class="text-gray-400">Institute of Technology Sepuluh Nopember (ITS)</span></p>
-                <p>ORCID iD: <a href="https://orcid.org/0009-0005-0888-2487" class="text-gray-400 underline">0009-0005-0888-2487</a></p>
+            <div class="flex flex-col md:flex-row justify-center gap-6 text-[12px] italic text-gray-500">
+                <p>Institution: <span class="text-[var(--charcoal)] font-semibold uppercase">Institute of Technology Sepuluh Nopember</span></p>
+                <p>ORCID iD: <a href="https://orcid.org/0009-0005-0888-2487" target="_blank" class="text-[var(--burgundy)] underline">0009-0005-0888-2487</a></p>
             </div>
         </header>
 
-        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-x-20 gap-y-10">
             
-            <!-- PERPUSTAKAAN JURNAL -->
-            <section class="bg-zinc-900/50 p-6 rounded-lg border border-[var(--cafe-au-lait)] glow transition-all">
-                <h2 class="text-xl text-[var(--Burgundy)] mb-4 border-l-4 border-[var(--gold)] pl-3 uppercase tracking-tighter">Journals</h2>
-                <div class="space-y-4">
-                    <div class="p-3 bg-gold/40 rounded border border-[var(--burgundy)]">
-                        <p class="font-bold text-[var(--gold)] text-sm">Rich Man, Strong Man. The Godfather in Politics: Bagaimana Uang Menginterupsi Hukum</p>
-                        <p class="text-[10px] text-[var(--gold)] mt-2">DOI: 10.5281/zenodo.19730062 | Repo: Zenodo/CERN</p>
-                        <span class="text-[10px] bg-[var(--camel)]/30 text-[var(--brown-khaki)] px-2 py-0.5 rounded mt-2 inline-block">Published</span>
+            <section class="aristocrat-section">
+                <h2 class="text-3xl text-[var(--burgundy)] mb-6 italic border-b border-[var(--cashmere)] pb-2">Journal Library</h2>
+                <div class="space-y-8">
+                    <div>
+                        <p class="text-lg font-bold leading-snug">Rich Man, Strong Man. The Godfather in Politics: Bagaimana Uang Menginterupsi Hukum</p>
+                        <p class="text-[10px] text-[var(--gold)] mt-2 tracking-widest uppercase font-bold">DOI: 10.5281/zenodo.19730062 — Zenodo/CERN</p>
+                        <span class="text-[9px] border border-[var(--gold)] text-[var(--gold)] px-2 py-0.5 mt-3 inline-block uppercase font-bold">Status: Published</span>
                     </div>
                 </div>
             </section>
 
-            <!-- MUSIC PLAYLIST -->
-            <section class="bg-zinc-900/50 p-6 rounded-lg border border-[var(--rosa-de-arena)] glow transition-all">
-                <h2 class="text-xl text-[var(--burgundy)] mb-4 border-l-4 border-[var(--gold)] pl-3 uppercase tracking-tighter">Music</h2>
-                <div class="flex gap-4 mb-4 items-center bg-[var(--gold)]/40 p-3 rounded border border-[var(--burgundy)]">
-                    <div class="w-16 h-16 bg-zinc-800 flex-none flex items-center justify-center text-[10px] overflow-hidden">
-                        <!-- Cover Image -->
-                        <img src="https://drive.google.com/uc?export=view&id=1lZ147tc8u_CEIa4WpVkbo5a7lnD67m2s" alt="cover" class="opacity-50">
+            <section class="aristocrat-section">
+                <h2 class="text-3xl text-[var(--burgundy)] mb-6 italic border-b border-[var(--cashmere)] pb-2">Music</h2>
+                <div class="flex gap-4 mb-6 items-start">
+                    <div class="w-20 h-20 bg-zinc-100 flex-none border border-[var(--gold)] p-1 shadow-md">
+                        <img src="https://drive.google.com/uc?export=view&id=1lZ147tc8u_CEIa4WpVkbosa7lnD67m2s" alt="Cover" class="w-full h-full object-cover">
                     </div>
                     <div>
-                        <p class="font-bold text-sm">Beyond the Last Eclipse</p>
-                        <a href="https://open.spotify.com/track/4T59tY14bSWNPGBTT9zMFV?si=03b241fee0ea4f62" target="_blank" class="text-[10px] text-black-400 uppercase tracking-tighter hover:underline">
-                            Open Spotify <span class="ml-1">↗</span>
-                        </a>
-                    
+                        <p class="text-xl font-bold">Beyond the Last Eclipse</p>
+                        <a href="https://open.spotify.com/track/4T59tY14bSWNPGBTT9zMFV?si=03b241fee0ea4f62"" target="_blank" class="text-[var(--gold)] text-[10px] font-bold uppercase tracking-widest hover:text-[var(--burgundy)] transition-colors">Open Spotify ↗</a>
                     </div>
                 </div>
+                
             </section>
 
-            <!-- BISNIS & ETALASE BUKU -->
-            <section class="bg-zinc-900/50 p-6 rounded-lg border border-[var(--camel)] glow transition-all">
-                <h2 class="text-xl text-[var(--burgundy)] mb-4 border-l-4 border-[var(--gold)] pl-3 uppercase tracking-tighter">Business & Store</h2>
+            <section class="aristocrat-section">
+                <h2 class="text-3xl text-[var(--burgundy)] mb-6 italic border-b border-[var(--cashmere)] pb-2">Business & Store</h2>
                 <div class="space-y-6">
-                    <div>
-                        <p class="text-[10px] text-[var(--gold)] font-bold mb-2 uppercase tracking-[0.2em]">Business</p>
-                        <div class="grid grid-cols-2 gap-2">
-                            <p class="text-sm text-[var(--gold)] bg-[var(--burgundy)]/30 p-2 rounded">• Orion & Co <span class="text-[9px] block text-[var(--gold)]">(Lifestyle & Fashion)</span></p>
-                            <p class="text-sm text-[var(--gold)] bg-[var(--burgundy)]/30 p-2 rounded">• ZENITH <span class="text-[9px] block text-[var(--gold)]">(Luxury Goods)</span></p>
+                    <div class="flex justify-between items-end border-b border-[var(--cashmere)] pb-2">
+                        <div>
+                            <p class="font-bold text-lg">Orion & Co</p>
+                            <p class="text-[10px] text-[var(--gold)] uppercase tracking-widest">Lifestyle & Fashion</p>
                         </div>
+                        <p class="text-[10px] italic text-green-700 font-bold uppercase">Active</p>
                     </div>
-                    <div>
-                        <p class="text-[10px] text-[var(--gold)] font-bold mb-2 uppercase tracking-[0.2em]">Book Store</p>
-                        <div class="p-3 bg-[var(--gold)]/40 rounded border border-dashed border-[var(--burgundy)]">
-                            <p class="text-xs text-[var(--gold)] italic text-center text-[10px]">Data is being updated via Secure Link...</p>
+                    <div class="flex justify-between items-end">
+                        <div>
+                            <p class="font-bold text-lg">ZENITH</p>
+                            <p class="text-[10px] text-[var(--gold)] uppercase tracking-widest">Luxury Goods</p>
                         </div>
+                        <p class="text-[10px] italic text-gray-400 font-bold uppercase">Coming Soon</p>
                     </div>
                 </div>
             </section>
 
-            <!-- ACHIEVEMENTS & LICENSES -->
-            <section class="bg-zinc-900/50 p-6 rounded-lg border border-[var(--cashmere)] glow transition-all">
-                <h2 class="text-xl text-[var(--gold)] mb-4 border-l-4 border-[var(--burgundy)] pl-3 uppercase tracking-tighter">Registry & Honors</h2>
-                <div class="space-y-4 text-sm">
-                    <div class="space-y-2">
-                        <p class="text-[var(--gold)] text-xs leading-tight flex items-start">
-                            <span class="mr-2">🏆</span> 
-                            <span><span class="font-bold text-[var(--gold)]">2nd Place Lomba Sastra Nasional</span> - Yayasan Masyarakat Indonesia Sehat</span>
-                        </p>
-                        <p class="text-[var(--gold)] text-xs leading-tight flex items-start">
-                            <span class="mr-2">🏆</span> 
-                            <span><span class="font-bold text-[var(--gold)]">Top 10 Lomba Sastra Nasional</span> - Lembaga Terverifikasi</span>
-                        </p>
-                    </div>
-                    <div class="pt-4 border-t border-[var(--burgundy)]">
-                        <p class="text-[10px] text-[var(--gold)] uppercase tracking-widest leading-loose">
-                            License: Creative Commons Attribution 4.0 International [CC BY 4.0]
-                        </p>
-                    </div>
+            <section class="aristocrat-section">
+                <h2 class="text-3xl text-[var(--burgundy)] mb-6 italic border-b border-[var(--cashmere)] pb-2">Registry & Honors</h2>
+                <div class="space-y-4 text-[13px] italic">
+                    <p class="flex gap-2"><span>—</span> <span>2nd Place Lomba Sastra Nasional (Yayasan Masyarakat Indonesia Sehat)</span></p>
+                    <p class="flex gap-2 text-gray-400"><span>—</span> <span>7th & Top 10 Lomba Sastra Nasional (Lembaga Terverifikasi)</span></p>
+                </div>
+                <div class="mt-12 pt-4 border-t border-[var(--cashmere)]">
+                    <p class="text-[10px] text-gray-400 uppercase tracking-[0.2em] font-bold">
+                        License: Creative Commons Attribution 4.0 [CC BY 4.0]
+                    </p>
                 </div>
             </section>
 
         </div>
 
-        <footer class="mt-16 pb-8 text-center">
-            <p class="text-[var(--charcoal)] text-[10px] uppercase tracking-[0.5em]">Systems Integrated - Sayyid Rahmat © 2026</p>
-            <div class="mt-2 text-[8px] text-[var(--burgundy)]">Encrypted Connection Verified: TLS 1.3</div>
+        <footer class="mt-32 mb-10 text-center">
+            <p class="text-[10px] uppercase tracking-[0.6em] text-[var(--gold)] font-bold">
+                The Archive of Hamdan Al Idrus — MMDXXVI
+            </p>
         </footer>
     </div>
 

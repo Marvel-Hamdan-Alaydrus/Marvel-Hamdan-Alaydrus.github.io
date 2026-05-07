@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Private Dossier | Sayyid Rahmat</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --midnight: #0D0D0D; /* Background Hitam Aristokrat */
+            --paper: #F4F1EA;
+            --gold: #B8860B;
+            --burgundy: #800020;
+            --cafe-au-lait: #A67B5B;
+            --brown-khaki: #7E634E;
+            --rosa-de-arena: #D2B48C;
+        }
+
+        body { 
+            background-color: var(--midnight); 
+            color: var(--paper);
+            font-family: 'Inter', sans-serif;
+        }
+
+        h1, h2, .aristocrat-font { font-family: 'Playfair Display', serif; }
+
+        /* BORDER BERLAPIS VERSI DARK MODE */
+        .dossier-card {
+            background-color: #1A1A1A;
+            border: 1px solid var(--burgundy);
+            box-shadow: 
+                0 0 0 4px var(--cafe-au-lait),
+                0 0 0 8px var(--brown-khaki),
+                0 0 0 12px var(--midnight); /* Penyekat */
+        }
+
+        .stat-box {
+            border-left: 1px solid var(--gold);
+            padding-left: 15px;
+        }
+
+        /* Efek foto hitam putih klasik */
+        .profile-img {
+            filter: grayscale(100%) contrast(110%);
+            transition: 0.5s;
+        }
+        .profile-img:hover { filter: grayscale(0%); }
+    </style>
+</head>
+<body class="p-6 md:p-20">
+
+    <div class="max-w-4xl mx-auto">
+        <a href="index.html" class="text-[var(--gold)] text-xs tracking-widest uppercase mb-10 inline-block hover:text-[var(--paper)]">
+            ← Return to Main Archives
+        </a>
+
+        <main class="dossier-card p-8 md:p-16 relative overflow-hidden">
+            
+            <div class="flex flex-col md:flex-row items-center gap-10 mb-16">
+                <div class="w-48 h-64 flex-none border border-[var(--gold)] p-2 bg-black">
+                    <img src="https://drive.google.com/uc?export=view&id=1lZ147tc8u_CEIa4WpVkbosa7lnD67m2s" 
+                         alt="Sayyid Rahmat" class="profile-img w-full h-full object-cover">
+                </div>
+                
+                <div class="text-center md:text-left">
+                    <h1 class="text-4xl md:text-5xl font-bold italic mb-2">Sayyid Rahmat H. Al Idrus</h1>
+                    <p class="text-[var(--gold)] tracking-[0.4em] uppercase text-[10px] font-bold">
+                        Venture Architect • Strategic Analyst • Polymath
+                    </p>
+                    <div class="mt-6 flex flex-wrap justify-center md:justify-start gap-4">
+                        <div class="stat-box">
+                            <span class="block text-xs text-gray-500 uppercase">Age</span>
+                            <span class="text-sm font-bold">20.4 Years</span>
+                        </div>
+                        <div class="stat-box border-[var(--burgundy)]">
+                            <span class="block text-xs text-gray-500 uppercase">Intelligence</span>
+                            <span class="text-sm font-bold">Superior (129)</span>
+                        </div>
+                        <div class="stat-box border-[var(--rosa-de-arena)]">
+                            <span class="block text-xs text-gray-500 uppercase">Status</span>
+                            <span class="text-sm font-bold">Active Researcher</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="space-y-8 text-gray-300 leading-relaxed italic">
+                <p class="text-xl text-[var(--paper)] not-italic font-serif">
+                    "Membedah struktur realitas melalui lensa teknik, seni, dan strategi perang."
+                </p>
+                
+                <p>
+                    Sebagai mahasiswa semester IV di Institut Teknologi Sepuluh Nopember (ITS), Sayyid beroperasi di persimpangan antara **Infrastruktur Sipil** dan **Ketahanan Sistemik**. Ia bukan sekadar perancang bangunan, melainkan seorang arsitek ide yang percaya bahwa efisiensi adalah senjata utama dalam memenangkan persaingan global.
+                </p>
+
+                <p>
+                    Keterlibatannya dalam Departemen Kewirausahaan HIMALAYA dan publikasi riset di Zenodo/CERN mencerminkan kapasitas intelektual yang mampu mensinergikan manajemen aset dengan analisis sosio-politik yang tajam.
+                </p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-16 pt-10 border-t border-gray-800">
+                <div>
+                    <h3 class="text-[var(--gold)] uppercase tracking-widest text-xs font-bold mb-4">Strategic Pillar</h3>
+                    <ul class="text-sm space-y-2 text-gray-400">
+                        <li>• Asymmetric Warfare Philosophy</li>
+                        <li>• Venture Architecture & Business Modeling</li>
+                        <li>• Theoretical Research & Systemic Analysis</li>
+                    </ul>
+                </div>
+                <div>
+                    <h3 class="text-[var(--gold)] uppercase tracking-widest text-xs font-bold mb-4">Creative Force</h3>
+                    <ul class="text-sm space-y-2 text-gray-400">
+                        <li>• Acoustic Intelligence (Composition)</li>
+                        <li>• Fine Arts (Multidimensional Canvas)</li>
+                        <li>• Narrative Engineering (Literature)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="mt-20 text-center opacity-20">
+                <p class="text-[9px] tracking-[0.8em] uppercase">Confidential Archives — MMDXXVI</p>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>

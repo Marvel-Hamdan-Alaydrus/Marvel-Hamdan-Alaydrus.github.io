@@ -15,15 +15,15 @@
             --text-main: #5D4E4E;
         }
 
-        body { background-color: var(--cream); color: var(--text-main); font-family: 'Quicksand', sans-serif; overflow-x: hidden; margin: 0; }
+        body { background-color: var(--cream); color: var(--text-main); font-family: 'Quicksand', sans-serif; margin: 0; overflow-x: hidden; }
         .cursive { font-family: 'Dancing Script', cursive; }
         .serif { font-family: 'Playfair Display', serif; }
 
-        /* --- ANIMATION STAGE --- */
+        /* --- STAGE 1: ANIMASI AWAL --- */
         #animation-stage {
             position: fixed;
             inset: 0;
-            background: #0a0a0a;
+            background: #0d0d0d;
             z-index: 9999;
             display: flex;
             justify-content: center;
@@ -31,125 +31,154 @@
             transition: opacity 1.5s ease;
         }
 
-        .seal-click-area {
-            width: 180px;
-            height: 180px;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            cursor: pointer;
-            z-index: 10001;
+        .seal-trigger {
+            width: 150px; height: 150px;
+            display: flex; justify-content: center; align-items: center;
+            cursor: pointer; z-index: 10001;
         }
 
-        .heart-seal {
-            width: 60px;
-            height: 60px;
+        .heart-pink {
+            width: 50px; height: 50px;
             background: #ff85a2;
             position: relative;
             transform: rotate(-45deg);
-            box-shadow: 0 0 40px #ff85a2;
-            animation: pulse-seal 1.5s infinite;
+            box-shadow: 0 0 30px #ff85a2;
+            animation: pulse 1.2s infinite;
         }
-        .heart-seal::before, .heart-seal::after {
-            content: "";
-            width: 60px; height: 60px;
-            background: #ff85a2;
-            border-radius: 50%;
-            position: absolute;
+        .heart-pink::before, .heart-pink::after {
+            content: ""; width: 50px; height: 50px;
+            background: #ff85a2; border-radius: 50%; position: absolute;
         }
-        .heart-seal::before { top: -30px; left: 0; }
-        .heart-seal::after { left: 30px; top: 0; }
+        .heart-pink::before { top: -25px; left: 0; }
+        .heart-pink::after { left: 25px; top: 0; }
 
-        @keyframes pulse-seal {
+        @keyframes pulse {
             0%, 100% { transform: rotate(-45deg) scale(1); }
             50% { transform: rotate(-45deg) scale(1.2); }
         }
 
-        /* Eros Cupid (SVG Mode) */
-        #eros-box {
+        #eros-anime {
             position: absolute;
-            bottom: -300px;
-            left: 5%;
-            width: 200px;
+            bottom: -400px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             z-index: 10000;
-            transition: all 1.8s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        #target-heart {
+        #target-name {
             position: absolute;
-            top: 35%;
+            top: 30%;
             opacity: 0;
-            transform: scale(0);
+            transform: scale(0) rotate(-45deg);
             transition: all 0.8s ease;
+            width: 100px; height: 100px;
+            background: var(--rose);
             z-index: 10000;
-            text-align: center;
         }
 
         #rain-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 10002; }
 
-        /* --- MAIN CONTENT --- */
-        #mainContent { opacity: 0; visibility: hidden; transition: all 2s ease; }
-        .content-show { opacity: 1 !important; visibility: visible !important; }
-        .photo-frame { border: 15px solid white; box-shadow: 0 15px 45px rgba(0,0,0,0.1); transform: rotate(-2deg); }
-        .cert-border { border: 2px solid var(--rose); padding: 10px; position: relative; background: white; }
-        .cert-border::after { content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 1px solid var(--dusty-gold); }
+        /* --- STAGE 2: HOME CONTENT --- */
+        #main-content { opacity: 0; visibility: hidden; transition: all 2s ease; padding: 20px; }
+        .content-active { opacity: 1 !important; visibility: visible !important; }
+
+        .photo-frame {
+            border: 12px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            transform: rotate(-1.5deg);
+            transition: 0.5s;
+        }
+        .photo-frame:hover { transform: rotate(0deg) scale(1.02); }
+
+        .cert-border {
+            border: 2px solid var(--rose);
+            padding: 15px;
+            position: relative;
+            background: white;
+            max-width: 500px;
+            margin: auto;
+        }
+        .cert-border::after {
+            content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid var(--dusty-gold);
+        }
     </style>
 </head>
 <body>
 
     <div id="animation-stage">
-        <div class="seal-click-area" id="btnBuka">
-            <div class="heart-seal"></div>
-        </div>
-        
-        <div id="eros-box">
-            <svg viewBox="0 0 512 512" fill="#FFD700">
-                <path d="M448 96c-17.7 0-32 14.3-32 32 0 12.3 7 23 17.2 28.4L373.9 211c-14.4 14.4-14.4 37.7 0 52.1l11.4 11.4c14.4 14.4 37.7 14.4 52.1 0l54.6-54.6c5.4 10.2 16.1 17.2 28.4 17.2 17.7 0 32-14.3 32-32s-14.3-32-32-32c-12.3 0-23 7-28.4 17.2l-54.6-54.6c10.2-5.4 17.2-16.1 17.2-28.4 0-17.7-14.3-32-32-32zM128 416c-17.7 0-32 14.3-32 32 0 12.3 7 23 17.2 28.4L53.9 531c-14.4 14.4-14.4 37.7 0 52.1l11.4 11.4c14.4 14.4 37.7 14.4 52.1 0l54.6-54.6c5.4 10.2 16.1 17.2 28.4 17.2 17.7 0 32-14.3 32-32s-14.3-32-32-32c-12.3 0-23 7-28.4 17.2l-54.6-54.6c10.2-5.4 17.2-16.1 17.2-28.4 0-17.7-14.3-32-32-32zM256 0C114.6 0 0 114.6 0 256s114.6 256 256 256 256-114.6 256-256S397.4 0 256 0zm0 464c-114.7 0-208-93.3-208-208S141.3 48 256 48s208 93.3 208 208-93.3 208-208 208z"/>
-                <circle cx="256" cy="256" r="64"/>
-            </svg>
-            <div style="font-size: 50px; text-align: center;">👼🏹</div>
+        <div class="seal-trigger" id="clickMe">
+            <div class="heart-pink"></div>
         </div>
 
-        <div id="target-heart">
-            <div class="heart-seal" style="animation:none; background: #E2999C;">
-                <span style="transform: rotate(45deg); display: block; color: white; font-family: 'Dancing Script'; font-size: 20px; text-align: center; width: 60px; font-weight: bold; margin-top:10px;">
-                    Sayyid
-                </span>
-            </div>
-            <p class="text-white mt-24 serif italic tracking-widest opacity-60">Captured by Love</p>
+        <img id="eros-anime" src="https://www.pngmart.com/files/13/Cupid-Arrow-PNG-Clipart.png" alt="Eros">
+
+        <div id="target-name">
+             <div style="transform: rotate(45deg); color: white; text-align: center; margin-top: 25px;" class="cursive text-xl">
+                 Sayyid
+             </div>
         </div>
+
         <canvas id="rain-canvas"></canvas>
     </div>
 
-    <div id="mainContent" class="max-w-4xl mx-auto px-6 py-10">
-        <header class="text-center py-20">
-            <h1 class="serif italic text-2xl text-[var(--rose)] mb-2">To Someone Special,</h1>
-            <h2 class="cursive text-7xl md:text-9xl text-[var(--text-main)] mb-6">Happy Birthday</h2>
-            <p class="max-w-md mx-auto text-sm opacity-70 italic">Semoga setiap langkahmu selalu diterangi cahaya kebaikan.</p>
+    <div id="main-content" class="max-w-4xl mx-auto">
+        
+        <div class="flex justify-center my-10">
+            <div class="bg-white/80 backdrop-blur p-4 rounded-full shadow-sm border border-[var(--blush)] flex items-center gap-4">
+                <button id="musicControl" class="w-12 h-12 bg-[var(--rose)] text-white rounded-full flex justify-center items-center shadow-lg">
+                    <span id="icon">▶</span>
+                </button>
+                <div class="pr-6">
+                    <p class="text-[10px] uppercase tracking-widest font-bold">Background Melody</p>
+                    <p class="cursive text-lg text-[var(--rose)]">The Only Light I See</p>
+                </div>
+            </div>
+        </div>
+
+        <header class="text-center mb-32">
+            <h1 class="serif italic text-2xl text-[var(--rose)] mb-4">Happy Birthday,</h1>
+            <h2 class="cursive text-7xl md:text-8xl mb-8">Someone Special</h2>
+            <p class="max-w-md mx-auto text-gray-500 leading-relaxed">
+                Semoga panjang umur, dikelilingi kebahagiaan, dan setiap langkahmu selalu diterangi oleh cahaya kebaikan. Hari ini adalah milikmu sepenuhnya.
+            </p>
         </header>
 
-        <section class="mb-40 flex justify-center">
-            <div class="photo-frame w-72 h-96 overflow-hidden bg-gray-100">
-                <img src="https://images.unsplash.com/photo-1519340333755-5072120ef3aa?q=80&w=1000" alt="Person" class="w-full h-full object-cover">
+        <div class="flex justify-center mb-40">
+            <div class="photo-frame w-72 h-96 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1519340333755-5072120ef3aa?q=80&w=1000" class="w-full h-full object-cover" alt="Foto">
             </div>
-        </section>
+        </div>
 
-        <section class="mb-40 bg-white p-12 text-center shadow-sm border-y-4 border-[var(--blush)]">
-            <h3 class="serif italic text-3xl mb-10 text-[var(--rose)]">Rangkaian Kata</h3>
-            <div class="serif italic text-xl leading-loose text-gray-600">
-                "Di antara ribuan bintang yang berpijar,<br>Hanya satu yang membawa ketenangan."
+        <section class="mb-40 px-6">
+            <div class="border-y-2 border-[var(--blush)] py-16 text-center">
+                <h3 class="serif italic text-3xl mb-8 text-[var(--rose)]">Rangkaian Kata</h3>
+                <div class="serif italic text-xl leading-loose text-gray-600">
+                    "Di antara ribuan bintang yang berpijar,<br>
+                    Hanya satu yang membawa ketenangan.<br>
+                    Bukan karena sinarnya yang paling terang,<br>
+                    Tapi karena ia hadir tepat di saat gelap datang."
+                </div>
             </div>
         </section>
 
         <section class="mb-40">
-            <div class="cert-border max-w-2xl mx-auto bg-white p-12 text-center shadow-inner">
-                <p class="serif text-[var(--dusty-gold)] tracking-[0.4em] uppercase text-[10px] mb-8">Official Recognition</p>
-                <h4 class="cursive text-5xl mb-4">The World's Kindest Soul</h4>
-                <div class="h-[1px] w-24 bg-[var(--rose)] mx-auto mb-8"></div>
-                <p class="text-sm italic text-gray-500 mb-10">Terima kasih telah menjadi bagian terindah dalam cerita ini.</p>
-                <p class="serif text-[10px] font-bold uppercase tracking-[0.6em] text-[var(--rose)]">Signed with Love</p>
+            <div class="cert-border text-center shadow-sm">
+                <p class="serif text-[var(--dusty-gold)] tracking-[0.3em] uppercase text-[10px] mb-6">Certificate of Appreciation</p>
+                <h4 class="cursive text-4xl mb-4">The World's Kindest Soul</h4>
+                <div class="h-[1px] w-20 bg-[var(--rose)] mx-auto mb-6"></div>
+                <p class="text-sm italic text-gray-400 mb-8 px-6">
+                    Diberikan kepada dirimu karena telah menjadi alasan seseorang tersenyum hari ini. Teruslah bersinar.
+                </p>
+                <p class="serif text-[10px] font-bold uppercase tracking-widest">Signed with Love</p>
             </div>
         </section>
+
+        <footer class="text-center pb-20 opacity-40 text-[10px] tracking-[0.5em]">
+            CREATED WITH LOVE — 2026
+        </footer>
     </div>
 
     <audio id="bgMusic" loop>
@@ -157,68 +186,83 @@
     </audio>
 
     <script>
-        const btnBuka = document.getElementById('btnBuka');
+        const clickMe = document.getElementById('clickMe');
         const stage = document.getElementById('animation-stage');
-        const eros = document.getElementById('eros-box');
-        const target = document.getElementById('target-heart');
+        const eros = document.getElementById('eros-anime');
+        const target = document.getElementById('target-name');
         const canvas = document.getElementById('rain-canvas');
-        const mainContent = document.getElementById('mainContent');
+        const content = document.getElementById('main-content');
         const music = document.getElementById('bgMusic');
         const ctx = canvas.getContext('2d');
 
-        btnBuka.addEventListener('click', function() {
-            this.style.opacity = '0';
-            this.style.pointerEvents = 'none';
-            music.play().catch(e => console.log(e));
-
-            // Eros muncul
+        // Logic Pembuka
+        clickMe.addEventListener('click', () => {
+            clickMe.style.display = 'none';
+            music.play();
+            
+            // Eros Naik
             eros.style.bottom = '20%';
-            eros.style.left = '15%';
-
+            
             setTimeout(() => {
+                // Panah Kena Hati Nama
                 target.style.opacity = '1';
-                target.style.transform = 'scale(2.5)';
+                target.style.transform = 'scale(2.5) rotate(-45deg)';
+                eros.style.filter = 'drop-shadow(0 0 20px gold)';
+                
+                // Hujan Mawar & Hati Dimulai
                 startRain();
-            }, 1500);
+            }, 1200);
         });
 
         function startRain() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            const items = [];
-            const types = ['❤️', '🌹', '💖', '🌸'];
+            const particles = [];
+            const symbols = ['❤️', '🌹', '💖', '🌸'];
 
-            for(let i=0; i<80; i++) {
-                items.push({
+            for(let i=0; i<100; i++) {
+                particles.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height - canvas.height,
-                    size: Math.random() * 20 + 15,
-                    speed: Math.random() * 3 + 2,
-                    content: types[Math.floor(Math.random() * types.length)]
+                    s: Math.random() * 20 + 10,
+                    v: Math.random() * 3 + 2,
+                    char: symbols[Math.floor(Math.random()*symbols.length)]
                 });
             }
 
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                items.forEach(p => {
-                    ctx.font = p.size + 'px serif';
-                    ctx.fillText(p.content, p.x, p.y);
-                    p.y += p.speed;
-                    if(p.y > canvas.height) p.y = -30;
+            function draw() {
+                ctx.clearRect(0,0, canvas.width, canvas.height);
+                particles.forEach(p => {
+                    ctx.font = p.s + 'px serif';
+                    ctx.fillText(p.char, p.x, p.y);
+                    p.y += p.v;
+                    if(p.y > canvas.height) p.y = -20;
                 });
-                requestAnimationFrame(animate);
+                requestAnimationFrame(draw);
             }
-            animate();
+            draw();
 
+            // Selesai Animasi, Masuk Home
             setTimeout(() => {
                 stage.style.opacity = '0';
                 setTimeout(() => {
                     stage.style.display = 'none';
-                    mainContent.classList.add('content-show');
-                    window.scrollTo(0,0);
-                }, 1500);
-            }, 5000);
+                    content.classList.add('content-active');
+                }, 1000);
+            }, 4500);
         }
+
+        // Control Musik di Home
+        const musicBtn = document.getElementById('musicControl');
+        musicBtn.addEventListener('click', () => {
+            if(music.paused) {
+                music.play();
+                document.getElementById('icon').innerText = '⏸';
+            } else {
+                music.pause();
+                document.getElementById('icon').innerText = '▶';
+            }
+        });
     </script>
 </body>
 </html>

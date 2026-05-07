@@ -15,18 +15,11 @@
             --text-main: #5D4E4E;
         }
 
-        body {
-            background-color: var(--cream);
-            color: var(--text-main);
-            font-family: 'Quicksand', sans-serif;
-            margin: 0;
-            overflow-x: hidden;
-        }
-
+        body { background-color: var(--cream); color: var(--text-main); font-family: 'Quicksand', sans-serif; overflow-x: hidden; margin: 0; }
         .cursive { font-family: 'Dancing Script', cursive; }
         .serif { font-family: 'Playfair Display', serif; }
 
-        /* --- ANIMATION STAGE (Overlay Gelap) --- */
+        /* --- ANIMATION STAGE --- */
         #animation-stage {
             position: fixed;
             inset: 0;
@@ -35,42 +28,53 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            overflow: hidden;
             transition: opacity 1s ease;
         }
 
+        /* Area klik yang luas untuk segel */
+        .seal-container {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+            z-index: 10001;
+        }
+
         .heart-seal {
-            width: 80px; height: 80px;
+            width: 60px;
+            height: 60px;
             background: #ff85a2;
             position: relative;
             transform: rotate(-45deg);
-            cursor: pointer;
-            box-shadow: 0 0 20px #ff85a2;
+            box-shadow: 0 0 30px #ff85a2;
             animation: pulse-seal 1.5s infinite;
-            border: none;
-            z-index: 10000;
+            pointer-events: none; /* Biar container yang tangkap klik */
         }
         .heart-seal::before, .heart-seal::after {
             content: "";
-            width: 80px; height: 80px;
+            width: 60px; height: 60px;
             background: #ff85a2;
             border-radius: 50%;
             position: absolute;
         }
-        .heart-seal::before { top: -40px; left: 0; }
-        .heart-seal::after { left: 40px; top: 0; }
+        .heart-seal::before { top: -30px; left: 0; }
+        .heart-seal::after { left: 30px; top: 0; }
 
         @keyframes pulse-seal {
             0%, 100% { transform: rotate(-45deg) scale(1); }
-            50% { transform: rotate(-45deg) scale(1.1); }
+            50% { transform: rotate(-45deg) scale(1.15); }
         }
 
+        /* Eros - Manusia Utuh (SVG/Image) */
         #eros {
             position: absolute;
-            bottom: -150px;
-            left: 10%;
-            font-size: 80px;
-            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            bottom: -300px;
+            left: 5%;
+            width: 250px;
+            transition: all 1.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            z-index: 10000;
         }
 
         #target-heart {
@@ -78,103 +82,60 @@
             top: 30%;
             opacity: 0;
             transform: scale(0);
-            transition: all 0.5s ease;
-            text-align: center;
+            transition: all 0.8s ease;
+            z-index: 10000;
         }
 
         #rain-canvas {
             position: absolute;
             inset: 0;
             pointer-events: none;
-            z-index: 1001;
+            z-index: 10002;
         }
 
-        /* --- CONTENT DISPLAY --- */
-        #main-wrapper {
-            opacity: 0;
-            transition: opacity 1.5s ease;
-            display: none;
-        }
-        .show-content {
-            display: block !important;
-            opacity: 1 !important;
-        }
-
-        .photo-frame {
-            border: 15px solid white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            transform: rotate(-2deg);
-        }
-        .cert-border {
-            border: 2px solid var(--rose);
-            padding: 10px;
-            position: relative;
-            background: white;
-        }
-        .cert-border::after {
-            content: '';
-            position: absolute;
-            top: 5px; left: 5px; right: 5px; bottom: 5px;
-            border: 1px solid var(--dusty-gold);
-        }
-        .floating { animation: floating 3s ease-in-out infinite; }
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
+        /* --- CONTENT STYLES --- */
+        #mainContent { opacity: 0; visibility: hidden; transition: all 1.5s ease; }
+        .content-show { opacity: 1 !important; visibility: visible !important; }
+        .photo-frame { border: 12px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: rotate(-2deg); }
     </style>
 </head>
 <body>
 
     <div id="animation-stage">
-        <button id="seal" class="heart-seal"></button>
-        <div id="eros">🏹👼</div> 
+        <div class="seal-container" id="mainSeal">
+            <div class="heart-seal"></div>
+        </div>
+        
+        <img id="eros" src="https://www.pngmart.com/files/13/Cupid-Arrow-PNG-Clipart.png" alt="Eros">
+
         <div id="target-heart">
-            <div class="heart-seal" style="animation:none; cursor:default;">
-                <span style="transform: rotate(45deg); display: block; color: white; font-family: 'Dancing Script'; font-size: 18px; margin-top: 20px; font-weight: bold; text-align:center;">
-                    Sayyid
+            <div class="heart-seal" style="animation:none; background: var(--rose);">
+                <span style="transform: rotate(45deg); display: block; color: white; font-family: 'Dancing Script'; font-size: 20px; padding: 10px; text-align: center; width: 60px;">
+                    NAMA DIA
                 </span>
             </div>
         </div>
         <canvas id="rain-canvas"></canvas>
     </div>
 
-    <div id="main-wrapper" class="p-4 md:p-8">
-        <div class="max-w-4xl mx-auto">
-            <header class="text-center py-20">
-                <h1 class="serif italic text-2xl text-[var(--rose)] mb-2">To Someone Special,</h1>
-                <h2 class="cursive text-6xl md:text-8xl text-[var(--text-main)] mb-6 floating">Happy Birthday</h2>
-                <p class="max-w-md mx-auto text-sm leading-relaxed opacity-80">
-                    Semoga panjang umur, dikelilingi kebahagiaan, dan setiap langkahmu selalu diterangi oleh cahaya kebaikan.
-                </p>
-            </header>
+    <div id="mainContent" class="max-w-4xl mx-auto px-6 py-20">
+        <header class="text-center py-20">
+            <h1 class="serif italic text-2xl text-[var(--rose)] mb-2">To Someone Special,</h1>
+            <h2 class="cursive text-6xl md:text-8xl text-[var(--text-main)] mb-6">Happy Birthday</h2>
+        </header>
 
-            <section class="mb-32 flex justify-center">
-                <div class="photo-frame w-72 h-96 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1519340333755-5072120ef3aa?q=80&w=1000" class="w-full h-full object-cover">
-                </div>
-            </section>
+        <section class="mb-32 flex justify-center">
+            <div class="photo-frame w-72 h-96 overflow-hidden">
+                <img src="https://images.unsplash.com/photo-1519340333755-5072120ef3aa?q=80&w=1000" alt="Person" class="w-full h-full object-cover">
+            </div>
+        </section>
 
-            <section class="mb-32 bg-white p-12 text-center shadow-sm border-y-4 border-[var(--blush)]">
-                <h3 class="serif italic text-3xl mb-8 text-[var(--rose)]">Rangkaian Kata</h3>
-                <div class="serif italic text-lg leading-loose text-gray-600">
-                    "Di antara ribuan bintang yang berpijar,<br>Hanya satu yang membawa ketenangan."
-                </div>
-            </section>
-
-            <section class="mb-32">
-                <div class="cert-border max-w-2xl mx-auto p-10 text-center shadow-inner">
-                    <p class="serif text-[var(--dusty-gold)] tracking-[0.3em] uppercase text-xs mb-6">Honors Registry</p>
-                    <h4 class="cursive text-4xl mb-4">The World's Kindest Soul</h4>
-                    <p class="text-sm italic text-gray-500">Verified by Heart</p>
-                </div>
-            </section>
-
-            <footer class="text-center pb-24">
-                <p class="serif italic text-xl">May all your dreams come true.</p>
-                <p class="text-[10px] uppercase tracking-[0.5em] mt-10 opacity-40">Created with Love — 2026</p>
-            </footer>
-        </div>
+        <section class="mb-32 bg-white p-12 text-center shadow-sm border-y-4 border-[var(--blush)]">
+            <h3 class="serif italic text-3xl mb-8 text-[var(--rose)]">Rangkaian Kata</h3>
+            <div class="serif italic text-lg leading-loose text-gray-600">
+                "Di antara ribuan bintang yang berpijar,<br>Hanya satu yang membawa ketenangan."
+            </div>
+        </section>
     </div>
 
     <audio id="bgMusic" loop>
@@ -182,41 +143,36 @@
     </audio>
 
     <script>
-        const seal = document.getElementById('seal');
+        const mainSeal = document.getElementById('mainSeal');
         const stage = document.getElementById('animation-stage');
         const eros = document.getElementById('eros');
         const target = document.getElementById('target-heart');
         const canvas = document.getElementById('rain-canvas');
-        const mainWrapper = document.getElementById('main-wrapper');
+        const mainContent = document.getElementById('mainContent');
         const music = document.getElementById('bgMusic');
         const ctx = canvas.getContext('2d');
 
-        seal.addEventListener('click', () => {
-            // 1. Mulai Musik & Sembunyikan Tombol
+        // Logic Klik
+        mainSeal.addEventListener('click', function() {
+            // Sembunyikan tombol segera
+            this.style.opacity = '0';
+            this.style.pointerEvents = 'none';
+
+            // Putar Musik
             music.play();
-            seal.style.display = 'none';
 
-            // 2. Animasi Eros
-            eros.style.bottom = '40%';
-            
+            // Eros Muncul
+            eros.style.bottom = '10%';
+            eros.style.left = '20%';
+
             setTimeout(() => {
-                // 3. Eros memanah (Target muncul)
+                // Hati Sasaran Muncul (Efek Terkena Panah)
                 target.style.opacity = '1';
-                target.style.transform = 'scale(1.5)';
-                eros.innerHTML = '🏹✨';
+                target.style.transform = 'scale(2)';
                 
-                // 4. Hujan Mawar & Hati
+                // Mulai Hujan Mawar
                 startRain();
-            }, 1000);
-
-            // 5. Transisi ke Konten Utama
-            setTimeout(() => {
-                stage.style.opacity = '0';
-                setTimeout(() => {
-                    stage.style.display = 'none';
-                    mainWrapper.classList.add('show-content');
-                }, 1000);
-            }, 5000);
+            }, 1200);
         });
 
         function startRain() {
@@ -229,13 +185,13 @@
                 items.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height - canvas.height,
-                    size: Math.random() * 20 + 10,
+                    size: Math.random() * 20 + 15,
                     speed: Math.random() * 3 + 2,
                     content: types[Math.floor(Math.random() * types.length)]
                 });
             }
 
-            function draw() {
+            function animate() {
                 ctx.clearRect(0, 0, canvas.width, canvas.height);
                 items.forEach(p => {
                     ctx.font = p.size + 'px serif';
@@ -243,9 +199,18 @@
                     p.y += p.speed;
                     if(p.y > canvas.height) p.y = -30;
                 });
-                requestAnimationFrame(draw);
+                requestAnimationFrame(animate);
             }
-            draw();
+            animate();
+
+            // Pindah ke Halaman Utama
+            setTimeout(() => {
+                stage.style.opacity = '0';
+                setTimeout(() => {
+                    stage.style.display = 'none';
+                    mainContent.classList.add('content-show');
+                }, 1000);
+            }, 4500);
         }
     </script>
 </body>

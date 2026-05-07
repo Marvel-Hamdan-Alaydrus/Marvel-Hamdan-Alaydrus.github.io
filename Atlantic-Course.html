@@ -3,235 +3,184 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atlantic Course | Excellence & Tradition</title>
-    <!-- Google Fonts: Playfair Display untuk kesan mewah -->
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Atlantic Course | Excellence in Education</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --primary: #1a2f23; /* Racing Green */
-            --accent: #c5a059;  /* Gold muted */
-            --bg: #f9f7f2;      /* Off-white/Parchment */
-            --text: #2c2c2c;
+            --beige: #F5F5DC;
+            --charcoal: #36454F;
+            --red-wine: #722F37;
+            --midnight-blue: #191970;
+            --glitter-gold: #D4AF37;
         }
 
         body {
-            margin: 0;
-            padding: 0;
+            background-color: var(--beige);
             font-family: 'Montserrat', sans-serif;
-            background-color: var(--bg);
-            color: var(--text);
+            color: var(--charcoal);
             overflow-x: hidden;
         }
 
-        /* --- NAVIGATION --- */
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 20px 5%;
-            background: var(--primary);
-            color: white;
-            border-bottom: 3px solid var(--accent);
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+
+        /* Old Money Border & Frames */
+        .gold-frame {
+            border: 3px double var(--glitter-gold);
+            outline: 1px solid var(--glitter-gold);
+            outline-offset: 4px;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .logo {
-            font-family: 'Playfair Display', serif;
-            font-size: 1.8rem;
-            font-weight: bold;
-            letter-spacing: 2px;
-            color: var(--accent);
+        .gold-frame:hover {
+            background-color: var(--midnight-blue);
+            color: var(--glitter-gold) !important;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
         }
 
-        .menu-dots {
-            cursor: pointer;
-            position: relative;
-            font-size: 24px;
-        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: var(--beige); }
+        ::-webkit-scrollbar-thumb { background: var(--midnight-blue); }
 
-        .dropdown {
-            display: none;
-            position: absolute;
-            right: 0;
-            top: 30px;
-            background: white;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            z-index: 100;
-            min-width: 150px;
-            border-radius: 4px;
-        }
-
-        .dropdown a {
-            color: var(--primary);
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-            font-size: 14px;
-        }
-
-        .dropdown a:hover { background: #eee; }
-        .menu-dots:hover .dropdown { display: block; }
-
-        /* --- HERO SECTION --- */
-        header {
-            text-align: center;
-            padding: 80px 20px;
-            background: linear-gradient(rgba(26, 47, 35, 0.8), rgba(26, 47, 35, 0.8)), url('https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&q=80&w=1500');
-            background-size: cover;
-            background-position: center;
-            color: white;
-        }
-
-        header h1 {
-            font-family: 'Playfair Display', serif;
-            font-size: 3.5rem;
-            margin-bottom: 10px;
-        }
-
-        header p {
-            font-style: italic;
-            font-size: 1.2rem;
-            opacity: 0.9;
-        }
-
-        /* --- BULLETIN SLIDE --- */
-        .bulletin-container {
-            width: 80%;
-            margin: -40px auto 40px;
-            background: white;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 1px solid var(--accent);
-        }
-
-        .slide-text {
-            text-align: center;
-            font-style: italic;
-            color: var(--primary);
-            animation: fadeIn 2s infinite alternate;
-        }
-
-        @keyframes fadeIn { from { opacity: 0.4; } to { opacity: 1; } }
-
-        /* --- DASHBOARD GRID --- */
-        .grid-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 25px;
-            padding: 40px 5%;
-            max-width: 1200px;
-            margin: auto;
-        }
-
-        .card {
-            background: white;
-            padding: 40px;
-            text-align: center;
-            border: 1px solid #e0e0e0;
-            transition: all 0.4s ease;
-            position: relative;
-            overflow: hidden;
-            text-decoration: none;
-            color: var(--text);
-        }
-
-        .card:hover {
-            transform: translateY(-10px);
-            border-color: var(--accent);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
-        }
-
-        .card::after {
+        .nav-link::after {
             content: '';
-            position: absolute;
-            bottom: 0; left: 0;
-            width: 100%; height: 5px;
-            background: var(--accent);
-            transform: scaleX(0);
-            transition: transform 0.4s ease;
+            display: block;
+            width: 0;
+            height: 2px;
+            background: var(--glitter-gold);
+            transition: width .3s;
         }
+        .nav-link:hover::after { width: 100%; }
 
-        .card:hover::after { transform: scaleX(1); }
-
-        .card i { font-size: 40px; color: var(--primary); margin-bottom: 20px; display: block; }
-        .card h3 { font-family: 'Playfair Display', serif; margin-bottom: 15px; font-size: 1.5rem; }
-        .card p { font-size: 0.9rem; line-height: 1.6; color: #666; }
-
-        footer {
-            text-align: center;
-            padding: 40px;
-            font-size: 0.8rem;
-            letter-spacing: 2px;
-            color: #888;
-            border-top: 1px solid #ddd;
+        /* Bulleting Slider Logic */
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease-in-out;
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVIGATION -->
-    <nav>
-        <div class="logo">ATLANTIC</div>
-        <div class="menu-dots">
-            ⋮
-            <div class="dropdown">
-                <a href="#">About Academy</a>
-                <a href="#">Contact Office</a>
+    <!-- Header Section -->
+    <header class="border-b-2 border-[#D4AF37] bg-[#191970] text-[#F5F5DC] py-4">
+        <div class="container mx-auto flex flex-col items-center">
+            <!-- Top Logo -->
+            <img src="" alt="Atlantic Top Crest" class="w-20 h-20 mb-2 border border-[#D4AF37] p-1 rounded-full">
+            <h1 class="font-cinzel text-3xl tracking-[0.2em] font-bold">ATLANTIC COURSE</h1>
+            <p class="font-playfair italic text-sm tracking-widest mt-1">Est. 1924 | Pursuit of Wisdom</p>
+        </div>
+    </header>
+
+    <!-- Navigation -->
+    <nav class="sticky top-0 z-50 bg-[#36454F] py-4 shadow-xl border-b border-[#D4AF37]">
+        <div class="container mx-auto flex justify-between items-center px-6">
+            <div class="flex items-center space-x-4">
+                <img src="" alt="Logo" class="w-10 h-10 border border-[#D4AF37]">
+                <span class="font-cinzel text-xl text-[#F5F5DC]">ATLANTIC</span>
+            </div>
+            <div class="flex space-x-10 text-[#F5F5DC] font-semibold text-sm uppercase tracking-widest">
+                <a href="#" class="nav-link">Beranda</a>
+                <a href="#" class="nav-link">About</a>
+                <a href="#" class="nav-link">Contact</a>
             </div>
         </div>
     </nav>
 
-    <!-- HERO -->
-    <header>
-        <h1>Atlantic Course</h1>
-        <p>"Knowledge is the Ultimate Heritage"</p>
-    </header>
-
-    <!-- BULLETIN SLIDER -->
-    <div class="bulletin-container">
-        <div class="slide-text">
-            <strong>PENGUMUMAN:</strong> Pendaftaran Semester Musim Gugur telah dibuka. Segera lengkapi berkas Anda.
-        </div>
-    </div>
-
-    <!-- MAIN DASHBOARD -->
-    <div class="grid-container">
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-12">
         
-        <!-- Atlantic Classroom -->
-        <a href="#" class="card">
-            <h3>Atlantic Classroom</h3>
-            <p>Akses modul pembelajaran, materi kuliah eksklusif, dan portal pengumpulan tugas harian.</p>
-        </a>
+        <!-- Papan Buletin / Slider -->
+        <section class="mb-16 relative overflow-hidden bg-[#191970] text-[#F5F5DC] rounded-lg shadow-2xl border-4 border-[#D4AF37]">
+            <div id="slider" class="slider-container">
+                <div class="min-w-full p-12 text-center">
+                    <h2 class="font-cinzel text-2xl mb-4 text-[#D4AF37]">Pengumuman Akademik</h2>
+                    <p class="font-playfair text-xl italic">"Pendaftaran Semester Musim Gugur telah dibuka. Segera lengkapi administrasi Anda."</p>
+                </div>
+                <div class="min-w-full p-12 text-center bg-[#722F37]">
+                    <h2 class="font-cinzel text-2xl mb-4 text-[#D4AF37]">Kuliah Umum Eksklusif</h2>
+                    <p class="font-playfair text-xl italic">"Menghadirkan Profesor dari Oxford University pada hari Jumat mendatang."</p>
+                </div>
+            </div>
+            <button onclick="moveSlider(-1)" class="absolute left-4 top-1/2 -translate-y-1/2 text-3xl text-[#D4AF37] hover:scale-125 transition">❮</button>
+            <button onclick="moveSlider(1)" class="absolute right-4 top-1/2 -translate-y-1/2 text-3xl text-[#D4AF37] hover:scale-125 transition">❯</button>
+        </section>
 
-        <!-- Atlantic Presensi -->
-        <a href="#" class="card">
-            <h3>Atlantic Presensi</h3>
-            <p>Pencatatan kehadiran digital. Kedisiplinan adalah kunci dari kesuksesan akademik.</p>
-        </a>
+        <!-- Main Shield Logo (Placeholder) -->
+        <div class="flex justify-center mb-16">
+            <div class="w-48 h-60 border-4 border-[#D4AF37] relative flex items-center justify-center bg-[#36454F]" style="clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%); shadow: inset 0 0 20px #000;">
+                <img src="" alt="Main Shield" class="w-full h-full object-cover opacity-50">
+                <span class="absolute font-cinzel text-[#D4AF37] text-xs">ATLANTIC EMBLEM</span>
+            </div>
+        </div>
 
-        <!-- SI Akademik -->
-        <a href="#" class="card">
-            <h3>SI Akademik</h3>
-            <p>Pantau transkrip nilai, laporan kemajuan belajar, dan berikan umpan balik akademik.</p>
-        </a>
+        <!-- Dashboard Grid -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
+            
+            <!-- Item 1 -->
+            <a href="#" class="gold-frame bg-white p-8 text-center flex flex-col items-center group">
+                <div class="text-4xl mb-4 group-hover:text-[#D4AF37]">📖</div>
+                <h3 class="font-cinzel text-xl font-bold mb-2">Atlantic Classroom</h3>
+                <p class="text-xs italic opacity-70">Akses Materi, Kelas Online, & Tugas</p>
+            </a>
 
-        <!-- Pengajar -->
-        <a href="#" class="card">
-            <h3>Profil Pengajar</h3>
-            <p>Mengenal lebih dekat para cendekiawan dan ahli yang akan membimbing Anda.</p>
-        </a>
+            <!-- Item 2 -->
+            <a href="#" class="gold-frame bg-white p-8 text-center flex flex-col items-center group">
+                <div class="text-4xl mb-4 group-hover:text-[#D4AF37]">🖋️</div>
+                <h3 class="font-cinzel text-xl font-bold mb-2">Atlantic Presensi</h3>
+                <p class="text-xs italic opacity-70">Log Kehadiran Mahasiswa</p>
+            </a>
 
-        <!-- Pendaftaran -->
-        <a href="#" class="card">
-            <h3>Pendaftaran</h3>
-            <p>Penerimaan mahasiswa baru dan pendaftaran kursus sertifikasi profesional.</p>
-        </a>
+            <!-- Item 3 -->
+            <a href="#" class="gold-frame bg-white p-8 text-center flex flex-col items-center group">
+                <div class="text-4xl mb-4 group-hover:text-[#D4AF37]">🏛️</div>
+                <h3 class="font-cinzel text-xl font-bold mb-2">SI Akademik</h3>
+                <p class="text-xs italic opacity-70">Transkrip Nilai & Feedback Dosen</p>
+            </a>
 
-    </div>
+            <!-- Item 4 -->
+            <a href="#" class="gold-frame bg-white p-8 text-center flex flex-col items-center group">
+                <div class="text-4xl mb-4 group-hover:text-[#D4AF37]">🎓</div>
+                <h3 class="font-cinzel text-xl font-bold mb-2">Pengajar</h3>
+                <p class="text-xs italic opacity-70">Direktori Profesor & Mentor</p>
+            </a>
 
-    <footer>
-        &copy; 2026 ATLANTIC COURSE EST. 1924 | ALL RIGHTS RESERVED
+            <!-- Item 5 -->
+            <a href="#" class="gold-frame bg-white p-8 text-center flex flex-col items-center group">
+                <div class="text-4xl mb-4 group-hover:text-[#D4AF37]">📜</div>
+                <h3 class="font-cinzel text-xl font-bold mb-2">Pendaftaran</h3>
+                <p class="text-xs italic opacity-70">Admisi Mahasiswa Baru</p>
+            </a>
+
+            <!-- Extra Placeholder for Symmetry -->
+            <div class="border-2 border-dashed border-[#D4AF37] flex items-center justify-center p-8 opacity-40">
+                <span class="font-cinzel italic text-sm">Atlantic Society</span>
+            </div>
+
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-20 py-10 bg-[#36454F] border-t-4 border-[#D4AF37] text-[#F5F5DC] text-center">
+        <p class="font-cinzel tracking-widest text-sm">&copy; 2026 Atlantic Course. All Rights Reserved.</p>
+        <p class="font-playfair italic text-xs mt-2 text-[#D4AF37]">"Non Ducor, Duco" — I am not led, I lead.</p>
     </footer>
 
+    <!-- Slider Script -->
+    <script>
+        let currentSlide = 0;
+        const slider = document.getElementById('slider');
+        const totalSlides = 2;
+
+        function moveSlider(direction) {
+            currentSlide = (currentSlide + direction + totalSlides) % totalSlides;
+            slider.style.transform = `translateX(-${currentSlide * 100}%)`;
+        }
+
+        // Auto slide every 5 seconds
+        setInterval(() => moveSlider(1), 5000);
+    </script>
 </body>
 </html>

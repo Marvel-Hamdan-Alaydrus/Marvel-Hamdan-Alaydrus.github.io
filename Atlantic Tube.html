@@ -12,10 +12,14 @@
 
     <!-- Header / Navigasi -->
     <nav class="navbar">
-        <div class="logo">Atlantic<span>TUBE</span></div>
-        <input type="text" class="search-bar" placeholder="Cari intelijen...">
-        <div class="user-icon">👤</div>
-    </nav>
+    <div class="logo" onclick="window.location.reload()" style="cursor:pointer">Atlantic<span>TUBE</span></div>
+    <input type="text" class="search-bar" placeholder="Cari target...">
+    <div class="nav-icons">
+        <button onclick="alert('Fitur Upload butuh Server/API!')">📤 Upload</button>
+        <button onclick="alert('Masuk ke Mode Intelegen...')">📡 Live</button>
+        <div class="user-icon" onclick="alert('Halaman Login sedang dikembangkan')">👤 Login</div>
+    </div>
+</nav>
 
     <div class="container">
         <!-- Area Video Utama -->

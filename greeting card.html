@@ -15,235 +15,154 @@
             --text-main: #5D4E4E;
         }
 
-        body { background-color: var(--cream); color: var(--text-main); font-family: 'Quicksand', sans-serif; margin: 0; overflow: hidden; }
+        body {
+            background-color: var(--cream);
+            color: var(--text-main);
+            font-family: 'Quicksand', sans-serif;
+            scroll-behavior: smooth;
+        }
+
         .cursive { font-family: 'Dancing Script', cursive; }
         .serif { font-family: 'Playfair Display', serif; }
 
-        /* --- STAGE 1: ANIMASI --- */
-        #animation-stage {
-            position: fixed;
-            inset: 0;
-            background: #0a0a0a;
-            z-index: 9999;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: opacity 1.5s ease;
+        /* Frame Estetik */
+        .photo-frame {
+            border: 15px solid white;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transform: rotate(-2deg);
+            transition: transform 0.5s ease;
         }
+        .photo-frame:hover { transform: rotate(0deg) scale(1.02); }
 
-        /* Tombol Segel Hati Pink */
-        #seal {
-            width: 80px; height: 80px;
-            background: #ff85a2;
+        /* Bingkai Sertifikat */
+        .cert-border {
+            border: 2px solid var(--rose);
+            padding: 10px;
             position: relative;
-            transform: rotate(-45deg);
-            cursor: pointer;
-            box-shadow: 0 0 30px #ff85a2;
-            animation: pulse-seal 1.5s infinite;
-            z-index: 10001;
         }
-        #seal::before, #seal::after {
-            content: ""; width: 80px; height: 80px;
-            background: #ff85a2; border-radius: 50%; position: absolute;
-        }
-        #seal::before { top: -40px; left: 0; }
-        #seal::after { left: 40px; top: 0; }
-
-        @keyframes pulse-seal {
-            0%, 100% { transform: rotate(-45deg) scale(1); }
-            50% { transform: rotate(-45deg) scale(1.1); }
-        }
-
-        /* Eros Anime (SVG - Pasti Muncul) */
-        #eros {
+        .cert-border::after {
+            content: '';
             position: absolute;
-            bottom: -200px;
-            left: 20%;
-            width: 150px;
-            z-index: 10000;
-            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            top: 5px; left: 5px; right: 5px; bottom: 5px;
+            border: 1px solid var(--dusty-gold);
         }
 
-        /* Hati Target (Nama) */
-        #target-heart {
-            position: absolute;
-            top: 30%;
-            width: 100px; height: 100px;
-            background: var(--rose);
-            transform: rotate(-45deg) scale(0);
-            opacity: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            transition: all 0.5s ease;
-            z-index: 10000;
-        }
-        #target-heart::before, #target-heart::after {
-            content: ""; width: 100px; height: 100px;
-            background: var(--rose); border-radius: 50%; position: absolute;
-        }
-        #target-heart::before { top: -50px; left: 0; }
-        #target-heart::after { left: 50px; top: 0; }
-
-        #target-heart span {
-            transform: rotate(45deg);
-            color: white;
-            z-index: 10;
-            font-weight: bold;
-            font-size: 20px;
-            white-space: nowrap;
+        /* Musik Player Minimalis */
+        .music-card {
+            background: rgba(255, 255, 255, 0.8);
+            backdrop-filter: blur(5px);
+            border-radius: 50px;
+            border: 1px solid var(--blush);
         }
 
-        #rain-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 10002; }
-
-        /* --- CONTENT HOME --- */
-        #main-content {
-            opacity: 0; visibility: hidden;
-            height: 100vh; overflow-y: auto;
-            padding: 40px 20px;
-            transition: 2s ease;
+        .floating {
+            animation: floating 3s ease-in-out infinite;
         }
-        .show-content { opacity: 1 !important; visibility: visible !important; }
-
-        .photo-frame { border: 15px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: rotate(-2deg); }
-        .cert-border { border: 2px solid var(--rose); padding: 20px; position: relative; background: white; }
-        .cert-border::after { content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 1px solid var(--dusty-gold); }
+        @keyframes floating {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
+        }
     </style>
 </head>
-<body>
+<body class="p-4 md:p-8">
 
-    <div id="animation-stage">
-        <div id="seal"></div>
-
-        <div id="eros">
-            <svg viewBox="0 0 200 200" fill="#ff85a2">
-                <path d="M100 20 C 120 20, 140 40, 140 60 C 140 90, 100 130, 100 130 C 100 130, 60 90, 60 60 C 60 40, 80 20, 100 20" />
-                <rect x="95" y="50" width="10" height="100" fill="#5D4E4E" transform="rotate(45 100 100)" />
-                <path d="M140 140 L 160 160 M 150 140 L 170 140" stroke="#5D4E4E" stroke-width="5" />
-                <text x="70" y="180" font-size="20" fill="white">👼🏹</text>
-            </svg>
+    <!-- Music Player (Fixed at Bottom) -->
+    <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[280px]">
+        <div class="music-card p-3 flex items-center gap-4 shadow-xl">
+            <button id="playBtn" class="w-10 h-10 bg-[var(--rose)] rounded-full flex items-center justify-center text-white shadow-md">
+                <span id="playIcon">▶</span>
+            </button>
+            <div class="text-[10px] uppercase tracking-widest font-bold">
+                <p id="trackTitle">The Only Light I See</p>
+                <p class="text-[var(--rose)]">Marvel Hamdan</p>
+            </div>
+            <!-- Ganti URL MP3 di bawah ini -->
+            <audio id="bgMusic" loop>
+                <source src="https://github.com/Marvel-Hamdan-Alaydrus/Marvel-Hamdan-Alaydrus.github.io/blob/main/The%20Only%20Light%20I%20See.mpeg" type="audio/mpeg">
+            </audio>
         </div>
-
-        <div id="target-heart">
-            <span class="cursive">Sayyid</span>
-        </div>
-
-        <canvas id="rain-canvas"></canvas>
     </div>
 
-    <div id="main-content">
-        <div class="max-w-2xl mx-auto text-center">
-            <div class="mb-10 p-4 bg-white rounded-full shadow-md flex items-center justify-center gap-4 border border-[var(--blush)]">
-                <button id="playBtn" class="bg-[var(--rose)] text-white w-10 h-10 rounded-full">▶</button>
-                <p class="text-xs uppercase tracking-widest font-bold">Press Play for Music</p>
-                <audio id="bgMusic" loop>
-                    <source src="https://raw.githubusercontent.com/Marvel-Hamdan-Alaydrus/Marvel-Hamdan-Alaydrus.github.io/main/The%20Only%20Light%20I%20See.mpeg" type="audio/mpeg">
-                </audio>
-            </div>
+    <div class="max-w-4xl mx-auto">
+        <!-- Hero Section -->
+        <header class="text-center py-20" data-aos="fade-up">
+            <h1 class="serif italic text-2xl text-[var(--rose)] mb-2">To Someone Special,</h1>
+            <h2 class="cursive text-6xl md:text-8xl text-[var(--text-main)] mb-6 floating">Happy Birthday</h2>
+            <p class="max-w-md mx-auto text-sm leading-relaxed opacity-80">
+                Semoga panjang umur, dikelilingi kebahagiaan, dan setiap langkahmu selalu diterangi oleh cahaya kebaikan. Hari ini adalah milikmu.
+            </p>
+        </header>
 
-            <h1 class="serif italic text-2xl text-[var(--rose)]">Happy Birthday,</h1>
-            <h2 class="cursive text-6xl md:text-8xl mb-10">Someone Special</h2>
-            
-            <div class="flex justify-center mb-20">
-                <div class="photo-frame w-64 h-80 overflow-hidden">
-                    <img src="https://images.unsplash.com/photo-1519340333755-5072120ef3aa?q=80&w=1000" class="w-full h-full object-cover">
-                </div>
+        <!-- Photo Section -->
+        <section class="mb-32 flex justify-center">
+            <div class="photo-frame w-72 h-96 overflow-hidden bg-gray-200">
+                <!-- Masukkan URL foto di sini -->
+                <img src="https://images.unsplash.com/photo-1519340333755-5072120ef3aa?q=80&w=1000" alt="Special Person" class="w-full h-full object-cover">
             </div>
+        </section>
 
-            <div class="mb-20 border-y-2 border-[var(--blush)] py-10">
-                <h3 class="serif italic text-2xl mb-6 text-[var(--rose)]">Rangkaian Kata</h3>
-                <p class="serif italic text-lg text-gray-600 leading-loose">
-                    "Di antara ribuan bintang yang berpijar,<br>
-                    Hanya satu yang membawa ketenangan.<br>
-                    Ia hadir tepat di saat gelap datang."
-                </p>
+        <!-- Poem/Puisi Section -->
+        <section class="mb-32 bg-white p-12 text-center shadow-sm border-y-4 border-[var(--blush)]">
+            <h3 class="serif italic text-3xl mb-8 text-[var(--rose)]">Rangkaian Kata</h3>
+            <div class="serif italic text-lg leading-loose text-gray-600">
+                "Di antara ribuan bintang yang berpijar,<br>
+                Hanya satu yang membawa ketenangan.<br>
+                Bukan karena sinarnya yang paling terang,<br>
+                Tapi karena ia hadir tepat di saat gelap datang."
             </div>
+        </section>
+        
+        <section class="mb-32 bg-white p-12 text-center shadow-sm border-y-4 border-[var(--blush)]">
+            <h3 class="serif italic text-3xl mb-8 text-[var(--rose)]">Rangkaian Kata</h3>
+            <div class="serif italic text-lg leading-loose text-gray-600">
+                "Jauh di antara sunyinya cakrawala,<br>
+                Ketika sang kala berdoa pada nirvana.<br>
+                Saat sang surya memancarkan mahkotanya,<br>
+                Penciptaan menyambut makhluk yang sangat cantik, yakni kamu."
+            </div>
+        </section>
 
-            <div class="cert-border mb-20">
-                <p class="serif text-[var(--dusty-gold)] text-[10px] tracking-widest uppercase mb-4">Certificate of Appreciation</p>
+        <!-- Certificate/Honors Section -->
+        <section class="mb-32">
+            <div class="cert-border max-w-2xl mx-auto bg-white p-10 text-center shadow-inner">
+                <p class="serif text-[var(--dusty-gold)] tracking-[0.3em] uppercase text-xs mb-6">Certificate of Appreciation</p>
                 <h4 class="cursive text-4xl mb-4">The World's Kindest Soul</h4>
-                <p class="text-sm italic text-gray-400">Teruslah bersinar dengan caramu sendiri.</p>
+                <div class="h-[1px] w-24 bg-[var(--rose)] mx-auto mb-6"></div>
+                <p class="text-sm italic text-gray-500 mb-8">
+                    Diberikan kepada dirimu karena telah menjadi alasan seseorang tersenyum hari ini. Teruslah bersinar dengan caramu sendiri.
+                </p>
+                <p class="serif text-xs font-bold uppercase tracking-widest">Signed with Love</p>
             </div>
-            
-            <p class="opacity-30 text-[10px] tracking-[0.5em] pb-10">CREATED WITH LOVE — 2026</p>
-        </div>
+        </section>
+
+        <!-- Footer Wishes -->
+        <footer class="text-center pb-24">
+            <div class="flex justify-center gap-4 mb-8">
+                <span class="text-[var(--rose)] text-2xl">✿</span>
+                <span class="text-[var(--rose)] text-2xl">✿</span>
+                <span class="text-[var(--rose)] text-2xl">✿</span>
+            </div>
+            <p class="serif italic text-xl">May all your dreams come true.</p>
+            <p class="text-[10px] uppercase tracking-[0.5em] mt-10 opacity-40">Created with Love — 2026</p>
+        </footer>
     </div>
 
     <script>
-        const seal = document.getElementById('seal');
-        const eros = document.getElementById('eros');
-        const target = document.getElementById('target-heart');
-        const canvas = document.getElementById('rain-canvas');
-        const stage = document.getElementById('animation-stage');
-        const content = document.getElementById('main-content');
-        const music = document.getElementById('bgMusic');
-        const ctx = canvas.getContext('2d');
+        const playBtn = document.getElementById('playBtn');
+        const audio = document.getElementById('bgMusic');
+        const playIcon = document.getElementById('playIcon');
+        const trackTitle = document.getElementById('trackTitle');
 
-        seal.addEventListener('click', () => {
-            seal.style.display = 'none';
-            music.play().catch(() => {});
-
-            // 1. Eros muncul & memanah
-            eros.style.bottom = '40%';
-            eros.style.left = '40%';
-
-            setTimeout(() => {
-                // 2. Panah kena hati (hati muncul)
-                target.style.opacity = '1';
-                target.style.transform = 'rotate(-45deg) scale(1.5)';
-                
-                // 3. Mulai Hujan
-                startRain();
-            }, 1000);
-        });
-
-        function startRain() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-            const items = [];
-            const types = ['❤️', '🌹', '💖', '🌸'];
-
-            for(let i=0; i<80; i++) {
-                items.push({
-                    x: Math.random() * canvas.width,
-                    y: Math.random() * canvas.height - canvas.height,
-                    s: Math.random() * 20 + 10,
-                    v: Math.random() * 3 + 2,
-                    c: types[Math.floor(Math.random() * types.length)]
-                });
-            }
-
-            function draw() {
-                ctx.clearRect(0,0, canvas.width, canvas.height);
-                items.forEach(p => {
-                    ctx.font = p.s + 'px serif';
-                    ctx.fillText(p.c, p.x, p.y);
-                    p.y += p.v;
-                    if(p.y > canvas.height) p.y = -20;
-                });
-                requestAnimationFrame(draw);
-            }
-            draw();
-
-            // 4. Masuk ke Home
-            setTimeout(() => {
-                stage.style.opacity = '0';
-                setTimeout(() => {
-                    stage.style.display = 'none';
-                    content.classList.add('show-content');
-                    document.body.style.overflow = 'auto';
-                }, 1000);
-            }, 4000);
-        }
-
-        // Play/Pause Musik di Home
-        document.getElementById('playBtn').addEventListener('click', function() {
-            if(music.paused) {
-                music.play();
-                this.innerText = '⏸';
+        playBtn.addEventListener('click', () => {
+            if (audio.paused) {
+                audio.play();
+                playIcon.innerText = '⏸';
+                trackTitle.innerText = 'Playing: Sweet Melody';
             } else {
-                music.pause();
-                this.innerText = '▶';
+                audio.pause();
+                playIcon.innerText = '▶';
+                trackTitle.innerText = 'Music Paused';
             }
         });
     </script>

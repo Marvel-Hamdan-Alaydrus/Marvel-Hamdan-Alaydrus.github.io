@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlantic Tube</title>
+    <link rel="stylesheet" href="style.css">
+    <!-- Menggunakan Font dari Google -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- Header / Navigasi -->
+    <nav class="navbar">
+        <div class="logo">Atlantic<span>TUBE</span></div>
+        <input type="text" class="search-bar" placeholder="Cari intelijen...">
+        <div class="user-icon">👤</div>
+    </nav>
+
+    <div class="container">
+        <!-- Area Video Utama -->
+        <main class="main-video">
+            <div class="video-container">
+                <video id="videoPlayer" controls autoplay>
+                    <source src="https://www.w3schools.com/html/mov_bbb.mp4" type="video/mp4">
+                    Browser kamu tidak mendukung video ini.
+                </video>
+            </div>
+            <h1 id="videoTitle">Sample Video</h1>
+            <p class="description">Proyek awal Atlantic Tube menggunakan GitHub Pages. Video ini di-host dari server eksternal.</p>
+        </main>
+
+        <!-- Sidebar Daftar Video -->
+        <aside class="playlist">
+            <h3>Video Rekomendasi</h3>
+            
+            <div class="video-item" onclick="changeVideo('https://www.w3schools.com/html/mov_bbb.mp4', 'Big Buck Bunny')">
+                <img src="https://img.youtube.com/vi/aqz-KE-bpKQ/mqdefault.jpg" alt="thumbnail">
+                <div class="info">
+                    <h4>Sample Video</h4>
+                    <p>Atlantic • 1.2M views</p>
+                </div>
+            </div>
+
+            <div class="video-item" onclick="changeVideo('https://www.w3schools.com/html/movie.mp4', 'Bear In The Woods')">
+                <img src="https://img.youtube.com/vi/Bey4XXJAqS8/mqdefault.jpg" alt="thumbnail">
+                <div class="info">
+                    <h4>Bear In The Woods</h4>
+                    <p>Nature Intel • 500K views</p>
+                </div>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        function changeVideo(url, title) {
+            const player = document.getElementById('videoPlayer');
+            const titleElement = document.getElementById('videoTitle');
+            player.src = url;
+            titleElement.innerText = title;
+            player.play();
+        }
+    </script>
+</body>
+</html>

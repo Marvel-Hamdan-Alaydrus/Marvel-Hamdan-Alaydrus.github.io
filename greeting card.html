@@ -25,6 +25,74 @@
         .cursive { font-family: 'Dancing Script', cursive; }
         .serif { font-family: 'Playfair Display', serif; }
 
+        /* Container Overlay Utama */
+#animation-stage {
+    position: fixed;
+    inset: 0;
+    background: #0a0a0a; /* Layar Gelap */
+    z-index: 999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* Tombol Segel Hati */
+.heart-seal {
+    width: 80px;
+    height: 80px;
+    background: #ff85a2;
+    position: relative;
+    transform: rotate(-45deg);
+    cursor: pointer;
+    box-shadow: 0 0 20px #ff85a2;
+    animation: pulse-seal 1.5s infinite;
+    border: none;
+}
+.heart-seal::before, .heart-seal::after {
+    content: "";
+    width: 80px;
+    height: 80px;
+    background: #ff85a2;
+    border-radius: 50%;
+    position: absolute;
+}
+.heart-seal::before { top: -40px; left: 0; }
+.heart-seal::after { left: 40px; top: 0; }
+
+@keyframes pulse-seal {
+    0% { transform: rotate(-45deg) scale(1); }
+    50% { transform: rotate(-45deg) scale(1.1); }
+    100% { transform: rotate(-45deg) scale(1); }
+}
+
+/* Karakter Eros (Kartun Sederhana) */
+#eros {
+    position: absolute;
+    bottom: -150px;
+    left: 10%;
+    font-size: 80px;
+    transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+/* Hati Sasaran */
+#target-heart {
+    position: absolute;
+    top: 30%;
+    opacity: 0;
+    transform: scale(0);
+    transition: all 0.5s ease;
+    text-align: center;
+}
+
+/* Rain Effect Canvas */
+#rain-canvas {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 1000;
+}
+
         /* Frame Estetik */
         .photo-frame {
             border: 15px solid white;
@@ -66,6 +134,21 @@
     </style>
 </head>
 <body class="p-4 md:p-8">
+    <div id="animation-stage">
+    <button id="seal" class="heart-seal"></button>
+    
+    <!-- Karakter Eros (Bisa diganti image kartun eros jika ada) -->
+    <div id="eros">🏹👼</div> 
+
+    <div id="target-heart">
+        <div class="heart-seal" style="animation:none; cursor:default;">
+            <span style="transform: rotate(45deg); display: block; color: white; font-family: 'Dancing Script'; font-size: 20px; margin-top: 15px; font-weight: bold;">
+                NAMA DIA
+            </span>
+        </div>
+    </div>
+    <canvas id="rain-canvas"></canvas>
+</div>
 
     <!-- Music Player (Fixed at Bottom) -->
     <div class="fixed bottom-6 left-1/2 -translate-x-1/2 z-50 w-[280px]">
@@ -155,6 +238,70 @@
                 trackTitle.innerText = 'Music Paused';
             }
         });
-    </script>
+    </script> 
+    const seal = document.getElementById('seal');
+const stage = document.getElementById('animation-stage');
+const eros = document.getElementById('eros');
+const target = document.getElementById('target-heart');
+const canvas = document.getElementById('rain-canvas');
+const ctx = canvas.getContext('2d');
+
+seal.addEventListener('click', () => {
+    // 1. Sembunyikan tombol segel
+    seal.style.display = 'none';
+    
+    // 2. Mainkan Musik (Memanggil id audio yang sudah kamu buat sebelumnya)
+    document.getElementById('bgMusic').play();
+
+    // 3. Eros muncul dan memanah
+    eros.style.bottom = '40%';
+    setTimeout(() => {
+        target.style.opacity = '1';
+        target.style.transform = 'scale(1.5)';
+        eros.innerHTML = '🏹✨'; // Efek memanah
+        
+        // 4. Hujan Hati & Mawar
+        startRain();
+    }, 1000);
+});
+
+function startRain() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    const items = [];
+    const types = ['❤️', '🌹', '💖', '🌸'];
+
+    for(let i=0; i<100; i++) {
+        items.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height - canvas.height,
+            size: Math.random() * 20 + 10,
+            speed: Math.random() * 3 + 2,
+            content: types[Math.floor(Math.random() * types.length)]
+        });
+    }
+
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        items.forEach(p => {
+            ctx.font = p.size + 'px serif';
+            ctx.fillText(p.content, p.x, p.y);
+            p.y += p.speed;
+            if(p.y > canvas.height) p.y = -20;
+        });
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+    // 5. Transisi ke Home (Setelah 4 detik hujan)
+    setTimeout(() => {
+        stage.style.opacity = '0';
+        setTimeout(() => {
+            stage.style.display = 'none';
+            document.getElementById('mainContent').classList.add('content-show');
+        }, 1000);
+    }, 4000);
+}
+    
 </body>
 </html>

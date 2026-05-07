@@ -50,9 +50,56 @@
             font-family: 'Inter', sans-serif;
             line-height: 1.8;
         }
+        /* Animasi Fade In untuk Menu */
+#mobile-menu-overlay {
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+}
+
+.menu-link {
+    display: block;
+    padding: 15px;
+    border-bottom: 1px solid var(--cashmere);
+    color: var(--charcoal);
+    font-family: 'Playfair Display', serif;
+    font-style: italic;
+    transition: all 0.2s;
+}
+
+.menu-link:hover {
+    background-color: var(--old-money-bg);
+    color: var(--burgundy);
+    padding-left: 25px; /* Efek geser saat hover */
+}
     </style>
 </head>
 <body class="p-4 md:p-16">
+    <button id="menu-btn" class="fixed top-6 right-6 z-50 p-2 bg-white border-2 border-[var(--burgundy)] rounded-full shadow-lg hover:scale-110 transition-transform">
+    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12 8C12.5523 8 13 7.55228 13 7C13 6.44772 12.5523 6 12 6C11.4477 6 11 6.44772 11 7C11 7.55228 11.4477 8 12 8Z" stroke="var(--burgundy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 13C12.5523 13 13 12.5523 13 12C13 11.4477 12.5523 11 12 11C11.4477 11 11 11.4477 11 12C11 12.5523 11.4477 13 12 13Z" stroke="var(--burgundy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        <path d="M12 18C12.5523 18 13 17.5523 13 17C13 16.4477 12.5523 16 12 16C11.4477 16 11 16.4477 11 17C11 17.5523 11.4477 18 12 18Z" stroke="var(--burgundy)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</button>
+
+<div id="mobile-menu-overlay" class="fixed inset-0 bg-black/60 z-[60] invisible opacity-0 flex justify-end">
+    <div class="w-64 h-full bg-white shadow-2xl p-8 border-l-4 border-[var(--burgundy)]">
+        <div class="flex justify-between items-center mb-10">
+            <h3 class="text-[var(--gold)] font-bold uppercase tracking-widest text-sm">Navigation</h3>
+            <button id="close-btn" class="text-gray-400 hover:text-black text-2xl">&times;</button>
+        </div>
+        
+        <nav class="space-y-2">
+            <a href="#" class="menu-link text-xl text-[var(--charcoal)]">About</a>
+            <a href="#" class="menu-link text-xl text-[var(--charcoal)]">Contact</a>
+            <a href="#" class="menu-link text-xl text-[var(--charcoal)]">Library</a>
+            <a href="https://marvel-hamdan-alaydrus.github.io/" class="menu-link text-xl text-[var(--charcoal)] border-none">Main Portal</a>
+        </nav>
+
+        <div class="absolute bottom-10 left-8">
+            <p class="text-[10px] uppercase tracking-[0.2em] text-gray-400 font-bold">Archives v1.0</p>
+        </div>
+    </div>
+</div>
 
     <div class="max-w-6xl mx-auto">
         <header class="text-center mb-20">
@@ -134,6 +181,30 @@
             </p>
         </footer>
     </div>
+    <script>
+    const menuBtn = document.getElementById('menu-btn');
+    const closeBtn = document.getElementById('close-btn');
+    const overlay = document.getElementById('mobile-menu-overlay');
+
+    // Buka Menu
+    menuBtn.addEventListener('click', () => {
+        overlay.classList.remove('invisible', 'opacity-0');
+        overlay.classList.add('visible', 'opacity-100');
+    });
+
+    // Tutup Menu
+    closeBtn.addEventListener('click', () => {
+        overlay.classList.remove('visible', 'opacity-100');
+        overlay.classList.add('invisible', 'opacity-0');
+    });
+
+    // Tutup jika klik di area hitam (luar menu)
+    overlay.addEventListener('click', (e) => {
+        if (e.target === overlay) {
+            closeBtn.click();
+        }
+    });
+</script>
 
 </body>
 </html>

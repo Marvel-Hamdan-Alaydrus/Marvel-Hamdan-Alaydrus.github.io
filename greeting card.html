@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>A Special Surprise | Romantic Edition</title>
+    <title>A Special Day | For You</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Quicksand:wght@300;400;600&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
     <style>
@@ -15,19 +15,11 @@
             --text-main: #5D4E4E;
         }
 
-        body {
-            background-color: var(--cream);
-            color: var(--text-main);
-            font-family: 'Quicksand', sans-serif;
-            margin: 0;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-
+        body { background-color: var(--cream); color: var(--text-main); font-family: 'Quicksand', sans-serif; margin: 0; overflow: hidden; }
         .cursive { font-family: 'Dancing Script', cursive; }
         .serif { font-family: 'Playfair Display', serif; }
 
-        /* --- STAGE 1: ANIMATION GATELKEEPER --- */
+        /* --- STAGE 1: ANIMASI --- */
         #animation-stage {
             position: fixed;
             inset: 0;
@@ -36,259 +28,224 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            transition: opacity 1s ease;
+            transition: opacity 1.5s ease;
         }
 
-        /* Area klik Segel Hati */
-        .heart-wrapper {
-            position: relative;
-            width: 100px;
-            height: 100px;
-            cursor: pointer;
-            z-index: 10001;
-        }
-
-        .heart-seal {
-            width: 50px;
-            height: 50px;
+        /* Tombol Segel Hati Pink */
+        #seal {
+            width: 80px; height: 80px;
             background: #ff85a2;
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%) rotate(-45deg);
+            position: relative;
+            transform: rotate(-45deg);
+            cursor: pointer;
             box-shadow: 0 0 30px #ff85a2;
             animation: pulse-seal 1.5s infinite;
-            border: none;
+            z-index: 10001;
         }
-        .heart-seal::before, .heart-seal::after {
-            content: "";
-            width: 50px; height: 50px;
-            background: #ff85a2;
-            border-radius: 50%;
-            position: absolute;
+        #seal::before, #seal::after {
+            content: ""; width: 80px; height: 80px;
+            background: #ff85a2; border-radius: 50%; position: absolute;
         }
-        .heart-seal::before { top: -25px; left: 0; }
-        .heart-seal::after { left: 25px; top: 0; }
+        #seal::before { top: -40px; left: 0; }
+        #seal::after { left: 40px; top: 0; }
 
         @keyframes pulse-seal {
-            0%, 100% { transform: translate(-50%, -50%) rotate(-45deg) scale(1); }
-            50% { transform: translate(-50%, -50%) rotate(-45deg) scale(1.2); }
+            0%, 100% { transform: rotate(-45deg) scale(1); }
+            50% { transform: rotate(-45deg) scale(1.1); }
         }
 
-        /* Eros Cupid (SVG Mode - Anti-Gagal) */
-        #eros-container {
+        /* Eros Anime (SVG - Pasti Muncul) */
+        #eros {
             position: absolute;
-            bottom: -300px; /* Posisi awal di luar layar bawah */
-            left: 10%;
-            width: 250px;
+            bottom: -200px;
+            left: 20%;
+            width: 150px;
             z-index: 10000;
-            transition: all 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-            display: none; /* Disembunyikan di awal */
-        }
-        
-        /* Animasi Eros Muncul */
-        .eros-show {
-            display: block !important;
-            animation: show-eros 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-        @keyframes show-eros {
-            to { bottom: 35%; left: 15%; }
+            transition: all 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
+        /* Hati Target (Nama) */
         #target-heart {
             position: absolute;
             top: 30%;
+            width: 100px; height: 100px;
+            background: var(--rose);
+            transform: rotate(-45deg) scale(0);
             opacity: 0;
-            transform: scale(0);
-            transition: all 0.7s ease;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.5s ease;
             z-index: 10000;
         }
-        
-        /* Hati Kena Panah */
-        .heart-hit {
-            opacity: 1 !important;
-            transform: scale(2.2) !important;
+        #target-heart::before, #target-heart::after {
+            content: ""; width: 100px; height: 100px;
+            background: var(--rose); border-radius: 50%; position: absolute;
+        }
+        #target-heart::before { top: -50px; left: 0; }
+        #target-heart::after { left: 50px; top: 0; }
+
+        #target-heart span {
+            transform: rotate(45deg);
+            color: white;
+            z-index: 10;
+            font-weight: bold;
+            font-size: 20px;
+            white-space: nowrap;
         }
 
-        #rain-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 10001; }
+        #rain-canvas { position: absolute; inset: 0; pointer-events: none; z-index: 10002; }
 
-        /* --- STAGE 2: MAIN CONTENT --- */
-        #mainContent {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1.5s ease;
-            visibility: hidden;
+        /* --- CONTENT HOME --- */
+        #main-content {
+            opacity: 0; visibility: hidden;
+            height: 100vh; overflow-y: auto;
+            padding: 40px 20px;
+            transition: 2s ease;
         }
-        
-        .content-show {
-            opacity: 1 !important;
-            transform: translateY(0) !important;
-            visibility: visible !important;
-        }
+        .show-content { opacity: 1 !important; visibility: visible !important; }
 
-        .photo-frame {
-            border: 12px solid white;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            transform: rotate(-1.5deg);
-        }
-
-        .cert-border {
-            border: 2px solid var(--rose);
-            padding: 10px;
-            position: relative;
-            background: white;
-        }
-        .cert-border::after {
-            content: '';
-            position: absolute;
-            top: 5px; left: 5px; right: 5px; bottom: 5px;
-            border: 1px solid var(--dusty-gold);
-        }
-
-        .floating { animation: floating 3s ease-in-out infinite; }
-        @keyframes floating {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-15px); }
-        }
+        .photo-frame { border: 15px solid white; box-shadow: 0 10px 30px rgba(0,0,0,0.1); transform: rotate(-2deg); }
+        .cert-border { border: 2px solid var(--rose); padding: 20px; position: relative; background: white; }
+        .cert-border::after { content: ''; position: absolute; top: 5px; left: 5px; right: 5px; bottom: 5px; border: 1px solid var(--dusty-gold); }
     </style>
 </head>
 <body>
 
     <div id="animation-stage">
-        <div class="heart-wrapper" id="sealTrigger">
-            <div class="heart-seal"></div>
-        </div>
-        
-        <div id="eros-container">
-            <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
-            viewBox="0 0 512 512" style="enable-background:new 0 0 512 512;" xml:space="preserve" fill="#E2999C">
-                <g><path d="M480,128c17.7,0,32-14.3,32-32s-14.3-32-32-32c-12.3,0-23,7-28.4,17.2L397,27.1C387.2,7.3,365.1-4.8,343.8,1.4l-75,22.5
-                c-10.4,3.1-18.7,11.3-21.8,21.8L210.5,188.5l-62.1-62.1c-14.4-14.4-37.7-14.4-52.1,0L11.4,211c-14.4,14.4-14.4,37.7,0,52.1l11.4,11.4
-                c14.4,14.4,37.7,14.4,52.1,0l62.1-62.1L279.5,454.9c3.1,10.4,11.3,18.7,21.8,21.8l75,22.5c21.3,6.2,43.4-6.1,53.2-25.9
-                l54.6-111.4c5.4,10.2,16.1,17.2,28.4,17.2c17.7,0,32-14.3,32-32s-14.3-32-32-32c-12.3,0-23,7-28.4,17.2l-54.6-54.6
-                c10.2-5.4,17.2-16.1,17.2-28.4c0-17.7-14.3-32-32-32s-32,14.3-32,32c0,12.3,7,23,17.2,28.4L373,397l-36.8-12.2l-42.5-42.5
-                l-83.3-83.3l120.3-120.3c14.4-14.4,37.7-14.4,52.1,0l11.4,11.4c14.4,14.4,37.7,14.4,52.1,0l54.6-54.6c5.4,10.2,16.1,17.2,28.4,17.2
-                c17.7,0,32-14.3,32-32s-14.3-32-32-32c-12.3,0-23,7-28.4,17.2l-54.6-54.6C473,151,480,140.3,480,128z M117.8,228.2l-11.4,11.4
-                c-14.4,14.4-37.7,14.4-52.1,0L27.1,117.8C7.3,107.8-4.8,85.1,1.4,62.8L23.9-12.2c3.1-10.4,11.3-18.7,21.8-21.8l75-22.5
-                c21.3-6.2,43.4,6.1,53.2,25.9L228.2,117.8l62.1,62.1c14.4,14.4,14.4,37.7,0,52.1l-11.4,11.4c-14.4,14.4-37.7,14.4-52.1,0l-62.1-62.1
-                l-120.3,120.3c-14.4,14.4-37.7,14.4-52.1,0l-11.4-11.4c-14.4-14.4-37.7-14.4-52.1,0l-54.6,54.6C123.8,245.2,117.8,237.7,117.8,228.2
-                z"/></g>
+        <div id="seal"></div>
+
+        <div id="eros">
+            <svg viewBox="0 0 200 200" fill="#ff85a2">
+                <path d="M100 20 C 120 20, 140 40, 140 60 C 140 90, 100 130, 100 130 C 100 130, 60 90, 60 60 C 60 40, 80 20, 100 20" />
+                <rect x="95" y="50" width="10" height="100" fill="#5D4E4E" transform="rotate(45 100 100)" />
+                <path d="M140 140 L 160 160 M 150 140 L 170 140" stroke="#5D4E4E" stroke-width="5" />
+                <text x="70" y="180" font-size="20" fill="white">👼🏹</text>
             </svg>
         </div>
 
         <div id="target-heart">
-            <div class="heart-seal" style="animation:none; background:#E2999C;">
-                <span style="transform: rotate(45deg); display: block; color: white; font-family: 'Dancing Script'; font-size: 14px; text-align: center; margin-top: 10px; width: 50px;">
-                    Sayyid
-                </span>
-            </div>
+            <span class="cursive">Sayyid</span>
         </div>
+
         <canvas id="rain-canvas"></canvas>
     </div>
 
-    <div id="mainContent" class="max-w-4xl mx-auto px-6 py-20">
-        <header class="text-center mb-32">
-            <h1 class="serif italic text-xl text-[var(--rose)] mb-4 tracking-widest">Especially for you,</h1>
-            <h2 class="cursive text-6xl md:text-8xl mb-8 floating">Happy Birthday</h2>
-        </header>
-
-        <section class="flex justify-center mb-40">
-            <div class="photo-frame w-64 h-80 md:w-80 md:h-[450px] overflow-hidden bg-gray-200">
-                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000" alt="Person" class="w-full h-full object-cover">
+    <div id="main-content">
+        <div class="max-w-2xl mx-auto text-center">
+            <div class="mb-10 p-4 bg-white rounded-full shadow-md flex items-center justify-center gap-4 border border-[var(--blush)]">
+                <button id="playBtn" class="bg-[var(--rose)] text-white w-10 h-10 rounded-full">▶</button>
+                <p class="text-xs uppercase tracking-widest font-bold">Press Play for Music</p>
+                <audio id="bgMusic" loop>
+                    <source src="https://raw.githubusercontent.com/Marvel-Hamdan-Alaydrus/Marvel-Hamdan-Alaydrus.github.io/main/The%20Only%20Light%20I%20See.mpeg" type="audio/mpeg">
+                </audio>
             </div>
-        </section>
 
-        <section class="mb-40 text-center">
-            <div class="max-w-lg mx-auto border-l border-r border-[var(--blush)] px-8 py-4">
-                <h3 class="serif italic text-2xl mb-8 text-[var(--rose)]">Rangkaian Kata</h3>
-                <div class="serif italic text-lg leading-loose text-gray-500">
-                    "Dalam setiap detak waktu,<br>kamu adalah puisi yang paling indah."
+            <h1 class="serif italic text-2xl text-[var(--rose)]">Happy Birthday,</h1>
+            <h2 class="cursive text-6xl md:text-8xl mb-10">Someone Special</h2>
+            
+            <div class="flex justify-center mb-20">
+                <div class="photo-frame w-64 h-80 overflow-hidden">
+                    <img src="https://images.unsplash.com/photo-1519340333755-5072120ef3aa?q=80&w=1000" class="w-full h-full object-cover">
                 </div>
             </div>
-        </section>
 
-        <section class="mb-40">
-            <div class="cert-border max-w-xl mx-auto p-12 text-center shadow-sm">
-                <h4 class="cursive text-4xl mb-2 text-[var(--text-main)]">The Most Precious Person</h4>
-                <div class="h-[1px] w-20 bg-[var(--rose)] mx-auto mb-8"></div>
-                <p class="text-sm italic text-gray-400 mb-10 leading-relaxed">Diberikan sebagai bukti bahwa hatimu murni dan membawa bahagia.</p>
-                <p class="serif text-[9px] font-bold uppercase tracking-[0.5em] text-[var(--dusty-gold)]">Verified by Love</p>
+            <div class="mb-20 border-y-2 border-[var(--blush)] py-10">
+                <h3 class="serif italic text-2xl mb-6 text-[var(--rose)]">Rangkaian Kata</h3>
+                <p class="serif italic text-lg text-gray-600 leading-loose">
+                    "Di antara ribuan bintang yang berpijar,<br>
+                    Hanya satu yang membawa ketenangan.<br>
+                    Ia hadir tepat di saat gelap datang."
+                </p>
             </div>
-        </section>
+
+            <div class="cert-border mb-20">
+                <p class="serif text-[var(--dusty-gold)] text-[10px] tracking-widest uppercase mb-4">Certificate of Appreciation</p>
+                <h4 class="cursive text-4xl mb-4">The World's Kindest Soul</h4>
+                <p class="text-sm italic text-gray-400">Teruslah bersinar dengan caramu sendiri.</p>
+            </div>
+            
+            <p class="opacity-30 text-[10px] tracking-[0.5em] pb-10">CREATED WITH LOVE — 2026</p>
+        </div>
     </div>
 
-    <audio id="bgMusic" loop>
-        <source src="https://raw.githubusercontent.com/Marvel-Hamdan-Alaydrus/Marvel-Hamdan-Alaydrus.github.io/main/The%20Only%20Light%20I%20See.mpeg" type="audio/mpeg">
-    </audio>
-
     <script>
-        // SCRIPT FUSION: Menyatukan semua variabel dan logika klik
-        const sealTrigger = document.getElementById('sealTrigger');
-        const stage = document.getElementById('animation-stage');
-        const erosBox = document.getElementById('eros-container');
+        const seal = document.getElementById('seal');
+        const eros = document.getElementById('eros');
         const target = document.getElementById('target-heart');
-        const music = document.getElementById('bgMusic');
-        const mainContent = document.getElementById('mainContent');
         const canvas = document.getElementById('rain-canvas');
+        const stage = document.getElementById('animation-stage');
+        const content = document.getElementById('main-content');
+        const music = document.getElementById('bgMusic');
         const ctx = canvas.getContext('2d');
 
-        // Fungsi Utama Klik (Seal Hati)
-        sealTrigger.addEventListener('click', () => {
-            // 1. Sembunyikan Segel (Tersenyum untuk bypassing autoplay)
-            sealTrigger.style.pointerEvents = 'none';
-            sealTrigger.style.opacity = '0';
+        seal.addEventListener('click', () => {
+            seal.style.display = 'none';
+            music.play().catch(() => {});
 
-            // 2. Play Musik (Link GitHub Pages)
-            music.play().catch(e => console.log("Audio Error:", e));
+            // 1. Eros muncul & memanah
+            eros.style.bottom = '40%';
+            eros.style.left = '40%';
 
-            // 3. Eros Muncul dan Bergerak Memanah (CSS Animation)
-            erosBox.classList.add('eros-show');
-            
-            // 4. Panah mengenai Hati Sasaran
             setTimeout(() => {
-                target.classList.add('heart-hit'); // Hati membesar (Kena Panah)
-                startRain(); // Mulai Hujan Mawar
-            }, 1500); // Sinkronisasi dengan timing animasi Eros
+                // 2. Panah kena hati (hati muncul)
+                target.style.opacity = '1';
+                target.style.transform = 'rotate(-45deg) scale(1.5)';
+                
+                // 3. Mulai Hujan
+                startRain();
+            }, 1000);
         });
 
-        // FUNGSI RAIN SYSTEM (Ringan & Cepat)
         function startRain() {
             canvas.width = window.innerWidth;
             canvas.height = window.innerHeight;
-            const particles = [];
-            const symbols = ['❤️', '🌹', '💖', '🌸'];
+            const items = [];
+            const types = ['❤️', '🌹', '💖', '🌸'];
 
             for(let i=0; i<80; i++) {
-                particles.push({
+                items.push({
                     x: Math.random() * canvas.width,
                     y: Math.random() * canvas.height - canvas.height,
-                    size: Math.random() * 20 + 15,
-                    speed: Math.random() * 2 + 3,
-                    content: symbols[Math.floor(Math.random() * symbols.length)]
+                    s: Math.random() * 20 + 10,
+                    v: Math.random() * 3 + 2,
+                    c: types[Math.floor(Math.random() * types.length)]
                 });
             }
 
-            function animate() {
-                ctx.clearRect(0, 0, canvas.width, canvas.height);
-                particles.forEach(p => {
-                    ctx.font = p.size + 'px serif';
-                    ctx.fillText(p.content, p.x, p.y);
-                    p.y += p.speed;
-                    if(p.y > canvas.height) p.y = -30;
+            function draw() {
+                ctx.clearRect(0,0, canvas.width, canvas.height);
+                items.forEach(p => {
+                    ctx.font = p.s + 'px serif';
+                    ctx.fillText(p.c, p.x, p.y);
+                    p.y += p.v;
+                    if(p.y > canvas.height) p.y = -20;
                 });
-                requestAnimationFrame(animate);
+                requestAnimationFrame(draw);
             }
-            animate();
+            draw();
 
-            // Selesai Animasi & Transisi ke Main Content
+            // 4. Masuk ke Home
             setTimeout(() => {
                 stage.style.opacity = '0';
                 setTimeout(() => {
                     stage.style.display = 'none';
-                    mainContent.classList.add('content-show'); // Munculkan Konten Utama
-                    window.scrollTo(0,0); // Reset scroll ke atas
+                    content.classList.add('show-content');
+                    document.body.style.overflow = 'auto';
                 }, 1000);
             }, 4000);
         }
+
+        // Play/Pause Musik di Home
+        document.getElementById('playBtn').addEventListener('click', function() {
+            if(music.paused) {
+                music.play();
+                this.innerText = '⏸';
+            } else {
+                music.pause();
+                this.innerText = '▶';
+            }
+        });
     </script>
 </body>
 </html>

@@ -3,156 +3,234 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Atlantic Course | Excellence in Education</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Lora:ital,wght@0,400;0,600;1,400&display=swap" rel="stylesheet">
+    <title>Atlantic Course | Excellence & Tradition</title>
+    <!-- Google Fonts: Playfair Display untuk kesan mewah -->
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
     <style>
         :root {
-            --oxford-blue: #002147;
-            --gold: #C5A059;
-            --cream: #FDFBF7;
+            --primary: #1a2f23; /* Racing Green */
+            --accent: #c5a059;  /* Gold muted */
+            --bg: #f9f7f2;      /* Off-white/Parchment */
+            --text: #2c2c2c;
         }
-        body {
-            font-family: 'Lora', serif;
-            background-color: var(--cream);
-            color: var(--oxford-blue);
-        }
-        .serif-title { font-family: 'Playfair Display', serif; }
-        .gold-border { border-color: var(--gold); }
-        .bg-oxford { background-color: var(--oxford-blue); }
-        .text-gold { color: var(--gold); }
-        
-        /* Smooth Fade Animation */
-        .fade-in { animation: fadeIn 1.5s ease-in; }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
-        /* Slide Animation Custom */
-        .slide-track {
-            display: flex;
-            overflow-x: auto;
-            scroll-snap-type: x mandatory;
-            scrollbar-width: none;
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg);
+            color: var(--text);
+            overflow-x: hidden;
         }
-        .slide-item {
-            flex: 0 0 100%;
-            scroll-snap-align: start;
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 5%;
+            background: var(--primary);
+            color: white;
+            border-bottom: 3px solid var(--accent);
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: bold;
+            letter-spacing: 2px;
+            color: var(--accent);
+        }
+
+        .menu-dots {
+            cursor: pointer;
+            position: relative;
+            font-size: 24px;
+        }
+
+        .dropdown {
+            display: none;
+            position: absolute;
+            right: 0;
+            top: 30px;
+            background: white;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            z-index: 100;
+            min-width: 150px;
+            border-radius: 4px;
+        }
+
+        .dropdown a {
+            color: var(--primary);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+        }
+
+        .dropdown a:hover { background: #eee; }
+        .menu-dots:hover .dropdown { display: block; }
+
+        /* --- HERO SECTION --- */
+        header {
+            text-align: center;
+            padding: 80px 20px;
+            background: linear-gradient(rgba(26, 47, 35, 0.8), rgba(26, 47, 35, 0.8)), url('https://images.unsplash.com/photo-1541339907198-e08756ebafe3?auto=format&fit=crop&q=80&w=1500');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        header h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-style: italic;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* --- BULLETIN SLIDE --- */
+        .bulletin-container {
+            width: 80%;
+            margin: -40px auto 40px;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid var(--accent);
+        }
+
+        .slide-text {
+            text-align: center;
+            font-style: italic;
+            color: var(--primary);
+            animation: fadeIn 2s infinite alternate;
+        }
+
+        @keyframes fadeIn { from { opacity: 0.4; } to { opacity: 1; } }
+
+        /* --- DASHBOARD GRID --- */
+        .grid-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 40px 5%;
+            max-width: 1200px;
+            margin: auto;
+        }
+
+        .card {
+            background: white;
+            padding: 40px;
+            text-align: center;
+            border: 1px solid #e0e0e0;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            color: var(--text);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--accent);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.05);
+        }
+
+        .card::after {
+            content: '';
+            position: absolute;
+            bottom: 0; left: 0;
+            width: 100%; height: 5px;
+            background: var(--accent);
+            transform: scaleX(0);
+            transition: transform 0.4s ease;
+        }
+
+        .card:hover::after { transform: scaleX(1); }
+
+        .card i { font-size: 40px; color: var(--primary); margin-bottom: 20px; display: block; }
+        .card h3 { font-family: 'Playfair Display', serif; margin-bottom: 15px; font-size: 1.5rem; }
+        .card p { font-size: 0.9rem; line-height: 1.6; color: #666; }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            font-size: 0.8rem;
+            letter-spacing: 2px;
+            color: #888;
+            border-top: 1px solid #ddd;
         }
     </style>
 </head>
-<body class="fade-in">
+<body>
 
-    <!-- Navigation Bar -->
-    <nav class="border-b gold-border py-6 px-8 md:px-16 flex justify-between items-center bg-white shadow-sm sticky top-0 z-50">
-        <div class="flex items-center gap-3">
-            <!-- Logo Simulation -->
-            <div class="w-12 h-12 bg-oxford flex items-center justify-center rounded-sm">
-                <span class="text-gold font-bold text-2xl serif-title">A</span>
-            </div>
-            <h1 class="serif-title text-2xl tracking-widest uppercase">Atlantic <span class="text-gold">Course</span></h1>
-        </div>
-
-        <div class="relative group">
-            <button class="text-3xl focus:outline-none">⋮</button>
-            <!-- Dropdown Menu -->
-            <div class="absolute right-0 mt-2 w-48 bg-white border gold-border shadow-xl opacity-0 group-hover:opacity-100 transition-opacity duration-300 invisible group-hover:visible">
-                <a href="#" class="block px-4 py-3 hover:bg-stone-100 border-b border-gray-100">About Atlantic</a>
-                <a href="#" class="block px-4 py-3 hover:bg-stone-100">Contact Registry</a>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">ATLANTIC</div>
+        <div class="menu-dots">
+            ⋮
+            <div class="dropdown">
+                <a href="#">About Academy</a>
+                <a href="#">Contact Office</a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero Section & Bulletin Slide -->
-    <header class="py-12 px-4 md:px-16 text-center">
-        <p class="italic text-lg mb-2">Semper Ad Meliora</p>
-        <h2 class="serif-title text-4xl md:text-6xl mb-8 tracking-tight">Papan Buletin Akademik</h2>
-        
-        <div class="max-w-5xl mx-auto overflow-hidden relative border-4 gold-border p-2 shadow-2xl">
-            <div class="slide-track">
-                <div class="slide-item bg-oxford text-white p-12 flex flex-col justify-center min-h-[300px]">
-                    <h3 class="text-2xl text-gold mb-4">Penerimaan Mahasiswa Baru 2026</h3>
-                    <p class="max-w-2xl mx-auto opacity-80">Bergabunglah dengan tradisi keunggulan intelektual. Pendaftaran semester musim gugur kini telah dibuka untuk kandidat terpilih.</p>
-                </div>
-                <div class="slide-item bg-stone-800 text-white p-12 flex flex-col justify-center min-h-[300px]">
-                    <h3 class="text-2xl text-gold mb-4">Kuliah Tamu: Ekonomi Politik</h3>
-                    <p class="max-w-2xl mx-auto opacity-80">Menghadirkan Profesor dari Oxford University. Senin, Aula Utama.</p>
-                </div>
-            </div>
-        </div>
+    <!-- HERO -->
+    <header>
+        <h1>Atlantic Course</h1>
+        <p>"Knowledge is the Ultimate Heritage"</p>
     </header>
 
-    <!-- Main Dashboard Grid -->
-    <main class="max-w-6xl mx-auto px-4 py-16 grid grid-cols-1 md:grid-cols-3 gap-8">
+    <!-- BULLETIN SLIDER -->
+    <div class="bulletin-container">
+        <div class="slide-text">
+            <strong>PENGUMUMAN:</strong> Pendaftaran Semester Musim Gugur telah dibuka. Segera lengkapi berkas Anda.
+        </div>
+    </div>
+
+    <!-- MAIN DASHBOARD -->
+    <div class="grid-container">
         
         <!-- Atlantic Classroom -->
-        <a href="#" class="group border gold-border p-8 hover:bg-oxford transition-all duration-500">
-            <div class="mb-4 text-gold group-hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                </svg>
-            </div>
-            <h3 class="serif-title text-2xl mb-2 group-hover:text-gold transition-colors">Atlantic Classroom</h3>
-            <p class="text-sm italic opacity-70 group-hover:text-white">Materi kuliah, kurikulum, dan submisi tugas terpusat.</p>
+        <a href="#" class="card">
+            <h3>Atlantic Classroom</h3>
+            <p>Akses modul pembelajaran, materi kuliah eksklusif, dan portal pengumpulan tugas harian.</p>
         </a>
 
         <!-- Atlantic Presensi -->
-        <a href="#" class="group border gold-border p-8 hover:bg-oxford transition-all duration-500">
-            <div class="mb-4 text-gold group-hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-                </svg>
-            </div>
-            <h3 class="serif-title text-2xl mb-2 group-hover:text-gold transition-colors">Atlantic Presensi</h3>
-            <p class="text-sm italic opacity-70 group-hover:text-white">Verifikasi kehadiran dan riwayat disiplin akademik.</p>
+        <a href="#" class="card">
+            <h3>Atlantic Presensi</h3>
+            <p>Pencatatan kehadiran digital. Kedisiplinan adalah kunci dari kesuksesan akademik.</p>
         </a>
 
         <!-- SI Akademik -->
-        <a href="#" class="group border gold-border p-8 hover:bg-oxford transition-all duration-500">
-            <div class="mb-4 text-gold group-hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                </svg>
-            </div>
-            <h3 class="serif-title text-2xl mb-2 group-hover:text-gold transition-colors">SI Akademik</h3>
-            <p class="text-sm italic opacity-70 group-hover:text-white">Transkrip nilai digital dan lembar umpan balik dosen.</p>
+        <a href="#" class="card">
+            <h3>SI Akademik</h3>
+            <p>Pantau transkrip nilai, laporan kemajuan belajar, dan berikan umpan balik akademik.</p>
         </a>
 
         <!-- Pengajar -->
-        <a href="#" class="group border gold-border p-8 hover:bg-oxford transition-all duration-500">
-            <div class="mb-4 text-gold group-hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                </svg>
-            </div>
-            <h3 class="serif-title text-2xl mb-2 group-hover:text-gold transition-colors">Direktori Pengajar</h3>
-            <p class="text-sm italic opacity-70 group-hover:text-white">Informasi dewan guru dan profil riset akademis.</p>
+        <a href="#" class="card">
+            <h3>Profil Pengajar</h3>
+            <p>Mengenal lebih dekat para cendekiawan dan ahli yang akan membimbing Anda.</p>
         </a>
 
         <!-- Pendaftaran -->
-        <a href="#" class="group border gold-border p-8 border-dashed hover:bg-stone-100 transition-all duration-500">
-            <div class="mb-4 text-gold">
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z" />
-                </svg>
-            </div>
-            <h3 class="serif-title text-2xl mb-2">Pendaftaran</h3>
-            <p class="text-sm italic opacity-70">Admisi siswa baru dan pendaftaran kursus sertifikasi.</p>
+        <a href="#" class="card">
+            <h3>Pendaftaran</h3>
+            <p>Penerimaan mahasiswa baru dan pendaftaran kursus sertifikasi profesional.</p>
         </a>
 
-    </main>
+    </div>
 
-    <!-- Footer -->
-    <footer class="bg-oxford text-white py-12 px-8 mt-20 border-t-4 gold-border">
-        <div class="max-w-6xl mx-auto flex flex-col md:row justify-between items-center gap-6">
-            <div class="text-center md:text-left">
-                <h4 class="serif-title text-gold text-xl tracking-widest">ATLANTIC COURSE</h4>
-                <p class="text-xs opacity-50 mt-1">EST. 1924 - PRESERVING TRADITION</p>
-            </div>
-            <div class="flex gap-8 text-sm text-stone-400">
-                <a href="#" class="hover:text-gold transition">Privacy Policy</a>
-                <a href="#" class="hover:text-gold transition">Institutional Archive</a>
-                <a href="#" class="hover:text-gold transition">Support</a>
-            </div>
-        </div>
+    <footer>
+        &copy; 2026 ATLANTIC COURSE EST. 1924 | ALL RIGHTS RESERVED
     </footer>
 
 </body>

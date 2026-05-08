@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Atlantic Classroom | Academic Portal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --beige: #F5F5DC;
+            --charcoal: #36454F;
+            --glitter-gold: #D4AF37;
+            --midnight-blue: #191970;
+            --red-wine: #722F37;
+        }
+
+        body {
+            background-color: var(--beige);
+            font-family: 'Montserrat', sans-serif;
+            color: var(--charcoal);
+        }
+
+        .font-cinzel { font-family: 'Cinzel', serif; }
+        .font-playfair { font-family: 'Playfair Display', serif; }
+
+        .gold-border {
+            border: 1px solid var(--glitter-gold);
+            position: relative;
+        }
+
+        .gold-border::before {
+            content: "";
+            position: absolute;
+            top: 2px; left: 2px; right: 2px; bottom: 2px;
+            border: 1px solid var(--glitter-gold);
+            pointer-events: none;
+        }
+
+        .course-card {
+            background: white;
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .course-card:hover {
+            background: var(--midnight-blue);
+            color: var(--glitter-gold);
+            transform: scale(1.02);
+        }
+
+        /* Accordion Style */
+        .content-hidden { display: none; }
+        .active-section { display: block; }
+
+        /* Calendar Styling */
+        .calendar-day {
+            aspect-ratio: 1 / 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ddd;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="bg-[#191970] py-4 shadow-xl border-b-2 border-[#D4AF37]">
+        <div class="container mx-auto flex justify-between items-center px-8">
+            <div class="flex items-center space-x-4">
+                <img src="https://drive.google.com/thumbnail?id=1FesaITSe3QqVMfNLFj2aVGJC1yNCAunJ&sz=w200" class="w-10 h-10 border border-[#D4AF37]">
+                <span class="font-cinzel text-xl text-[#F5F5DC] tracking-widest">ATLANTIC CLASSROOM</span>
+            </div>
+            <a href="index.html" class="font-cinzel text-[#D4AF37] text-sm hover:underline"> Kembali ke Dashboard</a>
+        </div>
+    </nav>
+
+    <main class="container mx-auto px-6 py-10 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        
+        <aside class="lg:col-span-4 space-y-8">
+            <div class="gold-border bg-white p-6 shadow-lg">
+                <h2 class="font-cinzel border-b border-[#D4AF37] mb-4 pb-2">Student Profile</h2>
+                <p class="font-playfair italic text-lg">Lord/Lady Scholar</p>
+                <p class="text-xs uppercase tracking-tighter opacity-60">ID: ATL-2026-001</p>
+            </div>
+
+            <div class="gold-border bg-white p-6 shadow-lg">
+                <h2 class="font-cinzel text-center border-b border-[#D4AF37] mb-4 pb-2">Academic Calendar</h2>
+                <div class="grid grid-cols-7 gap-1 text-center font-bold text-xs mb-2 text-[#722F37]">
+                    <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
+                </div>
+                <div class="grid grid-cols-7 gap-1" id="calendar-days">
+                    <script>
+                        const cal = document.getElementById('calendar-days');
+                        for(let i=1; i<=31; i++) {
+                            cal.innerHTML += `<div class="calendar-day hover:bg-[#D4AF37] hover:text-white cursor-pointer">${i}</div>`;
+                        }
+                    </script>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <a href="#" class="block gold-border bg-[#722F37] text-white p-4 text-center font-cinzel hover:bg-[#191970] transition">
+                    Final Examination Portal
+                </a>
+                <a href="#" class="block gold-border bg-[#36454F] text-[#D4AF37] p-4 text-center font-cinzel hover:bg-black transition border-glitter-gold">
+                    Thesis Submission & Defense
+                </a>
+            </div>
+        </aside>
+
+        <section class="lg:col-span-8 space-y-6">
+            
+            <div class="gold-border bg-white overflow-hidden shadow-xl">
+                <button onclick="toggleSection('my-course')" class="w-full text-left p-6 bg-[#191970] text-[#D4AF37] font-cinzel text-2xl flex justify-between items-center">
+                    MY COURSES <span class="text-sm font-playfair italic">(Assignment Hub)</span>
+                    <span id="icon-my-course">▼</span>
+                </button>
+                
+                <div id="my-course" class="content-hidden p-6 bg-[#F5F5DC]/50">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <a href="#" class="course-card p-4 gold-border border-charcoal font-cinzel text-center">Economy</a>
+                        <a href="#" class="course-card p-4 gold-border border-charcoal font-cinzel text-center">Law</a>
+                        <a href="#" class="course-card p-4 gold-border border-charcoal font-cinzel text-center">Medicine</a>
+                        <a href="#" class="course-card p-4 gold-border border-charcoal font-cinzel text-center">Literature</a>
+                        <a href="#" class="course-card p-4 gold-border border-charcoal font-cinzel text-center">Science</a>
+                        <a href="#" class="course-card p-4 gold-border border-charcoal font-cinzel text-center">Philosophy</a>
+                        <a href="#" class="course-card p-4 gold-border border-charcoal font-cinzel text-center">Sociology</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="gold-border bg-white overflow-hidden shadow-xl">
+                <button onclick="toggleSection('journals')" class="w-full text-left p-6 bg-[#36454F] text-[#F5F5DC] font-cinzel text-2xl flex justify-between items-center border-t-2 border-[#D4AF37]">
+                    ACADEMIC JOURNALS <span class="text-sm font-playfair italic">(Module & Materials)</span>
+                    <span id="icon-journals">▶</span>
+                </button>
+                
+                <div id="journals" class="content-hidden p-6 bg-[#F5F5DC]/50">
+                    <div class="space-y-3">
+                        <a href="#" class="block p-4 border-l-4 border-[#722F37] bg-white hover:bg-[#F5F5DC] transition shadow-sm font-cinzel flex justify-between">
+                            <span>Economy Journal - Vol I</span> <span class="text-xs italic">PDF Download</span>
+                        </a>
+                        <a href="#" class="block p-4 border-l-4 border-[#722F37] bg-white hover:bg-[#F5F5DC] transition shadow-sm font-cinzel flex justify-between">
+                            <span>Law Principles - 2026 Edition</span> <span class="text-xs italic">PDF Download</span>
+                        </a>
+                        <a href="#" class="block p-4 border-l-4 border-[#722F37] bg-white hover:bg-[#F5F5DC] transition shadow-sm font-cinzel flex justify-between">
+                            <span>Advanced Medicine Notes</span> <span class="text-xs italic">PDF Download</span>
+                        </a>
+                        <a href="#" class="block p-4 border-l-4 border-[#722F37] bg-white hover:bg-[#F5F5DC] transition shadow-sm font-cinzel flex justify-between">
+                            <span>Classic Literature Analysis</span> <span class="text-xs italic">PDF Download</span>
+                        </a>
+                        <a href="#" class="block p-4 border-l-4 border-[#722F37] bg-white hover:bg-[#F5F5DC] transition shadow-sm font-cinzel flex justify-between">
+                            <span>Pure Science Lab Manual</span> <span class="text-xs italic">PDF Download</span>
+                        </a>
+                        <a href="#" class="block p-4 border-l-4 border-[#722F37] bg-white hover:bg-[#F5F5DC] transition shadow-sm font-cinzel flex justify-between">
+                            <span>Philosophical Treatises</span> <span class="text-xs italic">PDF Download</span>
+                        </a>
+                        <a href="#" class="block p-4 border-l-4 border-[#722F37] bg-white hover:bg-[#F5F5DC] transition shadow-sm font-cinzel flex justify-between">
+                            <span>Contemporary Sociology Study</span> <span class="text-xs italic">PDF Download</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </main>
+
+    <footer class="mt-20 py-6 text-center border-t border-[#D4AF37] opacity-60 text-xs font-cinzel italic">
+        Atlantic Course Academic Management System &copy; 2026
+    </footer>
+
+    <script>
+        function toggleSection(id) {
+            const section = document.getElementById(id);
+            const icon = document.getElementById('icon-' + id);
+            
+            if (section.classList.contains('content-hidden')) {
+                section.classList.remove('content-hidden');
+                section.classList.add('active-section');
+                icon.innerText = '▼';
+            } else {
+                section.classList.remove('active-section');
+                section.classList.add('content-hidden');
+                icon.innerText = '▶';
+            }
+        }
+    </script>
+</body>
+</html>

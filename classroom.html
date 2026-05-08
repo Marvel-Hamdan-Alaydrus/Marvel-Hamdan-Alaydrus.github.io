@@ -85,11 +85,15 @@
                 <p class="text-xs uppercase tracking-tighter opacity-60">ID: ATL-2026-001</p>
             </div>
 
-            <div class="gold-border bg-white p-6 shadow-lg">
-                <h2 class="font-cinzel text-center border-b border-[#D4AF37] mb-4 pb-2">Academic Calendar</h2>
-                <div class="grid grid-cols-7 gap-1 text-center font-bold text-xs mb-2 text-[#722F37]">
-                    <div>S</div><div>M</div><div>T</div><div>W</div><div>T</div><div>F</div><div>S</div>
-                </div>
+           <div class="gold-border bg-white p-6 shadow-lg">
+    <h2 id="calendar-month" class="font-cinzel text-center border-b border-[#D4AF37] mb-4 pb-2 text-sm tracking-widest">
+        </h2>
+    <div class="grid grid-cols-7 gap-1 text-center font-bold text-[10px] mb-2 text-[#722F37]">
+        <div>SUN</div><div>MON</div><div>TUE</div><div>WED</div><div>THU</div><div>FRI</div><div>SAT</div>
+    </div>
+    <div class="grid grid-cols-7 gap-1" id="calendar-days">
+        </div>
+</div>
                 <div class="grid grid-cols-7 gap-1" id="calendar-days">
                     <script>
                         const cal = document.getElementById('calendar-days');
@@ -187,5 +191,57 @@
             }
         }
     </script>
+    <script>
+    function generateCalendar() {
+        const calendarDays = document.getElementById('calendar-days');
+        const monthElement = document.getElementById('calendar-month');
+        
+        const now = new Date();
+        const year = now.getFullYear();
+        const month = now.getMonth();
+        const today = now.getDate();
+
+        // Nama-nama bulan untuk header
+        const monthNames = ["JANUARY", "FEBRUARY", "MARCH", "APRIL", "MAY", "JUNE",
+                            "JULY", "AUGUST", "SEPTEMBER", "OCTOBER", "NOVEMBER", "DECEMBER"];
+        
+        monthElement.innerText = `${monthNames[month]} ${year}`;
+
+        // Hari pertama pada bulan ini (0 = Minggu, 1 = Senin, dst)
+        const firstDay = new Date(year, month, 1).getDay();
+        
+        // Jumlah hari dalam bulan ini
+        const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+        calendarDays.innerHTML = '';
+
+        // Buat kotak kosong untuk hari sebelum tanggal 1
+        for (let i = 0; i < firstDay; i++) {
+            const emptyDiv = document.createElement('div');
+            emptyDiv.classList.add('calendar-day', 'border-none', 'opacity-0');
+            calendarDays.appendChild(emptyDiv);
+        }
+
+        // Isi tanggal 1 sampai akhir bulan
+        for (let day = 1; day <= daysInMonth; day++) {
+            const dayDiv = document.createElement('div');
+            dayDiv.classList.add('calendar-day', 'transition-all', 'duration-300', 'cursor-pointer', 'hover:bg-[#D4AF37]', 'hover:text-white');
+            dayDiv.innerText = day;
+
+            // Tandai jika ini adalah HARI INI
+            if (day === today) {
+                dayDiv.classList.add('bg-[#191970]', 'text-[#D4AF37]', 'font-bold', 'border-2', 'border-[#D4AF37]');
+                dayDiv.title = "Today";
+            } else {
+                dayDiv.classList.add('bg-white', 'text-[#36454F]');
+            }
+
+            calendarDays.appendChild(dayDiv);
+        }
+    }
+
+    // Jalankan fungsi saat halaman dimuat
+    generateCalendar();
+</script>
 </body>
 </html>

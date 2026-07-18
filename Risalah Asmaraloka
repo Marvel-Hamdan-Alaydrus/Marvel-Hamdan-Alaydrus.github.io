@@ -3,70 +3,96 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Personal Archive | The Vault</title>
+    <title>The Archive | Personal Reflection</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
     <style>
-        body { background-color: #0f172a; color: #e2e8f0; font-family: 'Montserrat', sans-serif; }
-        .parchment { background-color: #f8f1e5; color: #2d2a2a; border: 2px solid #b8860b; }
-        .nav-hover:hover { color: #d4af37; border-bottom: 1px solid #d4af37; }
-        .archive-border { border: 1px solid #4a5568; transition: 0.3s; }
-        .archive-border:hover { border-color: #d4af37; box-shadow: 0 0 15px rgba(212, 175, 55, 0.2); }
+        :root {
+            --bg-deep: #0a0e14;
+            --gold: #c5a059;
+            --parchment: #f4e4bc;
+            --text-night: #1a1a1a;
+        }
+        body { background-color: var(--bg-deep); color: #e2e8f0; font-family: 'Montserrat', sans-serif; }
+        
+        .glass-panel {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(197, 160, 89, 0.3);
+        }
+        
+        .parchment-text {
+            background-color: var(--parchment);
+            color: var(--text-night);
+            border-left: 5px solid var(--gold);
+            transition: all 0.5s ease;
+        }
+
+        .gold-glow { text-shadow: 0 0 10px rgba(197, 160, 89, 0.5); }
+        
+        .nav-link {
+            position: relative;
+            color: var(--gold);
+            transition: 0.3s;
+        }
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            left: 0; bottom: -5px;
+            width: 0; height: 1px;
+            background: var(--gold);
+            transition: 0.3s;
+        }
+        .nav-link:hover::after { width: 100%; }
     </style>
 </head>
-<body class="min-h-screen p-4 md:p-10">
+<body class="p-6 md:p-12">
 
-    <!-- Header & Navigation -->
-    <header class="max-w-4xl mx-auto mb-16 border-b border-gray-700 pb-8">
-        <h1 class="text-4xl font-serif italic text-[#d4af37] mb-6">The Private Archive</h1>
-        <nav class="flex flex-wrap gap-6 text-sm uppercase tracking-widest">
-            <a href="#" class="nav-hover">Beranda</a>
-            <a href="#" class="nav-hover">About</a>
-            <a href="#" class="nav-hover">Asmaraloka</a>
-            <a href="#" class="nav-hover">Sajak Asmara</a>
-            <a href="#" class="nav-hover">Bait Ilahi</a>
-            <a href="#" class="nav-hover">Jika Waktu</a>
+    <!-- Header -->
+    <header class="max-w-5xl mx-auto mb-16 text-center">
+        <h1 class="text-5xl font-cinzel text-[var(--gold)] gold-glow mb-4">THE ARCHIVE</h1>
+        <p class="font-playfair italic text-lg opacity-80">"Tempat di mana waktu dan rasa bertemu"</p>
+        
+        <nav class="mt-10 flex flex-wrap justify-center gap-8 uppercase tracking-widest text-xs font-semibold">
+            <a href="#" class="nav-link">Beranda</a>
+            <a href="#" class="nav-link">About</a>
+            <a href="#" class="nav-link">Asmaraloka</a>
+            <a href="#" class="nav-link">Sajak Asmara</a>
+            <a href="#" class="nav-link">Bait Ilahi</a>
+            <a href="#" class="nav-link">Jika Waktu</a>
         </nav>
     </header>
 
-    <!-- Main Content Area -->
-    <main class="max-w-4xl mx-auto space-y-12">
+    <!-- Content -->
+    <main class="max-w-5xl mx-auto space-y-10">
         
-        <!-- Hero / Note Section -->
-        <section class="parchment p-10 md:p-16 shadow-2xl relative">
-            <div class="absolute top-2 left-2 text-[#b8860b] text-xl">「</div>
-            <p class="font-serif text-2xl leading-relaxed italic">
-                "Di sini adalah tempat di mana kata-kata berhenti menjadi sekadar deret huruf, 
-                dan berubah menjadi fragmen perasaan yang disemayamkan dalam keheningan."
+        <!-- Tulisan Utama -->
+        <section class="parchment-text p-10 md:p-16 shadow-2xl">
+            <h2 class="font-cinzel text-2xl mb-6 border-b border-black/20 pb-2">Refleksi Hari Ini</h2>
+            <p class="font-playfair text-xl italic leading-loose">
+                "Tuliskan isi pikiranmu di sini. Biarkan baris-baris ini menjadi saksi bisu 
+                atas perjalanan emosional yang tak mampu terucap oleh lisan, namun 
+                terpatri abadi dalam kode dan memori."
             </p>
-            <div class="absolute bottom-2 right-2 text-[#b8860b] text-xl">」</div>
         </section>
 
-        <!-- Grid Archive -->
-        <section class="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <!-- Custom Post Item -->
-            <article class="archive-border p-6 cursor-pointer">
-                <h3 class="font-bold text-[#d4af37] mb-2">Asmaraloka</h3>
-                <p class="text-xs opacity-70 mb-4">Catatan tentang ruang di hati.</p>
-                <div class="text-sm border-t border-gray-700 pt-4 italic">
-                    Isi teks kamu di sini...
-                </div>
-            </article>
-
-            <!-- Custom Post Item -->
-            <article class="archive-border p-6 cursor-pointer">
-                <h3 class="font-bold text-[#d4af37] mb-2">Jika Waktu</h3>
-                <p class="text-xs opacity-70 mb-4">Refleksi tentang linearitas.</p>
-                <div class="text-sm border-t border-gray-700 pt-4 italic">
-                    Isi teks kamu di sini...
-                </div>
-            </article>
-        </section>
-
+        <!-- Grid Arsip -->
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div class="glass-panel p-8 hover:bg-white/5 transition-all">
+                <h3 class="font-cinzel text-xl text-[var(--gold)] mb-3">Sajak Asmara</h3>
+                <p class="text-sm opacity-70">"Di antara sunyi, namamu adalah satu-satunya frekuensi yang terbaca."</p>
+            </div>
+            
+            <div class="glass-panel p-8 hover:bg-white/5 transition-all">
+                <h3 class="font-cinzel text-xl text-[var(--gold)] mb-3">Bait Ilahi</h3>
+                <p class="text-sm opacity-70">"Sebuah percakapan transendental antara hamba dan Sang Pencipta."</p>
+            </div>
+        </div>
     </main>
 
-    <footer class="max-w-4xl mx-auto mt-20 pt-8 text-center text-xs opacity-50 border-t border-gray-800">
-        &copy; 2026 | Fragmen yang diselamatkan.
+    <!-- Footer -->
+    <footer class="max-w-5xl mx-auto mt-20 text-center text-[var(--gold)] opacity-60 text-xs tracking-widest border-t border-[var(--gold)] pt-8">
+        SYSTEM ARCHIVE // 2026 // ACCESS GRANTED
     </footer>
 
 </body>

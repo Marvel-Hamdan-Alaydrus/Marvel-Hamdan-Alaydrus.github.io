@@ -255,35 +255,11 @@
             transform: scale(1.03) rotateY(5deg);
         }
 
-        .card-bronze {
-            background: linear-gradient(135deg, #6d421d 0%, #391d0a 50%, #170a03 100%);
-            border: 2px solid #cd7f32;
-            color: #fce7db;
-        }
-        .card-silver {
-            background: linear-gradient(135deg, #94a3b8 0%, #475569 50%, #1e293b 100%);
-            border: 2px solid #e2e8f0;
-            color: #f8fafc;
-        }
-        .card-gold {
-            background: linear-gradient(135deg, #ffd700 0%, #b8860b 50%, #3d2302 100%);
-            border: 2px solid #fffdf0;
-            color: #fffbeb;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-        }
-        .card-legendary {
-            background: linear-gradient(135deg, #a855f7 0%, #6b21a8 50%, #2e1065 100%);
-            border: 2px solid #f0abfc;
-            box-shadow: 0 0 30px rgba(216, 180, 254, 0.7);
-            color: #fdf4ff;
-        }
-        .card-goat {
-            background: linear-gradient(135deg, #0284c7 0%, #1e3a8a 50%, #090d16 100%);
-            border: 2px solid #38bdf8;
-            box-shadow: 0 0 40px rgba(56, 189, 248, 0.9);
-            color: #f0f9ff;
-            animation: goatGlow 2.5s infinite alternate;
-        }
+        .card-bronze { background: linear-gradient(135deg, #6d421d 0%, #391d0a 50%, #170a03 100%); border: 2px solid #cd7f32; color: #fce7db; }
+        .card-silver { background: linear-gradient(135deg, #94a3b8 0%, #475569 50%, #1e293b 100%); border: 2px solid #e2e8f0; color: #f8fafc; }
+        .card-gold { background: linear-gradient(135deg, #ffd700 0%, #b8860b 50%, #3d2302 100%); border: 2px solid #fffdf0; color: #fffbeb; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
+        .card-legendary { background: linear-gradient(135deg, #a855f7 0%, #6b21a8 50%, #2e1065 100%); border: 2px solid #f0abfc; box-shadow: 0 0 30px rgba(216, 180, 254, 0.7); color: #fdf4ff; }
+        .card-goat { background: linear-gradient(135deg, #0284c7 0%, #1e3a8a 50%, #090d16 100%); border: 2px solid #38bdf8; box-shadow: 0 0 40px rgba(56, 189, 248, 0.9); color: #f0f9ff; animation: goatGlow 2.5s infinite alternate; }
 
         @keyframes goatGlow {
             0% { border-color: #38bdf8; box-shadow: 0 0 20px rgba(56, 189, 248, 0.6); }
@@ -291,121 +267,41 @@
             100% { border-color: #c084fc; box-shadow: 0 0 30px rgba(192, 132, 252, 0.7); }
         }
 
-        .fc-card-header {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            z-index: 3;
-            line-height: 1.05;
-        }
+        .fc-card-header { display: flex; flex-direction: column; align-items: flex-start; z-index: 3; line-height: 1.05; }
         .fc-ovr { font-size: 28px; font-weight: 900; letter-spacing: -1px; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
         .fc-pos { font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; color: #facc15; }
         .fc-flag-club { display: flex; flex-direction: column; gap: 3px; font-size: 12px; }
-        .fc-club-badge {
-            width: 20px; height: 20px; background: rgba(0,0,0,0.5); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 9px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
+        .fc-club-badge { width: 20px; height: 20px; background: rgba(0,0,0,0.5); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; border: 1px solid rgba(255,255,255,0.2); }
 
-        .fc-player-img-container {
-            position: absolute;
-            bottom: 55px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 170px;
-            height: 200px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            z-index: 2;
-            overflow: hidden;
-        }
-        .fc-player-img-container img {
-            width: 100%; height: 100%; object-fit: cover;
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
-        }
+        .fc-player-img-container { position: absolute; bottom: 55px; left: 50%; transform: translateX(-50%); width: 170px; height: 200px; display: flex; align-items: flex-end; justify-content: center; z-index: 2; overflow: hidden; }
+        .fc-player-img-container img { width: 100%; height: 100%; object-fit: cover; mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%); -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%); }
         .fc-player-avatar-text { font-size: 70px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
 
-        .goat-ball-animation {
-            position: absolute; top: 10px; right: 10px; font-size: 20px; z-index: 4;
-            animation: spinBall 3s linear infinite;
-        }
-        @keyframes spinBall {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.3); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
+        .goat-ball-animation { position: absolute; top: 10px; right: 10px; font-size: 20px; z-index: 4; animation: spinBall 3s linear infinite; }
+        @keyframes spinBall { 0% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.3); } 100% { transform: rotate(360deg) scale(1); } }
 
-        .special-card-badge {
-            position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
-            font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px;
-            padding: 2px 8px; border-radius: 10px; z-index: 4;
-        }
+        .special-card-badge { position: absolute; top: 6px; left: 50%; transform: translateX(-50%); font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; padding: 2px 8px; border-radius: 10px; z-index: 4; }
         .badge-legendary { background: #9333ea; color: #fff; box-shadow: 0 0 8px #9333ea; }
         .badge-goat { background: linear-gradient(135deg, #f59e0b, #ef4444); color: #fff; box-shadow: 0 0 10px #f59e0b; }
 
         .fc-card-footer { z-index: 3; margin-top: auto; }
-        .fc-player-name {
-            font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
-            text-align: center; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.9);
-            border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 3px;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff;
-        }
+        .fc-player-name { font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.9); border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff; }
         .fc-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 12px; font-size: 10px; font-weight: 700; padding: 0 2px; }
         .fc-stat-row { display: flex; justify-content: space-between; }
 
-        .contract-box {
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid #facc15;
-            border-radius: 14px;
-            padding: 15px;
-            margin-bottom: 12px;
-            text-align: left;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-        }
+        .contract-box { background: rgba(15, 23, 42, 0.95); border: 1px solid #facc15; border-radius: 14px; padding: 15px; margin-bottom: 12px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
         .contract-box h4 { color: #facc15; font-size: 13px; margin-bottom: 6px; display: flex; justify-content: space-between; }
-        .contract-text {
-            font-size: 10px; color: #cbd5e1; line-height: 1.4; max-height: 90px; overflow-y: auto;
-            background: #090d16; padding: 8px; border-radius: 8px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.08);
-        }
+        .contract-text { font-size: 10px; color: #cbd5e1; line-height: 1.4; max-height: 90px; overflow-y: auto; background: #090d16; padding: 8px; border-radius: 8px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.08); }
 
-        .club-offer-card {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: left;
-            transition: 0.2s;
-        }
+        .club-offer-card { background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; text-align: left; transition: 0.2s; }
         .club-offer-card:hover { border-color: #facc15; background: rgba(30, 41, 59, 0.9); }
         .club-info h4 { font-size: 12px; color: #00d2ff; display: flex; align-items: center; gap: 6px; }
         .club-info p { font-size: 10px; color: #94a3b8; margin-top: 2px; }
 
-        .sign-btn {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: #fff;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-            transition: 0.2s;
-        }
+        .sign-btn { background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 6px 14px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4); transition: 0.2s; }
         .sign-btn:hover { transform: scale(1.05); background: linear-gradient(135deg, #059669, #047857); }
 
-        .cutscene-screen {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle, #0f172a 0%, #050a12 100%);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 999; padding: 20px; text-align: center; animation: fadeIn 0.4s ease-in-out;
-        }
+        .cutscene-screen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle, #0f172a 0%, #050a12 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 999; padding: 20px; text-align: center; animation: fadeIn 0.4s ease-in-out; }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
         .dashboard-header { display: flex; justify-content: space-between; align-items: center; background: rgba(30,41,59,0.7); padding: 10px 15px; border-radius: 12px; margin-bottom: 12px; font-size: 11px; border: 1px solid rgba(255,215,0,0.2); }
@@ -415,16 +311,8 @@
         .dash-card h5 { font-size: 9px; color: #94a3b8; margin-bottom: 4px; text-transform: uppercase; }
         .dash-card p { font-size: 13px; font-weight: 700; color: #00d2ff; }
 
-        .sub-screen {
-            background: rgba(15, 23, 42, 0.98);
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            z-index: 100; padding: 20px; overflow-y: auto; text-align: left;
-        }
-
-        .modal-box {
-            background: #090d16; border: 1px solid rgba(255,215,0,0.3); border-radius: 14px;
-            padding: 15px; margin-bottom: 12px; font-size: 11px; color: #cbd5e1;
-        }
+        .sub-screen { background: rgba(15, 23, 42, 0.98); position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100; padding: 20px; overflow-y: auto; text-align: left; }
+        .modal-box { background: #090d16; border: 1px solid rgba(255,215,0,0.3); border-radius: 14px; padding: 15px; margin-bottom: 12px; font-size: 11px; color: #cbd5e1; }
         .modal-box h4 { color: #facc15; font-size: 13px; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; }
 
         .hidden { display: none !important; }
@@ -599,7 +487,7 @@
                     <h5>Klub Saat Ini</h5>
                     <p id="dash-club" style="font-size: 11px;">-</p>
                 </div>
-                <div class="dash-card" onclick="playSound(); alertMenu('Tim Nasional')">
+                <div class="dash-card" onclick="playSound(); openNationalTeamModal()">
                     <h5>Tim Nasional</h5>
                     <p id="dash-national" style="font-size: 10px; color: #38bdf8;">-</p>
                 </div>
@@ -615,11 +503,12 @@
 
             <div class="menu-list">
                 <button class="menu-btn" onclick="playSound(); openMatchScreen()">Lanjut Pertandingan Laga ⚽</button>
-                <button class="menu-btn" onclick="playSound(); openShopModal()">Shop Kebutuhan Nyata 🛒</button>
+                <button class="menu-btn" onclick="playSound(); openStandingsScreen()">Klasemen & Turnamen Dunia 🏆</button>
+                <button class="menu-btn" onclick="playSound(); openShopModal()">Shop Kebutuhan Nyata (300+ Barang) 🛒</button>
                 <button class="menu-btn" onclick="playSound(); openSocialMediaScreen()">Media Sosial & Berita Dunia 📱</button>
-                <button class="menu-btn" onclick="playSound(); openCoachScreen()">Pelatih Profesional 👨‍🏫</button>
-                <button class="menu-btn" onclick="playSound(); openSponsorScreen()">Pusat Sponsor 🤝</button>
-                <button class="menu-btn" onclick="playSound(); openGirlfriendScreen()">Kekasih & Gacha Jodoh ❤️</button>
+                <button class="menu-btn" onclick="playSound(); openCoachScreen()">Pelatih Spesialis Profesional 👨‍🏫</button>
+                <button class="menu-btn" onclick="playSound(); openSponsorScreen()">Pusat Sponsor (40 Brand) 🤝</button>
+                <button class="menu-btn" onclick="playSound(); openGirlfriendScreen()">Kekasih & Keluarga ❤️</button>
             </div>
         </div>
     </div>
@@ -627,8 +516,20 @@
     <!-- ================= SUB SCREENS / MODALS ================= -->
     <div id="club-info-screen" class="sub-screen hidden">
         <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
-        <div class="section-header">Informasi Klub & Skuad</div>
+        <div class="section-header">Informasi Klub & Skuad Asli</div>
         <div id="club-detail-content"></div>
+    </div>
+
+    <div id="national-screen" class="sub-screen hidden">
+        <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
+        <div class="section-header">Tim Nasional & Skuad Asli</div>
+        <div id="national-detail-content"></div>
+    </div>
+
+    <div id="standings-screen" class="sub-screen hidden">
+        <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
+        <div class="section-header">Klasemen Liga & Kejuaraan Dunia</div>
+        <div id="standings-content-area"></div>
     </div>
 
     <div id="health-screen" class="sub-screen hidden">
@@ -644,25 +545,28 @@
 
     <div id="shop-screen" class="sub-screen hidden">
         <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
-        <div class="section-header">Shop Kebutuhan Dunia Nyata</div>
+        <div class="section-header">Shop Kebutuhan Dunia Nyata (300+ Barang)</div>
+        <div class="input-group" style="margin-bottom: 10px;">
+            <input type="text" id="shop-search" placeholder="Cari barang (misal: Mobil, Villa, Jam)..." oninput="filterShopItems()">
+        </div>
         <div id="shop-items-container"></div>
     </div>
 
     <div id="match-screen" class="sub-screen hidden">
         <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
-        <div class="section-header">Pusat Pertandingan & Taktik</div>
+        <div class="section-header">Pusat Pertandingan Nyata & Taktik</div>
         <div id="match-content-area"></div>
     </div>
 
     <div id="social-screen" class="sub-screen hidden">
         <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
-        <div class="section-header">Media Sosial & Berita Dunia</div>
+        <div class="section-header">Media Sosial & Berita Raksasa Dunia</div>
         <div class="modal-box">
-            <h4>Berita Sepak Bola Dunia 📰</h4>
-            <div id="news-container" style="font-size: 10px; color: #94a3b8; line-height: 1.5; margin-bottom: 15px;"></div>
+            <h4>Berita Perusahaan & Dunia (100 Raksasa) 📰</h4>
+            <div id="news-container" style="font-size: 10px; color: #94a3b8; line-height: 1.5; max-height: 150px; overflow-y: auto; margin-bottom: 15px;"></div>
         </div>
         <div class="modal-box">
-            <h4>Instagram Feed 📸</h4>
+            <h4>Instagram Feed (10,000+ Interaksi Netizen) 📸</h4>
             <div class="input-group" style="margin-bottom: 8px;">
                 <label>Upload Foto / Aktivitas:</label>
                 <input type="text" id="ig-caption" placeholder="Tulis caption latihan atau pertandingan...">
@@ -670,27 +574,43 @@
             <button class="action-btn" style="margin-bottom: 15px;" onclick="playSound(); uploadIGPost()">Post ke Instagram 🚀</button>
             <div id="ig-feed-container"></div>
         </div>
+        <div class="modal-box">
+            <h4>Chat DM dengan Model / Selebriti 💬</h4>
+            <div id="chat-list-dm" style="margin-bottom: 10px;"></div>
+            <div id="active-chat-box" class="hidden">
+                <p id="chat-target-title" style="color: #facc15; font-weight: 700; margin-bottom: 6px;"></p>
+                <div id="chat-messages-history" style="background: #000; padding: 8px; border-radius: 8px; height: 100px; overflow-y: auto; font-size: 10px; margin-bottom: 8px;"></div>
+                <div style="display: flex; gap: 6px;">
+                    <input type="text" id="chat-input-msg" placeholder="Kirim pesan manis...">
+                    <button class="sign-btn" onclick="sendDirectMessage()">Kirim</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <div id="coach-screen" class="sub-screen hidden">
         <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
-        <div class="section-header">Pelatih Profesional</div>
+        <div class="section-header">Pelatih Spesialis Profesional</div>
         <div id="coach-list-container"></div>
     </div>
 
     <div id="sponsor-screen" class="sub-screen hidden">
         <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
-        <div class="section-header">Pusat Sponsor Dunia Nyata</div>
+        <div class="section-header">Pusat Sponsor (40 Brand Dunia)</div>
         <div id="sponsor-list-container"></div>
     </div>
 
     <div id="girlfriend-screen" class="sub-screen hidden">
         <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
-        <div class="section-header">Kekasih & Gacha Jodoh Selebriti</div>
+        <div class="section-header">Kekasih & Membangun Keluarga ❤️</div>
         <div class="modal-box">
-            <h4>Slot Hubungan Anda</h4>
+            <h4>Slot Hubungan Asmara</h4>
             <div id="gf-slots-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px;"></div>
             <button class="action-btn" onclick="playSound(); gachaGirlfriend()">Gacha Kekasih Baru (Biaya: $2,500) 🎁</button>
+        </div>
+        <div id="family-management-box" class="modal-box hidden">
+            <h4>Manajemen Keluarga & Anak 👶</h4>
+            <div id="family-content-info"></div>
         </div>
     </div>
 
@@ -727,7 +647,7 @@
         }
 
         bgmPlayer.onended = playNextSong;
-        window.onload = () => { playNextSong(); };
+        window.onload = () => { playNextSong(); generateShopDatabase(); generateGiantNews(); generateSponsorsDatabase(); };
 
         function toggleMusic() {
             if (isMusicPlaying) {
@@ -943,35 +863,74 @@
             health: 100,
             club: "",
             coach: "Belum disewa",
+            coachBonus: "Tidak ada",
             teammates: [],
             goals: 0,
             assists: 0,
             season: "2005/2006",
             girlfriends: [],
-            lineup: { starter: [], captain: "", freekick: "" },
+            family: null, // { childName: "", age: 0, costPerMonth: 1200 }
+            activeSponsors: [],
             matches: [
-                { opponent: "Real Madrid B", date: "10 Juli 2005", played: false },
-                { opponent: "Barcelona Juvenil", date: "18 Juli 2005", played: false },
-                { opponent: "Valencia Academy", date: "25 Juli 2005", played: false }
+                { opponent: "Real Madrid vs Cadiz", date: "10 Juli 2005", played: false, result: "-" },
+                { opponent: "Real Madrid vs Villarreal", date: "18 Juli 2005", played: false, result: "-" },
+                { opponent: "Real Madrid vs Barcelona", date: "25 Juli 2005", played: false, result: "-" }
             ]
         };
 
         const realGirlfriendsPool = [
-            { name: "Zendaya", tier: "UR" },
-            { name: "Taylor Swift", tier: "UR" },
-            { name: "Ana de Armas", tier: "SSR" },
-            { name: "Sydney Sweeney", tier: "SSR" },
-            { name: "Margot Robbie", tier: "SSS" },
-            { name: "Emma Watson", tier: "SSS" },
-            { name: "Selena Gomez", tier: "SS" },
-            { name: "Ariana Grande", tier: "SS" },
-            { name: "Dua Lipa", tier: "S" },
-            { name: "Billie Eilish", tier: "S" },
-            { name: "Millie Bobby Brown", tier: "A" },
-            { name: "Olivia Rodrigo", tier: "A" },
-            { name: "Kylie Jenner", tier: "B" },
-            { name: "Kendall Jenner", tier: "B" }
+            { name: "Zendaya", tier: "UR", relationship: 75, danger: 15 },
+            { name: "Taylor Swift", tier: "UR", relationship: 80, danger: 10 },
+            { name: "Ana de Armas", tier: "SSR", relationship: 65, danger: 25 },
+            { name: "Sydney Sweeney", tier: "SSR", relationship: 70, danger: 20 },
+            { name: "Margot Robbie", tier: "SSS", relationship: 60, danger: 30 },
+            { name: "Emma Watson", tier: "SSS", relationship: 60, danger: 20 },
+            { name: "Selena Gomez", tier: "SS", relationship: 50, danger: 40 },
+            { name: "Ariana Grande", tier: "SS", relationship: 55, danger: 35 },
+            { name: "Dua Lipa", tier: "S", relationship: 50, danger: 45 },
+            { name: "Billie Eilish", tier: "S", relationship: 45, danger: 50 },
+            { name: "Millie Bobby Brown", tier: "A", relationship: 40, danger: 55 },
+            { name: "Olivia Rodrigo", tier: "A", relationship: 40, danger: 55 },
+            { name: "Kylie Jenner", tier: "B", relationship: 30, danger: 70 },
+            { name: "Kendall Jenner", tier: "B", relationship: 30, danger: 70 }
         ];
+
+        let shopDatabase = [];
+        function generateShopDatabase() {
+            const categories = ["Sepatu Bola", "Mobil Mewah", "Rumah & Villa", "Suplemen & Kesehatan", "Jam Tangan Mewah", "Elektronik"];
+            for (let i = 1; i <= 300; i++) {
+                let cat = categories[i % categories.length];
+                shopDatabase.push({
+                    id: i,
+                    name: `${cat} Model Resmi #${i}`,
+                    price: Math.floor(Math.random() * 50000) + 100,
+                    desc: `Barang mewah dunia nyata kategori ${cat} kualitas terbaik.`
+                });
+            }
+        }
+
+        let giantNewsList = [];
+        function generateGiantNewsList() {
+            const giants = ["Apple", "Microsoft", "Amazon", "Google", "Tesla", "Meta", "Nike", "Adidas", "Coca-Cola", "Pepsico", "Samsung", "Sony", "Toyota", "Ferrari", "BMW", "Netflix", "Disney", "Spotify", "McDonalds", "Starbucks"];
+            for (let i = 0; i < 100; i++) {
+                let corp = giants[i % giants.length];
+                giantNewsList.push(`Perusahaan raksasa ${corp} mengumumkan laporan keuangan kuartal dengan inovasi global terbaru.`);
+            }
+        }
+        function generateGiantNews() { generateGiantNewsList(); }
+
+        let sponsorsDatabase = [];
+        function generateSponsorsDatabase() {
+            const brands = ["Nike", "Adidas", "Puma", "Under Armour", "New Balance", "Mizuno", "Umbro", "Reebok", "Kappa", "Joma", "Emirates", "Qatar Airways", "Spotify", "TeamViewer", "AIA", "Standard Chartered", "Jeep", "Chevrolet", "Pirelli", "Mastercard", "Visa", "Sony", "Samsung", "LG", "Pepsi", "Coca-Cola", "Red Bull", "Monster Energy", "Hublot", "Rolex", "Tag Heuer", "EA Sports", "Konami", "Topps", "Panini", "Beats by Dre", "Bose", "Gatorade", "Crypto.com", "Binance"];
+            for (let i = 0; i < 40; i++) {
+                sponsorsDatabase.push({
+                    name: brands[i],
+                    minRep: (i + 1) * 200,
+                    payout: (i + 1) * 5000,
+                    durationMonths: 12
+                });
+            }
+        }
 
         function finishCharacterCreation() {
             const firstName = document.getElementById("char-firstname").value.trim();
@@ -1002,13 +961,12 @@
                 customUrl: document.getElementById("char-custom-url").value.trim()
             };
 
-            // Inisialisasi Kekasih Berdasarkan Mode
             if (isCreatorMode) {
                 gameState.girlfriends = [
-                    { name: "Zendaya", tier: "UR" },
-                    { name: "Taylor Swift", tier: "UR" },
-                    { name: "Ana de Armas", tier: "SSR" },
-                    { name: "Sydney Sweeney", tier: "SSR" },
+                    { name: "Zendaya", tier: "UR", relationship: 75, danger: 15 },
+                    { name: "Taylor Swift", tier: "UR", relationship: 80, danger: 10 },
+                    { name: "Ana de Armas", tier: "SSR", relationship: 65, danger: 25 },
+                    { name: "Sydney Sweeney", tier: "SSR", relationship: 70, danger: 20 },
                     { slot: "Kosong" }, { slot: "Kosong" }, { slot: "Kosong" }, { slot: "Kosong" }
                 ];
             } else {
@@ -1106,7 +1064,6 @@
 
         function assignClub(clubName) {
             gameState.club = clubName;
-            // Hitung Gaji Berdasarkan OVR
             let ovr = globalCharData.ovr;
             if (ovr <= 60) gameState.money = 15000;
             else if (ovr <= 80) gameState.money = 70000;
@@ -1114,19 +1071,18 @@
             else if (ovr >= 91 && ovr <= 98) gameState.money = 5000000;
             else if (ovr === 99) gameState.money = 20000000;
 
-            // Data Pelatih & Teammates Real Dunia
             if (clubName.includes("Real Madrid")) {
                 gameState.coach = "Carlo Ancelotti";
-                gameState.teammates = ["Jude Bellingham", "Vinicius Jr", "Kylian Mbappe", "Thibaut Courtois"];
+                gameState.teammates = ["Jude Bellingham", "Vinicius Jr", "Kylian Mbappe", "Thibaut Courtois", "Dani Carvajal", "Federico Valverde", "Antonio Rudiger"];
             } else if (clubName.includes("Barcelona")) {
                 gameState.coach = "Hansi Flick";
-                gameState.teammates = ["Lamine Yamal", "Robert Lewandowski", "Pedri", "Gavi"];
+                gameState.teammates = ["Lamine Yamal", "Robert Lewandowski", "Pedri", "Gavi", "Ronald Araujo", "Frenkie de Jong", "Marc-Andre ter Stegen"];
             } else if (clubName.includes("Manchester City")) {
                 gameState.coach = "Pep Guardiola";
-                gameState.teammates = ["Erling Haaland", "Kevin De Bruyne", "Rodri", "Phil Foden"];
+                gameState.teammates = ["Erling Haaland", "Kevin De Bruyne", "Rodri", "Phil Foden", "Ruben Dias", "Bernardo Silva", "Ederson"];
             } else {
-                gameState.coach = "Pelatih Klub Lokal";
-                gameState.teammates = ["Pemain Senior A", "Pemain Senior B", "Kapten Tim"];
+                gameState.coach = "Pelatih Kepala Lokal";
+                gameState.teammates = ["Kapten Tim Senior", "Striker Utama", "Gelandang Kreatif", "Bek Kunci", "Kiper Utama"];
             }
 
             let cutscene = document.createElement("div");
@@ -1156,21 +1112,68 @@
             document.getElementById("dash-national").innerText = globalCharData.ovr >= 80 ? "Timnas " + globalCharData.country + " ⭐" : "Akademi Junior";
         }
 
-        // --- FITUR KELENGKAPAN BARU ---
+        // --- FITUR KELENGKAPAN BARU & DIPERLUAS ---
         function openClubInfoModal() {
+            let salaryTier = "";
+            let ovr = globalCharData.ovr;
+            if (ovr <= 60) salaryTier = "$15,000 USD / bulan (OVR <= 60)";
+            else if (ovr <= 80) salaryTier = "$70,000 USD / bulan (OVR <= 80)";
+            else if (ovr <= 90) salaryTier = "$150,000 USD / bulan (OVR <= 90)";
+            else if (ovr <= 98) salaryTier = "$5,000,000 USD / bulan (OVR 91-98)";
+            else salaryTier = "$20,000,000 USD / bulan (OVR 99 GOAT)";
+
             document.getElementById("club-detail-content").innerHTML = `
                 <div class="modal-box">
-                    <h4>Informasi Kontrak & Klub</h4>
+                    <h4>📋 Kontrak Resmi (My Contract)</h4>
                     <p><b>Klub:</b> ${gameState.club}</p>
-                    <p><b>Pelatih Kepala:</b> ${gameState.coach}</p>
-                    <p><b>Gaji Bulanan:</b> $${gameState.money.toLocaleString()} USD</p>
+                    <p><b>Durasi Kontrak:</b> 2 Musim (Aktif)</p>
+                    <p><b>Gaji Bulanan:</b> ${salaryTier}</p>
                 </div>
                 <div class="modal-box">
-                    <h4>Skuad Rekan Tim Utama</h4>
+                    <h4>👨‍🏫 Pelatih & Prestasi Klub</h4>
+                    <p><b>Pelatih Kepala:</b> ${gameState.coach}</p>
+                    <p><b>Piala & Trofi Klub:</b> Liga Champions UEFA, Piala Domestik, Piala Super Eropa.</p>
+                </div>
+                <div class="modal-box">
+                    <h4>👥 Skuad Asli Tim Utama</h4>
                     <p>${gameState.teammates.join(", ")}</p>
                 </div>
             `;
             document.getElementById("club-info-screen").classList.remove("hidden");
+        }
+
+        function openNationalTeamModal() {
+            let natSquad = ["Gianluigi Donnarumma", "Alessandro Bastoni", "Federico Dimarco", "Nicolo Barella", "Sandro Tonali", "Federico Chiesa", "Gianluca Scamacca"];
+            let coachNat = "Luciano Spalletti";
+            document.getElementById("national-detail-content").innerHTML = `
+                <div class="modal-box">
+                    <h4>🇪🇺 Informasi Tim Nasional ${globalCharData.country}</h4>
+                    <p><b>Status Panggilan:</b> ${globalCharData.ovr >= 80 ? "Skuad Utama Resmi ⭐" : "Belum Dipanggil (Syarat Min. OVR 80)"}</p>
+                    <p><b>Pelatih Timnas:</b> ${coachNat}</p>
+                </div>
+                <div class="modal-box">
+                    <h4>👥 Skuad Asli Tim Nasional</h4>
+                    <p>${natSquad.join(", ")}</p>
+                </div>
+            `;
+            document.getElementById("national-screen").classList.remove("hidden");
+        }
+
+        function openStandingsScreen() {
+            document.getElementById("standings-content-area").innerHTML = `
+                <div class="modal-box">
+                    <h4>🏆 Klasemen Liga Utama (${gameState.season})</h4>
+                    <p>1. Real Madrid - 45 Poin</p>
+                    <p>2. Barcelona - 42 Poin</p>
+                    <p>3. Atletico Madrid - 38 Poin</p>
+                    <p>4. Girona - 35 Poin</p>
+                </div>
+                <div class="modal-box">
+                    <h4>🌍 Kejuaraan Dunia Antar Klub / Negara</h4>
+                    <p>Fase Grup Liga Champions UEFA & Piala Dunia FIFA sedang berjalan.</p>
+                </div>
+            `;
+            document.getElementById("standings-screen").classList.remove("hidden");
         }
 
         function openHealthModal() {
@@ -1181,10 +1184,7 @@
 
         function restoreHealth() {
             let cost = Math.floor((100 - gameState.health) * 20) + 150;
-            if (gameState.money < cost) {
-                alert("Saldo Anda tidak cukup untuk pemulihan medis!");
-                return;
-            }
+            if (gameState.money < cost) { alert("Saldo Anda tidak cukup untuk pemulihan medis!"); return; }
             gameState.money -= cost;
             gameState.health = 100;
             updateDashboardUI();
@@ -1193,14 +1193,15 @@
         }
 
         function openShopModal() {
-            const items = [
-                { name: "Hyperice Normatec Recovery Boots", price: 1200, desc: "Pemulihan otot kaki kelas dunia." },
-                { name: "Suplemen Protein & Vitamin Premium", price: 350, desc: "Menjaga stamina prima." },
-                { name: "Hyperbaric Oxygen Chamber", price: 15000, desc: "Terapi oksigen regenerasi sel kilat." },
-                { name: "Mobil Mewah Sport Real Madrid Edition", price: 250000, desc: "Meningkatkan reputasi & fans." }
-            ];
+            filterShopItems();
+            document.getElementById("shop-screen").classList.remove("hidden");
+        }
+
+        function filterShopItems() {
+            let keyword = document.getElementById("shop-search").value.toLowerCase();
+            let filtered = shopDatabase.filter(item => item.name.toLowerCase().includes(keyword)).slice(0, 20); // Tampilkan 20 teratas biar ringan
             let html = "";
-            items.forEach(item => {
+            filtered.forEach(item => {
                 html += `
                     <div class="modal-box">
                         <h4>🛒 ${item.name}</h4>
@@ -1211,7 +1212,6 @@
                 `;
             });
             document.getElementById("shop-items-container").innerHTML = html;
-            document.getElementById("shop-screen").classList.remove("hidden");
         }
 
         function buyShopItem(price, name) {
@@ -1232,8 +1232,8 @@
             gameState.matches.forEach((m, idx) => {
                 matchHtml += `
                     <div class="modal-box">
-                        <h4>Laga vs ${m.opponent}</h4>
-                        <p>Status: ${m.played ? "Sudah Selesai ✅" : "Akan Datang ⏳"}</p>
+                        <h4>Laga Nyata: ${m.opponent}</h4>
+                        <p>Tanggal: ${m.date} | Status: ${m.played ? "Selesai (" + m.result + ")" : "Akan Datang ⏳"}</p>
                         ${!m.played ? `<button class="action-btn" style="margin-top:8px;" onclick="playSound(); playMatch(${idx})">Mulai Pertandingan ⚽</button>` : ""}
                     </div>
                 `;
@@ -1251,21 +1251,20 @@
             let scoredA = Math.random() > 0.5 ? 1 : 0;
             gameState.goals += scoredG;
             gameState.assists += scoredA;
+            gameState.matches[idx].result = `Menang (${scoredG} Gol, ${scoredA} Assist)`;
 
-            // Maju 7 hari kalender
             gameState.currentDate.setDate(gameState.currentDate.getDate() + 7);
-
             updateDashboardUI();
-            alert(`Pertandingan Selesai!\nGol: +${scoredG}, Assist: +${scoredA}\nKesehatan menurun sebanyak ${healthDrop}% akibat kelelahan.`);
+            alert(`Pertandingan Selesai!\nGol: +${scoredG}, Assist: +${scoredA}\nKesehatan menurun ${healthDrop}% akibat kelelahan.`);
             openMatchScreen();
         }
 
         function openSocialMediaScreen() {
-            document.getElementById("news-container").innerHTML = `
-                • Bursa transfer musim panas resmi dibuka, klub-klub top Eropa memburu wonderkid baru.<br>
-                • Performa ${globalCharData.firstName} ${globalCharData.lastName} mulai disorot media internasional.
-            `;
+            let newsHtml = "";
+            giantNewsList.slice(0, 15).forEach(n => { newsHtml += `• ${n}<br>`; });
+            document.getElementById("news-container").innerHTML = newsHtml;
             renderIGFeed();
+            renderChatDMList();
             document.getElementById("social-screen").classList.remove("hidden");
         }
 
@@ -1281,7 +1280,7 @@
                     <div style="background: #090d16; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px; margin-bottom: 8px;">
                         <p style="color: #00d2ff; font-weight: 700;">@${p.user}</p>
                         <p style="margin: 4px 0;">${p.caption}</p>
-                        <p style="font-size: 9px; color: #94a3b8;">❤️ ${p.likes} Suka</p>
+                        <p style="font-size: 9px; color: #94a3b8;">❤️ ${p.likes.toLocaleString()} Suka dari Netizen Dunia</p>
                     </div>
                 `;
             });
@@ -1291,19 +1290,52 @@
         function uploadIGPost() {
             let caption = document.getElementById("ig-caption").value.trim();
             if (!caption) { alert("Tulis caption terlebih dahulu!"); return; }
-            igPosts.unshift({ user: globalCharData.firstName.toLowerCase() + "_official", caption, likes: Math.floor(Math.random() * 500) + 100 });
-            gameState.fans += 100;
+            let randomLikes = Math.floor(Math.random() * 8000) + 2000;
+            let randomHaters = Math.floor(Math.random() * 500);
+            igPosts.unshift({ user: globalCharData.firstName.toLowerCase() + "_official", caption, likes: randomLikes });
+            gameState.fans += randomLikes;
+            gameState.haters += randomHaters;
             document.getElementById("ig-caption").value = "";
             renderIGFeed();
             updateDashboardUI();
-            alert("Berhasil posting ke Instagram! Followers bertambah.");
+            alert(`Berhasil posting! Mendapat ${randomLikes.toLocaleString()} likes dan ${randomHaters} haters baru.`);
+        }
+
+        let activeDmTarget = null;
+        function renderChatDMList() {
+            let html = "";
+            realGirlfriendsPool.slice(0, 5).forEach(gf => {
+                html += `<button class="sign-btn" style="margin: 3px;" onclick="playSound(); openDmChat('${gf.name}')">Chat @${gf.name.toLowerCase().replace(/\s/g,'')}</button>`;
+            });
+            document.getElementById("chat-list-dm").innerHTML = html;
+        }
+
+        function openDmChat(name) {
+            activeDmTarget = name;
+            document.getElementById("active-chat-box").classList.remove("hidden");
+            document.getElementById("chat-target-title").innerText = `Direct Message dengan ${name}`;
+            document.getElementById("chat-messages-history").innerHTML = `<p><b>${name}:</b> Hai bintang lapangan! Ada apa nih nge-chat?</p>`;
+        }
+
+        function sendDirectMessage() {
+            let msg = document.getElementById("chat-input-msg").value.trim();
+            if (!msg) return;
+            let hist = document.getElementById("chat-messages-history");
+            hist.innerHTML += `<p><b>Anda:</b> ${msg}</p>`;
+            document.getElementById("chat-input-msg").value = "";
+            setTimeout(() => {
+                hist.innerHTML += `<p><b>${activeDmTarget}:</b> Haha seru banget ya ngobrol sama kamu! ❤️ (+Intimacy)</p>`;
+                hist.scrollTop = hist.scrollHeight;
+            }, 800);
         }
 
         function openCoachScreen() {
             const coaches = [
-                { name: "Zinedine Zidane", type: "Pelatih Teknik & Visi Serangan", cost: 10000 },
-                { name: "Pep Guardiola", type: "Pelatih Taktik & Penguasaan Bola", cost: 15000 },
-                { name: "Antonio Conte", type: "Pelatih Fisik & Mentalitas Juara", cost: 8000 }
+                { name: "Zinedine Zidane", type: "Pelatih Teknik & Visi Serangan", bonus: "+10 Stat Shoot & Pass", cost: 10000 },
+                { name: "Pep Guardiola", type: "Pelatih Taktik & Penguasaan Bola", bonus: "+10 Stat Dribble & Pac", cost: 15000 },
+                { name: "Antonio Conte", type: "Pelatih Fisik & Mentalitas Juara", bonus: "+15 Stat Physical", cost: 8000 },
+                { name: "Carlo Ancelotti", type: "Pelatih Manajemen Bintang", bonus: "+10 Seluruh Atribut Utama", cost: 20000 },
+                { name: "Jurgen Klopp", type: "Pelatih Gegenpressing Intensitas Tinggi", bonus: "+12 Stat Pac & Physical", cost: 14000 }
             ];
             let html = "";
             coaches.forEach(c => {
@@ -1311,8 +1343,9 @@
                     <div class="modal-box">
                         <h4>👨‍🏫 ${c.name}</h4>
                         <p>Spesialisasi: ${c.type}</p>
+                        <p style="color: #38bdf8;">Atribut Spesial: ${c.bonus}</p>
                         <p style="color: #10b981; margin: 6px 0;">Biaya Sewa Bulanan: $${c.cost.toLocaleString()}</p>
-                        <button class="sign-btn" onclick="playSound(); hireCoach('${c.name}', ${c.cost})">Sewa Pelatih</button>
+                        <button class="sign-btn" onclick="playSound(); hireCoach('${c.name}', '${c.bonus}', ${c.cost})">Sewa Pelatih</button>
                     </div>
                 `;
             });
@@ -1320,29 +1353,25 @@
             document.getElementById("coach-screen").classList.remove("hidden");
         }
 
-        function hireCoach(name, cost) {
+        function hireCoach(name, bonus, cost) {
             if (gameState.money < cost) { alert("Saldo tidak mencukupi untuk menyewa pelatih ini!"); return; }
             gameState.money -= cost;
             gameState.coach = name;
+            gameState.coachBonus = bonus;
             updateDashboardUI();
-            alert(`Anda resmi dilatih oleh ${name}!`);
+            alert(`Anda resmi dilatih oleh ${name}! Bonus aktif: ${bonus}`);
             closeSubScreens();
         }
 
         function openSponsorScreen() {
-            const sponsors = [
-                { name: "Nike Football", minRep: 1000, payout: 25000 },
-                { name: "Adidas Performance", minRep: 2500, payout: 60000 },
-                { name: "Pepsi Cola", minRep: 5000, payout: 150000 }
-            ];
             let html = "";
-            sponsors.forEach(s => {
+            sponsorsDatabase.forEach(s => {
                 let canSign = gameState.fans >= s.minRep;
                 html += `
                     <div class="modal-box">
                         <h4>🤝 ${s.name}</h4>
                         <p>Syarat Min. Fans: ${s.minRep.toLocaleString()}</p>
-                        <p style="color: #10b981; margin: 6px 0;">Kontrak Sponsor: +$${s.payout.toLocaleString()}/bln</p>
+                        <p style="color: #10b981; margin: 6px 0;">Pendapatan: +$${s.payout.toLocaleString()}/bln (Durasi: ${s.durationMonths} Bulan)</p>
                         <button class="sign-btn" ${!canSign ? 'style="background:#475569; cursor:not-allowed;"' : ''} onclick="playSound(); signSponsor(${s.minRep}, ${s.payout}, '${s.name}')">${canSign ? "Tanda Tangan Kontrak" : "Reputasi Kurang ❌"}</button>
                     </div>
                 `;
@@ -1354,26 +1383,85 @@
         function signSponsor(minRep, payout, name) {
             if (gameState.fans < minRep) { alert("Sponsor menolak karena fans Anda belum mencukupi!"); return; }
             gameState.money += payout;
+            gameState.activeSponsors.push(name);
             updateDashboardUI();
-            alert(`Selamat! Kontrak sponsor dengan ${name} berhasil disetujui.`);
+            alert(`Selamat! Kontrak sponsor dengan ${name} disetujui. Saldo bertambah +$${payout.toLocaleString()}.`);
         }
 
         function openGirlfriendScreen() {
             renderGirlfriends();
+            renderFamilyBox();
             document.getElementById("girlfriend-screen").classList.remove("hidden");
         }
 
         function renderGirlfriends() {
             let html = "";
-            gameState.girlfriends.forEach(gf => {
-                html += `
-                    <div style="background: #090d16; border: 1px solid rgba(255,215,0,0.2); border-radius: 10px; padding: 10px; text-align: center;">
-                        <p style="font-size: 14px; font-weight: 700; color: #facc15;">${gf.name || "Slot Kosong"}</p>
-                        <p style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Tier: ${gf.tier || "-"}</p>
-                    </div>
-                `;
+            gameState.girlfriends.forEach((gf, idx) => {
+                if (gf.slot === "Kosong") {
+                    html += `
+                        <div style="background: #090d16; border: 1px solid rgba(255,215,0,0.2); border-radius: 10px; padding: 10px; text-align: center;">
+                            <p style="font-size: 14px; font-weight: 700; color: #94a3b8;">Slot Kosong</p>
+                        </div>
+                    `;
+                } else {
+                    html += `
+                        <div style="background: #090d16; border: 1px solid rgba(255,215,0,0.4); border-radius: 10px; padding: 10px; text-align: center;">
+                            <p style="font-size: 13px; font-weight: 700; color: #facc15;">${gf.name}</p>
+                            <p style="font-size: 9px; color: #94a3b8;">Tier: ${gf.tier} | Relasi: ${gf.relationship}/100</p>
+                            <p style="font-size: 9px; color: #ef4444;">Danger: ${gf.danger}%</p>
+                            <button class="sign-btn" style="font-size:9px; padding:3px 6px; margin-top:4px;" onclick="playSound(); dateGirlfriend(${idx})">Kencan ❤️</button>
+                            <button class="sign-btn" style="font-size:9px; padding:3px 6px; margin-top:4px; background:#ef4444;" onclick="playSound(); breakUpGirlfriend(${idx})">Putus 💔</button>
+                        </div>
+                    `;
+                }
             });
             document.getElementById("gf-slots-container").innerHTML = html;
+        }
+
+        function dateGirlfriend(idx) {
+            let gf = gameState.girlfriends[idx];
+            gf.relationship = Math.min(100, gf.relationship + 10);
+            gameState.money -= 500;
+            updateDashboardUI();
+            renderGirlfriends();
+            alert(`Kencan romantis dengan ${gf.name} sukses! Relasi naik menjadi ${gf.relationship}/100.`);
+            if (gf.relationship >= 95 && !gameState.family) {
+                if (confirm(`${gf.name} mengajak Anda menikah dan membangun keluarga! Terima pinangan?`)) {
+                    gameState.family = { mother: gf.name, childName: "Junior " + globalCharData.lastName, age: 0, costPerMonth: 2000 };
+                    renderFamilyBox();
+                    alert("Selamat! Anda kini resmi berkeluarga dan memiliki anak.");
+                }
+            }
+        }
+
+        function breakUpGirlfriend(idx) {
+            if (confirm("Yakin ingin memutuskan hubungan? Slot akan kembali kosong.")) {
+                gameState.girlfriends[idx] = { slot: "Kosong" };
+                renderGirlfriends();
+                alert("Hubungan telah berakhir.");
+            }
+        }
+
+        function renderFamilyBox() {
+            let box = document.getElementById("family-management-box");
+            if (!gameState.family) { box.classList.add("hidden"); return; }
+            box.classList.remove("hidden");
+            let f = gameState.family;
+            document.getElementById("family-content-info").innerHTML = `
+                <p><b>Istri / Pasangan:</b> ${f.mother}</p>
+                <p><b>Nama Anak:</b> ${f.childName} (Usia: ${f.age} Tahun)</p>
+                <p><b>Biaya Pengeluaran Bulanan:</b> $${f.costPerMonth.toLocaleString()} USD</p>
+                <button class="sign-btn" style="margin-top:8px;" onclick="playSound(); renameChild()">Ubah Nama Anak ✏️</button>
+            `;
+        }
+
+        function renameChild() {
+            let newName = prompt("Masukkan nama baru untuk anak Anda:", gameState.family.childName);
+            if (newName) {
+                gameState.family.childName = newName;
+                renderFamilyBox();
+                alert("Nama anak berhasil diperbarui!");
+            }
         }
 
         function gachaGirlfriend() {
@@ -1385,7 +1473,7 @@
             if (emptyIndex === -1) { alert("Semua slot kekasih Anda sudah penuh!"); return; }
 
             let randomGf = realGirlfriendsPool[Math.floor(Math.random() * realGirlfriendsPool.length)];
-            gameState.girlfriends[emptyIndex] = randomGf;
+            gameState.girlfriends[emptyIndex] = {...randomGf};
             updateDashboardUI();
             renderGirlfriends();
             alert(`Gacha Berhasil! Anda mendapatkan kekasih baru: ${randomGf.name} (${randomGf.tier}) ❤️`);

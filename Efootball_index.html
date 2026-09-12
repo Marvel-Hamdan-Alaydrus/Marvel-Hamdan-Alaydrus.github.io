@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>E-Football: Be A Pro</title>
-    <!-- Menggunakan Google Fonts untuk kesan modern -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -22,111 +21,116 @@
             justify-content: center;
             align-items: center;
             overflow-x: hidden;
+            padding: 20px 0;
         }
 
         .container {
             width: 100%;
-            max-width: 480px; /* Ukuran pas ala UI game mobile */
-            background: rgba(15, 23, 42, 0.85);
+            max-width: 480px;
+            background: rgba(15, 23, 42, 0.9);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
-            padding: 30px 20px;
+            padding: 25px 20px;
             text-align: center;
+            max-height: 90vh;
+            overflow-y: auto;
         }
 
-        /* Header Game */
+        /* Scrollbar custom agar rapi */
+        .container::-webkit-scrollbar {
+            width: 5px;
+        }
+        .container::-webkit-scrollbar-thumb {
+            background: #334155;
+            border-radius: 10px;
+        }
+
         .game-title {
-            font-size: 28px;
+            font-size: 26px;
             font-weight: 900;
             color: #00d2ff;
             text-transform: uppercase;
             letter-spacing: 2px;
-            margin-bottom: 5px;
+            margin-bottom: 3px;
             text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
         }
 
         .game-subtitle {
-            font-size: 12px;
+            font-size: 11px;
             color: #94a3b8;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             letter-spacing: 1px;
         }
 
-        /* Tampilan Form Email Creator */
-        .email-section {
+        /* Form & Input Styles */
+        .input-group {
             background: rgba(30, 41, 59, 0.6);
-            padding: 15px;
+            padding: 12px 15px;
             border-radius: 12px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             border: 1px solid rgba(255, 255, 255, 0.05);
+            text-align: left;
         }
 
-        .email-section label {
+        .input-group label {
             display: block;
             font-size: 12px;
             color: #cbd5e1;
-            margin-bottom: 8px;
-            text-align: left;
+            margin-bottom: 6px;
             font-weight: 600;
         }
 
-        .email-section input {
+        .input-group input, .input-group select {
             width: 100%;
             padding: 10px 12px;
             background: #0f172a;
             border: 1px solid #334155;
             border-radius: 8px;
             color: #fff;
-            font-size: 14px;
+            font-size: 13px;
             outline: none;
             transition: 0.3s;
         }
 
-        .email-section input:focus {
+        .input-group input:focus, .input-group select:focus {
             border-color: #00d2ff;
             box-shadow: 0 0 8px rgba(0, 210, 255, 0.3);
         }
 
         .status-badge {
-            margin-top: 8px;
+            margin-top: 6px;
             font-size: 11px;
-            text-align: left;
             font-weight: 600;
         }
-
-        .status-badge.creator {
-            color: #10b981;
-        }
-
-        .status-badge.user {
-            color: #f59e0b;
-        }
+        .status-badge.creator { color: #10b981; }
+        .status-badge.user { color: #f59e0b; }
 
         /* Menu Pilihan Utama */
         .menu-list {
             display: flex;
             flex-direction: column;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .menu-btn {
+        .menu-btn, .action-btn {
             background: linear-gradient(135deg, #1e293b, #334155);
             color: #ffffff;
             border: 1px solid rgba(255, 255, 255, 0.1);
-            padding: 14px;
+            padding: 13px;
             border-radius: 12px;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 600;
             cursor: pointer;
             transition: all 0.3s ease;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width: 100%;
         }
 
-        .menu-btn:hover {
+        .menu-btn:hover, .action-btn:hover {
             background: linear-gradient(135deg, #00d2ff, #3a7bd5);
             color: #0f172a;
             transform: translateY(-2px);
@@ -134,127 +138,397 @@
             border-color: transparent;
         }
 
-        .menu-btn span {
-            font-size: 18px;
+        .action-btn {
+            justify-content: center;
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+            color: #0f172a;
+            margin-top: 10px;
         }
 
-        /* Hidden class untuk navigasi layar nanti */
-        .hidden {
-            display: none !important;
-        }
-
-        /* Tombol Kembali / Navigasi Sementara */
         .back-btn {
-            background: #ef4444;
+            background: #334155;
             color: white;
             border: none;
-            padding: 10px 20px;
+            padding: 8px 15px;
             border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
-            margin-top: 20px;
+            font-size: 12px;
+            margin-bottom: 15px;
+            float: left;
         }
+        .back-btn:hover { background: #475569; }
+
+        .section-header {
+            font-size: 16px;
+            color: #00d2ff;
+            font-weight: 700;
+            margin-bottom: 15px;
+            text-align: left;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        /* Stat Sliders */
+        .stat-slider-group {
+            margin-bottom: 10px;
+            text-align: left;
+        }
+        .stat-slider-group label {
+            font-size: 11px;
+            color: #cbd5e1;
+            display: flex;
+            justify-content: space-between;
+        }
+        .stat-slider-group input[type="range"] {
+            width: 100%;
+            accent-color: #00d2ff;
+        }
+
+        /* Utility */
+        .hidden { display: none !important; }
+        .clearfix::after { content: ""; clear: both; display: table; }
     </style>
 </head>
 <body>
 
     <div class="container">
-        <!-- HOME PAGE SCREEN -->
+        <!-- ================= 1. HOME SCREEN ================= -->
         <div id="home-screen">
             <div class="game-title">E-Football</div>
             <div class="game-subtitle">Be A Pro Career Simulator</div>
 
-            <!-- Input Email untuk Deteksi Creator / User -->
-            <div class="email-section">
+            <div class="input-group">
                 <label for="user-email">Masukkan Email Anda:</label>
                 <input type="email" id="user-email" placeholder="contoh: admin@creator.com" oninput="checkEmailRole()">
                 <div id="role-status" class="status-badge user">Status: Standard User (Mode Acak)</div>
             </div>
 
-            <!-- Pilihan Menu Utama -->
             <div class="menu-list">
-                <button class="menu-btn" onclick="selectMenu('Karier Baru')">
-                    Karier Baru <span>⚽</span>
-                </button>
-                <button class="menu-btn" onclick="selectMenu('Mode Club')">
-                    Mode Club <span>🛡️</span>
-                </button>
-                <button class="menu-btn" onclick="selectMenu('Mode Kejuaraan Dunia')">
-                    Mode Kejuaraan Dunia <span>🏆</span>
-                </button>
-                <button class="menu-btn" onclick="selectMenu('Permainan Tersimpan')">
-                    Permainan Tersimpan <span>💾</span>
-                </button>
-                <button class="menu-btn" onclick="selectMenu('Pencapaian')">
-                    Pencapaian <span>🏅</span>
-                </button>
+                <button class="menu-btn" onclick="goToCareerSetup()">Karier Baru <span>⚽</span></button>
+                <button class="menu-btn" onclick="alertMenu('Mode Club')">Mode Club <span>🛡️</span></button>
+                <button class="menu-btn" onclick="alertMenu('Mode Kejuaraan Dunia')">Mode Kejuaraan Dunia <span>🏆</span></button>
+                <button class="menu-btn" onclick="alertMenu('Permainan Tersimpan')">Permainan Tersimpan <span>💾</span></button>
+                <button class="menu-btn" onclick="alertMenu('Pencapaian')">Pencapaian <span>🏅</span></button>
             </div>
         </div>
 
-        <!-- SCREEN KONTEN SEMENTARA (UNTUK UJI KLIK MENU) -->
-        <div id="sub-screen" class="hidden">
-            <h2 id="screen-title" style="color: #00d2ff; margin-bottom: 15px;"></h2>
-            <p id="screen-desc" style="color: #94a3b8; font-size: 14px; margin-bottom: 20px;"></p>
-            <button class="back-btn" onclick="goHome()">Kembali ke Home</button>
+        <!-- ================= 2. CAREER SETUP (LEVEL & KESULITAN) ================= -->
+        <div id="career-setup-screen" class="hidden">
+            <div class="clearfix">
+                <button class="back-btn" onclick="goScreen('home-screen')">← Kembali</button>
+            </div>
+            <div class="section-header">Pengaturan Karier Baru</div>
+
+            <div class="input-group">
+                <label>Level Awal Pemain:</label>
+                <select id="setup-level">
+                    <option value="amatir">Amatir (OVR 50 - 58)</option>
+                    <option value="normal">Normal (OVR 59 - 67)</option>
+                    <option value="berbakat">Berbakat (OVR 68 - 75)</option>
+                </select>
+            </div>
+
+            <div class="input-group" id="creator-mode-box">
+                <!-- Opsi tambahan khusus email creator saat setup level -->
+                <label>Tipe Mode Pembuatan:</label>
+                <div id="creator-mode-info" style="font-size: 12px; color: #10b981; font-weight: 600;">Standard (Random Stat)</div>
+            </div>
+
+            <div class="input-group">
+                <label>Tingkat Kesulitan Permainan:</label>
+                <select id="setup-difficulty">
+                    <option value="mudah">Mudah</option>
+                    <option value="normal" selected>Normal</option>
+                    <option value="susah">Susah</option>
+                </select>
+            </div>
+
+            <button class="action-btn" onclick="goToCharacterForm()">Lanjut Buat Karakter ➔</button>
         </div>
+
+        <!-- ================= 3. CHARACTER FORM SCREEN ================= -->
+        <div id="character-form-screen" class="hidden">
+            <div class="clearfix">
+                <button class="back-btn" onclick="goScreen('career-setup-screen')">← Kembali</button>
+            </div>
+            <div class="section-header">Buat Karakter Pemain</div>
+
+            <div class="input-group">
+                <label>Nama Depan:</label>
+                <input type="text" id="char-firstname" placeholder="Contoh: Alex">
+            </div>
+
+            <div class="input-group">
+                <label>Nama Belakang:</label>
+                <input type="text" id="char-lastname" placeholder="Contoh: Maulana">
+            </div>
+
+            <div class="input-group">
+                <label>Nama Punggung (Jersey):</label>
+                <input type="text" id="char-shirtname" placeholder="Contoh: A. MAULANA">
+            </div>
+
+            <div class="input-group">
+                <label>Benua Asal:</label>
+                <select id="char-continent" onchange="updateCountries()">
+                    <option value="asia">Asia</option>
+                    <option value="eropa">Eropa</option>
+                    <option value="afrika">Afrika</option>
+                    <option value="amerika-selatan">Amerika Selatan</option>
+                    <option value="amerika-utara">Amerika Utara</option>
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Negara Asal:</label>
+                <select id="char-country">
+                    <!-- Akan diisi dinamis via JS -->
+                </select>
+            </div>
+
+            <div class="input-group">
+                <label>Nomor Punggung:</label>
+                <input type="number" id="char-number" min="1" max="99" value="10">
+            </div>
+
+            <div class="input-group">
+                <label>Pilih Avatar / Foto:</label>
+                <select id="char-avatar-type" onchange="toggleAvatarInput()">
+                    <option value="system">Gunakan 10 Avatar Sistem</option>
+                    <option value="upload">Upload dari Gallery (URL Gambar)</option>
+                </select>
+            </div>
+
+            <div class="input-group" id="avatar-selection-box">
+                <label>Pilih Avatar Sistem:</label>
+                <select id="char-system-avatar">
+                    <option value="avatar1.png">Avatar Wajah 1 (Striker)</option>
+                    <option value="avatar2.png">Avatar Wajah 2 (Playmaker)</option>
+                    <option value="avatar3.png">Avatar Wajah 3 (Winger)</option>
+                    <option value="avatar4.png">Avatar Wajah 4 (Defender)</option>
+                    <option value="avatar5.png">Avatar Wajah 5 (Goalkeeper)</option>
+                </select>
+            </div>
+
+            <div class="input-group hidden" id="avatar-upload-box">
+                <label>Masukkan Link/URL Gambar Foto:</label>
+                <input type="text" id="char-custom-url" placeholder="https://contoh.com/foto-saya.jpg">
+            </div>
+
+            <div class="input-group">
+                <label>Posisi Bermain:</label>
+                <select id="char-position">
+                    <option value="CF">CF (Center Forward / Penyerang)</option>
+                    <option value="LWF">LWF / RWF (Winger / Penyerang Sayap)</option>
+                    <option value="AMF">AMF / CMF (Midfielder / Gelandang)</option>
+                    <option value="CB">CB (Center Back / Bek Tengah)</option>
+                    <option value="GK">GK (Goalkeeper / Kiper)</option>
+                </select>
+            </div>
+
+            <!-- Bagian Pengaturan Stat (Custom untuk Creator, Acak untuk User) -->
+            <div id="stat-configuration-section">
+                <div class="section-header" style="font-size: 14px; margin-top: 15px;">Pengaturan Statistik Awal</div>
+                <div id="stat-info-text" style="font-size: 11px; color: #f59e0b; margin-bottom: 10px; text-align: left;">
+                    Statistik akan diacak otomatis sesuai level awal Anda.
+                </div>
+
+                <!-- Slider Stat (Hanya aktif atau bisa diatur jika Creator Mode) -->
+                <div class="stat-slider-group">
+                    <label>Kecepatan (Speed): <span id="val-speed">60</span></label>
+                    <input type="range" id="stat-speed" min="40" max="99" value="60" disabled>
+                </div>
+                <div class="stat-slider-group">
+                    <label>Tendangan (Shooting): <span id="val-shoot">60</span></label>
+                    <input type="range" id="stat-shoot" min="40" max="99" value="60" disabled>
+                </div>
+                <div class="stat-slider-group">
+                    <label>Operan (Passing): <span id="val-passing">60</span></label>
+                    <input type="range" id="stat-passing" min="40" max="99" value="60" disabled>
+                </div>
+                <div class="stat-slider-group">
+                    <label>Giring Bola (Dribbling): <span id="val-dribble">60</span></label>
+                    <input type="range" id="stat-dribble" min="40" max="99" value="60" disabled>
+                </div>
+                <div class="stat-slider-group">
+                    <label>Pertahanan (Defending): <span id="val-defend">50</span></label>
+                    <input type="range" id="stat-defend" min="40" max="99" value="50" disabled>
+                </div>
+                <div class="stat-slider-group">
+                    <label>Fisik (Physical): <span id="val-physical">60</span></label>
+                    <input type="range" id="stat-physical" min="40" max="99" value="60" disabled>
+                </div>
+            </div>
+
+            <button class="action-btn" onclick="finishCharacterCreation()">Konfirmasi Karakter & Kartu ➔</button>
+        </div>
+
     </div>
 
     <script>
-        // DAFTAR EMAIL CREATOR (Ganti atau tambahkan email Anda di sini)
+        // DAFTAR EMAIL CREATOR (Ganti dengan email Anda)
         const creatorEmails = [
-            "admin@creator.com",
-            "creatorasli@gmail.com",
-            "ownerfc@pro.com"
+            "sayyidrahmathamdani@gmail.com",
+            "Princemarvelerlangga@gmail.com"
         ];
 
         let isCreatorMode = false;
 
-        // Fungsi untuk mendeteksi apakah email yang diketik adalah email Creator
+        // Cek Email Role
         function checkEmailRole() {
             const emailInput = document.getElementById("user-email").value.trim().toLowerCase();
             const statusBadge = document.getElementById("role-status");
+            const creatorInfo = document.getElementById("creator-mode-info");
 
             if (creatorEmails.includes(emailInput)) {
                 isCreatorMode = true;
                 statusBadge.className = "status-badge creator";
-                statusBadge.innerText = "Status: 👑 Creator Mode Aktif (Custom Customization)";
+                statusBadge.innerText = "Status: 👑 Creator Mode Aktif";
+                creatorInfo.innerText = "👑 Mode Custom Creator Aktif (Anda bebas mengatur stat awal)";
+                creatorInfo.style.color = "#10b981";
             } else {
                 isCreatorMode = false;
                 statusBadge.className = "status-badge user";
-                statusBadge.innerText = "Status: Standard User (Mode Random/Acak)";
+                statusBadge.innerText = "Status: Standard User (Mode Acak)";
+                creatorInfo.innerText = "⚠️ Mode Standard (Stat diacak otomatis sesuai level)";
+                creatorInfo.style.color = "#f59e0b";
             }
         }
 
-        // Fungsi Simulasi Pindah Menu
-        function selectMenu(menuName) {
+        // Navigasi Layar
+        function goScreen(screenId) {
+            document.getElementById("home-screen").classList.add("hidden");
+            document.getElementById("career-setup-screen").classList.add("hidden");
+            document.getElementById("character-form-screen").classList.add("hidden");
+
+            document.getElementById(screenId).classList.remove("hidden");
+        }
+
+        function goToCareerSetup() {
             const emailInput = document.getElementById("user-email").value.trim();
-            
-            // Validasi kecil jika klik Karier Baru
-            if (menuName === 'Karier Baru' && emailInput === "") {
-                alert("Harap masukkan email terlebih dahulu untuk menentukan mode Anda!");
+            if (emailInput === "") {
+                alert("Harap masukkan email Anda terlebih dahulu di halaman utama!");
                 document.getElementById("user-email").focus();
                 return;
             }
+            goScreen('career-setup-screen');
+        }
 
-            // Sembunyikan home screen, tampilkan sub-screen
-            document.getElementById("home-screen").classList.add("hidden");
-            const subScreen = document.getElementById("sub-screen");
-            subScreen.classList.remove("hidden");
+        function alertMenu(menuName) {
+            alert(`Fitur ${menuName} sedang dalam tahap pengembangan.`);
+        }
 
-            document.getElementById("screen-title").innerText = menuName;
-            
-            if (menuName === 'Karier Baru') {
-                document.getElementById("screen-desc").innerText = 
-                    `Berhasil masuk ke ${menuName}! Mode aktif Anda: ${isCreatorMode ? 'Custom Creator' : 'Standard (Acak)'}. Selanjutnya kita akan masuk ke tahap pemilihan Level Awal & Kesulitan.`;
-            } else {
-                document.getElementById("screen-desc").innerText = `Halaman untuk fitur ${menuName} sedang dipersiapkan.`;
+        function goToCharacterForm() {
+            goScreen('character-form-screen');
+            updateCountries(); // Load negara awal
+            setupStatSlidersPermission(); // Atur apakah slider stat bisa digeser atau dikunci
+        }
+
+        // Data Negara Berdasarkan Benua
+        const countryData = {
+            "asia": ["Indonesia", "Jepang", "Korea Selatan", "Arab Saudi", "Qatar", "Iran", "Uzbekistan", "Irak", "Australia", "Thailand"],
+            "eropa": ["Inggris", "Spanyol", "Jerman", "Italia", "Prancis", "Belanda", "Portugal", "Belgia", "Kroasia", "Denmark"],
+            "afrika": ["Maroko", "Senegal", "Mesir", "Aljazair", "Nigeria", "Kamerun", "Ghana", "Pantai Gading", "Tunisia", "Mali"],
+            "amerika-selatan": ["Brasil", "Argentina", "Uruguay", "Kolombia", "Cile", "Ekuador", "Peru", "Paraguay", "Venezuela", "Bolivia"],
+            "amerika-utara": ["Amerika Serikat", "Meksiko", "Kanada", "Kosta Rika", "Jamaika", "Panama", "Honduras", "El Salvador", "Trinidad & Tobago", "Kuba"]
+        };
+
+        function updateCountries() {
+            const continent = document.getElementById("char-continent").value;
+            const countrySelect = document.getElementById("char-country");
+            countrySelect.innerHTML = "";
+
+            if (countryData[continent]) {
+                countryData[continent].forEach(country => {
+                    let opt = document.createElement("option");
+                    opt.value = country;
+                    opt.innerText = country;
+                    countrySelect.appendChild(opt);
+                });
             }
         }
 
-        // Fungsi Kembali ke Home
-        function goHome() {
-            document.getElementById("sub-screen").classList.add("hidden");
-            document.getElementById("home-screen").classList.remove("hidden");
+        // Toggle Avatar Input Sistem vs Upload
+        function toggleAvatarInput() {
+            const type = document.getElementById("char-avatar-type").value;
+            if (type === "system") {
+                document.getElementById("avatar-selection-box").classList.remove("hidden");
+                document.getElementById("avatar-upload-box").classList.add("hidden");
+            } else {
+                document.getElementById("avatar-selection-box").classList.add("hidden");
+                document.getElementById("avatar-upload-box").classList.remove("hidden");
+            }
+        }
+
+        // Atur Izin Slider Stat (Creator bisa geser manual, User dikunci / diacak)
+        function setupStatSlidersProfile() {
+            // Placeholder fungsi pendukung
+        }
+
+        function setupStatSlidersPermission() {
+            const sliders = document.querySelectorAll("#stat-configuration-section input[type='range']");
+            const infoText = document.getElementById("stat-info-text");
+
+            if (isCreatorMode) {
+                // Jika creator, aktifkan slider agar bisa diatur custom
+                sliders.forEach(slider => {
+                    slider.disabled = false;
+                    slider.oninput = function() {
+                        document.getElementById("val-" + getSliderKey(this.id)).innerText = this.value;
+                    };
+                });
+                infoText.innerText = "✨ [Creator Mode] Geser slider di bawah untuk mengatur stat awal karakter Anda secara bebas!";
+                infoText.style.color = "#10b981";
+            } else {
+                // Jika user biasa, kunci slider dan beri nilai acak berdasarkan level
+                sliders.forEach(slider => {
+                    slider.disabled = true;
+                });
+                infoText.innerText = "🔒 Statistik diacak otomatis sesuai pilihan Level Awal Anda (Mode User Biasa).";
+                infoText.style.color = "#f59e0b";
+                
+                // Berikan nilai acak berdasarkan level
+                generateRandomStatsForUser();
+            }
+        }
+
+        function getSliderKey(id) {
+            if(id === 'stat-speed') return 'speed';
+            if(id === 'stat-shoot') return 'shoot';
+            if(id === 'stat-passing') return 'passing';
+            if(id === 'stat-dribble') return 'dribble';
+            if(id === 'stat-defend') return 'defend';
+            if(id === 'stat-physical') return 'physical';
+        }
+
+        function generateRandomStatsForUser() {
+            const level = document.getElementById("setup-level").value;
+            let min = 50, max = 58;
+            if (level === 'normal') { min = 59; max = 67; }
+            if (level === 'berbakat') { min = 68; max = 75; }
+
+            const stats = ['speed', 'shoot', 'passing', 'dribble', 'defend', 'physical'];
+            stats.forEach(st => {
+                let randomVal = Math.floor(Math.random() * (max - min + 1)) + min;
+                document.getElementById("stat-" + st).value = randomVal;
+                document.getElementById("val-" + st).innerText = randomVal;
+            });
+        }
+
+        function finishCharacterCreation() {
+            const firstName = document.getElementById("char-firstname").value.trim();
+            const lastName = document.getElementById("char-lastname").value.trim();
+
+            if (!firstName || !lastName) {
+                alert("Harap isi Nama Depan dan Nama Belakang pemain terlebih dahulu!");
+                return;
+            }
+
+            alert("Karakter berhasil dibuat! Selanjutnya kita akan masuk ke tahap Konfirmasi Kartu Pemain dan Penawaran Klub Asli.");
         }
     </script>
 </body>

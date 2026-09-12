@@ -87,7 +87,6 @@
             gap: 5px;
             cursor: pointer;
             box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
-            z-index: 10;
         }
 
         .input-group {
@@ -114,7 +113,7 @@
             letter-spacing: 1px;
         }
 
-        .input-group input, .input-group select, .input-group textarea {
+        .input-group input, .input-group select {
             width: 100%;
             padding: 11px 14px;
             background: #090d16;
@@ -126,7 +125,7 @@
             transition: 0.3s;
         }
 
-        .input-group input:focus, .input-group select:focus, .input-group textarea:focus {
+        .input-group input:focus, .input-group select:focus {
             border-color: #00d2ff;
         }
 
@@ -252,13 +251,39 @@
             clip-path: polygon(0% 0%, 100% 0%, 100% 88%, 86% 100%, 14% 100%, 0% 88%);
             transition: transform 0.4s ease;
         }
-        .card-container:hover { transform: scale(1.03) rotateY(5deg); }
+        .card-container:hover {
+            transform: scale(1.03) rotateY(5deg);
+        }
 
-        .card-bronze { background: linear-gradient(135deg, #6d421d 0%, #391d0a 50%, #170a03 100%); border: 2px solid #cd7f32; color: #fce7db; }
-        .card-silver { background: linear-gradient(135deg, #94a3b8 0%, #475569 50%, #1e293b 100%); border: 2px solid #e2e8f0; color: #f8fafc; }
-        .card-gold { background: linear-gradient(135deg, #ffd700 0%, #b8860b 50%, #3d2302 100%); border: 2px solid #fffdf0; color: #fffbeb; box-shadow: 0 0 25px rgba(255, 215, 0, 0.4); }
-        .card-legendary { background: linear-gradient(135deg, #a855f7 0%, #6b21a8 50%, #2e1065 100%); border: 2px solid #f0abfc; box-shadow: 0 0 30px rgba(216, 180, 254, 0.7); color: #fdf4ff; }
-        .card-goat { background: linear-gradient(135deg, #0284c7 0%, #1e3a8a 50%, #090d16 100%); border: 2px solid #38bdf8; box-shadow: 0 0 40px rgba(56, 189, 248, 0.9); color: #f0f9ff; animation: goatGlow 2.5s infinite alternate; }
+        .card-bronze {
+            background: linear-gradient(135deg, #6d421d 0%, #391d0a 50%, #170a03 100%);
+            border: 2px solid #cd7f32;
+            color: #fce7db;
+        }
+        .card-silver {
+            background: linear-gradient(135deg, #94a3b8 0%, #475569 50%, #1e293b 100%);
+            border: 2px solid #e2e8f0;
+            color: #f8fafc;
+        }
+        .card-gold {
+            background: linear-gradient(135deg, #ffd700 0%, #b8860b 50%, #3d2302 100%);
+            border: 2px solid #fffdf0;
+            color: #fffbeb;
+            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
+        }
+        .card-legendary {
+            background: linear-gradient(135deg, #a855f7 0%, #6b21a8 50%, #2e1065 100%);
+            border: 2px solid #f0abfc;
+            box-shadow: 0 0 30px rgba(216, 180, 254, 0.7);
+            color: #fdf4ff;
+        }
+        .card-goat {
+            background: linear-gradient(135deg, #0284c7 0%, #1e3a8a 50%, #090d16 100%);
+            border: 2px solid #38bdf8;
+            box-shadow: 0 0 40px rgba(56, 189, 248, 0.9);
+            color: #f0f9ff;
+            animation: goatGlow 2.5s infinite alternate;
+        }
 
         @keyframes goatGlow {
             0% { border-color: #38bdf8; box-shadow: 0 0 20px rgba(56, 189, 248, 0.6); }
@@ -266,56 +291,141 @@
             100% { border-color: #c084fc; box-shadow: 0 0 30px rgba(192, 132, 252, 0.7); }
         }
 
-        .fc-card-header { display: flex; flex-direction: column; align-items: flex-start; z-index: 3; line-height: 1.05; }
+        .fc-card-header {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            z-index: 3;
+            line-height: 1.05;
+        }
         .fc-ovr { font-size: 28px; font-weight: 900; letter-spacing: -1px; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
         .fc-pos { font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; color: #facc15; }
         .fc-flag-club { display: flex; flex-direction: column; gap: 3px; font-size: 12px; }
-        .fc-club-badge { width: 20px; height: 20px; background: rgba(0,0,0,0.5); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; border: 1px solid rgba(255,255,255,0.2); }
+        .fc-club-badge {
+            width: 20px; height: 20px; background: rgba(0,0,0,0.5); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 9px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
 
-        .fc-player-img-container { position: absolute; bottom: 55px; left: 50%; transform: translateX(-50%); width: 170px; height: 200px; display: flex; align-items: flex-end; justify-content: center; z-index: 2; overflow: hidden; }
-        .fc-player-img-container img { width: 100%; height: 100%; object-fit: cover; mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%); -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%); }
+        .fc-player-img-container {
+            position: absolute;
+            bottom: 55px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 170px;
+            height: 200px;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            z-index: 2;
+            overflow: hidden;
+        }
+        .fc-player-img-container img {
+            width: 100%; height: 100%; object-fit: cover;
+            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
+            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
+        }
         .fc-player-avatar-text { font-size: 70px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
 
-        .goat-ball-animation { position: absolute; top: 10px; right: 10px; font-size: 20px; z-index: 4; animation: spinBall 3s linear infinite; }
-        @keyframes spinBall { 0% { transform: rotate(0deg) scale(1); } 50% { transform: rotate(180deg) scale(1.3); } 100% { transform: rotate(360deg) scale(1); } }
+        .goat-ball-animation {
+            position: absolute; top: 10px; right: 10px; font-size: 20px; z-index: 4;
+            animation: spinBall 3s linear infinite;
+        }
+        @keyframes spinBall {
+            0% { transform: rotate(0deg) scale(1); }
+            50% { transform: rotate(180deg) scale(1.3); }
+            100% { transform: rotate(360deg) scale(1); }
+        }
 
-        .special-card-badge { position: absolute; top: 6px; left: 50%; transform: translateX(-50%); font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; padding: 2px 8px; border-radius: 10px; z-index: 4; }
+        .special-card-badge {
+            position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+            font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px;
+            padding: 2px 8px; border-radius: 10px; z-index: 4;
+        }
         .badge-legendary { background: #9333ea; color: #fff; box-shadow: 0 0 8px #9333ea; }
         .badge-goat { background: linear-gradient(135deg, #f59e0b, #ef4444); color: #fff; box-shadow: 0 0 10px #f59e0b; }
 
         .fc-card-footer { z-index: 3; margin-top: auto; }
-        .fc-player-name { font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.9); border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff; }
+        .fc-player-name {
+            font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
+            text-align: center; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.9);
+            border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 3px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff;
+        }
         .fc-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 12px; font-size: 10px; font-weight: 700; padding: 0 2px; }
         .fc-stat-row { display: flex; justify-content: space-between; }
 
-        .contract-box { background: rgba(15, 23, 42, 0.95); border: 1px solid #facc15; border-radius: 14px; padding: 15px; margin-bottom: 12px; text-align: left; box-shadow: 0 10px 30px rgba(0,0,0,0.6); }
+        .contract-box {
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid #facc15;
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 12px;
+            text-align: left;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
+        }
         .contract-box h4 { color: #facc15; font-size: 13px; margin-bottom: 6px; display: flex; justify-content: space-between; }
-        .contract-text { font-size: 10px; color: #cbd5e1; line-height: 1.4; max-height: 90px; overflow-y: auto; background: #090d16; padding: 8px; border-radius: 8px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.08); }
+        .contract-text {
+            font-size: 10px; color: #cbd5e1; line-height: 1.4; max-height: 90px; overflow-y: auto;
+            background: #090d16; padding: 8px; border-radius: 8px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.08);
+        }
 
-        .club-offer-card { background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; text-align: left; transition: 0.2s; }
+        .club-offer-card {
+            background: rgba(30, 41, 59, 0.7);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+            transition: 0.2s;
+        }
         .club-offer-card:hover { border-color: #facc15; background: rgba(30, 41, 59, 0.9); }
         .club-info h4 { font-size: 12px; color: #00d2ff; display: flex; align-items: center; gap: 6px; }
         .club-info p { font-size: 10px; color: #94a3b8; margin-top: 2px; }
 
-        .sign-btn { background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 6px 14px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4); transition: 0.2s; }
+        .sign-btn {
+            background: linear-gradient(135deg, #10b981, #059669);
+            color: #fff;
+            border: none;
+            padding: 6px 14px;
+            border-radius: 8px;
+            font-size: 11px;
+            font-weight: 700;
+            cursor: pointer;
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+            transition: 0.2s;
+        }
         .sign-btn:hover { transform: scale(1.05); background: linear-gradient(135deg, #059669, #047857); }
 
-        .cutscene-screen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle, #0f172a 0%, #050a12 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 999; padding: 20px; text-align: center; animation: fadeIn 0.4s ease-in-out; }
+        .cutscene-screen {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle, #0f172a 0%, #050a12 100%);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 999; padding: 20px; text-align: center; animation: fadeIn 0.4s ease-in-out;
+        }
         @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
 
-        .dashboard-header { display: flex; justify-content: space-between; align-items: center; background: rgba(30,41,59,0.7); padding: 10px 15px; border-radius: 12px; margin-bottom: 15px; font-size: 12px; border: 1px solid rgba(255,215,0,0.2); }
-        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .dash-card { background: rgba(30,41,59,0.5); border: 1px solid rgba(255,255,255,0.06); padding: 12px; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.2s; }
+        .dashboard-header { display: flex; justify-content: space-between; align-items: center; background: rgba(30,41,59,0.7); padding: 10px 15px; border-radius: 12px; margin-bottom: 12px; font-size: 11px; border: 1px solid rgba(255,215,0,0.2); }
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+        .dash-card { background: rgba(30,41,59,0.5); border: 1px solid rgba(255,255,255,0.06); padding: 10px; border-radius: 12px; text-align: center; cursor: pointer; transition: 0.2s; }
         .dash-card:hover { border-color: #00d2ff; background: rgba(30,41,59,0.8); }
-        .dash-card h5 { font-size: 10px; color: #94a3b8; margin-bottom: 4px; text-transform: uppercase; }
-        .dash-card p { font-size: 14px; font-weight: 700; color: #00d2ff; }
+        .dash-card h5 { font-size: 9px; color: #94a3b8; margin-bottom: 4px; text-transform: uppercase; }
+        .dash-card p { font-size: 13px; font-weight: 700; color: #00d2ff; }
 
-        .modal-overlay { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(5,10,18,0.85); backdrop-filter: blur(10px); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
-        .modal-content { background: #0f172a; border: 1px solid #facc15; border-radius: 16px; width: 100%; max-width: 400px; padding: 20px; text-align: left; max-height: 85vh; overflow-y: auto; box-shadow: 0 20px 40px rgba(0,0,0,0.8); }
-        .modal-content h3 { color: #facc15; font-size: 15px; margin-bottom: 12px; border-bottom: 1px solid rgba(250,204,21,0.2); padding-bottom: 6px; }
-        .modal-content p, .modal-content li { font-size: 11px; color: #cbd5e1; line-height: 1.5; margin-bottom: 6px; }
+        .sub-screen {
+            background: rgba(15, 23, 42, 0.98);
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            z-index: 100; padding: 20px; overflow-y: auto; text-align: left;
+        }
 
-        .shop-item, .coach-item, .partner-card { background: rgba(30,41,59,0.6); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px; margin-bottom: 8px; display: flex; justify-content: space-between; align-items: center; }
+        .modal-box {
+            background: #090d16; border: 1px solid rgba(255,215,0,0.3); border-radius: 14px;
+            padding: 15px; margin-bottom: 12px; font-size: 11px; color: #cbd5e1;
+        }
+        .modal-box h4 { color: #facc15; font-size: 13px; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; }
 
         .hidden { display: none !important; }
         .clearfix::after { content: ""; clear: both; display: table; }
@@ -474,130 +584,113 @@
 
         <!-- ================= 5. DASHBOARD UTAMA PEMAIN ================= -->
         <div id="dashboard-screen" class="hidden">
-            <div class="section-header" style="display:flex; justify-content:space-between; align-items:center;">
+            <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
                 <span>Dashboard Karier</span>
-                <span id="dash-date" style="color: #00d2ff; font-size: 11px;">05 Jul 2005</span>
+                <span id="dash-date" style="font-size: 11px; color: #00d2ff;">05 Juli 2005</span>
             </div>
             
             <div class="dashboard-header">
                 <div>💰 Saldo: <span id="dash-money" style="color: #10b981; font-weight:700;">$0</span></div>
-                <div>⭐ Fans/Haters: <span id="dash-fans" style="color: #f59e0b; font-weight:700;">100 / 5</span></div>
+                <div>⭐ Reputasi: <span id="dash-rep" style="color: #f59e0b; font-weight:700;">0 F / 0 H</span></div>
             </div>
 
             <div class="dashboard-grid">
-                <div class="dash-card" onclick="playSound(); openClubModal()">
+                <div class="dash-card" onclick="playSound(); openClubInfoModal()">
                     <h5>Klub Saat Ini</h5>
-                    <p id="dash-club" style="font-size: 12px;">-</p>
+                    <p id="dash-club" style="font-size: 11px;">-</p>
                 </div>
-                <div class="dash-card">
+                <div class="dash-card" onclick="playSound(); alertMenu('Tim Nasional')">
                     <h5>Tim Nasional</h5>
-                    <p id="dash-national" style="font-size: 11px; color: #38bdf8;">-</p>
+                    <p id="dash-national" style="font-size: 10px; color: #38bdf8;">-</p>
                 </div>
                 <div class="dash-card" onclick="playSound(); openHealthModal()">
                     <h5>Kesehatan</h5>
                     <p id="dash-health">100% 🟢</p>
                 </div>
-                <div class="dash-card">
-                    <h5>Gol / Assist</h5>
+                <div class="dash-card" onclick="playSound(); alertMenu('Gol & Assist')">
+                    <h5>Statistik G / A</h5>
                     <p id="dash-g-a">0 G / 0 A</p>
                 </div>
             </div>
 
             <div class="menu-list">
-                <button class="menu-btn" onclick="playSound(); openMatchHub()">Pertandingan Laga & Taktik ⚽</button>
-                <button class="menu-btn" onclick="playSound(); openShopModal()">Toko Kebutuhan Real World 🛍️</button>
-                <button class="menu-btn" onclick="playSound(); openSocialMediaHub()">Media Sosial & Berita Dunia 📱</button>
-                <button class="menu-btn" onclick="playSound(); openCoachModal()">Pusat Pelatih Profesional 🧠</button>
-                <button class="menu-btn" onclick="playSound(); openSponsorModal()">Sponsor & Brand Partnership 🤝</button>
-                <button class="menu-btn" onclick="playSound(); openPartnerModal()">Pasangan Hidup (Gacha Partner) ❤️</button>
+                <button class="menu-btn" onclick="playSound(); openMatchScreen()">Lanjut Pertandingan Laga ⚽</button>
+                <button class="menu-btn" onclick="playSound(); openShopModal()">Shop Kebutuhan Nyata 🛒</button>
+                <button class="menu-btn" onclick="playSound(); openSocialMediaScreen()">Media Sosial & Berita Dunia 📱</button>
+                <button class="menu-btn" onclick="playSound(); openCoachScreen()">Pelatih Profesional 👨‍🏫</button>
+                <button class="menu-btn" onclick="playSound(); openSponsorScreen()">Pusat Sponsor 🤝</button>
+                <button class="menu-btn" onclick="playSound(); openGirlfriendScreen()">Kekasih & Gacha Jodoh ❤️</button>
             </div>
         </div>
     </div>
 
-    <!-- MODAL DETAIL KLUB -->
-    <div id="club-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <h3>Informasi Klub & Skuad</h3>
-            <div id="club-modal-body"></div>
-            <button class="action-btn" onclick="playSound(); closeModals()">Tutup</button>
+    <!-- ================= SUB SCREENS / MODALS ================= -->
+    <div id="club-info-screen" class="sub-screen hidden">
+        <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
+        <div class="section-header">Informasi Klub & Skuad</div>
+        <div id="club-detail-content"></div>
+    </div>
+
+    <div id="health-screen" class="sub-screen hidden">
+        <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
+        <div class="section-header">Pemulihan Kesehatan Pemain</div>
+        <div class="modal-box">
+            <h4>Pusat Medis & Pemulihan Fisik</h4>
+            <p id="health-status-desc" style="margin-bottom: 10px;">Kesehatan Anda saat ini kurang dari 100%. Lakukan perawatan medis atau pemulihan agar performa tidak menurun di lapangan.</p>
+            <p style="color: #facc15; margin-bottom: 10px;" id="health-cost-info">Biaya Pemulihan: $500</p>
+            <button class="action-btn" onclick="playSound(); restoreHealth()">Pulihkan Kesehatan 💉</button>
         </div>
     </div>
 
-    <!-- MODAL KESEHATAN -->
-    <div id="health-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <h3>Pusat Pemulihan Kesehatan</h3>
-            <p>Kesehatan Anda saat ini menurun akibat benturan fisik dalam pertandingan. Lakukan pemulihan medis profesional menggunakan saldo gaji Anda.</p>
-            <div style="margin: 15px 0;">
-                <p>Biaya Pemulihan Penuh (100%): <b style="color: #10b981;" id="heal-cost">$5,000</b></p>
+    <div id="shop-screen" class="sub-screen hidden">
+        <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
+        <div class="section-header">Shop Kebutuhan Dunia Nyata</div>
+        <div id="shop-items-container"></div>
+    </div>
+
+    <div id="match-screen" class="sub-screen hidden">
+        <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
+        <div class="section-header">Pusat Pertandingan & Taktik</div>
+        <div id="match-content-area"></div>
+    </div>
+
+    <div id="social-screen" class="sub-screen hidden">
+        <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
+        <div class="section-header">Media Sosial & Berita Dunia</div>
+        <div class="modal-box">
+            <h4>Berita Sepak Bola Dunia 📰</h4>
+            <div id="news-container" style="font-size: 10px; color: #94a3b8; line-height: 1.5; margin-bottom: 15px;"></div>
+        </div>
+        <div class="modal-box">
+            <h4>Instagram Feed 📸</h4>
+            <div class="input-group" style="margin-bottom: 8px;">
+                <label>Upload Foto / Aktivitas:</label>
+                <input type="text" id="ig-caption" placeholder="Tulis caption latihan atau pertandingan...">
             </div>
-            <button class="action-btn" onclick="playSound(); recoverHealth()">Pulihkan Kesehatan 💉</button>
-            <button class="action-btn" style="background:#475569; margin-top:8px;" onclick="playSound(); closeModals()">Kembali</button>
+            <button class="action-btn" style="margin-bottom: 15px;" onclick="playSound(); uploadIGPost()">Post ke Instagram 🚀</button>
+            <div id="ig-feed-container"></div>
         </div>
     </div>
 
-    <!-- MODAL SHOP -->
-    <div id="shop-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <h3>Toko Kebutuhan Nyata</h3>
-            <div id="shop-list"></div>
-            <button class="action-btn" style="margin-top:10px;" onclick="playSound(); closeModals()">Tutup Toko</button>
-        </div>
+    <div id="coach-screen" class="sub-screen hidden">
+        <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
+        <div class="section-header">Pelatih Profesional</div>
+        <div id="coach-list-container"></div>
     </div>
 
-    <!-- MODAL MATCH HUB & TACTICS -->
-    <div id="match-modal" class="modal-overlay hidden">
-        <div class="modal-content" style="max-width: 420px;">
-            <h3>Pusat Laga & Strategi Tim</h3>
-            <div id="match-hub-body"></div>
-            <button class="action-btn" style="margin-top:10px;" onclick="playSound(); closeModals()">Tutup Hub</button>
-        </div>
+    <div id="sponsor-screen" class="sub-screen hidden">
+        <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
+        <div class="section-header">Pusat Sponsor Dunia Nyata</div>
+        <div id="sponsor-list-container"></div>
     </div>
 
-    <!-- MODAL SOCIAL MEDIA & NEWS -->
-    <div id="social-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <h3>Media Sosial & Berita Dunia</h3>
-            <div style="display:flex; gap:5px; margin-bottom:10px;">
-                <button class="sign-btn" onclick="switchSocialTab('news')">Berita Dunia</button>
-                <button class="sign-btn" onclick="switchSocialTab('ig')">Instagram</button>
-            </div>
-            <div id="social-body"></div>
-            <button class="action-btn" style="margin-top:10px;" onclick="playSound(); closeModals()">Tutup</button>
-        </div>
-    </div>
-
-    <!-- MODAL COACH -->
-    <div id="coach-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <h3>Sewa Pelatih Pribadi</h3>
-            <p>Tingkatkan atribut dan performa harian Anda dengan menyewa pelatih ahli profesional.</p>
-            <div id="coach-list" style="margin-top:10px;"></div>
-            <button class="action-btn" style="margin-top:10px;" onclick="playSound(); closeModals()">Tutup</button>
-        </div>
-    </div>
-
-    <!-- MODAL SPONSOR -->
-    <div id="sponsor-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <h3>Pusat Sponsor & Brand</h3>
-            <p>Tarik brand ternama dunia berdasarkan reputasi fans Anda.</p>
-            <div id="sponsor-list" style="margin-top:10px;"></div>
-            <button class="action-btn" style="margin-top:10px;" onclick="playSound(); closeModals()">Tutup</button>
-        </div>
-    </div>
-
-    <!-- MODAL PARTNER / KEKASIH -->
-    <div id="partner-modal" class="modal-overlay hidden">
-        <div class="modal-content">
-            <h3>Pasangan Hidup (Partner Gacha)</h3>
-            <p>Temukan pendamping jiwa yang paling cocok dengan status karier Anda.</p>
-            <div style="margin: 10px 0; background:rgba(30,41,59,0.5); padding:8px; border-radius:8px;">
-                <p>Sisa Gacha Slot: <b id="gacha-slots" style="color:#facc15;">0</b></p>
-                <button class="action-btn" style="margin-top:6px;" onclick="playSound(); rollGachaPartner()">Gacha Pasangan Baru ($25,000) 🎰</button>
-            </div>
-            <div id="partner-list"></div>
-            <button class="action-btn" style="margin-top:10px;" onclick="playSound(); closeModals()">Tutup</button>
+    <div id="girlfriend-screen" class="sub-screen hidden">
+        <div class="clearfix"><button class="back-btn" onclick="playSound(); closeSubScreens()">← Kembali</button></div>
+        <div class="section-header">Kekasih & Gacha Jodoh Selebriti</div>
+        <div class="modal-box">
+            <h4>Slot Hubungan Anda</h4>
+            <div id="gf-slots-container" style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px;"></div>
+            <button class="action-btn" onclick="playSound(); gachaGirlfriend()">Gacha Kekasih Baru (Biaya: $2,500) 🎁</button>
         </div>
     </div>
 
@@ -632,6 +725,7 @@
             });
             currentSongIndex = (currentSongIndex + 1) % worldCupSongs.length;
         }
+
         bgmPlayer.onended = playNextSong;
         window.onload = () => { playNextSong(); };
 
@@ -673,7 +767,7 @@
                 isCreatorMode = true;
                 statusBadge.className = "status-badge creator";
                 statusBadge.innerText = "Status: 👑 Creator Mode Aktif";
-                creatorInfo.innerText = "✨ [Creator] Bonus 2 UR, 2 SSR Partner & Klub Elite Eropa!";
+                creatorInfo.innerText = "✨ [Creator] Bonus: 2 UR & 2 SSR Kekasih + Bebas Atur Stat!";
                 creatorInfo.style.color = "#10b981";
             } else {
                 isCreatorMode = false;
@@ -691,6 +785,11 @@
             document.getElementById("card-reveal-screen").classList.add("hidden");
             document.getElementById("dashboard-screen").classList.add("hidden");
             document.getElementById(screenId).classList.remove("hidden");
+        }
+
+        function closeSubScreens() {
+            playSound();
+            document.querySelectorAll(".sub-screen").forEach(el => el.classList.add("hidden"));
         }
 
         function goToCareerSetup() {
@@ -712,163 +811,68 @@
         const countryData = {
             "asia": {
                 "Indonesia": {
-                    manager: "Shin Tae-yong",
-                    squad: ["Marc Klok", "Asnawi Mangkualam", "Pratama Arhan", "Marselino Ferdinan", "Rizky Ridho"],
                     liga1: ["Persija Jakarta (OVR 72)", "Persib Bandung (OVR 73)", "Persebaya Surabaya (OVR 70)", "Bali United (OVR 71)", "PSM Makassar (OVR 69)"],
-                    liga2: ["Persis Solo", "PSS Sleman", "PSIM Yogyakarta", "Sriwijaya FC", "Persipura Jayapura"]
+                    liga2: ["Persis Solo", "PSS Sleman", "PSIM Yogyakarta"]
                 },
                 "Jepang": {
-                    manager: "Hajime Moriyasu",
-                    squad: ["Wataru Endo", "Kaoru Mitoma", "Takefusa Kubo", "Takumi Minamino", "Takehiro Tomiyasu"],
-                    liga1: ["Vissel Kobe (OVR 76)", "Yokohama F. Marinos (OVR 75)", "Kawasaki Frontale (OVR 76)", "Urawa Red Diamonds (OVR 74)", "Kashima Antlers (OVR 73)"],
-                    liga2: ["Shimizu S-Pulse", "JEF United", "Tokyo Verdy", "Jubilo Iwata", "V-Varen Nagasaki"]
+                    liga1: ["Vissel Kobe (OVR 76)", "Yokohama F. Marinos (OVR 75)", "Kawasaki Frontale (OVR 76)", "Urawa Red Diamonds (OVR 74)"],
+                    liga2: ["Shimizu S-Pulse", "JEF United", "Tokyo Verdy"]
                 },
                 "Korea Selatan": {
-                    manager: "Hong Myung-bo",
-                    squad: ["Son Heung-min", "Kim Min-jae", "Lee Kang-in", "Hwang Hee-chan", "Cho Gue-sung"],
-                    liga1: ["Ulsan HD (OVR 75)", "Jeonbuk Hyundai (OVR 75)", "FC Seoul (OVR 73)", "Pohang Steelers (OVR 74)", "Suwon FC (OVR 70)"],
-                    liga2: ["FC Anyang", "Busan IPark", "Gyeongnam FC", "Seongnam FC", "Bucheon FC"]
+                    liga1: ["Ulsan HD (OVR 75)", "Jeonbuk Hyundai (OVR 75)", "FC Seoul (OVR 73)"],
+                    liga2: ["FC Anyang", "Busan IPark"]
                 },
                 "Arab Saudi": {
-                    manager: "Hervé Renard",
-                    squad: ["Salem Al-Dawsari", "Firas Al-Buraikan", "Sultan Al-Ghannam", "Saud Abdulhamid", "Nasser Al-Dawsari"],
-                    liga1: ["Al Hilal (OVR 82)", "Al Nassr (OVR 81)", "Al Ittihad (OVR 80)", "Al Ahli (OVR 79)", "Al Shabab (OVR 75)"],
-                    liga2: ["Al Faisaly", "Al Hazem", "Al Orobah", "Al Jabalain", "Al Diriyah"]
+                    liga1: ["Al Hilal (OVR 82)", "Al Nassr (OVR 81)", "Al Ittihad (OVR 80)"],
+                    liga2: ["Al Faisaly", "Al Hazem"]
                 },
                 "Qatar": {
-                    manager: "Tintín Márquez",
-                    squad: ["Akram Afif", "Almoez Ali", "Saad Al Sheeb", "Hassan Al-Haydos", "Boualem Khoukhi"],
-                    liga1: ["Al Sadd (OVR 76)", "Al Duhail (OVR 75)", "Al Rayyan (OVR 73)", "Al Gharafa (OVR 72)", "Al Wakrah (OVR 71)"],
-                    liga2: ["Al Shahaniya", "Al Khor", "Al Markhiya", "Lusail City", "Al Mesaimeer"]
+                    liga1: ["Al Sadd (OVR 76)", "Al Duhail (OVR 75)"],
+                    liga2: ["Al Shahaniya", "Al Khor"]
                 }
             },
             "eropa": {
                 "Inggris": {
-                    manager: "Thomas Tuchel",
-                    squad: ["Harry Kane", "Jude Bellingham", "Bukayo Saka", "Phil Foden", "Declan Rice"],
                     liga1: ["Manchester City (OVR 88)", "Arsenal (OVR 86)", "Liverpool (OVR 86)", "Manchester United (OVR 83)", "Chelsea (OVR 83)"],
-                    liga2: ["Leicester City", "Leeds United", "Southampton", "Norwich City", "West Bromwich"]
+                    liga2: ["Leicester City", "Leeds United", "Southampton"]
                 },
                 "Spanyol": {
-                    manager: "Luis de la Fuente",
-                    squad: ["Rodri", "Lamine Yamal", "Dani Carvajal", "Pedri", "Alvaro Morata"],
-                    liga1: ["Real Madrid (OVR 89)", "Barcelona (OVR 87)", "Atletico Madrid (OVR 85)", "Real Sociedad (OVR 82)", "Villarreal (OVR 81)"],
-                    liga2: ["Real Valladolid", "Eibar", "Levante", "Sporting Gijon", "Real Zaragoza"]
+                    liga1: ["Real Madrid (OVR 89)", "Barcelona (OVR 87)", "Atletico Madrid (OVR 85)", "Real Sociedad (OVR 82)"],
+                    liga2: ["Real Valladolid", "Eibar", "Levante"]
                 },
                 "Jerman": {
-                    manager: "Julian Nagelsmann",
-                    squad: ["Jamal Musiala", "Florian Wirtz", "Joshua Kimmich", "Antonio Rüdiger", "Kai Havertz"],
-                    liga1: ["Bayern Munich (OVR 87)", "Bayer Leverkusen (OVR 86)", "Borussia Dortmund (OVR 84)", "RB Leipzig (OVR 83)", "VfB Stuttgart (OVR 81)"],
-                    liga2: ["Hamburg SV", "FC Schalke 04", "Hertha BSC", "Hannover 96", "FC Kaiserslautern"]
+                    liga1: ["Bayern Munich (OVR 87)", "Bayer Leverkusen (OVR 86)", "Borussia Dortmund (OVR 84)"],
+                    liga2: ["Hamburg SV", "FC Schalke 04"]
                 },
                 "Italia": {
-                    manager: "Luciano Spalletti",
-                    squad: ["Gianluigi Donnarumma", "Nicolò Barella", "Federico Chiesa", "Alessandro Bastoni", "Sandro Tonali"],
-                    liga1: ["Inter Milan (OVR 86)", "AC Milan (OVR 84)", "Juventus (OVR 84)", "Napoli (OVR 83)", "Atalanta (OVR 83)"],
-                    liga2: ["Sassuolo", "Sampdoria", "Palermo", "Parma", "Venezia"]
+                    liga1: ["Inter Milan (OVR 86)", "AC Milan (OVR 84)", "Juventus (OVR 84)", "Napoli (OVR 83)"],
+                    liga2: ["Sassuolo", "Sampdoria"]
                 },
                 "Prancis": {
-                    manager: "Didier Deschamps",
-                    squad: ["Kylian Mbappé", "Antoine Griezmann", "William Saliba", "Mike Maignan", "Eduardo Camavinga"],
-                    liga1: ["Paris Saint-Germain (OVR 87)", "Marseille (OVR 81)", "Monaco (OVR 81)", "Lille (OVR 80)", "Lyon (OVR 79)"],
-                    liga2: ["Bordeaux", "Saint-Etienne", "Auxerre", "Angers", "Guingamp"]
+                    liga1: ["Paris Saint-Germain (OVR 87)", "Marseille (OVR 81)", "Monaco (OVR 81)"],
+                    liga2: ["Bordeaux", "Saint-Etienne"]
                 }
             },
             "afrika": {
-                "Maroko": {
-                    manager: "Walid Regragui",
-                    squad: ["Achraf Hakimi", "Yassine Bounou", "Sofyan Amrabat", "Hakim Ziyech", "Youssef En-Nesyri"],
-                    liga1: ["Wydad AC (OVR 71)", "Raja CA (OVR 71)", "AS FAR (OVR 70)", "RS Berkane (OVR 69)", "FUS Rabat (OVR 68)"],
-                    liga2: ["KAC Marrakech", "CODM Meknes", "Ittihad Khemisset", "JS Massira", "Rachad Bernoussi"]
-                },
-                "Senegal": {
-                    manager: "Aliou Cissé",
-                    squad: ["Sadio Mané", "Kalidou Koulibaly", "Edouard Mendy", "Ismaïla Sarr", "Pape Matar Sarr"],
-                    liga1: ["Generation Foot (OVR 66)", "Teungueth FC (OVR 65)", "Diambars FC (OVR 65)", "AS Douanes (OVR 64)", "Jaraaf (OVR 66)"],
-                    liga2: ["Dakar UC", "Stade Mbour", "AS Pikine", "Port Autonome", "ASC Linguère"]
-                },
-                "Mesir": {
-                    manager: "Hossam Hassan",
-                    squad: ["Mohamed Salah", "Trezeguet", "Mohamed Elneny", "Mostafa Mohamed", "Omar Marmoush"],
-                    liga1: ["Al Ahly (OVR 76)", "Zamalek (OVR 75)", "Pyramids FC (OVR 74)", "Al Masry (OVR 70)", "Modern Future (OVR 69)"],
-                    liga2: ["Ghazl El Mahalla", "Petrojet", "Tanta SC", "Aswan SC", "Wadi Degla"]
-                },
-                "Nigeria": {
-                    manager: "Austin Eguavoen",
-                    squad: ["Victor Osimhen", "Ademola Lookman", "Alex Iwobi", "Wilfred Ndidi", "Samuel Chukwueze"],
-                    liga1: ["Enyimba (OVR 68)", "Remo Stars (OVR 67)", "Rivers United (OVR 68)", "Bendel Insurance (OVR 66)", "Shooting Stars (OVR 65)"],
-                    liga2: ["Ikorodu City", "Jigawa Golden Stars", "Abia Warriors", "Kwara United", "Wikki Tourists"]
-                },
-                "Kamerun": {
-                    manager: "Marc Brys",
-                    squad: ["André-Frank Zambo Anguissa", "Bryan Mbeumo", "Vincent Aboubakar", "André Onana", "Carlos Baleba"],
-                    liga1: ["Coton Sport (OVR 67)", "Canon Yaoundé (OVR 65)", "Union Douala (OVR 65)", "PWD Bamenda (OVR 64)", "Bamboutos (OVR 64)"],
-                    liga2: ["Panthère du Ndé", "Unisport de Bafang", "Tonnerre Yaoundé", "Racing Bafoussam", "Yosa Bamenda"]
-                }
+                "Maroko": { liga1: ["Wydad AC (OVR 71)", "Raja CA (OVR 71)"], liga2: ["KAC Marrakech"] },
+                "Senegal": { liga1: ["Generation Foot (OVR 66)", "Teungueth FC (OVR 65)"], liga2: ["Dakar UC"] },
+                "Mesir": { liga1: ["Al Ahly (OVR 76)", "Zamalek (OVR 75)"], liga2: ["Ghazl El Mahalla"] },
+                "Nigeria": { liga1: ["Enyimba (OVR 68)", "Remo Stars (OVR 67)"], liga2: ["Ikorodu City"] },
+                "Kamerun": { liga1: ["Coton Sport (OVR 67)"], liga2: ["Panthère du Ndé"] }
             },
             "amerika-selatan": {
-                "Brasil": {
-                    manager: "Dorival Júnior",
-                    squad: ["Vinicius Junior", "Rodrygo", "Marquinhos", "Alisson Becker", "Bruno Guimarães"],
-                    liga1: ["Flamengo (OVR 81)", "Palmeiras (OVR 81)", "Fluminense (OVR 79)", "Atletico Mineiro (OVR 79)", "Sao Paulo (OVR 78)"],
-                    liga2: ["Santos", "Vasco da Gama", "Sport Recife", "Ceara", "Coritiba"]
-                },
-                "Argentina": {
-                    manager: "Lionel Scaloni",
-                    squad: ["Lionel Messi", "Lautaro Martínez", "Julián Álvarez", "Enzo Fernández", "Emiliano Martínez"],
-                    liga1: ["River Plate (OVR 80)", "Boca Juniors (OVR 79)", "Racing Club (OVR 77)", "Independiente (OVR 76)", "San Lorenzo (OVR 75)"],
-                    liga2: ["Rosario Central", "Belgrano", "Godoy Cruz", "Argentinos Juniors", "Defensa y Justicia"]
-                },
-                "Uruguay": {
-                    manager: "Marcelo Bielsa",
-                    squad: ["Federico Valverde", "Darwin Núñez", "Ronald Araújo", "Manuel Ugarte", "José María Giménez"],
-                    liga1: ["Peñarol (OVR 74)", "Nacional (OVR 74)", "Defensor Sporting (OVR 71)", "Liverpool Montevideo (OVR 72)", "Danubio (OVR 70)"],
-                    liga2: ["Racing Montevideo", "Cerro", "Plaza Colonia", "Juventud", "Sud América"]
-                },
-                "Kolombia": {
-                    manager: "Néstor Lorenzo",
-                    squad: ["Luis Díaz", "James Rodríguez", "Jhon Durán", "Dávinson Sánchez", "Daniel Muñoz"],
-                    liga1: ["Millonarios (OVR 75)", "Atletico Nacional (OVR 76)", "Junior FC (OVR 74)", "Independiente Medellin (OVR 74)", "America de Cali (OVR 73)"],
-                    liga2: ["Deportivo Pereira", "Bucaramanga", "Patriotas", "Cucuta Deportivo", "Union Magdalena"]
-                },
-                "Cile": {
-                    manager: "Ricardo Gareca",
-                    squad: ["Alexis Sánchez", "Eduardo Vargas", "Claudio Bravo", "Gary Medel", "Ben Brereton Díaz"],
-                    liga1: ["Colo-Colo (OVR 74)", "Universidad de Chile (OVR 73)", "Universidad Catolica (OVR 73)", "Palestino (OVR 71)", "Union Espanola (OVR 70)"],
-                    liga2: ["Santiago Wanderers", "Cobreloa", "Deportes Antofagasta", "San Luis de Quillota", "Deportes Iquique"]
-                }
+                "Brasil": { liga1: ["Flamengo (OVR 81)", "Palmeiras (OVR 81)", "Fluminense (OVR 79)"], liga2: ["Santos", "Vasco da Gama"] },
+                "Argentina": { liga1: ["River Plate (OVR 80)", "Boca Juniors (OVR 79)", "Racing Club (OVR 77)"], liga2: ["Rosario Central"] },
+                "Uruguay": { liga1: ["Peñarol (OVR 74)", "Nacional (OVR 74)"], liga2: ["Racing Montevideo"] },
+                "Kolombia": { liga1: ["Millonarios (OVR 75)", "Atletico Nacional (OVR 76)"], liga2: ["Deportivo Pereira"] },
+                "Cile": { liga1: ["Colo-Colo (OVR 74)", "Universidad de Chile (OVR 73)"], liga2: ["Santiago Wanderers"] }
             },
             "amerika-utara": {
-                "Amerika Serikat": {
-                    manager: "Mauricio Pochettino",
-                    squad: ["Christian Pulisic", "Weston McKennie", "Folarin Balogun", "Timothy Weah", "Antonee Robinson"],
-                    liga1: ["Inter Miami (OVR 78)", "LA Galaxy (OVR 76)", "Los Angeles FC (OVR 77)", "Columbus Crew (OVR 76)", "Seattle Sounders (OVR 75)"],
-                    liga2: ["Sacramento Republic", "Louisville City", "Phoenix Rising", "San Antonio FC", "Tampa Bay Rowdies"]
-                },
-                "Meksiko": {
-                    manager: "Javier Aguirre",
-                    squad: ["Edson Álvarez", "Santiago Giménez", "Hirving Lozano", "Orbelín Pineda", "Guillermo Ochoa"],
-                    liga1: ["Club America (OVR 77)", "Tigres UANL (OVR 76)", "Monterrey (OVR 76)", "Chivas Guadalajara (OVR 74)", "Cruz Azul (OVR 75)"],
-                    liga2: ["Atlante", "Celaya", "Leones Negros", "Mineros de Zacatecas", "Correcaminos"]
-                },
-                "Kanada": {
-                    manager: "Jesse Marsch",
-                    squad: ["Alphonso Davies", "Jonathan David", "Tajon Buchanan", "Alistair Johnston", "Stephen Eustáquio"],
-                    liga1: ["Vancouver Whitecaps (OVR 73)", "Toronto FC (OVR 73)", "CF Montreal (OVR 72)", "Cavalry FC (OVR 67)", "Forge FC (OVR 68)"],
-                    liga2: ["Sigma FC", "Blizzard SC", "FC London", "Vaughan Azzurri", "Oakville Blue Devils"]
-                },
-                "Kosta Rika": {
-                    manager: "Claudio Vivas",
-                    squad: ["Keylor Navas", "Joel Campbell", "Francisco Calvo", "Juan Pablo Vargas", "Manfred Ugalde"],
-                    liga1: ["Saprissa (OVR 72)", "Alajuelense (OVR 72)", "Herediano (OVR 71)", "Cartagines (OVR 70)", "San Carlos (OVR 68)"],
-                    liga2: ["Municipal Grecia", "AD Carmelita", "Uruguay de Coronado", "Escorpiones de Belén", "Quepos Cambute"]
-                },
-                "Jamaika": {
-                    manager: "Steve McClaren",
-                    squad: ["Leon Bailey", "Michail Antonio", "Bobby Decordova-Reid", "Shamar Nicholson", "Andre Blake"],
-                    liga1: ["Mount Pleasant (OVR 67)", "Cavalier FC (OVR 67)", "Waterhouse (OVR 66)", "Tivoli Gardens (OVR 65)", "Harbour View (OVR 65)"],
-                    liga2: ["Chapelton Maroons", "Montego Bay United", "Falmouth United", "Seba United", "Negril FC"]
-                }
+                "Amerika Serikat": { liga1: ["Inter Miami (OVR 78)", "LA Galaxy (OVR 76)", "Los Angeles FC (OVR 77)"], liga2: ["Sacramento Republic"] },
+                "Meksiko": { liga1: ["Club America (OVR 77)", "Tigres UANL (OVR 76)"], liga2: ["Atlante"] },
+                "Kanada": { liga1: ["Vancouver Whitecaps (OVR 73)", "Toronto FC (OVR 73)"], liga2: ["Sigma FC"] },
+                "Kosta Rika": { liga1: ["Saprissa (OVR 72)", "Alajuelense (OVR 72)"], liga2: ["Municipal Grecia"] },
+                "Jamaika": { liga1: ["Mount Pleasant (OVR 67)"], liga2: ["Chapelton Maroons"] }
             }
         };
 
@@ -905,11 +909,11 @@
                     slider.disabled = false;
                     slider.oninput = function() { document.getElementById("val-" + getSliderKey(this.id)).innerText = this.value; };
                 });
-                infoText.innerText = "👑 [Creator Mode] Atur stat manual 1 - 99!";
+                infoText.innerText = "👑 [Creator Mode] Geser slider nilai 1 - 99 untuk mengatur OVR & stat secara bebas!";
                 infoText.style.color = "#10b981";
             } else {
                 sliders.forEach(slider => slider.disabled = true);
-                infoText.innerText = "🔒 Statistik diacak otomatis.";
+                infoText.innerText = "🔒 Statistik diacak otomatis sesuai Level Awal.";
                 infoText.style.color = "#f59e0b";
                 generateRandomStatsForUser();
             }
@@ -930,12 +934,49 @@
             });
         }
 
-        let playerProfile = {};
+        let globalCharData = {};
+        let gameState = {
+            currentDate: new Date(2005, 6, 5), // 05 Juli 2005
+            money: 15000,
+            fans: 1200,
+            haters: 50,
+            health: 100,
+            club: "",
+            coach: "Belum disewa",
+            teammates: [],
+            goals: 0,
+            assists: 0,
+            season: "2005/2006",
+            girlfriends: [],
+            lineup: { starter: [], captain: "", freekick: "" },
+            matches: [
+                { opponent: "Real Madrid B", date: "10 Juli 2005", played: false },
+                { opponent: "Barcelona Juvenil", date: "18 Juli 2005", played: false },
+                { opponent: "Valencia Academy", date: "25 Juli 2005", played: false }
+            ]
+        };
+
+        const realGirlfriendsPool = [
+            { name: "Zendaya", tier: "UR" },
+            { name: "Taylor Swift", tier: "UR" },
+            { name: "Ana de Armas", tier: "SSR" },
+            { name: "Sydney Sweeney", tier: "SSR" },
+            { name: "Margot Robbie", tier: "SSS" },
+            { name: "Emma Watson", tier: "SSS" },
+            { name: "Selena Gomez", tier: "SS" },
+            { name: "Ariana Grande", tier: "SS" },
+            { name: "Dua Lipa", tier: "S" },
+            { name: "Billie Eilish", tier: "S" },
+            { name: "Millie Bobby Brown", tier: "A" },
+            { name: "Olivia Rodrigo", tier: "A" },
+            { name: "Kylie Jenner", tier: "B" },
+            { name: "Kendall Jenner", tier: "B" }
+        ];
 
         function finishCharacterCreation() {
             const firstName = document.getElementById("char-firstname").value.trim();
             const lastName = document.getElementById("char-lastname").value.trim();
-            if (!firstName || !lastName) { alert("Isi Nama Depan dan Belakang!"); return; }
+            if (!firstName || !lastName) { alert("Isi Nama Depan dan Belakang terlebih dahulu!"); return; }
 
             let spd = parseInt(document.getElementById("stat-speed").value);
             let sht = parseInt(document.getElementById("stat-shoot").value);
@@ -947,13 +988,7 @@
             let avgOvr = Math.round((spd + sht + pas + dri + def + phy) / 6);
             if (avgOvr > 99) avgOvr = 99;
 
-            let monthlySalary = 15000;
-            if (avgOvr > 60 && avgOvr <= 80) monthlySalary = 70000;
-            else if (avgOvr > 80 && avgOvr <= 90) monthlySalary = 150000;
-            else if (avgOvr > 90 && avgOvr < 99) monthlySalary = 2500000;
-            else if (avgOvr >= 99) monthlySalary = 20000000;
-
-            playerProfile = {
+            globalCharData = {
                 firstName, lastName,
                 shirtName: document.getElementById("char-shirtname").value.trim() || (firstName.charAt(0) + ". " + lastName).toUpperCase(),
                 continent: document.getElementById("char-continent").value,
@@ -964,27 +999,26 @@
                 spd, sht, pas, dri, def, phy,
                 avatarType: document.getElementById("char-avatar-type").value,
                 systemAvatar: document.getElementById("char-system-avatar").value,
-                customUrl: document.getElementById("char-custom-url").value.trim(),
-                money: 50000,
-                salary: monthlySalary,
-                health: 100,
-                fans: 1200,
-                haters: 45,
-                goals: 0,
-                assists: 0,
-                club: "",
-                currentDate: new Date(2005, 6, 5), // 05 Juli 2005
-                gachaSlots: isCreatorMode ? 4 : 2,
-                partners: isCreatorMode ? [
-                    {name: "Margot Robbie", tier: "UR"},
-                    {name: "Ana de Armas", tier: "UR"},
-                    {name: "Zendaya", tier: "SSR"},
-                    {name: "Sydney Sweeney", tier: "SSR"}
-                ] : []
+                customUrl: document.getElementById("char-custom-url").value.trim()
             };
 
-            renderFCCard(playerProfile);
-            generateClubOffers(playerProfile);
+            // Inisialisasi Kekasih Berdasarkan Mode
+            if (isCreatorMode) {
+                gameState.girlfriends = [
+                    { name: "Zendaya", tier: "UR" },
+                    { name: "Taylor Swift", tier: "UR" },
+                    { name: "Ana de Armas", tier: "SSR" },
+                    { name: "Sydney Sweeney", tier: "SSR" },
+                    { slot: "Kosong" }, { slot: "Kosong" }, { slot: "Kosong" }, { slot: "Kosong" }
+                ];
+            } else {
+                gameState.girlfriends = [
+                    { slot: "Kosong" }, { slot: "Kosong" }
+                ];
+            }
+
+            renderFCCard(globalCharData);
+            generateClubOffers(globalCharData);
             goScreen('card-reveal-screen');
         }
 
@@ -992,8 +1026,8 @@
             let cardClass = "card-bronze";
             let specialBadgeHtml = "";
 
-            if (data.ovr >= 70 && data.ovr < 85) cardClass = "card-silver";
-            else if (data.ovr >= 85 && data.ovr < 95) cardClass = "card-gold";
+            if (data.ovr >= 70 && data.ovr < 85) { cardClass = "card-silver"; }
+            else if (data.ovr >= 85 && data.ovr < 95) { cardClass = "card-gold"; }
             else if (data.ovr >= 95 && data.ovr < 99) {
                 cardClass = "card-legendary";
                 specialBadgeHtml = `<div class="special-card-badge badge-legendary">⭐ Legendary ⭐</div>`;
@@ -1039,7 +1073,9 @@
             } else {
                 const selectedCountryObj = countryData[data.continent][data.country];
                 if (selectedCountryObj) poolClubs = poolClubs.concat(selectedCountryObj.liga1, selectedCountryObj.liga2);
+                else poolClubs = ["Klub Lokal A (OVR 65)"];
             }
+
             let shuffled = [...poolClubs].sort(() => 0.5 - Math.random());
             shuffled.slice(0, 4).forEach((clubStr) => {
                 let card = document.createElement("div");
@@ -1047,9 +1083,9 @@
                 card.innerHTML = `
                     <div class="club-info">
                         <h4>🛡️ ${clubStr}</h4>
-                        <p>Gaji: $${playerProfile.salary.toLocaleString()} / bulan</p>
+                        <p>Kontrak Profesional Durasi 2 Musim</p>
                     </div>
-                    <button class="sign-btn" onclick="playSound(); showContractModal('${clubStr}')">Tinjau</button>
+                    <button class="sign-btn" onclick="playSound(); showContractModal('${clubStr}')">Tinjau Kontrak</button>
                 `;
                 listEl.appendChild(card);
             });
@@ -1061,7 +1097,7 @@
                 <div class="contract-box">
                     <h4><span>📝 Kontrak Resmi</span><span>🛡️ ${clubName}</span></h4>
                     <div class="contract-text">
-                        Klub sepakat mengontrak <b>${playerProfile.firstName} ${playerProfile.lastName}</b> dengan gaji <b>$${playerProfile.salary.toLocaleString()} USD per bulan</b>.
+                        Pemain <b>${globalCharData.firstName} ${globalCharData.lastName}</b> dikontrak resmi oleh ${clubName}. Gaji disesuaikan dengan tier OVR Anda.
                     </div>
                     <button class="action-btn" onclick="playSound(); assignClub('${clubName}')">Tanda Tangan Kontrak ✍️</button>
                 </div>
@@ -1069,265 +1105,290 @@
         }
 
         function assignClub(clubName) {
+            gameState.club = clubName;
+            // Hitung Gaji Berdasarkan OVR
+            let ovr = globalCharData.ovr;
+            if (ovr <= 60) gameState.money = 15000;
+            else if (ovr <= 80) gameState.money = 70000;
+            else if (ovr <= 90) gameState.money = 150000;
+            else if (ovr >= 91 && ovr <= 98) gameState.money = 5000000;
+            else if (ovr === 99) gameState.money = 20000000;
+
+            // Data Pelatih & Teammates Real Dunia
+            if (clubName.includes("Real Madrid")) {
+                gameState.coach = "Carlo Ancelotti";
+                gameState.teammates = ["Jude Bellingham", "Vinicius Jr", "Kylian Mbappe", "Thibaut Courtois"];
+            } else if (clubName.includes("Barcelona")) {
+                gameState.coach = "Hansi Flick";
+                gameState.teammates = ["Lamine Yamal", "Robert Lewandowski", "Pedri", "Gavi"];
+            } else if (clubName.includes("Manchester City")) {
+                gameState.coach = "Pep Guardiola";
+                gameState.teammates = ["Erling Haaland", "Kevin De Bruyne", "Rodri", "Phil Foden"];
+            } else {
+                gameState.coach = "Pelatih Klub Lokal";
+                gameState.teammates = ["Pemain Senior A", "Pemain Senior B", "Kapten Tim"];
+            }
+
             let cutscene = document.createElement("div");
             cutscene.className = "cutscene-screen";
             cutscene.innerHTML = `
-                <h1 style="color: #facc15; font-size: 22px; margin-bottom: 10px;">WELCOME TO ${clubName.toUpperCase()}!</h1>
-                <p style="color: #cbd5e1; font-size: 12px; margin-bottom: 20px;">Konferensi pers pemain baru resmi dimulai.</p>
-                <button class="action-btn" style="max-width: 200px; margin: 0 auto;" onclick="playSound(); proceedToDashboard('${clubName}')">Lanjutkan ➔</button>
+                <h1 style="color: #facc15; font-size: 24px; margin-bottom: 10px;">WELCOME TO ${clubName.toUpperCase()}!</h1>
+                <p style="color: #cbd5e1; font-size: 13px; margin-bottom: 25px;">Konferensi pers penyambutan pemain bintang resmi dimulai.</p>
+                <button class="action-btn" style="max-width: 220px; margin: 0 auto;" onclick="playSound(); proceedToDashboard()">Lanjutkan ke Karier ➔</button>
             `;
             document.body.appendChild(cutscene);
         }
 
-        function proceedToDashboard(clubName) {
+        function proceedToDashboard() {
             document.querySelector(".cutscene-screen").remove();
-            playerProfile.club = clubName;
             updateDashboardUI();
             goScreen('dashboard-screen');
         }
 
         function updateDashboardUI() {
-            document.getElementById("dash-club").innerText = playerProfile.club;
-            document.getElementById("dash-money").innerText = `$${playerProfile.money.toLocaleString()}`;
-            document.getElementById("dash-fans").innerText = `${playerProfile.fans} / ${playerProfile.haters}`;
-            document.getElementById("dash-health").innerText = `${playerProfile.health}% ${playerProfile.health > 50 ? '🟢' : '🔴'}`;
-            document.getElementById("dash-g-a").innerText = `${playerProfile.goals} G / ${playerProfile.assists} A`;
-            
-            let options = { year: 'numeric', month: 'short', day: 'numeric' };
-            document.getElementById("dash-date").innerText = playerProfile.currentDate.toLocaleDateString('id-ID', options);
-            document.getElementById("national-team").innerText = playerProfile.ovr >= 80 ? `Timnas ${playerProfile.country} ⭐` : `Akademi Junior`;
-            document.getElementById("gacha-slots").innerText = playerProfile.gachaSlots;
+            let options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById("dash-date").innerText = gameState.currentDate.toLocaleDateString('id-ID', options);
+            document.getElementById("dash-money").innerText = "$" + gameState.money.toLocaleString();
+            document.getElementById("dash-rep").innerText = `${gameState.fans} F / ${gameState.haters} H`;
+            document.getElementById("dash-club").innerText = gameState.club;
+            document.getElementById("dash-health").innerText = gameState.health + "% " + (gameState.health > 70 ? "🟢" : "🔴");
+            document.getElementById("dash-g-a").innerText = `${gameState.goals} G / ${gameState.assists} A`;
+            document.getElementById("dash-national").innerText = globalCharData.ovr >= 80 ? "Timnas " + globalCharData.country + " ⭐" : "Akademi Junior";
         }
 
-        function openClubModal() {
-            const countryObj = countryData[playerProfile.continent][playerProfile.country];
-            document.getElementById("club-modal-body").innerHTML = `
-                <p><b>Klub:</b> ${playerProfile.club}</p>
-                <p><b>Gaji Bulanan:</b> $${playerProfile.salary.toLocaleString()} USD</p>
-                <p><b>Pelatih Kepala Dunia:</b> ${countryObj.manager}</p>
-                <p style="margin-top:8px;"><b>Rekan Skuad Utama:</b></p>
-                <ul>${countryObj.squad.map(s => `<li>⚽ ${s}</li>`).join('')}</ul>
+        // --- FITUR KELENGKAPAN BARU ---
+        function openClubInfoModal() {
+            document.getElementById("club-detail-content").innerHTML = `
+                <div class="modal-box">
+                    <h4>Informasi Kontrak & Klub</h4>
+                    <p><b>Klub:</b> ${gameState.club}</p>
+                    <p><b>Pelatih Kepala:</b> ${gameState.coach}</p>
+                    <p><b>Gaji Bulanan:</b> $${gameState.money.toLocaleString()} USD</p>
+                </div>
+                <div class="modal-box">
+                    <h4>Skuad Rekan Tim Utama</h4>
+                    <p>${gameState.teammates.join(", ")}</p>
+                </div>
             `;
-            document.getElementById("club-modal").classList.remove("hidden");
+            document.getElementById("club-info-screen").classList.remove("hidden");
         }
 
         function openHealthModal() {
-            let cost = Math.round(playerProfile.salary * 0.1);
-            document.getElementById("heal-cost").innerText = `$${cost.toLocaleString()}`;
-            document.getElementById("health-modal").classList.remove("hidden");
+            let cost = Math.floor((100 - gameState.health) * 20) + 150;
+            document.getElementById("health-cost-info").innerText = `Biaya Pemulihan: $${cost.toLocaleString()} USD`;
+            document.getElementById("health-screen").classList.remove("hidden");
         }
 
-        function recoverHealth() {
-            let cost = Math.round(playerProfile.salary * 0.1);
-            if (playerProfile.money < cost) { alert("Saldo tidak cukup untuk pemulihan medis!"); return; }
-            playerProfile.money -= cost;
-            playerProfile.health = 100;
+        function restoreHealth() {
+            let cost = Math.floor((100 - gameState.health) * 20) + 150;
+            if (gameState.money < cost) {
+                alert("Saldo Anda tidak cukup untuk pemulihan medis!");
+                return;
+            }
+            gameState.money -= cost;
+            gameState.health = 100;
             updateDashboardUI();
-            closeModals();
-            alert("Kesehatan pemain berhasil dipulihkan 100%!");
+            alert("Kesehatan Anda telah pulih 100%!");
+            closeSubScreens();
         }
 
         function openShopModal() {
             const items = [
-                {name: "Hyperice Normatec Recovery Boots", price: 3500},
-                {name: "Private Chef & Nutritionist (1 Bulan)", price: 8000},
-                {name: "Hyperbaric Oxygen Chamber Session", price: 12000},
-                {name: "Supercar Mewah (Ferrari / Lamborghini)", price: 250000}
+                { name: "Hyperice Normatec Recovery Boots", price: 1200, desc: "Pemulihan otot kaki kelas dunia." },
+                { name: "Suplemen Protein & Vitamin Premium", price: 350, desc: "Menjaga stamina prima." },
+                { name: "Hyperbaric Oxygen Chamber", price: 15000, desc: "Terapi oksigen regenerasi sel kilat." },
+                { name: "Mobil Mewah Sport Real Madrid Edition", price: 250000, desc: "Meningkatkan reputasi & fans." }
             ];
             let html = "";
-            items.forEach((item, idx) => {
+            items.forEach(item => {
                 html += `
-                    <div class="shop-item">
-                        <div><b>${item.name}</b><br><small style="color:#10b981;">$${item.price.toLocaleString()}</small></div>
-                        <button class="sign-btn" onclick="buyShopItem(${item.price})">Beli</button>
+                    <div class="modal-box">
+                        <h4>🛒 ${item.name}</h4>
+                        <p>${item.desc}</p>
+                        <p style="color: #10b981; margin: 6px 0;">Harga: $${item.price.toLocaleString()}</p>
+                        <button class="sign-btn" onclick="playSound(); buyShopItem(${item.price}, '${item.name}')">Beli Barang</button>
                     </div>
                 `;
             });
-            document.getElementById("shop-list").innerHTML = html;
-            document.getElementById("shop-modal").classList.remove("hidden");
+            document.getElementById("shop-items-container").innerHTML = html;
+            document.getElementById("shop-screen").classList.remove("hidden");
         }
 
-        function buyShopItem(price) {
-            if (playerProfile.money < price) { alert("Saldo Anda tidak mencukupi!"); return; }
-            playerProfile.money -= price;
-            playerProfile.fans += 50;
+        function buyShopItem(price, name) {
+            if (gameState.money < price) { alert("Saldo tidak mencukupi!"); return; }
+            gameState.money -= price;
+            gameState.fans += 50;
             updateDashboardUI();
-            alert("Pembelian berhasil! Reputasi fans meningkat.");
+            alert(`Berhasil membeli ${name}! Reputasi fans bertambah.`);
         }
 
-        function openMatchHub() {
-            let opp = "Real Madrid CF";
-            if (playerProfile.club.includes("Real Madrid")) opp = "FC Barcelona";
-            document.getElementById("match-hub-body").innerHTML = `
-                <p><b>Musim Aktif:</b> 2005 / 2006</p>
-                <p><b>Laga Berikutnya:</b> vs ${opp}</p>
-                <div style="margin:12px 0; background:rgba(30,41,59,0.5); padding:10px; border-radius:8px;">
-                    <p style="color:#facc15; font-weight:700;">Pengaturan Taktik & Tim</p>
-                    <p>Formasi: 4-3-3 Menyerang</p>
-                    <p>Kapten Utama: ${playerProfile.shirtName}</p>
-                    <p>Eksekutor Free Kick: ${playerProfile.shirtName}</p>
+        function openMatchScreen() {
+            let matchHtml = `
+                <div class="modal-box">
+                    <h4>Musim Kompetisi: ${gameState.season}</h4>
+                    <p><b>Tanggal Pertandingan:</b> ${gameState.currentDate.toLocaleDateString('id-ID')}</p>
                 </div>
-                <button class="action-btn" onclick="playMatchSimulator()">Simulasikan Pertandingan ⚡</button>
             `;
-            document.getElementById("match-modal").classList.remove("hidden");
+            gameState.matches.forEach((m, idx) => {
+                matchHtml += `
+                    <div class="modal-box">
+                        <h4>Laga vs ${m.opponent}</h4>
+                        <p>Status: ${m.played ? "Sudah Selesai ✅" : "Akan Datang ⏳"}</p>
+                        ${!m.played ? `<button class="action-btn" style="margin-top:8px;" onclick="playSound(); playMatch(${idx})">Mulai Pertandingan ⚽</button>` : ""}
+                    </div>
+                `;
+            });
+            document.getElementById("match-content-area").innerHTML = matchHtml;
+            document.getElementById("match-screen").classList.remove("hidden");
         }
 
-        function playMatchSimulator() {
-            let healthLoss = Math.floor(Math.random() * 20) + 10;
-            playerProfile.health -= healthLoss;
-            if (playerProfile.health < 0) playerProfile.health = 0;
+        function playMatch(idx) {
+            gameState.matches[idx].played = true;
+            let healthDrop = Math.floor(Math.random() * 20) + 10;
+            gameState.health = Math.max(10, gameState.health - healthDrop);
 
-            let scored = Math.random() > 0.4 ? 1 : 0;
-            let assisted = Math.random() > 0.5 ? 1 : 0;
-            playerProfile.goals += scored;
-            playerProfile.assists += assisted;
-
-            playerProfile.fans += (scored * 120) + (assisted * 80);
-            playerProfile.money += playerProfile.salary; // Gaji cair saat bertanding
+            let scoredG = Math.random() > 0.4 ? 1 : 0;
+            let scoredA = Math.random() > 0.5 ? 1 : 0;
+            gameState.goals += scoredG;
+            gameState.assists += scoredA;
 
             // Maju 7 hari kalender
-            playerProfile.currentDate.setDate(playerProfile.currentDate.getDate() + 7);
+            gameState.currentDate.setDate(gameState.currentDate.getDate() + 7);
 
             updateDashboardUI();
-            closeModals();
-            alert(`Pertandingan Selesai!\nGol: +${scored}, Assist: +${assisted}\nKesehatan Turun: -${healthLoss}%\nGaji Bulanan Dicairkan: +$${playerProfile.salary.toLocaleString()}`);
+            alert(`Pertandingan Selesai!\nGol: +${scoredG}, Assist: +${scoredA}\nKesehatan menurun sebanyak ${healthDrop}% akibat kelelahan.`);
+            openMatchScreen();
         }
 
-        function openSocialMediaHub() {
-            switchSocialTab('news');
-            document.getElementById("social-modal").classList.remove("hidden");
+        function openSocialMediaScreen() {
+            document.getElementById("news-container").innerHTML = `
+                • Bursa transfer musim panas resmi dibuka, klub-klub top Eropa memburu wonderkid baru.<br>
+                • Performa ${globalCharData.firstName} ${globalCharData.lastName} mulai disorot media internasional.
+            `;
+            renderIGFeed();
+            document.getElementById("social-screen").classList.remove("hidden");
         }
 
-        function switchSocialTab(tab) {
-            let body = document.getElementById("social-body");
-            if (tab === 'news') {
-                body.innerHTML = `
-                    <p><b>📰 Berita Dunia Sepak Bola:</b></p>
-                    <p>• Bursa transfer musim panas diwarnai kepindahan bintang muda berbakat.</p>
-                    <p>• Pelatih tim nasional memantau talenta baru untuk kualifikasi Piala Dunia.</p>
-                `;
-            } else {
-                body.innerHTML = `
-                    <p><b>📱 Instagram Feed (${playerProfile.shirtName})</b></p>
-                    <div class="input-group" style="margin-top:8px;">
-                        <input type="text" id="ig-caption" placeholder="Tulis caption foto...">
-                        <button class="sign-btn" style="margin-top:6px;" onclick="uploadIGPhoto()">Upload Postingan 📸</button>
-                    </div>
-                    <div id="ig-feed" style="margin-top:10px;">
-                        <div style="background:#1e293b; padding:8px; border-radius:8px; margin-bottom:6px;">
-                            <small>@${playerProfile.firstName.toLowerCase()}_off</small>
-                            <p>Siap untuk laga besar akhir pekan ini! ⚽🔥</p>
-                            <small style="color:#facc15;">❤️ 1,420 Likes | 💬 88 Komentar</small>
-                        </div>
+        let igPosts = [
+            { user: "global_sports", caption: "Bintang muda baru siap menggebrak dunia sepak bola!", likes: 4200 },
+            { user: "transfer_news", caption: "Klub-klub besar memantau perkembangan sang pemain.", likes: 1930 }
+        ];
+
+        function renderIGFeed() {
+            let html = "";
+            igPosts.forEach(p => {
+                html += `
+                    <div style="background: #090d16; border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 10px; margin-bottom: 8px;">
+                        <p style="color: #00d2ff; font-weight: 700;">@${p.user}</p>
+                        <p style="margin: 4px 0;">${p.caption}</p>
+                        <p style="font-size: 9px; color: #94a3b8;">❤️ ${p.likes} Suka</p>
                     </div>
                 `;
-            }
+            });
+            document.getElementById("ig-feed-container").innerHTML = html;
         }
 
-        function uploadIGPhoto() {
-            let caption = document.getElementById("ig-caption").value;
+        function uploadIGPost() {
+            let caption = document.getElementById("ig-caption").value.trim();
             if (!caption) { alert("Tulis caption terlebih dahulu!"); return; }
-            playerProfile.fans += 300;
+            igPosts.unshift({ user: globalCharData.firstName.toLowerCase() + "_official", caption, likes: Math.floor(Math.random() * 500) + 100 });
+            gameState.fans += 100;
+            document.getElementById("ig-caption").value = "";
+            renderIGFeed();
             updateDashboardUI();
-            alert("Foto berhasil di-upload! Followers Instagram bertambah.");
-            switchSocialTab('ig');
+            alert("Berhasil posting ke Instagram! Followers bertambah.");
         }
 
-        function openCoachModal() {
+        function openCoachScreen() {
             const coaches = [
-                {name: "Zinedine Zidane (Teknik & Visi)", cost: 40000},
-                {name: "Carlo Ancelotti (Taktik & Mental)", cost: 45000},
-                {name: "Pintus (Fisik & Stamina)", cost: 30000}
+                { name: "Zinedine Zidane", type: "Pelatih Teknik & Visi Serangan", cost: 10000 },
+                { name: "Pep Guardiola", type: "Pelatih Taktik & Penguasaan Bola", cost: 15000 },
+                { name: "Antonio Conte", type: "Pelatih Fisik & Mentalitas Juara", cost: 8000 }
             ];
             let html = "";
             coaches.forEach(c => {
                 html += `
-                    <div class="coach-item">
-                        <div><b>${c.name}</b><br><small style="color:#10b981;">Fee: $${c.cost.toLocaleString()}</small></div>
-                        <button class="sign-btn" onclick="hireCoach(${c.cost})">Sewa</button>
+                    <div class="modal-box">
+                        <h4>👨‍🏫 ${c.name}</h4>
+                        <p>Spesialisasi: ${c.type}</p>
+                        <p style="color: #10b981; margin: 6px 0;">Biaya Sewa Bulanan: $${c.cost.toLocaleString()}</p>
+                        <button class="sign-btn" onclick="playSound(); hireCoach('${c.name}', ${c.cost})">Sewa Pelatih</button>
                     </div>
                 `;
             });
-            document.getElementById("coach-list").innerHTML = html;
-            document.getElementById("coach-modal").classList.remove("hidden");
+            document.getElementById("coach-list-container").innerHTML = html;
+            document.getElementById("coach-screen").classList.remove("hidden");
         }
 
-        function hireCoach(cost) {
-            if (playerProfile.money < cost) { alert("Saldo tidak cukup untuk menyewa pelatih!"); return; }
-            playerProfile.money -= cost;
-            playerProfile.ovr += 1;
+        function hireCoach(name, cost) {
+            if (gameState.money < cost) { alert("Saldo tidak mencukupi untuk menyewa pelatih ini!"); return; }
+            gameState.money -= cost;
+            gameState.coach = name;
             updateDashboardUI();
-            renderFCCard(playerProfile);
-            alert("Pelatih berhasil disewa! Atribut OVR pemain meningkat +1.");
+            alert(`Anda resmi dilatih oleh ${name}!`);
+            closeSubScreens();
         }
 
-        function openSponsorModal() {
+        function openSponsorScreen() {
             const sponsors = [
-                {name: "Nike Football", minFans: 2000, payout: 50000},
-                {name: "Adidas Elite", minFans: 5000, payout: 150000},
-                {name: "Pepsi Cola", minFans: 10000, payout: 300000}
+                { name: "Nike Football", minRep: 1000, payout: 25000 },
+                { name: "Adidas Performance", minRep: 2500, payout: 60000 },
+                { name: "Pepsi Cola", minRep: 5000, payout: 150000 }
             ];
             let html = "";
             sponsors.forEach(s => {
-                let canSign = playerProfile.fans >= s.minFans;
+                let canSign = gameState.fans >= s.minRep;
                 html += `
-                    <div class="coach-item">
-                        <div><b>${s.name}</b><br><small>Min Fans: ${s.minFans} | <span style="color:#10b981;">+$${s.payout.toLocaleString()}</span></small></div>
-                        <button class="sign-btn" ${canSign ? '' : 'disabled style="background:#475569;"'} onclick="signSponsor(${s.payout})">${canSign ? 'Klaim Kontrak' + ' ' : 'Ditolak'}</button>
+                    <div class="modal-box">
+                        <h4>🤝 ${s.name}</h4>
+                        <p>Syarat Min. Fans: ${s.minRep.toLocaleString()}</p>
+                        <p style="color: #10b981; margin: 6px 0;">Kontrak Sponsor: +$${s.payout.toLocaleString()}/bln</p>
+                        <button class="sign-btn" ${!canSign ? 'style="background:#475569; cursor:not-allowed;"' : ''} onclick="playSound(); signSponsor(${s.minRep}, ${s.payout}, '${s.name}')">${canSign ? "Tanda Tangan Kontrak" : "Reputasi Kurang ❌"}</button>
                     </div>
                 `;
             });
-            document.getElementById("sponsor-list").innerHTML = html;
-            document.getElementById("sponsor-modal").classList.remove("hidden");
+            document.getElementById("sponsor-list-container").innerHTML = html;
+            document.getElementById("sponsor-screen").classList.remove("hidden");
         }
 
-        function signSponsor(payout) {
-            playerProfile.money += payout;
+        function signSponsor(minRep, payout, name) {
+            if (gameState.fans < minRep) { alert("Sponsor menolak karena fans Anda belum mencukupi!"); return; }
+            gameState.money += payout;
             updateDashboardUI();
-            alert(`Kontrak sponsor disetujui! Dana masuk: +$${payout.toLocaleString()}`);
-            closeModals();
+            alert(`Selamat! Kontrak sponsor dengan ${name} berhasil disetujui.`);
         }
 
-        function openPartnerModal() {
-            renderPartners();
-            document.getElementById("partner-modal").classList.remove("hidden");
+        function openGirlfriendScreen() {
+            renderGirlfriends();
+            document.getElementById("girlfriend-screen").classList.remove("hidden");
         }
 
-        function renderPartners() {
+        function renderGirlfriends() {
             let html = "";
-            playerProfile.partners.forEach(p => {
-                html += `<div class="partner-card"><span>❤️ ${p.name}</span><b style="color:#facc15;">Tier: ${p.tier}</b></div>`;
+            gameState.girlfriends.forEach(gf => {
+                html += `
+                    <div style="background: #090d16; border: 1px solid rgba(255,215,0,0.2); border-radius: 10px; padding: 10px; text-align: center;">
+                        <p style="font-size: 14px; font-weight: 700; color: #facc15;">${gf.name || "Slot Kosong"}</p>
+                        <p style="font-size: 10px; color: #94a3b8; margin-top: 4px;">Tier: ${gf.tier || "-"}</p>
+                    </div>
+                `;
             });
-            if (playerProfile.partners.length === 0) html = "<p>Belum ada pasangan. Lakukan gacha partner.</p>";
-            document.getElementById("partner-list").innerHTML = html;
-            document.getElementById("gacha-slots").innerText = playerProfile.gachaSlots;
+            document.getElementById("gf-slots-container").innerHTML = html;
         }
 
-        function rollGachaPartner() {
-            if (playerProfile.money < 25000) { alert("Saldo tidak cukup untuk gacha pasangan ($25,000)!"); return; }
-            if (playerProfile.gachaSlots <= 0) { alert("Slot kosong pasangan Anda sudah habis!"); return; }
-            
-            playerProfile.money -= 25000;
-            playerProfile.gachaSlots -= 1;
+        function gachaGirlfriend() {
+            let cost = 2500;
+            if (gameState.money < cost) { alert("Saldo tidak cukup untuk gacha kekasih!"); return; }
+            gameState.money -= cost;
 
-            const pool = [
-                {name: "Taylor Swift", tier: "SSR"},
-                {name: "Dua Lipa", tier: "SSR"},
-                {name: "Kendall Jenner", tier: "SS"},
-                {name: "Hailey Bieber", tier: "S"},
-                {name: "Selena Gomez", tier: "SSR"},
-                {name: "Ariana Grande", tier: "SS"},
-                {name: "Alexandra Daddario", tier: "UR"}
-            ];
-            let picked = pool[Math.floor(Math.random() * pool.length)];
-            playerProfile.partners.push(picked);
+            let emptyIndex = gameState.girlfriends.findIndex(gf => gf.slot === "Kosong");
+            if (emptyIndex === -1) { alert("Semua slot kekasih Anda sudah penuh!"); return; }
+
+            let randomGf = realGirlfriendsPool[Math.floor(Math.random() * realGirlfriendsPool.length)];
+            gameState.girlfriends[emptyIndex] = randomGf;
             updateDashboardUI();
-            renderPartners();
-            alert(`Selamat! Anda mendapatkan pasangan baru: ${picked.name} (${picked.tier})`);
-        }
-
-        function closeModals() {
-            document.querySelectorAll(".modal-overlay").forEach(m => m.classList.add("hidden"));
+            renderGirlfriends();
+            alert(`Gacha Berhasil! Anda mendapatkan kekasih baru: ${randomGf.name} (${randomGf.tier}) ❤️`);
         }
     </script>
 </body>

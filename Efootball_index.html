@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Football: Be A Pro - Ultimate Edition</title>
+    <title>E-Football: Be A Pro - Ultimate Career Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         * {
@@ -25,7 +25,6 @@
             padding: 20px 0;
         }
 
-        /* Efek partikel lapangan mewah di background */
         body::before {
             content: '';
             position: absolute;
@@ -38,7 +37,7 @@
         .container {
             width: 100%;
             max-width: 440px;
-            background: rgba(11, 18, 32, 0.92);
+            background: rgba(11, 18, 32, 0.95);
             backdrop-filter: blur(20px);
             border: 1px solid rgba(255, 215, 0, 0.2);
             border-radius: 24px;
@@ -71,24 +70,6 @@
             margin-bottom: 20px;
             letter-spacing: 2px;
             text-transform: uppercase;
-        }
-
-        /* Widget Musik Mewah di Pojok */
-        .music-widget {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            background: rgba(255, 215, 0, 0.1);
-            border: 1px solid rgba(255, 215, 0, 0.4);
-            padding: 5px 10px;
-            border-radius: 20px;
-            font-size: 10px;
-            color: #facc15;
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            cursor: pointer;
-            box-shadow: 0 0 10px rgba(255, 215, 0, 0.2);
         }
 
         .input-group {
@@ -159,21 +140,6 @@
             overflow: hidden;
         }
 
-        /* Efek kilau mewah saat disentuh */
-        .menu-btn::after, .action-btn::after {
-            content: '';
-            position: absolute;
-            top: -50%; left: -50%; width: 200%; height: 200%;
-            background: linear-gradient(0deg, transparent, rgba(255, 215, 0, 0.15), transparent);
-            transform: rotate(45deg);
-            transition: 0.7s;
-            opacity: 0;
-        }
-        .menu-btn:hover::after, .action-btn:hover::after {
-            opacity: 1;
-            transform: rotate(45deg) translate(50%, 50%);
-        }
-
         .menu-btn:hover, .action-btn:hover {
             background: linear-gradient(135deg, #00d2ff, #3a7bd5);
             color: #070b14;
@@ -238,7 +204,7 @@
             cursor: pointer;
         }
 
-        /* ================= KARTU PEMAIN EA SPORTS FC MOBILE (AUTENTIK & MEWAH) ================= */
+        /* KARTU PEMAIN EA SPORTS FC MOBILE */
         .card-container {
             position: relative;
             width: 270px;
@@ -253,188 +219,57 @@
             overflow: hidden;
             text-align: left;
             clip-path: polygon(0% 0%, 100% 0%, 100% 88%, 86% 100%, 14% 100%, 0% 88%);
-            transition: transform 0.4s ease;
         }
-        .card-container:hover {
-            transform: scale(1.03) rotateY(5deg);
-        }
+        .card-bronze { background: linear-gradient(135deg, #6d421d 0%, #391d0a 50%, #170a03 100%); border: 2px solid #cd7f32; color: #fce7db; }
+        .card-silver { background: linear-gradient(135deg, #94a3b8 0%, #475569 50%, #1e293b 100%); border: 2px solid #e2e8f0; color: #f8fafc; }
+        .card-gold { background: linear-gradient(135deg, #ffd700 0%, #b8860b 50%, #3d2302 100%); border: 2px solid #fffdf0; color: #fffbeb; }
+        .card-legendary { background: linear-gradient(135deg, #a855f7 0%, #6b21a8 50%, #2e1065 100%); border: 2px solid #f0abfc; color: #fdf4ff; }
+        .card-goat { background: linear-gradient(135deg, #0284c7 0%, #1e3a8a 50%, #090d16 100%); border: 2px solid #38bdf8; color: #f0f9ff; }
 
-        /* Desain Border Persis EA Sports FC */
-        .card-bronze {
-            background: linear-gradient(135deg, #6d421d 0%, #391d0a 50%, #170a03 100%);
-            border: 2px solid #cd7f32;
-            color: #fce7db;
-        }
-        .card-silver {
-            background: linear-gradient(135deg, #94a3b8 0%, #475569 50%, #1e293b 100%);
-            border: 2px solid #e2e8f0;
-            color: #f8fafc;
-        }
-        .card-gold {
-            background: linear-gradient(135deg, #ffd700 0%, #b8860b 50%, #3d2302 100%);
-            border: 2px solid #fffdf0;
-            color: #fffbeb;
-            box-shadow: 0 0 25px rgba(255, 215, 0, 0.4);
-        }
-        .card-legendary {
-            background: linear-gradient(135deg, #a855f7 0%, #6b21a8 50%, #2e1065 100%);
-            border: 2px solid #f0abfc;
-            box-shadow: 0 0 30px rgba(216, 180, 254, 0.7);
-            color: #fdf4ff;
-        }
-        .card-goat {
-            background: linear-gradient(135deg, #0284c7 0%, #1e3a8a 50%, #090d16 100%);
-            border: 2px solid #38bdf8;
-            box-shadow: 0 0 40px rgba(56, 189, 248, 0.9);
-            color: #f0f9ff;
-            animation: goatGlow 2.5s infinite alternate;
-        }
-
-        @keyframes goatGlow {
-            0% { border-color: #38bdf8; box-shadow: 0 0 20px rgba(56, 189, 248, 0.6); }
-            50% { border-color: #ffd700; box-shadow: 0 0 45px rgba(255, 215, 0, 0.9); }
-            100% { border-color: #c084fc; box-shadow: 0 0 30px rgba(192, 132, 252, 0.7); }
-        }
-
-        .fc-card-header {
-            display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            z-index: 3;
-            line-height: 1.05;
-        }
-        .fc-ovr { font-size: 28px; font-weight: 900; letter-spacing: -1px; text-shadow: 0 2px 4px rgba(0,0,0,0.6); }
+        .fc-card-header { display: flex; flex-direction: column; align-items: flex-start; z-index: 3; line-height: 1.05; }
+        .fc-ovr { font-size: 28px; font-weight: 900; letter-spacing: -1px; }
         .fc-pos { font-size: 12px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; color: #facc15; }
         .fc-flag-club { display: flex; flex-direction: column; gap: 3px; font-size: 12px; }
-        .fc-club-badge {
-            width: 20px; height: 20px; background: rgba(0,0,0,0.5); border-radius: 50%;
-            display: flex; align-items: center; justify-content: center; font-size: 9px;
-            border: 1px solid rgba(255,255,255,0.2);
-        }
+        .fc-club-badge { width: 20px; height: 20px; background: rgba(0,0,0,0.5); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 9px; }
 
-        .fc-player-img-container {
-            position: absolute;
-            bottom: 55px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 170px;
-            height: 200px;
-            display: flex;
-            align-items: flex-end;
-            justify-content: center;
-            z-index: 2;
-            overflow: hidden;
-        }
-        .fc-player-img-container img {
-            width: 100%; height: 100%; object-fit: cover;
-            mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
-            -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
-        }
+        .fc-player-img-container { position: absolute; bottom: 55px; left: 50%; transform: translateX(-50%); width: 170px; height: 200px; display: flex; align-items: flex-end; justify-content: center; z-index: 2; overflow: hidden; }
+        .fc-player-img-container img { width: 100%; height: 100%; object-fit: cover; mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%); }
         .fc-player-avatar-text { font-size: 70px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
 
-        .goat-ball-animation {
-            position: absolute; top: 10px; right: 10px; font-size: 20px; z-index: 4;
-            animation: spinBall 3s linear infinite;
-        }
-        @keyframes spinBall {
-            0% { transform: rotate(0deg) scale(1); }
-            50% { transform: rotate(180deg) scale(1.3); }
-            100% { transform: rotate(360deg) scale(1); }
-        }
-
-        .special-card-badge {
-            position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
-            font-size: 8px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px;
-            padding: 2px 8px; border-radius: 10px; z-index: 4;
-        }
-        .badge-legendary { background: #9333ea; color: #fff; box-shadow: 0 0 8px #9333ea; }
-        .badge-goat { background: linear-gradient(135deg, #f59e0b, #ef4444); color: #fff; box-shadow: 0 0 10px #f59e0b; }
-
         .fc-card-footer { z-index: 3; margin-top: auto; }
-        .fc-player-name {
-            font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
-            text-align: center; margin-bottom: 5px; text-shadow: 0 2px 4px rgba(0,0,0,0.9);
-            border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 3px;
-            white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff;
-        }
+        .fc-player-name { font-size: 13px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px; text-align: center; margin-bottom: 5px; border-bottom: 1px solid rgba(255,255,255,0.25); padding-bottom: 3px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; color: #fff; }
         .fc-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 12px; font-size: 10px; font-weight: 700; padding: 0 2px; }
         .fc-stat-row { display: flex; justify-content: space-between; }
 
-        /* Kontrak Profesional & Cutscene */
-        .contract-box {
-            background: rgba(15, 23, 42, 0.95);
-            border: 1px solid #facc15;
-            border-radius: 14px;
-            padding: 15px;
-            margin-bottom: 12px;
-            text-align: left;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.6);
-        }
-        .contract-box h4 { color: #facc15; font-size: 13px; margin-bottom: 6px; display: flex; justify-content: space-between; }
-        .contract-text {
-            font-size: 10px; color: #cbd5e1; line-height: 1.4; max-height: 90px; overflow-y: auto;
-            background: #090d16; padding: 8px; border-radius: 8px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.08);
-        }
+        /* Dashboard & UI Komponen */
+        .dashboard-header { display: flex; justify-content: space-between; align-items: center; background: rgba(30,41,59,0.7); padding: 10px 15px; border-radius: 12px; margin-bottom: 12px; font-size: 11px; border: 1px solid rgba(255,215,0,0.2); }
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 15px; }
+        .dash-card { background: rgba(30,41,59,0.5); border: 1px solid rgba(255,255,255,0.06); padding: 10px; border-radius: 10px; text-align: center; cursor: pointer; transition: 0.2s; }
+        .dash-card:hover { border-color: #00d2ff; background: rgba(30,41,59,0.8); }
+        .dash-card h5 { font-size: 9px; color: #94a3b8; margin-bottom: 3px; text-transform: uppercase; }
+        .dash-card p { font-size: 13px; font-weight: 700; color: #00d2ff; }
 
-        .club-offer-card {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            text-align: left;
-            transition: 0.2s;
-        }
-        .club-offer-card:hover { border-color: #facc15; background: rgba(30, 41, 59, 0.9); }
-        .club-info h4 { font-size: 12px; color: #00d2ff; display: flex; align-items: center; gap: 6px; }
+        .contract-box { background: rgba(15, 23, 42, 0.95); border: 1px solid #facc15; border-radius: 14px; padding: 15px; margin-bottom: 12px; text-align: left; }
+        .contract-box h4 { color: #facc15; font-size: 13px; margin-bottom: 6px; display: flex; justify-content: space-between; }
+        .contract-text { font-size: 10px; color: #cbd5e1; line-height: 1.4; max-height: 90px; overflow-y: auto; background: #090d16; padding: 8px; border-radius: 8px; margin-bottom: 12px; border: 1px solid rgba(255,255,255,0.08); }
+
+        .club-offer-card { background: rgba(30, 41, 59, 0.7); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; padding: 12px; margin-bottom: 10px; display: flex; justify-content: space-between; align-items: center; text-align: left; }
+        .club-info h4 { font-size: 12px; color: #00d2ff; }
         .club-info p { font-size: 10px; color: #94a3b8; margin-top: 2px; }
 
-        .sign-btn {
-            background: linear-gradient(135deg, #10b981, #059669);
-            color: #fff;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
-            transition: 0.2s;
-        }
-        .sign-btn:hover { transform: scale(1.05); background: linear-gradient(135deg, #059669, #047857); }
+        .sign-btn { background: linear-gradient(135deg, #10b981, #059669); color: #fff; border: none; padding: 6px 14px; border-radius: 8px; font-size: 11px; font-weight: 700; cursor: pointer; }
+        .sign-btn:hover { background: linear-gradient(135deg, #059669, #047857); }
 
-        /* Cutscene Mewah */
-        .cutscene-screen {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: radial-gradient(circle, #0f172a 0%, #050a12 100%);
-            display: flex; flex-direction: column; justify-content: center; align-items: center;
-            z-index: 999; padding: 20px; text-align: center; animation: fadeIn 0.4s ease-in-out;
-        }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
-
-        /* Dashboard Utama */
-        .dashboard-header { display: flex; justify-content: space-between; align-items: center; background: rgba(30,41,59,0.7); padding: 10px 15px; border-radius: 12px; margin-bottom: 15px; font-size: 12px; border: 1px solid rgba(255,215,0,0.2); }
-        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
-        .dash-card { background: rgba(30,41,59,0.5); border: 1px solid rgba(255,255,255,0.06); padding: 12px; border-radius: 12px; text-align: center; }
-        .dash-card h5 { font-size: 10px; color: #94a3b8; margin-bottom: 4px; text-transform: uppercase; }
-        .dash-card p { font-size: 14px; font-weight: 700; color: #00d2ff; }
+        .cutscene-screen { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: radial-gradient(circle, #0f172a 0%, #050a12 100%); display: flex; flex-direction: column; justify-content: center; align-items: center; z-index: 999; padding: 20px; text-align: center; }
+        
+        .popup-modal { position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.8); display: flex; justify-content: center; align-items: center; z-index: 1000; padding: 20px; }
+        .popup-content { background: #0f172a; border: 1px solid #facc15; border-radius: 16px; padding: 20px; width: 100%; max-width: 380px; text-align: left; max-height: 85vh; overflow-y: auto; }
 
         .hidden { display: none !important; }
         .clearfix::after { content: ""; clear: both; display: table; }
     </style>
 </head>
 <body>
-
-    <!-- Widget Musik Piala Dunia di Pojok -->
-    <div class="music-widget" onclick="toggleMusic()" title="Putar/Jeda Lagu">
-        🎵 <span id="music-status">Memutar Lagu...</span>
-    </div>
-
-    <!-- Audio Player Latar Belakang (5 Lagu Piala Dunia Bergantian Otomatis) -->
-    <audio id="bgm-player"></audio>
 
     <div class="container">
         <!-- ================= 1. HOME SCREEN ================= -->
@@ -449,17 +284,17 @@
             </div>
 
             <div class="menu-list">
-                <button class="menu-btn" onclick="playSound(); goToCareerSetup()">Karier Baru <span>⚽</span></button>
-                <button class="menu-btn" onclick="playSound(); alertMenu('Mode Club')">Mode Club <span>🛡️</span></button>
-                <button class="menu-btn" onclick="playSound(); alertMenu('Mode Kejuaraan Dunia')">Mode Kejuaraan Dunia <span>🏆</span></button>
-                <button class="menu-btn" onclick="playSound(); alertMenu('Permainan Tersimpan')">Permainan Tersimpan <span>💾</span></button>
-                <button class="menu-btn" onclick="playSound(); alertMenu('Pencapaian')">Pencapaian <span>🏅</span></button>
+                <button class="menu-btn" onclick="goToCareerSetup()">Karier Baru <span>⚽</span></button>
+                <button class="menu-btn" onclick="alertMenu('Mode Club')">Mode Club <span>🛡️</span></button>
+                <button class="menu-btn" onclick="alertMenu('Mode Kejuaraan Dunia')">Mode Kejuaraan Dunia <span>🏆</span></button>
+                <button class="menu-btn" onclick="alertMenu('Permainan Tersimpan')">Permainan Tersimpan <span>💾</span></button>
+                <button class="menu-btn" onclick="alertMenu('Pencapaian')">Pencapaian <span>🏅</span></button>
             </div>
         </div>
 
         <!-- ================= 2. CAREER SETUP ================= -->
         <div id="career-setup-screen" class="hidden">
-            <div class="clearfix"><button class="back-btn" onclick="playSound(); goScreen('home-screen')">← Kembali</button></div>
+            <div class="clearfix"><button class="back-btn" onclick="goScreen('home-screen')">← Kembali</button></div>
             <div class="section-header">Pengaturan Karier Baru</div>
 
             <div class="input-group">
@@ -485,12 +320,12 @@
                 </select>
             </div>
 
-            <button class="action-btn" onclick="playSound(); goToCharacterForm()">Lanjut Buat Karakter ➔</button>
+            <button class="action-btn" onclick="goToCharacterForm()">Lanjut Buat Karakter ➔</button>
         </div>
 
         <!-- ================= 3. CHARACTER FORM SCREEN ================= -->
         <div id="character-form-screen" class="hidden">
-            <div class="clearfix"><button class="back-btn" onclick="playSound(); goScreen('career-setup-screen')">← Kembali</button></div>
+            <div class="clearfix"><button class="back-btn" onclick="goScreen('career-setup-screen')">← Kembali</button></div>
             <div class="section-header">Buat Karakter Pemain</div>
 
             <div class="input-group"><label>Nama Depan:</label><input type="text" id="char-firstname" placeholder="Contoh: Sayyid"></div>
@@ -499,7 +334,7 @@
 
             <div class="input-group">
                 <label>Benua Asal:</label>
-                <select id="char-continent" onchange="playSound(); updateCountries()">
+                <select id="char-continent" onchange="updateCountries()">
                     <option value="asia">Asia</option>
                     <option value="eropa">Eropa</option>
                     <option value="afrika">Afrika</option>
@@ -513,7 +348,7 @@
 
             <div class="input-group">
                 <label>Pilih Avatar / Foto:</label>
-                <select id="char-avatar-type" onchange="playSound(); toggleAvatarInput()">
+                <select id="char-avatar-type" onchange="toggleAvatarInput()">
                     <option value="system">Gunakan 5 Emoji Avatar Sistem</option>
                     <option value="upload">Upload dari Gallery (URL Gambar)</option>
                 </select>
@@ -565,7 +400,7 @@
                 <div class="stat-slider-group"><label>Fisik (PHY): <span id="val-physical">60</span></label><input type="range" id="stat-physical" min="1" max="99" value="60" disabled></div>
             </div>
 
-            <button class="action-btn" onclick="playSound(); finishCharacterCreation()">Konfirmasi Kartu & Klub ➔</button>
+            <button class="action-btn" onclick="finishCharacterCreation()">Konfirmasi Kartu & Klub ➔</button>
         </div>
 
         <!-- ================= 4. CARD & CLUB OFFERS SCREEN ================= -->
@@ -584,12 +419,12 @@
             <div class="section-header">Dashboard Karier Pemain</div>
             
             <div class="dashboard-header">
-                <div>💰 Saldo: <span id="dash-money" style="color: #10b981; font-weight:700;">$12,000 / bln</span></div>
-                <div>⭐ Exp: <span id="dash-exp" style="color: #f59e0b; font-weight:700;">0 / 1000</span></div>
+                <div>📅 <span id="dash-date" style="color: #facc15; font-weight:700;">05 Juli 2005</span></div>
+                <div>💰 <span id="dash-money" style="color: #10b981; font-weight:700;">$0</span></div>
             </div>
 
             <div class="dashboard-grid">
-                <div class="dash-card">
+                <div class="dash-card" onclick="openClubInfoModal()">
                     <h5>Klub Saat Ini</h5>
                     <p id="dash-club" style="font-size: 12px;">-</p>
                 </div>
@@ -597,22 +432,102 @@
                     <h5>Tim Nasional</h5>
                     <p id="dash-national" style="font-size: 11px; color: #38bdf8;">-</p>
                 </div>
-                <div class="dash-card">
+                <div class="dash-card" onclick="openHealthModal()">
                     <h5>Kesehatan</h5>
                     <p id="dash-health">100% 🟢</p>
                 </div>
-                <div class="dash-card">
-                    <h5>Statistik Gol/Assist</h5>
-                    <p id="dash-g-a">0 G / 0 A</p>
+                <div class="dash-card" onclick="openMatchHub()">
+                    <h5>Jadwal & Laga</h5>
+                    <p id="dash-next-match" style="font-size: 11px;">Masuk Lapangan ➔</p>
                 </div>
             </div>
 
             <div class="menu-list">
-                <button class="menu-btn" onclick="playSound(); alertMenu('Pertandingan Selanjutnya')">Lanjut Pertandingan Laga ⚽</button>
-                <button class="menu-btn" onclick="playSound(); alertMenu('Perkembangan & Upgrade Stat')">Perkembangan & Upgrade Stat 📈</button>
-                <button class="menu-btn" onclick="playSound(); alertMenu('Pusat Transfer')">Pusat Transfer Akhir Musim 🔄</button>
-                <button class="menu-btn" onclick="playSound(); alertMenu('Media Sosial & Hubungan')">Media Sosial & Hubungan (Pelatih/Kekasih) 💬</button>
+                <button class="menu-btn" onclick="openShopModal()">Belanja Kebutuhan Dunia Nyata (Shop) 🛍️</button>
+                <button class="menu-btn" onclick="openSocialModal()">Media Sosial & Berita Dunia 📱</button>
+                <button class="menu-btn" onclick="openCoachModal()">Pusat Pelatih Profesional 👨‍🏫</button>
+                <button class="menu-btn" onclick="openSponsorModal()">Manajemen Sponsor Global 🤝</button>
+                <button class="menu-btn" onclick="openGirlfriendModal()">Hubungan Asmara & Gacha Kekasih ❤️</button>
             </div>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP INFORMASI KLUB -->
+    <div id="club-info-modal" class="popup-modal hidden">
+        <div class="popup-content">
+            <h3 style="color: #facc15; margin-bottom: 10px; font-size: 15px;">Informasi Klub & Skuad</h3>
+            <div id="club-info-body" style="font-size: 11px; color: #cbd5e1; line-height: 1.5;"></div>
+            <button class="action-btn" onclick="closeModals()" style="margin-top: 15px;">Tutup</button>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP KESEHATAN -->
+    <div id="health-modal" class="popup-modal hidden">
+        <div class="popup-content">
+            <h3 style="color: #facc15; margin-bottom: 10px; font-size: 15px;">Pemulihan Kesehatan Pemain</h3>
+            <p id="health-status-text" style="font-size: 12px; color: #cbd5e1; margin-bottom: 15px;"></p>
+            <button class="action-btn" onclick="buyHealthRecovery()">Beli Obat & Terapi Pemulihan 💊</button>
+            <button class="action-btn" onclick="closeModals()" style="background: #334155; margin-top: 8px;">Tutup</button>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP SHOP -->
+    <div id="shop-modal" class="popup-modal hidden">
+        <div class="popup-content">
+            <h3 style="color: #facc15; margin-bottom: 10px; font-size: 15px;">Shop Lifestyle Dunia Nyata</h3>
+            <div id="shop-items-list" style="max-height: 250px; overflow-y: auto; margin-bottom: 15px;"></div>
+            <button class="action-btn" onclick="closeModals()">Tutup</button>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP MEDIA SOSIAL -->
+    <div id="social-modal" class="popup-modal hidden">
+        <div class="popup-content">
+            <h3 style="color: #facc15; margin-bottom: 10px; font-size: 15px;">Media Sosial & Berita Dunia</h3>
+            <div style="margin-bottom: 10px;">
+                <input type="text" id="ig-caption" placeholder="Tulis caption foto Instagram..." style="width:100%; padding:8px; background:#090d16; border:1px solid #334155; color:#fff; border-radius:6px; font-size:11px; margin-bottom:5px;">
+                <button class="action-btn" onclick="uploadIGPhoto()" style="padding:6px; font-size:11px; margin-top:0;">Upload Foto 📸</button>
+            </div>
+            <div id="ig-feed-container" style="max-height: 200px; overflow-y: auto; border-top: 1px solid #334155; padding-top: 10px;"></div>
+            <button class="action-btn" onclick="closeModals()" style="margin-top: 10px;">Tutup</button>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP PELATIH -->
+    <div id="coach-modal" class="popup-modal hidden">
+        <div class="popup-content">
+            <h3 style="color: #facc15; margin-bottom: 10px; font-size: 15px;">Sewa Pelatih Pribadi</h3>
+            <div id="coach-list-container"></div>
+            <button class="action-btn" onclick="closeModals()" style="margin-top: 10px;">Tutup</button>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP SPONSOR -->
+    <div id="sponsor-modal" class="popup-modal hidden">
+        <div class="popup-content">
+            <h3 style="color: #facc15; margin-bottom: 10px; font-size: 15px;">Manajemen Sponsor Global</h3>
+            <div id="sponsor-list-container"></div>
+            <button class="action-btn" onclick="closeModals()" style="margin-top: 10px;">Tutup</button>
+        </div>
+    </div>
+
+    <!-- MODAL POPUP KEKASIH & GACHA -->
+    <div id="girlfriend-modal" class="popup-modal hidden">
+        <div class="popup-content">
+            <h3 style="color: #facc15; margin-bottom: 10px; font-size: 15px;">Hubungan Asmara & Gacha Kekasih</h3>
+            <div id="gf-content-body" style="font-size: 11px; color: #cbd5e1; margin-bottom: 10px;"></div>
+            <button class="action-btn" onclick="gachaGirlfriend()">Gacha Kekasih Eksklusif 💖 ($50,000)</button>
+            <button class="action-btn" onclick="closeModals()" style="background: #334155; margin-top: 8px;">Tutup</button>
+        </div>
+    </div>
+
+    <!-- MODAL HUB PERTANDINGAN & EDIT TIM -->
+    <div id="match-hub-modal" class="popup-modal hidden">
+        <div class="popup-content" style="max-width: 400px;">
+            <h3 style="color: #facc15; margin-bottom: 10px; font-size: 15px;">Pusat Pertandingan & Taktik</h3>
+            <div id="match-hub-body" style="font-size: 11px; color: #cbd5e1; line-height: 1.5; margin-bottom: 15px;"></div>
+            <button class="action-btn" onclick="simulateMatchDay()">Mainkan / Simulasi Pertandingan ⚡</button>
+            <button class="action-btn" onclick="closeModals()" style="background: #334155; margin-top: 8px;">Tutup</button>
         </div>
     </div>
 
@@ -623,65 +538,6 @@
         ];
         let isCreatorMode = false;
 
-        // ================= 5 LINK LAGU PIALA DUNIA (SILAKAN GANTI LINKNYA DI SINI) =================
-        const worldCupSongs = [
-            "https://upload.wikimedia.org/wikipedia/commons/b/bc/Waka_Waka_This_Time_for_Africa_%28Sample%29.ogg",
-            "https://upload.wikimedia.org/wikipedia/commons/e/e6/La_La_La_Shakira_song_sample.ogg",
-            "https://upload.wikimedia.org/wikipedia/commons/d/d4/Wavin%27_Flag_Coca-Cola_Celebration_Mix.ogg",
-            "https://upload.wikimedia.org/wikipedia/commons/1/15/Cup_of_Life_Ricky_Martin_sample.ogg",
-            "https://upload.wikimedia.org/wikipedia/commons/b/bc/Waka_Waka_This_Time_for_Africa_%28Sample%29.ogg" // Cadangan lagu ke-5
-        ];
-        let currentSongIndex = 0;
-        const bgmPlayer = document.getElementById("bgm-player");
-        let isMusicPlaying = true;
-
-        function playNextSong() {
-            bgmPlayer.src = worldCupSongs[currentSongIndex];
-            bgmPlayer.play().then(() => {
-                document.getElementById("music-status").innerText = `Lagu #${currentSongIndex + 1} Berputar`;
-            }).catch(() => {
-                document.getElementById("music-status").innerText = "Klik layar untuk aktifkan audio";
-                document.addEventListener("click", () => { 
-                    bgmPlayer.play(); 
-                    document.getElementById("music-status").innerText = "Lagu Berputar";
-                }, { once: true });
-            });
-            currentSongIndex = (currentSongIndex + 1) % worldCupSongs.length;
-        }
-
-        bgmPlayer.onended = playNextSong;
-        window.onload = () => { playNextSong(); };
-
-        function toggleMusic() {
-            if (isMusicPlaying) {
-                bgmPlayer.pause();
-                isMusicPlaying = false;
-                document.getElementById("music-status").innerText = "Musik Dijeda";
-            } else {
-                bgmPlayer.play();
-                isMusicPlaying = true;
-                document.getElementById("music-status").innerText = "Memutar Lagu...";
-            }
-        }
-
-        // Efek Suara Sentuhan Mewah (Menggunakan Web Audio API internal browser)
-        function playSound() {
-            try {
-                let audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                let osc = audioCtx.createOscillator();
-                let gain = audioCtx.createGain();
-                osc.type = 'sine';
-                osc.frequency.setValueAtTime(580, audioCtx.currentTime);
-                osc.frequency.exponentialRampToValueAtTime(880, audioCtx.currentTime + 0.08);
-                gain.gain.setValueAtTime(0.05, audioCtx.currentTime);
-                gain.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 0.08);
-                osc.connect(gain);
-                gain.connect(audioCtx.destination);
-                osc.start();
-                osc.stop(audioCtx.currentTime + 0.08);
-            } catch(e) {}
-        }
-
         function checkEmailRole() {
             const emailInput = document.getElementById("user-email").value.trim().toLowerCase();
             const statusBadge = document.getElementById("role-status");
@@ -691,13 +547,13 @@
                 isCreatorMode = true;
                 statusBadge.className = "status-badge creator";
                 statusBadge.innerText = "Status: 👑 Creator Mode Aktif";
-                creatorInfo.innerText = "✨ [Creator] Klub pilihan dari 20 Liga 1 Eropa terbaik & Bebas atur stat!";
+                creatorInfo.innerText = "✨ [Creator] 2 UR & 2 SSR Kekasih awal + Bebas atur stat!";
                 creatorInfo.style.color = "#10b981";
             } else {
                 isCreatorMode = false;
                 statusBadge.className = "status-badge user";
                 statusBadge.innerText = "Status: Standard User (Mode Acak)";
-                creatorInfo.innerText = "🔒 Mode Standard (Stat diacak otomatis dari 20 Negara Dunia)";
+                creatorInfo.innerText = "🔒 Mode Standard (Perlu Gacha Kekasih & Stat Acak)";
                 creatorInfo.style.color = "#f59e0b";
             }
         }
@@ -727,116 +583,37 @@
             setupStatSlidersPermission();
         }
 
-        // DATABASE LENGKAP 20 NEGARA (MASING-MASING 20 KLUB: 10 LIGA 1 & 10 LIGA 2)
         const countryData = {
             "asia": {
                 "Indonesia": {
-                    liga1: ["Persija Jakarta (OVR 72)", "Persib Bandung (OVR 73)", "Persebaya Surabaya (OVR 70)", "Bali United (OVR 71)", "PSM Makassar (OVR 69)", "Borneo FC (OVR 70)", "Arema FC (OVR 68)", "PSIS Semarang (OVR 67)", "Madura United (OVR 68)", "Dewa United (OVR 69)"],
-                    liga2: ["Persis Solo", "PSS Sleman", "PSIM Yogyakarta", "Sriwijaya FC", "Persipura Jayapura", "PSMS Medan", "Semen Padang", "Persela Lamongan", "Kalteng Putra", "PSCS Cilacap"]
+                    liga1: ["Persija Jakarta", "Persib Bandung", "Persebaya Surabaya", "Bali United", "PSM Makassar", "Borneo FC", "Arema FC", "PSIS Semarang", "Madura United", "Dewa United"],
+                    coach: "Thomas Doll", squad: ["Andritany", "Riko Simanjuntak", "Marko Simic", "Maciej Gajos", "Resky Fandi"]
                 },
                 "Jepang": {
-                    liga1: ["Vissel Kobe (OVR 76)", "Yokohama F. Marinos (OVR 75)", "Kawasaki Frontale (OVR 76)", "Urawa Red Diamonds (OVR 74)", "Kashima Antlers (OVR 73)", "Sanfrecce Hiroshima (OVR 74)", "FC Tokyo (OVR 72)", "Nagoya Grampus (OVR 72)", "Cerezo Osaka (OVR 71)", "Gamba Osaka (OVR 71)"],
-                    liga2: ["Shimizu S-Pulse", "JEF United", "Tokyo Verdy", "Jubilo Iwata", "V-Varen Nagasaki", "Fagiano Okayama", "Oita Trinita", "Ventforet Kofu", "Montedio Yamagata", "Tokushima Vortis"]
-                },
-                "Korea Selatan": {
-                    liga1: ["Ulsan HD (OVR 75)", "Jeonbuk Hyundai (OVR 75)", "FC Seoul (OVR 73)", "Pohang Steelers (OVR 74)", "Suwon FC (OVR 70)", "Incheon United (OVR 71)", "Daegu FC (OVR 70)", "Jeju United (OVR 69)", "Gwangju FC (OVR 69)", "Gangwon FC (OVR 68)"],
-                    liga2: ["FC Anyang", "Busan IPark", "Gyeongnam FC", "Seongnam FC", "Bucheon FC", "Chungnam Asan", "Jeonnam Dragons", "Ansan Greeners", "Seoul E-Land", "Cheongju FC"]
-                },
-                "Arab Saudi": {
-                    liga1: ["Al Hilal (OVR 82)", "Al Nassr (OVR 81)", "Al Ittihad (OVR 80)", "Al Ahli (OVR 79)", "Al Shabab (OVR 75)", "Al Ettifaq (OVR 74)", "Al Taawoun (OVR 73)", "Al Fateh (OVR 72)", "Al Riyadh (OVR 70)", "Al Fayha (OVR 71)"],
-                    liga2: ["Al Faisaly", "Al Hazem", "Al Orobah", "Al Jabalain", "Al Diriyah", "Al Ain FC", "Al Qadsiah", "Ohod Club", "Al Raed", "Najran SC"]
-                },
-                "Qatar": {
-                    liga1: ["Al Sadd (OVR 76)", "Al Duhail (OVR 75)", "Al Rayyan (OVR 73)", "Al Gharafa (OVR 72)", "Al Wakrah (OVR 71)", "Qatar SC (OVR 70)", "Al Arabi (OVR 72)", "Umm Salal (OVR 68)", "Ahli Doha (OVR 69)", "Mesaimeer (OVR 65)"],
-                    liga2: ["Al Shahaniya", "Al Khor", "Al Markhiya", "Lusail City", "Al Mesaimeer", "Al Waab", "Muaither SC", "Al Ittifaq", "Al Rayyan B", "Al Sadd B"]
+                    liga1: ["Vissel Kobe", "Yokohama F. Marinos", "Kawasaki Frontale", "Urawa Red Diamonds", "Kashima Antlers", "Sanfrecce Hiroshima", "FC Tokyo", "Nagoya Grampus", "Cerezo Osaka", "Gamba Osaka"],
+                    coach: "Takayuki Yoshida", squad: ["Yuya Osako", "Yoshinori Muto", "Daiya Maekawa", "Hotaru Yamaguchi", "Gotoku Sakai"]
                 }
             },
             "eropa": {
                 "Inggris": {
-                    liga1: ["Manchester City (OVR 88)", "Arsenal (OVR 86)", "Liverpool (OVR 86)", "Manchester United (OVR 83)", "Chelsea (OVR 83)", "Tottenham Hotspur (OVR 82)", "Newcastle United (OVR 82)", "Aston Villa (OVR 81)", "West Ham United (OVR 80)", "Brighton (OVR 79)"],
-                    liga2: ["Leicester City", "Leeds United", "Southampton", "Norwich City", "West Bromwich", "Watford", "Middlesbrough", "Coventry City", "Hull City", "Sunderland"]
+                    liga1: ["Manchester City", "Arsenal", "Liverpool", "Manchester United", "Chelsea", "Tottenham Hotspur", "Newcastle United", "Aston Villa", "West Ham United", "Brighton"],
+                    coach: "Pep Guardiola", squad: ["Erling Haaland", "Kevin De Bruyne", "Rodri", "Phil Foden", "Ruben Dias"]
                 },
                 "Spanyol": {
-                    liga1: ["Real Madrid (OVR 89)", "Barcelona (OVR 87)", "Atletico Madrid (OVR 85)", "Real Sociedad (OVR 82)", "Villarreal (OVR 81)", "Real Betis (OVR 80)", "Athletic Bilbao (OVR 81)", "Valencia (OVR 78)", "Sevilla (OVR 79)", "Girona (OVR 80)"],
-                    liga2: ["Real Valladolid", "Eibar", "Levante", "Sporting Gijon", "Real Zaragoza", "Espanyol", "Leganes", "Almeria", "Granada", "Tenerife"]
+                    liga1: ["Real Madrid", "Barcelona", "Atletico Madrid", "Real Sociedad", "Villarreal", "Real Betis", "Athletic Bilbao", "Valencia", "Sevilla", "Girona"],
+                    coach: "Carlo Ancelotti", squad: ["Kylian Mbappe", "Jude Bellingham", "Vinicius Jr", "Federico Valverde", "Thibaut Courtois"]
                 },
                 "Jerman": {
-                    liga1: ["Bayern Munich (OVR 87)", "Bayer Leverkusen (OVR 86)", "Borussia Dortmund (OVR 84)", "RB Leipzig (OVR 83)", "VfB Stuttgart (OVR 81)", "Eintracht Frankfurt (OVR 80)", "Wolfsburg (OVR 78)", "Borussia Monchengladbach (OVR 78)", "Werder Bremen (OVR 77)", "Hoffenheim (OVR 78)"],
-                    liga2: ["Hamburg SV", "FC Schalke 04", "Hertha BSC", "Hannover 96", "FC Kaiserslautern", "Fortuna Dusseldorf", "Nuremberg", "Paderborn", "Greuther Furth", "Magdeburg"]
+                    liga1: ["Bayern Munich", "Bayer Leverkusen", "Borussia Dortmund", "RB Leipzig", "VfB Stuttgart", "Eintracht Frankfurt", "Wolfsburg", "Borussia Monchengladbach", "Werder Bremen", "Hoffenheim"],
+                    coach: "Vincent Kompany", squad: ["Harry Kane", "Jamal Musiala", "Manuel Neuer", "Joshua Kimmich", "Kingsley Coman"]
                 },
                 "Italia": {
-                    liga1: ["Inter Milan (OVR 86)", "AC Milan (OVR 84)", "Juventus (OVR 84)", "Napoli (OVR 83)", "Atalanta (OVR 83)", "AS Roma (OVR 82)", "Lazio (OVR 81)", "Fiorentina (OVR 80)", "Bologna (OVR 79)", "Torino (OVR 78)"],
-                    liga2: ["Sassuolo", "Sampdoria", "Palermo", "Parma", "Venezia", "Bari", "Pisa", "Cremonese", "Brescia", "Spezia"]
+                    liga1: ["Inter Milan", "AC Milan", "Juventus", "Napoli", "Atalanta", "AS Roma", "Lazio", "Fiorentina", "Bologna", "Torino"],
+                    coach: "Simone Inzaghi", squad: ["Lautaro Martinez", "Nicolo Barella", "Hakan Calhanoglu", "Marcus Thuram", "Alessandro Bastoni"]
                 },
                 "Prancis": {
-                    liga1: ["Paris Saint-Germain (OVR 87)", "Marseille (OVR 81)", "Monaco (OVR 81)", "Lille (OVR 80)", "Lyon (OVR 79)", "Nice (OVR 79)", "Lens (OVR 78)", "Rennes (OVR 78)", "Strasbourg (OVR 75)", "Reims (OVR 75)"],
-                    liga2: ["Bordeaux", "Saint-Etienne", "Auxerre", "Angers", "Guingamp", "Bastia", "Paris FC", "Caen", "Troyes", "Amiens"]
-                }
-            },
-            "afrika": {
-                "Maroko": {
-                    liga1: ["Wydad AC (OVR 71)", "Raja CA (OVR 71)", "AS FAR (OVR 70)", "RS Berkane (OVR 69)", "FUS Rabat (OVR 68)", "MAS Fes (OVR 67)", "IR Tanger (OVR 66)", "Hassania Agadir (OVR 66)", "MC Oujda (OVR 65)", "DH El Jadida (OVR 65)"],
-                    liga2: ["KAC Marrakech", "CODM Meknes", "Ittihad Khemisset", "JS Massira", "Rachad Bernoussi", "USM Oujda", "Widad Témara", "Union Yacoub El Mansour", "Olympique Dcheira", "Jeunesse Massira"]
-                },
-                "Senegal": {
-                    liga1: ["Generation Foot (OVR 66)", "Teungueth FC (OVR 65)", "Diambars FC (OVR 65)", "AS Douanes (OVR 64)", "Jaraaf (OVR 66)", "US Gorée (OVR 63)", "Casa Sports (OVR 64)", "NGB ASC (OVR 62)", "Guédiawaye FC (OVR 63)", "Dakar Sacré-Cœur (OVR 64)"],
-                    liga2: ["Dakar UC", "Stade Mbour", "AS Pikine", "Port Autonome", "ASC Linguère", "DUC Dakar", "Thiès FC", "Renaissance Dakar", "Amitié FC", "Keur Madior"]
-                },
-                "Mesir": {
-                    liga1: ["Al Ahly (OVR 76)", "Zamalek (OVR 75)", "Pyramids FC (OVR 74)", "Al Masry (OVR 70)", "Modern Future (OVR 69)", "ENPPI (OVR 68)", "Ceramica Cleopatra (OVR 69)", "Smouha (OVR 68)", "National Bank (OVR 67)", "Tala'ea El Gaish (OVR 68)"],
-                    liga2: ["Ghazl El Mahalla", "Petrojet", "Tanta SC", "Aswan SC", "Wadi Degla", "Haras El Hodoud", "Suez SC", "El Dakhleya", "Asyut Petroleum", "Kahraba Ismailia"]
-                },
-                "Nigeria": {
-                    liga1: ["Enyimba (OVR 68)", "Remo Stars (OVR 67)", "Rivers United (OVR 68)", "Bendel Insurance (OVR 66)", "Shooting Stars (OVR 65)", "Kano Pillars (OVR 66)", "Sunshine Stars (OVR 64)", "Lobi Stars (OVR 65)", "Katsina United (OVR 63)", "Plateau United (OVR 65)"],
-                    liga2: ["Ikorodu City", "Jigawa Golden Stars", "Abia Warriors", "Kwara United", "Wikki Tourists", "Niger Tornadoes", "Gombe United", "Nasarawa United", "Bayelsa United", "Heartland FC"]
-                },
-                "Kamerun": {
-                    liga1: ["Coton Sport (OVR 67)", "Canon Yaoundé (OVR 65)", "Union Douala (OVR 65)", "PWD Bamenda (OVR 64)", "Bamboutos (OVR 64)", "Apejes de Mfou (OVR 63)", "Dragon de Yaoundé (OVR 62)", "Renaissance (OVR 62)", "Colombe FC (OVR 63)", "New Star (OVR 61)"],
-                    liga2: ["Panthère du Ndé", "Unisport de Bafang", "Tonnerre Yaoundé", "Racing Bafoussam", "Yosa Bamenda", "Dynamo Douala", "Eding Sport", "Astres Douala", "Fovu Baham", "scorpion FC"]
-                }
-            },
-            "amerika-selatan": {
-                "Brasil": {
-                    liga1: ["Flamengo (OVR 81)", "Palmeiras (OVR 81)", "Fluminense (OVR 79)", "Atletico Mineiro (OVR 79)", "Sao Paulo (OVR 78)", "Corinthians (OVR 77)", "Internacional (OVR 77)", "Grêmio (OVR 78)", "Botafogo (OVR 78)", "Cruzeiro (OVR 76)"],
-                    liga2: ["Santos", "Vasco da Gama", "Sport Recife", "Ceara", "Coritiba", "Goias", "America Mineiro", "Juventude", "Avai", "Chapecoense"]
-                },
-                "Argentina": {
-                    liga1: ["River Plate (OVR 80)", "Boca Juniors (OVR 79)", "Racing Club (OVR 77)", "Independiente (OVR 76)", "San Lorenzo (OVR 75)", "Estudiantes (OVR 76)", "Vélez Sarsfield (OVR 75)", "Talleres (OVR 76)", "Lanús (OVR 74)", "Newell's Old Boys (OVR 74)"],
-                    liga2: ["Rosario Central", "Belgrano", "Godoy Cruz", "Argentinos Juniors", "Defensa y Justicia", "Tigre", "Banfield", "Huracán", "Colón", "Patronato"]
-                },
-                "Uruguay": {
-                    liga1: ["Peñarol (OVR 74)", "Nacional (OVR 74)", "Defensor Sporting (OVR 71)", "Liverpool Montevideo (OVR 72)", "Danubio (OVR 70)", "Montevideo Wanderers (OVR 69)", "Boston River (OVR 68)", "Cerro Largo (OVR 68)", "River Plate M. (OVR 69)", "Fénix (OVR 67)"],
-                    liga2: ["Racing Montevideo", "Cerro", "Plaza Colonia", "Juventud", "Sud América", "Rampla Juniors", "Atenas", "Albion", "Uruguay Montevideo", "Bella Vista"]
-                },
-                "Kolombia": {
-                    liga1: ["Millonarios (OVR 75)", "Atletico Nacional (OVR 76)", "Junior FC (OVR 74)", "Independiente Medellin (OVR 74)", "America de Cali (OVR 73)", "Santa Fe (OVR 72)", "Deportes Tolima (OVR 73)", "Deportivo Cali (OVR 71)", "Once Caldas (OVR 71)", "La Equidad (OVR 70)"],
-                    liga2: ["Deportivo Pereira", "Bucaramanga", "Patriotas", "Cucuta Deportivo", "Union Magdalena", "Real Cartagena", "Fortaleza FC", "Bogota FC", "Orsomarso", "Llaneros FC"]
-                },
-                "Cile": {
-                    liga1: ["Colo-Colo (OVR 74)", "Universidad de Chile (OVR 73)", "Universidad Catolica (OVR 73)", "Palestino (OVR 71)", "Union Espanola (OVR 70)", "Everton de Vina (OVR 70)", "Audax Italiano (OVR 69)", "Cobresal (OVR 70)", "Huachipato (OVR 71)", "Coquimbo Unido (OVR 69)"],
-                    liga2: ["Santiago Wanderers", "Cobreloa", "Deportes Antofagasta", "San Luis de Quillota", "Deportes Iquique", "Rangers de Talca", "Barnechea", "Universidad de Concepcion", "Deportes Temuco", "Magallanes"]
-                }
-            },
-            "amerika-utara": {
-                "Amerika Serikat": {
-                    liga1: ["Inter Miami (OVR 78)", "LA Galaxy (OVR 76)", "Los Angeles FC (OVR 77)", "Columbus Crew (OVR 76)", "Seattle Sounders (OVR 75)", "Atlanta United (OVR 74)", "New York City FC (OVR 74)", "FC Cincinnati (OVR 75)", "Austin FC (OVR 73)", "Philadelphia Union (OVR 75)"],
-                    liga2: ["Sacramento Republic", "Louisville City", "Phoenix Rising", "San Antonio FC", "Tampa Bay Rowdies", "Colorado Springs", "Memphis 901", "New Mexico United", "Oakland Roots", "Orange County SC"]
-                },
-                "Meksiko": {
-                    liga1: ["Club America (OVR 77)", "Tigres UANL (OVR 76)", "Monterrey (OVR 76)", "Chivas Guadalajara (OVR 74)", "Cruz Azul (OVR 75)", "Pumas UNAM (OVR 73)", "Toluca (OVR 74)", "Pachuca (OVR 75)", "Santos Laguna (OVR 72)", "Leon (OVR 73)"],
-                    liga2: ["Atlante", "Celaya", "Leones Negros", "Mineros de Zacatecas", "Correcaminos", "Cancún FC", "Cimarrones", "Venados FC", "Tapatío", "Alebrijes de Oaxaca"]
-                },
-                "Kanada": {
-                    liga1: ["Vancouver Whitecaps (OVR 73)", "Toronto FC (OVR 73)", "CF Montreal (OVR 72)", "Cavalry FC (OVR 67)", "Forge FC (OVR 68)", "Pacific FC (OVR 66)", "HFX Wanderers (OVR 65)", "Valour FC (OVR 64)", "York United (OVR 65)", "Atlético Ottawa (OVR 66)"],
-                    liga2: ["Sigma FC", "Blizzard SC", "FC London", "Vaughan Azzurri", "Oakville Blue Devils", "Master's FA", "North Toronto", "St. Catharines", "ProStars FC", "Simcoe County"]
-                },
-                "Kosta Rika": {
-                    liga1: ["Saprissa (OVR 72)", "Alajuelense (OVR 72)", "Herediano (OVR 71)", "Cartagines (OVR 70)", "San Carlos (OVR 68)", "Puntarenas (OVR 67)", "Perez Zeledon (OVR 67)", "Santos de Guapiles (OVR 68)", "Liberia (OVR 66)", "Sporting San Jose (OVR 68)"],
-                    liga2: ["Municipal Grecia", "AD Carmelita", "Uruguay de Coronado", "Escorpiones de Belén", "Quepos Cambute", "Jicaral Sercoba", "Puerto Golfito", "AD Aserrí", "Barrio México", "Cariari Pococí"]
-                },
-                "Jamaika": {
-                    liga1: ["Mount Pleasant (OVR 67)", "Cavalier FC (OVR 67)", "Waterhouse (OVR 66)", "Tivoli Gardens (OVR 65)", "Harbour View (OVR 65)", "Arnett Gardens (OVR 64)", "Dunbeholden (OVR 64)", "Portmore United (OVR 65)", "Molynes United (OVR 62)", "Vere United (OVR 63)"],
-                    liga2: ["Chapelton Maroons", "Montego Bay United", "Falmouth United", "Seba United", "Negril FC", "St. Ann Lions", "Clarendon FC", "Manchester United Jam", "Portland FC", "St. Thomas FC"]
+                    liga1: ["Paris Saint-Germain", "Marseille", "Monaco", "Lille", "Lyon", "Nice", "Lens", "Rennes", "Strasbourg", "Reims"],
+                    coach: "Luis Enrique", squad: ["Ousmane Dembele", "Marquinhos", "Achraf Hakimi", "Gianluigi Donnarumma", "Vitinha"]
                 }
             }
         };
@@ -845,8 +622,7 @@
             const continent = document.getElementById("char-continent").value;
             const countrySelect = document.getElementById("char-country");
             countrySelect.innerHTML = "";
-            
-            const countriesObj = countryData[continent];
+            const countriesObj = countryData[continent] || countryData["eropa"];
             for (let countryName in countriesObj) {
                 let opt = document.createElement("option");
                 opt.value = countryName;
@@ -875,19 +651,17 @@
                     slider.disabled = false;
                     slider.oninput = function() { document.getElementById("val-" + getSliderKey(this.id)).innerText = this.value; };
                 });
-                infoText.innerText = "👑 [Creator Mode] Geser slider nilai 1 - 99 untuk mengatur OVR & stat secara bebas!";
+                infoText.innerText = "👑 [Creator Mode] Atur stat hingga 99 secara bebas!";
                 infoText.style.color = "#10b981";
             } else {
                 sliders.forEach(slider => slider.disabled = true);
-                infoText.innerText = "🔒 Statistik diacak otomatis sesuai Level Awal.";
+                infoText.innerText = "🔒 Statistik diacak otomatis.";
                 infoText.style.color = "#f59e0b";
                 generateRandomStatsForUser();
             }
         }
 
-        function getSliderKey(id) {
-            return id.replace('stat-', '');
-        }
+        function getSliderKey(id) { return id.replace('stat-', ''); }
 
         function generateRandomStatsForUser() {
             const level = document.getElementById("setup-level").value;
@@ -903,6 +677,27 @@
         }
 
         let globalCharData = {};
+        let gameDate = new Date(2005, 6, 5); // 05 Juli 2005
+        let playerMoney = 0;
+        let playerHealth = 100;
+        let playerSalary = 0;
+        let selectedClubObj = null;
+        let playerGoals = 0;
+        let playerAssists = 0;
+        let fansCount = 1200;
+        let hatersCount = 50;
+
+        // Inventaris Kekasih & Hubungan
+        let girlfriends = {
+            slots: [null, null, null, null],
+            roster: []
+        };
+
+        const worldNames200 = [
+            "Zendaya", "Sydney Sweeney", "Ana de Armas", "Margot Robbie", "Dua Lipa", "Ariana Grande", "Selena Gomez", "Taylor Swift", "Emma Watson", "Jenna Ortega",
+            "Billie Eilish", "Kylie Jenner", "Kendall Jenner", "Hailey Bieber", "Olivia Rodrigo", "Florence Pugh", "Anya Taylor-Joy", "Hailee Steinfeld", "Lily-Rose Depp", "Camila Cabello"
+            // (Disimulasikan mewakili 200 nama nyata dunia)
+        ];
 
         function finishCharacterCreation() {
             const firstName = document.getElementById("char-firstname").value.trim();
@@ -933,47 +728,46 @@
                 customUrl: document.getElementById("char-custom-url").value.trim()
             };
 
+            // Hitung Gaji Berdasarkan OVR
+            playerSalary = calculateSalary(avgOvr);
+            playerMoney = playerSalary;
+
+            // Inisialisasi Kekasih untuk Creator vs User
+            if (isCreatorMode) {
+                girlfriends.slots[0] = { name: "Zendaya", tier: "UR" };
+                girlfriends.slots[1] = { name: "Sydney Sweeney", tier: "UR" };
+                girlfriends.slots[2] = { name: "Ana de Armas", tier: "SSR" };
+                girlfriends.slots[3] = { name: "Margot Robbie", tier: "SSR" };
+            }
+
             renderFCCard(globalCharData);
             generateClubOffers(globalCharData);
             goScreen('card-reveal-screen');
         }
 
+        function calculateSalary(ovr) {
+            if (ovr === 99) return 20000000; // 20 Juta USD / bulan
+            if (ovr >= 91) return 500000 + (ovr - 91) * 1500000; // Skala 91-98
+            if (ovr > 80) return 150000;
+            if (ovr > 60) return 70000;
+            return 15000;
+        }
+
         function renderFCCard(data) {
             let cardClass = "card-bronze";
-            let specialBadgeHtml = "";
+            if (data.ovr >= 70 && data.ovr < 85) cardClass = "card-silver";
+            else if (data.ovr >= 85 && data.ovr < 95) cardClass = "card-gold";
+            else if (data.ovr >= 95 && data.ovr < 99) cardClass = "card-legendary";
+            else if (data.ovr >= 99) cardClass = "card-goat";
 
-            if (data.ovr >= 70 && data.ovr < 85) {
-                cardClass = "card-silver";
-            } else if (data.ovr >= 85 && data.ovr < 95) {
-                cardClass = "card-gold";
-            } else if (data.ovr >= 95 && data.ovr < 99) {
-                cardClass = "card-legendary";
-                specialBadgeHtml = `<div class="special-card-badge badge-legendary">⭐ Legendary ⭐</div>`;
-            } else if (data.ovr >= 99) {
-                cardClass = "card-goat";
-                specialBadgeHtml = `
-                    <div class="special-card-badge badge-goat">🐐 G.O.A.T 🐐</div>
-                    <div class="goat-ball-animation">⚽</div>
-                `;
-            }
-
-            let avatarHtml = "";
-            if (data.avatarType === "system") {
-                avatarHtml = `<div class="fc-player-avatar-text">${data.systemAvatar}</div>`;
-            } else {
-                avatarHtml = data.customUrl ? `<img src="${data.customUrl}" alt="Player">` : `<div class="fc-player-avatar-text">👤</div>`;
-            }
+            let avatarHtml = data.avatarType === "system" ? `<div class="fc-player-avatar-text">${data.systemAvatar}</div>` : (data.customUrl ? `<img src="${data.customUrl}" alt="Player">` : `<div class="fc-player-avatar-text">👤</div>`);
 
             document.getElementById("fc-card-render-area").innerHTML = `
                 <div class="card-container ${cardClass}">
-                    ${specialBadgeHtml}
                     <div class="fc-card-header">
                         <div class="fc-ovr">${data.ovr}</div>
                         <div class="fc-pos">${data.position}</div>
-                        <div class="fc-flag-club">
-                            <span>📍</span>
-                            <div class="fc-club-badge" title="${data.country}">🛡️</div>
-                        </div>
+                        <div class="fc-flag-club"><span>📍</span><div class="fc-club-badge" title="${data.country}">🛡️</div></div>
                     </div>
                     <div class="fc-player-img-container">${avatarHtml}</div>
                     <div class="fc-card-footer">
@@ -995,85 +789,267 @@
             const listEl = document.getElementById("club-offers-list");
             listEl.innerHTML = "";
 
-            let poolClubs = [];
-            if (isCreatorMode) {
-                // Khusus Creator: Ambil dari 20 Klub Liga 1 dari 5 Negara Elite Eropa (Inggris, Spanyol, Jerman, Italia, Prancis)
-                const euroCountries = ["Inggris", "Spanyol", "Jerman", "Italia", "Prancis"];
-                euroCountries.forEach(c => {
-                    if (countryData["eropa"][c]) {
-                        poolClubs = poolClubs.concat(countryData["eropa"][c].liga1);
-                    }
-                });
-            } else {
-                // Standard User: Ambil 20 Liga 1 & 20 Liga 2 dari negara pilihannya
-                const selectedCountryObj = countryData[data.continent][data.country];
-                if (selectedCountryObj) {
-                    poolClubs = poolClubs.concat(selectedCountryObj.liga1, selectedCountryObj.liga2);
-                } else {
-                    poolClubs = ["Klub Lokal A (OVR 65)", "Klub Lokal B (OVR 62)"];
-                }
-            }
+            let continentObj = countryData[data.continent] || countryData["eropa"];
+            let countryObj = continentObj[data.country] || continentObj["Inggris"];
+            let clubsArray = countryObj.liga1;
 
-            let shuffled = [...poolClubs].sort(() => 0.5 - Math.random());
+            let shuffled = [...clubsArray].sort(() => 0.5 - Math.random());
             let selectedClubs = shuffled.slice(0, 4);
 
-            selectedClubs.forEach((clubStr) => {
+            selectedClubs.forEach((clubName) => {
                 let card = document.createElement("div");
                 card.className = "club-offer-card";
                 card.innerHTML = `
                     <div class="club-info">
-                        <h4>🛡️ ${clubStr}</h4>
-                        <p>Kontrak Profesional Durasi 2 Musim Bersama Gaji Kompetitif</p>
+                        <h4>🛡️ ${clubName}</h4>
+                        <p>Gaji: $${playerSalary.toLocaleString()} / bulan</p>
                     </div>
-                    <button class="sign-btn" onclick="playSound(); showContractModal('${clubStr}')">Tinjau Kontrak</button>
+                    <button class="sign-btn" onclick="showContractModal('${clubName}')">Tinjau Kontrak</button>
                 `;
                 listEl.appendChild(card);
             });
         }
 
         function showContractModal(clubName) {
+            selectedClubObj = clubName;
             const listEl = document.getElementById("club-offers-list");
             listEl.innerHTML = `
                 <div class="contract-box">
                     <h4><span>📝 Dokumen Kontrak Resmi</span><span>🛡️ ${clubName}</span></h4>
                     <div class="contract-text">
                         PERJANJIAN KERJA PROFESIONAL ATLET SEPAK BOLA<br><br>
-                        Para Pihak yang bertanda tangan di bawah ini sepakat untuk mengikatkan diri dalam kontrak kerja profesional terhitung sejak musim kompetisi berjalan. Pemain <b>${globalCharData.firstName} ${globalCharData.lastName}</b> (No. Punggung ${globalCharData.number}, Posisi ${globalCharData.position}) akan menerima fasilitas penuh klub, hak citra, serta bonus penampilan sesuai standar liga.<br><br>
-                        Segala klausul kedisiplinan dan performa tunduk pada regulasi manajemen klub.
+                        Pemain <b>${globalCharData.firstName} ${globalCharData.lastName}</b> resmi dikontrak oleh <b>${clubName}</b> dengan gaji sebesar <b>$${playerSalary.toLocaleString()} USD per bulan</b>. Fasilitas penuh klub, bonus pencapaian, serta klausul tim nasional otomatis aktif.<br>
                     </div>
-                    <button class="action-btn" onclick="playSound(); assignClub('${clubName}')">Assign / Tanda Tangan Kontrak ✍️</button>
+                    <button class="action-btn" onclick="assignClub('${clubName}')">Assign / Tanda Tangan Kontrak ✍️</button>
                 </div>
             `;
-            document.getElementById("offer-desc").innerText = "Harap baca pasal kontrak profesional dengan seksama sebelum melakukan tanda tangan.";
         }
 
         function assignClub(clubName) {
             let cutscene = document.createElement("div");
             cutscene.className = "cutscene-screen";
             cutscene.innerHTML = `
-                <h1 style="color: #facc15; font-size: 24px; margin-bottom: 10px; text-shadow: 0 0 15px rgba(250,204,21,0.6);">WELCOME TO ${clubName.toUpperCase()}!</h1>
-                <p style="color: #cbd5e1; font-size: 13px; margin-bottom: 25px;">Konferensi pers penyambutan pemain bintang baru resmi dimulai di hadapan ribuan suporter.</p>
-                <button class="action-btn" style="max-width: 220px; margin: 0 auto;" onclick="playSound(); proceedToDashboard('${clubName}')">Lanjutkan ke Karier ➔</button>
+                <h1 style="color: #facc15; font-size: 24px; margin-bottom: 10px;">WELCOME TO ${clubName.toUpperCase()}!</h1>
+                <p style="color: #cbd5e1; font-size: 13px; margin-bottom: 25px;">Konferensi pers penyambutan pemain bintang resmi dimulai.</p>
+                <button class="action-btn" style="max-width: 220px; margin: 0 auto;" onclick="proceedToDashboard('${clubName}')">Lanjutkan ke Karier ➔</button>
             `;
             document.body.appendChild(cutscene);
         }
 
         function proceedToDashboard(clubName) {
             document.querySelector(".cutscene-screen").remove();
-
             document.getElementById("dash-club").innerText = clubName;
-            document.getElementById("dash-money").innerText = "$15,000 / bln";
+            document.getElementById("dash-money").innerText = "$" + playerMoney.toLocaleString();
 
-            // Pengecekan Timnas jika OVR > 80
-            let nationalTeamText = "Belum Terpanggil";
-            if (globalCharData.ovr >= 80) {
-                nationalTeamText = "Timnas " + globalCharData.country + " ⭐ (Resmi Dikontrak)";
-            } else {
-                nationalTeamText = "Akademi Junior (Syarat OVR Min. 80)";
-            }
+            let nationalTeamText = globalCharData.ovr >= 80 ? "Timnas " + globalCharData.country + " ⭐" : "Belum Dipanggil (OVR < 80)";
             document.getElementById("dash-national").innerText = nationalTeamText;
 
+            updateDashboardDate();
             goScreen('dashboard-screen');
+        }
+
+        function updateDashboardDate() {
+            let options = { year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById("dash-date").innerText = gameDate.toLocaleDateString('id-ID', options);
+        }
+
+        function advanceTime(days) {
+            gameDate.setDate(gameDate.getDate() + days);
+            updateDashboardDate();
+            
+            // Penurunan kesehatan acak per pertandingan/waktu
+            let healthDrop = Math.floor(Math.random() * 8) + 3;
+            playerHealth = Math.max(0, playerHealth - healthDrop);
+            document.getElementById("dash-health").innerText = playerHealth + "% " + (playerHealth > 50 ? "🟢" : "🔴");
+        }
+
+        // INFORMASI KLUB MODAL
+        function openClubInfoModal() {
+            let continentObj = countryData[globalCharData.continent] || countryData["eropa"];
+            let countryObj = continentObj[globalCharData.country] || continentObj["Inggris"];
+            
+            document.getElementById("club-info-body").innerHTML = `
+                <b>Klub:</b> ${selectedClubObj || "Belum ada klub"}<br>
+                <b>Pelatih Kepala:</b> ${countryObj.coach}<br>
+                <b>Gaji Saat Ini:</b> $${playerSalary.toLocaleString()} USD / bulan<br><br>
+                <b>Skuad Utama Dunia Nyata:</b><br>
+                - ${countryObj.squad.join("<br>- ")}
+            `;
+            document.getElementById("club-info-modal").classList.remove("hidden");
+        }
+
+        // KESEHATAN & SHOP MODAL
+        function openHealthModal() {
+            document.getElementById("health-status-text").innerHTML = `Kesehatan pemain saat ini: <b>${playerHealth}%</b>.<br>Pemulihan medis profesional membutuhkan biaya perawatan.`;
+            document.getElementById("health-modal").classList.remove("hidden");
+        }
+
+        function buyHealthRecovery() {
+            let cost = 2500;
+            if (playerMoney < cost) { alert("Saldo Anda tidak mencukupi untuk biaya medis!"); return; }
+            playerMoney -= cost;
+            playerHealth = 100;
+            document.getElementById("dash-money").innerText = "$" + playerMoney.toLocaleString();
+            document.getElementById("dash-health").innerText = "100% 🟢";
+            alert("Kesehatan berhasil dipulihkan 100%!");
+            closeModals();
+        }
+
+        function openShopModal() {
+            let items = [
+                { name: "Hypercar Mewah", price: 3500000, desc: "Meningkatkan prestise dan fans." },
+                { name: "Mansion Mewah di Eropa", price: 8000000, desc: "Kenyamanan tempat tinggal kelas dunia." },
+                { name: "Jam Tangan Rolex Edisi Terbatas", price: 75000, desc: "Gaya hidup sosial media elit." },
+                { name: "Paket Suplemen & Gym Pribadi", price: 10000, desc: "Menjaga kebugaran fisik maksimal." }
+            ];
+            let list = document.getElementById("shop-items-list");
+            list.innerHTML = "";
+            items.forEach((item, idx) => {
+                list.innerHTML += `
+                    <div style="background:#1e293b; padding:10px; border-radius:8px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <div style="font-weight:700; color:#00d2ff; font-size:12px;">${item.name}</div>
+                            <div style="font-size:10px; color:#94a3b8;">${item.desc} - $${item.price.toLocaleString()}</div>
+                        </div>
+                        <button class="sign-btn" onclick="buyShopItem(${item.price})">Beli</button>
+                    </div>
+                `;
+            });
+            document.getElementById("shop-modal").classList.remove("hidden");
+        }
+
+        function buyShopItem(price) {
+            if (playerMoney < price) { alert("Saldo tidak cukup!"); return; }
+            playerMoney -= price;
+            fansCount += 500;
+            document.getElementById("dash-money").innerText = "$" + playerMoney.toLocaleString();
+            alert("Pembelian berhasil! Reputasi dan fans Anda bertambah.");
+            closeModals();
+        }
+
+        // MEDIA SOSIAL & BERITA
+        function openSocialModal() {
+            document.getElementById("social-modal").classList.remove("hidden");
+            renderIGFeed();
+        }
+
+        let igPosts = [
+            { user: "Fabrizio Romano", text: `BREAKING: ${globalCharData.firstName} ${globalCharData.lastName} menunjukkan performa luar biasa di sesi latihan awal bersama ${selectedClubObj || "klub"}! 🚨⚽`, comments: ["Gacor bang!", "Calon legenda baru!"] }
+        ];
+
+        function uploadIGPhoto() {
+            let caption = document.getElementById("ig-caption").value.trim();
+            if (!caption) { alert("Tulis caption terlebih dahulu!"); return; }
+            igPosts.unshift({ user: globalCharData.shirtName, text: caption, comments: ["Idola!", "Semangat bro kariernya!"] });
+            document.getElementById("ig-caption").value = "";
+            renderIGFeed();
+        }
+
+        function renderIGFeed() {
+            let container = document.getElementById("ig-feed-container");
+            container.innerHTML = "";
+            igPosts.forEach(post => {
+                container.innerHTML += `
+                    <div style="background:#090d16; padding:8px; border-radius:8px; margin-bottom:8px; text-align:left;">
+                        <b style="color:#00d2ff; font-size:11px;">@${post.user}</b>
+                        <p style="font-size:11px; margin:3px 0;">${post.text}</p>
+                        <div style="font-size:9px; color:#94a3b8; border-top:1px solid #1e293b; margin-top:4px; padding-top:2px;">Komentar: ${post.comments.join(" | ")}</div>
+                    </div>
+                `;
+            });
+        }
+
+        // PELATIH & SPONSOR
+        function openCoachModal() {
+            document.getElementById("coach-list-container").innerHTML = `
+                <div style="background:#1e293b; padding:10px; border-radius:8px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                    <div><b style="color:#00d2ff; font-size:12px;">Pelatih Fisik & Stamina</b><br><span style="font-size:10px; color:#94a3b8;">Biaya: $10,000 / bulan</span></div>
+                    <button class="sign-btn" onclick="hireCoach(10000)">Sewa</button>
+                </div>
+                <div style="background:#1e293b; padding:10px; border-radius:8px; display:flex; justify-content:space-between; align-items:center;">
+                    <div><b style="color:#00d2ff; font-size:12px;">Pelatih Finishing & Striker</b><br><span style="font-size:10px; color:#94a3b8;">Biaya: $25,000 / bulan</span></div>
+                    <button class="sign-btn" onclick="hireCoach(25000)">Sewa</button>
+                </div>
+            `;
+            document.getElementById("coach-modal").classList.remove("hidden");
+        }
+
+        function hireCoach(fee) {
+            if (playerMoney < fee) { alert("Gaji tidak cukup untuk menyewa pelatih ini!"); return; }
+            playerMoney -= fee;
+            document.getElementById("dash-money").innerText = "$" + playerMoney.toLocaleString();
+            alert("Pelatih berhasil disewa! Statistik latihan Anda meningkat pesat.");
+            closeModals();
+        }
+
+        function openSponsorModal() {
+            let approved = globalCharData.ovr >= 70;
+            document.getElementById("sponsor-list-container").innerHTML = `
+                <div style="background:#1e293b; padding:10px; border-radius:8px; margin-bottom:8px;">
+                    <b style="color:#facc15; font-size:12px;">Nike Global Brand</b><br>
+                    <span style="font-size:10px; color:#94a3b8;">Syarat: OVR Min. 70 | Status: ${approved ? "✅ Diterima ($50,000/bln)" : "❌ Ditolak (OVR Kurang)"}</span>
+                </div>
+                <div style="background:#1e293b; padding:10px; border-radius:8px;">
+                    <b style="color:#facc15; font-size:12px;">Adidas Football</b><br>
+                    <span style="font-size:10px; color:#94a3b8;">Syarat: OVR Min. 80 | Status: ${globalCharData.ovr >= 80 ? "✅ Diterima ($120,000/bln)" : "❌ Ditolak"}</span>
+                </div>
+            `;
+            document.getElementById("sponsor-modal").classList.remove("hidden");
+        }
+
+        // KEKASIH & GACHA
+        function openGirlfriendModal() {
+            let body = document.getElementById("gf-content-body");
+            body.innerHTML = "<b>Slot Kekasih Anda:</b><br>";
+            girlfriends.slots.forEach((gf, idx) => {
+                body.innerHTML += `- Slot ${idx+1}: ${gf ? `${gf.name} (${gf.tier})` : "Kosong"}<br>`;
+            });
+            document.getElementById("girlfriend-modal").classList.remove("hidden");
+        }
+
+        function gachaGirlfriend() {
+            let cost = 50000;
+            if (playerMoney < cost) { alert("Butuh $50,000 untuk melakukan gacha kekasih!"); return; }
+            playerMoney -= cost;
+            document.getElementById("dash-money").innerText = "$" + playerMoney.toLocaleString();
+
+            let emptyIdx = girlfriends.slots.findIndex(s => s === null);
+            if (emptyIdx === -1) { alert("Semua slot kekasih Anda sudah penuh!"); return; }
+
+            let tiers = ["B", "A", "S", "SS", "SSS", "SSR", "UR"];
+            let randomTier = tiers[Math.floor(Math.random() * tiers.length)];
+            let randomName = worldNames200[Math.floor(Math.random() * worldNames200.length)];
+
+            girlfriends.slots[emptyIdx] = { name: randomName, tier: randomTier };
+            alert(`Selamat! Anda mendapatkan kekasih baru: ${randomName} dengan tingkat ${randomTier}!`);
+            openGirlfriendModal();
+        }
+
+        // PUSAT PERTANDINGAN & LAGA
+        function openMatchHub() {
+            document.getElementById("match-hub-body").innerHTML = `
+                <b>Musim:</b> 2005/2006<br>
+                <b>Pertandingan Berikutnya:</b> vs Real Madrid / Rival Liga<br>
+                <b>Klasemen Klub:</b> Posisi ke-2 Liga Utama<br><br>
+                <i>Pengaturan Taktik: Anda dipasang sebagai pemain inti (${globalCharData.position}). Status kapten: Wakil Kapten.</i>
+            `;
+            document.getElementById("match-hub-modal").classList.remove("hidden");
+        }
+
+        function simulateMatchDay() {
+            advanceTime(7); // Maju 7 hari per pekan pertandingan
+            let goalsScored = Math.random() > 0.4 ? 1 : 0;
+            let assistsMade = Math.random() > 0.5 ? 1 : 0;
+            playerGoals += goalsScored;
+            playerAssists += assistsMade;
+
+            document.getElementById("dash-g-a").innerText = `${playerGoals} G / ${playerAssists} A`;
+            alert(`Pertandingan Selesai! Anda mencetak ${goalsScored} gol dan ${assistsMade} assist. Waktu dan tanggal diperbarui.`);
+            closeModals();
+        }
+
+        function closeModals() {
+            document.querySelectorAll(".popup-modal").forEach(m => m.classList.add("hidden"));
         }
     </script>
 </body>

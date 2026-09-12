@@ -278,27 +278,8 @@ function train(){
 }
 function rest(){S.player.energy=Math.min(100,S.player.energy+35);S.player.health=Math.min(100,S.player.health+5);S.player.morale=Math.min(100,S.player.morale+3);advanceDays();toast("Recovery selesai.")}
 function playMatch(){
- if(S.player.energy<30)return toast("Kamu terlalu lelah untuk main.");
- S.player.energy-=30;S.player.matches++;
- const c=club(S.player.clubId), opp=pick(clubs.filter(x=>x.id!==c.id));
- const my=(S.player.ovr+S.player.form*.15+S.career.managerTrust*.08)+(Math.random()*12-6);
- const enemy=opp.strength+(Math.random()*12-6);
- let log=[],score=0,oppScore=0,rating=6.2+Math.random()*1.2;
- for(let m=1;m<=90;m+=rand(7,14)){
-   let chance=Math.random();
-   if(chance<Math.max(.07,(my-enemy)/130+.10)){score++;S.player.goals++;rating+=.45;log.push(`${m}' ⚽ GOAL! ${S.player.name} finds the net.`)}
-   else if(chance<.22){S.player.assists++;rating+=.15;log.push(`${m}' 🎯 Key pass creates danger.`)}
-   else if(chance>.93){rating-=.25;log.push(`${m}' 🟨 Yellow card after a late challenge.`)}
-   else log.push(`${m}' Game flows through midfield...`)
- }
- if(enemy>my && score===0)oppScore=rand(1,3); else if(enemy>my)oppScore=Math.max(1,score+rand(-1,1)); else oppScore=rand(0,Math.max(1,score));
- const result=score>oppScore?"WIN":score===oppScore?"DRAW":"LOSS";
- if(result==="WIN"){S.player.fans+=rand(20,70);S.player.reputation+=2;S.career.managerTrust=Math.min(100,S.career.managerTrust+4)}
- if(result==="LOSS"){S.player.morale-=5;S.career.managerTrust=Math.max(0,S.career.managerTrust-3)}
- S.career.lastRating=pct(rating);addXP(70+Math.max(0,score)*30);
- S.world.news.unshift({day:`${S.world.day}/${S.world.month}`,text:`${c.name} ${score}-${oppScore} ${opp.name}. ${S.player.name} rated ${pct(rating)}.`});
- openModal("MATCH RESULT",`<div class="score">${c.short} ${score} — ${oppScore} ${opp.short}</div><p>Result: <b class="${result==="WIN"?"green":result==="LOSS"?"red":"gold"}">${result}</b> · Rating <b>${pct(rating)}</b></p><div class="matchlog">${log.map(x=>`<div>${x}</div>`).join("")}</div><br><button class="btn primary" onclick="closeModal();advanceDays()">Continue career</button>`);
- save();render()
+  // Single source of truth: Career and Calendar both use the exact same scheduled fixture.
+  return playScheduledMatch();
 }
 function signSponsor(name,value){
  const s=SPONSORS.find(x=>x.name===name);if(!s)return;
@@ -346,13 +327,13 @@ function headerCard(){
 }
 function home(){
  let p=S.player,c=club(p.clubId);
- return headerCard()+`<div class="grid"><div class="half card"><h3>Player Condition</h3><p>Energy ${p.energy}%</p><div class="bar"><i style="width:${p.energy}%"></i></div><p>Health ${p.health}%</p><div class="bar"><i style="width:${p.health}%"></i></div><p>Morale ${p.morale}% · Form ${p.form}%</p><div class="actions"><button class="btn primary" onclick="train()">Train + XP</button><button class="btn" onclick="rest()">Rest</button><button class="btn gold" onclick="playMatch()">Play Match</button></div></div>
+ return headerCard()+`<div class="grid"><div class="half card"><h3>Player Condition</h3><p>Energy ${p.energy}%</p><div class="bar"><i style="width:${p.energy}%"></i></div><p>Health ${p.health}%</p><div class="bar"><i style="width:${p.health}%"></i></div><p>Morale ${p.morale}% · Form ${p.form}%</p><div class="actions"><button class="btn primary" onclick="train()">Train + XP</button><button class="btn" onclick="rest()">Rest</button><button class="btn gold" onclick="playScheduledMatch()">Play Next Fixture</button></div></div>
  <div class="half card"><h3>Next Chapter</h3><p>You are <b>${c.name}</b>'s ${p.pos}. Manager trust: <b>${S.career.managerTrust}%</b>.</p><p>Last match rating: <b>${S.career.lastRating||"—"}</b>. Goals: <b>${p.goals}</b>, assists: <b>${p.assists}</b>.</p><div class="actions"><button class="btn" onclick="setTab('market')">Check Transfers</button><button class="btn" onclick="setTab('world')">World News</button></div></div>
  <div class="half card"><h3>Breaking News</h3><div class="list">${S.world.news.slice(0,5).map(n=>`<div class="item"><small class="muted">${n.day}</small><br>${n.text}</div>`).join("")||`<div class="empty">World is quiet... for now.</div>`}</div></div>
  <div class="half card"><h3>Attributes</h3><div class="statgrid">${Object.entries(p.stats).map(([k,v])=>`<div class="stat"><span>${k}</span><b>${v}</b></div>`).join("")}</div></div></div>`
 }
 function career(){
- return headerCard()+`<div class="grid"><div class="half card"><h3>Career Hub</h3><p>Season <b>${S.world.season}</b> · ${club(S.player.clubId).league}</p><div class="statgrid"><div class="stat">Matches<b>${S.player.matches}</b></div><div class="stat">Goals<b>${S.player.goals}</b></div><div class="stat">Assists<b>${S.player.assists}</b></div><div class="stat">Trophies<b>${S.player.trophies}</b></div></div><br><div class="actions"><button class="btn gold" onclick="playMatch()">⚽ Play Match</button><button class="btn primary" onclick="train()">🏋 Train</button></div></div>
+ return headerCard()+`<div class="grid"><div class="half card"><h3>Career Hub</h3><p>Season <b>${S.world.season}</b> · ${club(S.player.clubId).league}</p><div class="item"><b>Next scheduled fixture</b><br><span class="muted">${(()=>{buildV7Schedule();const f=nextFixture();if(!f)return 'Season complete.';const d=serialToDate(f.serial);return `${fmtDate(d)} · ${f.name} · ${f.home} vs ${f.away}`})()}</span></div><br><div class="statgrid"><div class="stat">Matches<b>${S.player.matches}</b></div><div class="stat">Goals<b>${S.player.goals}</b></div><div class="stat">Assists<b>${S.player.assists}</b></div><div class="stat">Trophies<b>${S.player.trophies}</b></div></div><br><div class="actions"><button class="btn gold" onclick="playScheduledMatch()">⚽ Play Next Fixture</button><button class="btn primary" onclick="train()">🏋 Train</button></div></div>
  <div class="half card"><h3>Tactical Role</h3><select onchange="S.career.tactic=this.value;save();render()">${["Balanced","Attacking","Possession","Counter","Defensive"].map(x=>`<option ${x===S.career.tactic?"selected":""}>${x}</option>`).join("")}</select><p class="muted">Tactics influence your match probability and manager trust in future versions of the simulation.</p></div>
  <div class="card"><h3>Development</h3><p>Level ${S.player.level} · XP ${S.player.xp}/${S.player.level*100} · Potential ${S.player.potential}</p><div class="bar"><i style="width:${S.player.xp/(S.player.level*100)*100}%"></i></div><br><div class="actions">${Object.entries(S.player.stats).map(([k,v])=>`<button class="btn small" onclick="upgradeStat('${k}')">${k} +1 (${v})</button>`).join("")}</div></div></div>`
 }
@@ -561,8 +542,36 @@ function transferRumor(){let c=pick(clubs.filter(x=>x.id!==S.player.clubId));S.w
 function matchStrengthAgainst(opp){return S.player.ovr+S.player.form*.15+S.career.managerTrust*.08-(Number(opp.strength)||75)}
 function simulateFixture(f){let c=club(S.player.clubId);let oppName=f.home===c.name?f.away:f.home;let oppStrength=(clubs.find(x=>x.name===oppName)?.strength)||rand(Math.max(60,S.player.ovr-10),Math.min(95,S.player.ovr+10));let diff=matchStrengthAgainst({strength:oppStrength});let myGoals=rand(0,Math.max(1,Math.round(1.2+diff/30)));let oppGoals=rand(0,Math.max(1,Math.round(1.3-diff/35)));if(diff>18)myGoals=Math.max(myGoals,1);if(diff<-18)oppGoals=Math.max(oppGoals,1);let rating=pct(6+Math.random()*2+(myGoals>oppGoals?.8:myGoals<oppGoals?-.6:0));let playerScored=Math.min(myGoals,rand(0,Math.max(0,myGoals)));S.player.goals+=playerScored;S.player.assists+=Math.max(0,myGoals-playerScored);S.player.matches++;S.player.energy=Math.max(20,S.player.energy-20);S.player.form=pct(S.player.form+(myGoals>oppGoals?3:myGoals<oppGoals?-3:1));S.career.lastRating=rating;f.played=true;f.score=`${myGoals}-${oppGoals}`;f.rating=rating;f.result=myGoals>oppGoals?'W':myGoals<oppGoals?'L':'D';return {myGoals,oppGoals,rating,oppName}}
 function nextFixture(){buildV7Schedule();let today=dateToSerial(S.world.year,S.world.month,S.world.day);return S.schedule.fixtures.filter(f=>!f.played&&f.serial>=today).sort((a,b)=>a.serial-b.serial)[0]||null}
-function playScheduledMatch(){buildV7Schedule();let f=nextFixture();if(!f)return toast('Tidak ada fixture mendatang.');let d=serialToDate(f.serial);if(dateToSerial(S.world.year,S.world.month,S.world.day)<f.serial){let days=f.serial-dateToSerial(S.world.year,S.world.month,S.world.day);dateAdvance(days)}let result=simulateFixture(f);addXP(70+result.myGoals*30);save();render();openModal('MATCH RESULT',`<div class="score">${f.home} ${result.myGoals} — ${result.oppGoals} ${f.away}</div><p>${f.name} · ${f.stage||''} · ${fmtDate(d)}</p><p>Rating <b>${result.rating}</b> · ${result.myGoals>result.oppGoals?'WIN':result.myGoals<result.oppGoals?'LOSS':'DRAW'}</p><button class="btn primary" onclick="closeModal();render()">Continue</button>`)}
-function generateStandings(){buildV7Schedule();let league=playerLeague(),teams=LEAGUE_TEAMS[league]||LEAGUE_TEAMS['Premier League'];let table=teams.map((name,i)=>({name,played:0,wins:0,draws:0,losses:0,gf:0,ga:0,pts:0}));let by=new Map(table.map(x=>[x.name,x]));for(let r=1;r<=38;r++){for(let m=0;m<10;m++){let h=teams[(m+r*3)%teams.length],a=teams[(teams.length-1-m+r)%teams.length];let hs=rand(0,4),as=rand(0,4);let H=by.get(h),A=by.get(a);if(!H||!A)continue;H.played++;A.played++;H.gf+=hs;H.ga+=as;A.gf+=as;A.ga+=hs;if(hs>as){H.wins++;H.pts+=3;A.losses++}else if(hs<as){A.wins++;A.pts+=3;H.losses++}else{H.draws++;A.draws++;H.pts++;A.pts++}}}let pc=club(S.player.clubId).name;let mine=by.get(pc);if(mine){mine.played=Math.max(mine.played,S.player.matches);mine.wins+=S.player.wins||0;mine.draws+=S.player.draws||0;mine.losses+=S.player.losses||0;mine.gf+=S.player.goals||0;mine.ga+=S.player.conceded||0;mine.pts=mine.wins*3+mine.draws}return table.sort((a,b)=>b.pts-a.pts||((b.gf-b.ga)-(a.gf-a.ga)))}
+function playScheduledMatch(){
+  buildV7Schedule();
+  let f=nextFixture();
+  if(!f)return toast('Tidak ada fixture mendatang.');
+  let d=serialToDate(f.serial);
+  let now=dateToSerial(S.world.year,S.world.month,S.world.day);
+  if(now<f.serial){ dateAdvance(f.serial-now); }
+  let result=simulateFixture(f);
+  S.player.wins=(S.player.wins||0)+(result.myGoals>result.oppGoals?1:0);
+  S.player.draws=(S.player.draws||0)+(result.myGoals===result.oppGoals?1:0);
+  S.player.losses=(S.player.losses||0)+(result.myGoals<result.oppGoals?1:0);
+  addXP(70+result.myGoals*30);
+  save();
+  render();
+  openModal('MATCH RESULT',`<div class="score">${f.home} ${result.myGoals} — ${result.oppGoals} ${f.away}</div><p>${f.name} · ${f.stage||''} · ${fmtDate(d)}</p><p>Rating <b>${result.rating}</b> · ${result.myGoals>result.oppGoals?'WIN':result.myGoals<result.oppGoals?'LOSS':'DRAW'}</p><p class="muted">Fixture tersimpan di Calendar dan Career sebagai pertandingan yang sama.</p><button class="btn primary" onclick="closeModal();render()">Continue</button>`);
+}
+function generateStandings(){
+  buildV7Schedule();
+  const league=playerLeague();
+  const teams=LEAGUE_TEAMS[league]||LEAGUE_TEAMS['Premier League'];
+  const table=teams.map(name=>({name,played:0,wins:0,draws:0,losses:0,gf:0,ga:0,pts:0}));
+  const by=new Map(table.map(x=>[x.name,x]));
+  for(const f of S.schedule.fixtures.filter(x=>x.priority==='domestic'&&x.played)){
+    const H=by.get(f.home), A=by.get(f.away); if(!H||!A) continue;
+    const [hs,as]=String(f.score||'0-0').split('-').map(Number);
+    H.played++; A.played++; H.gf+=hs; H.ga+=as; A.gf+=as; A.ga+=hs;
+    if(hs>as){H.wins++;H.pts+=3;A.losses++;} else if(hs<as){A.wins++;A.pts+=3;H.losses++;} else {H.draws++;A.draws++;H.pts++;A.pts++;}
+  }
+  return table.sort((a,b)=>b.pts-a.pts||((b.gf-b.ga)-(a.gf-a.ga))||b.gf-a.gf);
+}
 function competitionLabel(f){return `${f.name} · ${f.stage||''}`}
 function calendar(){buildV7Schedule();let today=dateToSerial(S.world.year,S.world.month,S.world.day);let upcoming=S.schedule.fixtures.filter(f=>!f.played).sort((a,b)=>a.serial-b.serial);return headerCard()+`<div class="grid"><div class="half card"><h3>📅 Calendar</h3><p>${S.world.day}/${S.world.month}/${S.world.year} · ${S.world.season}</p><div class="actions"><button class="btn" onclick="dateAdvance(1);save();render()">+1 Day</button><button class="btn" onclick="dateAdvance(7);save();render()">+1 Week</button><button class="btn primary" onclick="dateAdvance(30);save();render()">+1 Month</button><button class="btn gold" onclick="playScheduledMatch()">Play Next Fixture</button></div></div><div class="half card"><h3>📌 Competition Rules</h3><p>Domestic League: <b>38 matches</b>, 7-day rhythm.</p><p>National Cup: <b>32-team knockout</b>.</p><p>Super Cup: <b>single match</b>.</p><p>Continental: <b>36 clubs, 8 league-phase matches</b>.</p><p>Club World Cup: <b>32 clubs, Round of 16 knockout</b>.</p><p>International: windows, qualifiers, continental finals and World Cup cycles.</p></div></div><div class="card"><h3>Upcoming Fixtures</h3><div class="list">${upcoming.slice(0,30).map(f=>{let d=serialToDate(f.serial);return `<div class="item row"><div><b>${fmtDate(d)}</b> · ${competitionLabel(f)}<br><span class="muted">${f.home} vs ${f.away}</span></div><span class="tag">${f.priority}</span></div>`}).join('')||'<div class="empty">Season complete.</div>'}</div></div><div class="card"><h3>📊 Standings</h3><div class="list">${generateStandings().map((t,i)=>`<div class="item row"><span><b>${i+1}.</b> ${t.name}</span><span>${t.played} GP · ${t.pts} pts · GD ${t.gf-t.ga}</span></div>`).join('')}</div></div>`}
 function shop(){let cats=Object.entries(SHOP_CATS);return headerCard()+`<div class="card"><h3>🛒 World Shop</h3><p class="muted">8 kategori · 100 katalog item per kategori. Pilih kategori untuk membuka halaman khusus.</p><div class="grid">${cats.map(([k,n])=>`<div class="quarter card"><h3>${n}</h3><p>100 products</p><button class="btn primary" onclick="openShopCategory('${k}')">Open Category</button></div>`).join('')}</div></div>`}

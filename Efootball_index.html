@@ -153,7 +153,7 @@ function makeState(){
  clubs:clone(clubs),standings:{},fixtures:[],npc:Array.from({length:1000},(_,i)=>npc(i)),relations:[],family:{engagedTo:null,marriedTo:null,children:[],nextChildId:1},businesses:[{name:"Creator Studio",type:"Media",level:1,value:3,income:1.2}],
  sponsors:[{name:"Local Brand",deal:1,value:0.5}],social:{posts:[],trending:["#MatchDay","#FootballLife"]},
  career:{tactic:"Balanced",managerTrust:55,startingXI:true,position:"ST",lastRating:0},achievements:[],
- creator:{enabled:false,slots:4,email:""},tab:"home",calendar:[]
+ creator:{enabled:false,slots:4,email:"",ovrOverride:null},tab:"home",calendar:[]
 }
 }
 let S=load(); 
@@ -193,6 +193,7 @@ function normalizeState(x){
  x.world={...base.world,...(x.world||{})};
  x.career={...base.career,...(x.career||{})};
  x.creator={...base.creator,...(x.creator||{})};
+ if(x.creator.ovrOverride!==null&&x.creator.ovrOverride!==undefined)x.creator.ovrOverride=Math.max(1,Math.min(99,Number(x.creator.ovrOverride)||x.player.ovr));
  x.social={...base.social,...(x.social||{})};
  x.businesses=Array.isArray(x.businesses)?x.businesses:base.businesses;
  x.sponsors=Array.isArray(x.sponsors)?x.sponsors:base.sponsors;
@@ -239,7 +240,7 @@ function save(){clampWorld();localStorage.setItem(KEY,JSON.stringify(S))}
 function toast(t){let e=document.getElementById("toast");e.textContent=t;e.style.display="block";setTimeout(()=>e.style.display="none",1800)}
 function openModal(title,body){document.getElementById("modalTitle").textContent=title;document.getElementById("modalBody").innerHTML=body;document.getElementById("modal").classList.add("show")}
 function closeModal(){document.getElementById("modal").classList.remove("show")}
-function calcOVR(){let s=S.player.stats;let base=Math.round((s.PAC+s.SHO+s.PAS+s.DRI+s.DEF+s.PHY)/6);return Math.min(LIMITS.OVR,Math.round(base+(S.player.level-1)*1.4))}
+function calcOVR(){if(S.creator?.enabled&&S.creator.ovrOverride!==null&&S.creator.ovrOverride!==undefined)return Math.max(1,Math.min(99,Number(S.creator.ovrOverride)||1));let s=S.player.stats;let base=Math.round((s.PAC+s.SHO+s.PAS+s.DRI+s.DEF+s.PHY)/6);return Math.min(LIMITS.OVR,Math.round(base+(S.player.level-1)*1.4))}
 function advanceDays(n=1){n=Math.max(1,Number(n)||1);dateAdvance(n);
  S.player.energy=Math.max(35,S.player.energy-rand(2,7));S.player.health=Math.max(50,S.player.health-rand(0,2));
  S.player.form=Math.max(30,Math.min(100,S.player.form+rand(-3,4)));
@@ -455,12 +456,25 @@ function creatorConsole(){
  openModal("👑 CREATOR MODE",`<p><b>Universe control:</b> ${S.creator.slots} relationship slots · ${S.creator.email||"creator account"}</p><div class="formgrid">
  <label>Money (M)<input id="cmoney" type="number" value="${S.player.money}"></label><label>Fans<input id="cfans" type="number" value="${S.player.fans}"></label>
  <label>Followers<input id="cfollowers" type="number" value="${S.player.followers}"></label><label>Reputation<input id="crep" type="number" value="${S.player.reputation}"></label>
- <label>OVR<input id="covr" type="number" value="${S.player.ovr}"></label><label>Age<input id="cage" type="number" value="${S.player.age}"></label></div><br>
- <div class="actions"><button class="btn primary" onclick="godSave()">Apply Changes</button><button class="btn gold" onclick="godMax()">MAX EVERYTHING</button><button class="btn" onclick="spawnNews()">Spawn World Event</button><button class="btn" onclick="creatorTime()">Time Travel</button><button class="btn danger" onclick="S.creator.enabled=false;S.creator.slots=4;save();closeModal();render()">Disable Creator</button></div>
+ <label>OVR<input id="covr" type="number" min="1" max="99" value="${S.player.ovr}"></label><label>Age<input id="cage" type="number" min="16" max="45" value="${S.player.age}"></label>
+ <label>PAC<input id="cPAC" type="number" min="1" max="99" value="${S.player.stats.PAC}"></label><label>SHO<input id="cSHO" type="number" min="1" max="99" value="${S.player.stats.SHO}"></label>
+ <label>PAS<input id="cPAS" type="number" min="1" max="99" value="${S.player.stats.PAS}"></label><label>DRI<input id="cDRI" type="number" min="1" max="99" value="${S.player.stats.DRI}"></label>
+ <label>DEF<input id="cDEF" type="number" min="1" max="99" value="${S.player.stats.DEF}"></label><label>PHY<input id="cPHY" type="number" min="1" max="99" value="${S.player.stats.PHY}"></label></div><br>
+ <div class="actions"><button class="btn primary" onclick="godSave()">Apply Changes</button><button class="btn gold" onclick="godMax()">MAX EVERYTHING</button><button class="btn" onclick="spawnNews()">Spawn World Event</button><button class="btn" onclick="creatorTime()">Time Travel</button><button class="btn danger" onclick="S.creator.enabled=false;S.creator.slots=4;S.creator.ovrOverride=null;save();closeModal();render()">Disable Creator</button></div>
  <hr style="border-color:var(--line)"><h3>Relationship Control</h3><div class="list">${S.npc.map(n=>`<div class="item row"><span>${n.name} · ${n.status}</span><button class="btn small" onclick="forcePartner('${n.id}')">Force Partner</button></div>`).join("")}</div>`)
 }
-function godSave(){S.player.money=Math.min(LIMITS.MONEY_M,Math.max(0,Number(document.getElementById("cmoney").value)||0));S.player.fans=Math.min(LIMITS.FANS,Math.max(0,Number(document.getElementById("cfans").value)||0));S.player.followers=Math.min(LIMITS.FOLLOWERS,Math.max(0,Number(document.getElementById("cfollowers").value)||0));S.player.reputation=pct(Number(document.getElementById("crep").value));S.player.ovr=Math.min(LIMITS.OVR,Math.max(1,Number(document.getElementById("covr").value)||1));S.player.age=Math.max(16,Math.min(LIMITS.AGE,Number(document.getElementById("cage").value)||18));save();closeModal();render();toast("Universe edited 👑") }
-function godMax(){S.player.money=LIMITS.MONEY_M;S.player.fans=LIMITS.FANS;S.player.followers=LIMITS.FOLLOWERS;S.player.reputation=100;S.player.ovr=99;S.player.potential=99;S.player.energy=100;S.player.health=100;S.player.morale=100;S.player.form=100;Object.keys(S.player.stats).forEach(k=>S.player.stats[k]=99);S.player.level=50;save();closeModal();render();toast("GOD MODE ACTIVE 🗿") }
+function godSave(){
+ S.player.money=Math.min(LIMITS.MONEY_M,Math.max(0,Number(document.getElementById("cmoney").value)||0));
+ S.player.fans=Math.min(LIMITS.FANS,Math.max(0,Number(document.getElementById("cfans").value)||0));
+ S.player.followers=Math.min(LIMITS.FOLLOWERS,Math.max(0,Number(document.getElementById("cfollowers").value)||0));
+ S.player.reputation=pct(Number(document.getElementById("crep").value));
+ S.creator.ovrOverride=Math.min(99,Math.max(1,Number(document.getElementById("covr").value)||1));
+ S.player.ovr=S.creator.ovrOverride;
+ S.player.age=Math.max(16,Math.min(LIMITS.AGE,Number(document.getElementById("cage").value)||18));
+ ["PAC","SHO","PAS","DRI","DEF","PHY"].forEach(k=>{const el=document.getElementById("c"+k);if(el)S.player.stats[k]=Math.min(99,Math.max(1,Number(el.value)||1));});
+ save();closeModal();render();toast("Universe edited 👑")
+}
+function godMax(){S.player.money=LIMITS.MONEY_M;S.player.fans=LIMITS.FANS;S.player.followers=LIMITS.FOLLOWERS;S.player.reputation=100;S.creator.ovrOverride=99;S.player.ovr=99;S.player.potential=99;S.player.energy=100;S.player.health=100;S.player.morale=100;S.player.form=100;Object.keys(S.player.stats).forEach(k=>S.player.stats[k]=99);S.player.level=50;save();closeModal();render();toast("GOD MODE ACTIVE 🗿") }
 function spawnNews(){worldNews();S.world.news[0].text="👑 CREATOR EVENT: "+pick(["A mega sponsor enters the league!","A mysterious transfer scandal shakes football!","A wonderkid appears out of nowhere!","A legendary manager returns!"]);save();creatorConsole()}
 function creatorTime(){let n=prompt("Advance days:", "365");if(n){advanceDays(Number(n));closeModal();toast("Time travel complete.")}}
 function forcePartner(id){let n=S.npc.find(x=>x.id===id);n.affection=100;n.trust=100;n.status="Partner";if(!S.relations.includes(id))S.relations.push(id);save();creatorConsole()}
@@ -480,7 +494,7 @@ function startCareer(){
  const name=document.getElementById("loginName").value.trim()||"Player";
  const email=document.getElementById("loginEmail").value.trim().toLowerCase();
  S.player.name=name;S.creator.email=email;
- if(CREATOR_EMAILS.includes(email)){S.creator.enabled=true;S.creator.slots=10;S.player.money=Math.max(S.player.money,50000);S.player.fans=Math.max(S.player.fans,500000);S.player.reputation=Math.max(S.player.reputation,90);toast("👑 Creator Mode unlocked!")}
+ if(CREATOR_EMAILS.includes(email)){S.creator.enabled=true;S.creator.slots=10;S.creator.ovrOverride=S.creator.ovrOverride??null;S.player.money=Math.max(S.player.money,50000);S.player.fans=Math.max(S.player.fans,500000);S.player.reputation=Math.max(S.player.reputation,90);toast("👑 Creator Mode unlocked!")}
  S.logged=true;save();closeModal();render()
 }
 if(location.hash==="#creator"){S.creator.enabled=true;S.creator.slots=10}

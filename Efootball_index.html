@@ -1,289 +1,482 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Football: Be A Pro - Ultimate FC 26 Edition</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
-    <style>
-        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; user-select: none; }
-        body { background: radial-gradient(circle at center, #1b263b 0%, #0d1b2a 60%, #050a12 100%); color: #ffffff; min-height: 100vh; display: flex; justify-content: center; align-items: center; overflow-x: hidden; padding: 20px 0; }
-        .container { width: 100%; max-width: 440px; background: rgba(11, 18, 32, 0.95); backdrop-filter: blur(20px); border: 1px solid rgba(255, 215, 0, 0.2); border-radius: 24px; box-shadow: 0 25px 50px rgba(0, 0, 0, 0.8), 0 0 30px rgba(0, 210, 255, 0.15); padding: 25px 20px; text-align: center; max-height: 94vh; overflow-y: auto; position: relative; }
-        .container::-webkit-scrollbar { width: 4px; }
-        .container::-webkit-scrollbar-thumb { background: #d4af37; border-radius: 10px; }
-        .game-title { font-size: 28px; font-weight: 900; background: linear-gradient(135deg, #00d2ff, #facc15); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-transform: uppercase; letter-spacing: 2px; margin-bottom: 2px; }
-        .game-subtitle { font-size: 10px; color: #94a3b8; margin-bottom: 20px; letter-spacing: 2px; text-transform: uppercase; }
-        .music-widget { position: absolute; top: 15px; right: 20px; background: rgba(255, 215, 0, 0.1); border: 1px solid rgba(255, 215, 0, 0.4); padding: 5px 10px; border-radius: 20px; font-size: 10px; color: #facc15; display: flex; align-items: center; gap: 5px; cursor: pointer; }
-        .input-group { background: rgba(30, 41, 59, 0.6); padding: 12px 15px; border-radius: 14px; margin-bottom: 14px; border: 1px solid rgba(255, 255, 255, 0.08); text-align: left; }
-        .input-group label { display: block; font-size: 10px; color: #94a3b8; margin-bottom: 5px; font-weight: 700; text-transform: uppercase; letter-spacing: 1px; }
-        .input-group input, .input-group select { width: 100%; padding: 11px 14px; background: #090d16; border: 1px solid #334155; border-radius: 10px; color: #fff; font-size: 13px; outline: none; }
-        .status-badge { margin-top: 6px; font-size: 11px; font-weight: 600; }
-        .status-badge.creator { color: #10b981; }
-        .status-badge.user { color: #f59e0b; }
-        .menu-list { display: flex; flex-direction: column; gap: 10px; }
-        .menu-btn, .action-btn { background: linear-gradient(135deg, #1e293b, #0f172a); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.1); padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; width: 100%; transition: 0.3s; }
-        .menu-btn:hover, .action-btn:hover { background: linear-gradient(135deg, #00d2ff, #3a7bd5); color: #070b14; border-color: #facc15; }
-        .action-btn { justify-content: center; background: linear-gradient(135deg, #d4af37, #b45309); margin-top: 10px; border: 1px solid #facc15; }
-        .back-btn { background: rgba(30, 41, 59, 0.8); color: white; border: 1px solid rgba(255,255,255,0.1); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 11px; margin-bottom: 15px; float: left; }
-        .section-header { font-size: 14px; color: #facc15; font-weight: 800; margin-bottom: 15px; text-align: left; border-bottom: 1px solid rgba(250, 204, 21, 0.2); padding-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
-        .dashboard-header { display: flex; justify-content: space-between; align-items: center; background: rgba(30,41,59,0.7); padding: 10px 15px; border-radius: 12px; margin-bottom: 12px; font-size: 11px; border: 1px solid rgba(255,215,0,0.2); }
-        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
-        .dash-card { background: rgba(30,41,59,0.5); border: 1px solid rgba(255,255,255,0.06); padding: 10px; border-radius: 12px; text-align: center; cursor: pointer; }
-        .dash-card h5 { font-size: 9px; color: #94a3b8; margin-bottom: 4px; text-transform: uppercase; }
-        .dash-card p { font-size: 13px; font-weight: 700; color: #00d2ff; }
-        .sub-screen { background: rgba(15, 23, 42, 0.98); position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100; padding: 20px; overflow-y: auto; text-align: left; }
-        .modal-box { background: #090d16; border: 1px solid rgba(255,215,0,0.3); border-radius: 14px; padding: 15px; margin-bottom: 12px; font-size: 11px; color: #cbd5e1; }
-        .modal-box h4 { color: #facc15; font-size: 13px; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; }
-        .hidden { display: none !important; }
-        .clearfix::after { content: ""; clear: both; display: table; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>RV Sports: Football des Champions — V5</title>
+<style>
+:root{--bg:#07110d;--panel:#0d1b15;--panel2:#11241b;--line:#1f3b2c;--text:#eef7f1;--muted:#94ad9f;--green:#36e27b;--gold:#ffd166;--red:#ff6577;--blue:#5da9ff}
+*{box-sizing:border-box}body{margin:0;background:radial-gradient(circle at top,#10291c,#050a08 55%);color:var(--text);font-family:Inter,system-ui,Arial,sans-serif}
+button,input,select{font:inherit}button{cursor:pointer;border:0}.wrap{max-width:1250px;margin:auto;padding:18px}.top{display:flex;justify-content:space-between;gap:12px;align-items:center;margin-bottom:14px}.brand{font-weight:900;font-size:22px}.brand span{color:var(--green)}.pill{background:#10251a;border:1px solid var(--line);padding:7px 10px;border-radius:999px;color:var(--muted);font-size:12px}
+nav{display:flex;gap:7px;overflow:auto;padding-bottom:10px}nav button,.btn{background:var(--panel);border:1px solid var(--line);color:var(--text);padding:10px 13px;border-radius:10px}nav button.active,.btn.primary{background:var(--green);color:#031108;border-color:var(--green);font-weight:800}.btn.gold{background:var(--gold);color:#241900}.btn.danger{background:#35151b;color:#ff9aaa;border-color:#64232f}.btn.small{padding:7px 9px;font-size:12px}
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:12px}.card{grid-column:span 12;background:linear-gradient(145deg,var(--panel),#0a1711);border:1px solid var(--line);border-radius:15px;padding:15px;box-shadow:0 12px 30px #0003}.half{grid-column:span 6}.third{grid-column:span 4}.quarter{grid-column:span 3}
+h2,h3{margin:0 0 10px}.muted{color:var(--muted)}.big{font-size:42px;font-weight:950}.green{color:var(--green)}.gold{color:var(--gold)}.red{color:var(--red)}.blue{color:var(--blue)}
+.statgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}.stat{background:var(--panel2);padding:10px;border-radius:10px}.stat b{display:block;font-size:20px}.bar{height:7px;background:#182a20;border-radius:9px;overflow:hidden}.bar i{display:block;height:100%;background:var(--green)}.row{display:flex;justify-content:space-between;gap:8px;align-items:center}.list{display:grid;gap:8px}.item{padding:11px;background:var(--panel2);border:1px solid #183126;border-radius:11px}.actions{display:flex;flex-wrap:wrap;gap:7px}.tag{display:inline-block;padding:3px 7px;border-radius:99px;background:#193224;color:#aee8c4;font-size:11px;margin:2px}
+input,select{width:100%;background:#08130e;color:var(--text);border:1px solid var(--line);padding:10px;border-radius:9px;outline:none}.formgrid{display:grid;grid-template-columns:repeat(2,1fr);gap:9px}.feed{max-height:380px;overflow:auto}.feed .item{position:relative}.score{font-size:34px;font-weight:900}.matchlog{height:270px;overflow:auto;background:#050b08;border-radius:12px;padding:10px;font-family:ui-monospace,monospace;font-size:12px}.modal{position:fixed;inset:0;background:#000b;display:none;align-items:center;justify-content:center;padding:15px;z-index:50}.modal.show{display:flex}.modalbox{width:min(760px,100%);max-height:90vh;overflow:auto;background:#0a1711;border:1px solid var(--line);border-radius:18px;padding:18px}.toast{position:fixed;right:15px;bottom:15px;background:#eaf9f0;color:#05130a;padding:12px 15px;border-radius:12px;display:none;z-index:80;font-weight:700}.empty{text-align:center;padding:30px;color:var(--muted)}
+.character-card{max-width:340px;margin:0 auto 14px;padding:14px;border-radius:20px;border:3px solid #8b8b8b;background:linear-gradient(160deg,#252525,#111);position:relative;overflow:hidden;box-shadow:0 15px 40px #0008}.character-card:after{content:"";position:absolute;inset:-60%;background:linear-gradient(115deg,transparent 42%,#fff4 50%,transparent 58%);animation:sweep 4s linear infinite;pointer-events:none}.character-card.bronze{border-color:#8a6040;background:linear-gradient(160deg,#5c402b,#20150e)}.character-card.green{border-color:#42e879;background:linear-gradient(160deg,#173d25,#0d1c13)}.character-card.purple{border-color:#a56cff;background:linear-gradient(160deg,#39215e,#171023)}.character-card.silver{border-color:#cfd5df;background:linear-gradient(160deg,#56606c,#171b20)}.character-card.gold,.character-card.gold97,.character-card.gold98,.character-card.myth{border-color:#ffd166;background:linear-gradient(160deg,#5b4510,#1c1405)}.character-card.gold97{border-width:4px}.character-card.gold98{border-width:5px;box-shadow:0 0 28px #ffd16688,0 15px 40px #0008}.character-card.myth{border-width:5px;box-shadow:0 0 35px #ffd166aa,0 15px 40px #0008;animation:pulseCard 2s ease-in-out infinite}.cc-head,.cc-meta,.cc-name{position:relative;z-index:2}.cc-head{display:flex;justify-content:space-between;font-size:12px;font-weight:900}.cc-photo{height:220px;display:flex;align-items:center;justify-content:center;font-size:100px;position:relative;z-index:2}.cc-photo img{max-height:220px;max-width:100%;object-fit:contain}.cc-ovr{font-size:46px;font-weight:950;line-height:.9;position:relative;z-index:2}.cc-name{font-size:22px;font-weight:900;margin-top:6px}.cc-meta{font-size:12px;color:#d5dfd8;margin-top:3px}@keyframes sweep{to{transform:translate(40%,40%) rotate(10deg)}}@keyframes pulseCard{50%{transform:translateY(-2px) scale(1.01)}}
+@media(max-width:800px){.half,.third,.quarter{grid-column:span 12}.statgrid{grid-template-columns:repeat(2,1fr)}.top{align-items:flex-start}.formgrid{grid-template-columns:1fr}}
+</style>
 </head>
 <body>
-
-    <div class="music-widget" onclick="toggleMusic()">🎵 <span id="music-status">Audio Aktif</span></div>
-    <audio id="bgm-player" loop></audio>
-
-    <div class="container">
-        <!-- HOME SCREEN -->
-        <div id="home-screen">
-            <div class="game-title">E-Football 26</div>
-            <div class="game-subtitle">⚽ Ultimate Career & Real World Engine ⚽</div>
-            <div class="input-group">
-                <label for="user-email">Email Akun:</label>
-                <input type="email" id="user-email" placeholder="sayyidrahmathamdani@gmail.com" oninput="checkEmailRole()">
-                <div id="role-status" class="status-badge user">Status: Standard User (4 Slot Kekasih)</div>
-            </div>
-            <div class="menu-list">
-                <button class="menu-btn" onclick="goToCareerSetup()">Karier Baru <span>⚽</span></button>
-                <button class="menu-btn" onclick="alertMenu('Database 1000 Karakter & Gacha')">Gacha Pemain Legendaris <span>🌟</span></button>
-                <button class="menu-btn" onclick="alertMenu('Pencapaian Global')">Pencapaian <span>🏆</span></button>
-            </div>
-        </div>
-
-        <!-- CAREER SETUP -->
-        <div id="career-setup-screen" class="hidden">
-            <button class="back-btn" onclick="goScreen('home-screen')">← Kembali</button>
-            <div class="section-header">Konfigurasi Karier</div>
-            <div class="input-group">
-                <label>Level Awal:</label>
-                <select id="setup-level">
-                    <option value="amatir">Amatir (OVR 50-58)</option>
-                    <option value="normal">Normal (OVR 59-67)</option>
-                    <option value="berbakat">Berbakat (OVR 68-75)</option>
-                </select>
-            </div>
-            <div class="input-group">
-                <label>Nama Depan:</label><input type="text" id="char-firstname" placeholder="Sayyid">
-            </div>
-            <div class="input-group">
-                <label>Nama Belakang:</label><input type="text" id="char-lastname" placeholder="Rahmat">
-            </div>
-            <div class="input-group">
-                <label>Posisi:</label>
-                <select id="char-position"><option value="ST">ST</option><option value="CAM">CAM</option><option value="CB">CB</option><option value="GK">GK</option></select>
-            </div>
-            <button class="action-btn" onclick="initDashboard()">Mulai Perjalanan Karir ➔</button>
-        </div>
-
-        <!-- DASHBOARD UTAMA -->
-        <div id="dashboard-screen" class="hidden">
-            <div class="section-header" style="display: flex; justify-content: space-between;">
-                <span>Dashboard Utama</span>
-                <span id="dash-date" style="color: #00d2ff;">05 Juli 2005</span>
-            </div>
-            <div class="dashboard-header">
-                <div>💰 Saldo: <span id="dash-money" style="color: #10b981;">$15,000</span></div>
-                <div>⭐ Fans: <span id="dash-rep" style="color: #f59e0b;">1,200</span></div>
-            </div>
-            <div class="dashboard-grid">
-                <div class="dash-card" onclick="openSub('club-screen')"><h5>Klub</h5><p id="dash-club">-</p></div>
-                <div class="dash-card" onclick="openSub('national-screen')"><h5>Timnas</h5><p>Nasional ⭐</p></div>
-                <div class="dash-card" onclick="openSub('health-screen')"><h5>Kesehatan</h5><p id="dash-health">100% 🟢</p></div>
-                <div class="dash-card" onclick="openSub('match-screen')"><h5>Laga Riil</h5><p>Next Match ⚽</p></div>
-            </div>
-            <div class="menu-list">
-                <button class="menu-btn" onclick="openSub('match-screen')">Lanjut Pertandingan (Next Match) ⚽</button>
-                <button class="menu-btn" onclick="openSub('standings-screen')">Klasemen & Kejuaraan Dunia 🏆</button>
-                <button class="menu-btn" onclick="openSub('shop-screen')">Shop 500+ Barang Nyata 🛒</button>
-                <button class="menu-btn" onclick="openSub('social-screen')">Sosmed & Berita 200 Raksasa 📱</button>
-                <button class="menu-btn" onclick="openSub('coach-screen')">30 Pelatih Spesialis 👨‍🏫</button>
-                <button class="menu-btn" onclick="openSub('sponsor-screen')">40 Sponsor Global 🤝</button>
-                <button class="menu-btn" onclick="openSub('girlfriend-screen')">Kekasih & Keluarga ❤️</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- SUB-SCREENS -->
-    <div id="sub-match-screen" class="sub-screen hidden">
-        <button class="back-btn" onclick="closeSub()">← Kembali</button>
-        <div class="section-header">Pusat Jadwal & Pertandingan Riil</div>
-        <div class="modal-box">
-            <h4 id="match-title">Real Madrid vs Real Sociedad</h4>
-            <p id="match-league-info">Liga 1 Spanyol (La Liga) & UEFA Champions League</p>
-            <p style="margin: 10px 0; color: #10b981;" id="match-status-text">Status: Siap Bertanding</p>
-            <button class="action-btn" onclick="simulateNextMatch()">Mainkan / Next Match ⚽</button>
-        </div>
-    </div>
-
-    <div id="sub-shop-screen" class="sub-screen hidden">
-        <button class="back-btn" onclick="closeSub()">← Kembali</button>
-        <div class="section-header">Shop 500+ Produk Dunia Nyata</div>
-        <div id="shop-container"></div>
-    </div>
-
-    <div id="sub-girlfriend-screen" class="sub-screen hidden">
-        <button class="back-btn" onclick="closeSub()">← Kembali</button>
-        <div class="section-header">Kekasih & Sistem Keluarga</div>
-        <div class="modal-box">
-            <h4>Slot Hubungan Asmara (<span id="slot-count-info">4</span> Slot)</h4>
-            <div id="gf-list-ui"></div>
-            <button class="action-btn" onclick="gachaGf()">Gacha Kekasih Baru ($2,500) 🎁</button>
-        </div>
-        <div id="family-box" class="modal-box hidden">
-            <h4>Manajemen Keluarga & Anak 👶</h4>
-            <div id="family-details"></div>
-        </div>
-    </div>
-
-    <script>
-        const creatorEmails = ["sayyidrahmathamdani@gmail.com", "princemarvelerlangga@gmail.com"];
-        let isCreator = false;
-        let gameState = {
-            date: new Date(2005, 6, 5),
-            money: 25000,
-            fans: 1500,
-            health: 100,
-            club: "Real Madrid",
-            maxSlots: 4,
-            girlfriends: [],
-            family: null,
-            matchIndex: 0
-        };
-
-        const realMatches = [
-            { league: "La Liga", rival: "Real Madrid vs Cadiz", date: "10 Jul 2005" },
-            { league: "La Liga", rival: "Real Madrid vs Villarreal", date: "18 Jul 2005" },
-            { league: "UEFA Champions League", rival: "Real Madrid vs AC Milan", date: "26 Jul 2005" },
-            { league: "Piala Super Spanyol", rival: "Real Madrid vs Barcelona", date: "04 Agu 2005" }
-        ];
-
-        function checkEmailRole() {
-            let email = document.getElementById("user-email").value.trim().toLowerCase();
-            let badge = document.getElementById("role-status");
-            if(creatorEmails.includes(email)) {
-                isCreator = true;
-                gameState.maxSlots = 10;
-                badge.className = "status-badge creator";
-                badge.innerText = "Status: 👑 Creator Mode (10 Slot Kekasih)";
-            } else {
-                isCreator = false;
-                gameState.maxSlots = 4;
-                badge.className = "status-badge user";
-                badge.innerText = "Status: Standard User (4 Slot Kekasih)";
-            }
-        }
-
-        function goToCareerSetup() {
-            document.getElementById("home-screen").classList.add("hidden");
-            document.getElementById("career-setup-screen").classList.remove("hidden");
-        }
-
-        function initDashboard() {
-            let fn = document.getElementById("char-firstname").value || "Sayyid";
-            let ln = document.getElementById("char-lastname").value || "Rahmat";
-            document.getElementById("career-setup-screen").classList.add("hidden");
-            document.getElementById("dashboard-screen").classList.remove("hidden");
-            
-            // Inisialisasi slot kekasih kosong
-            for(let i=0; i<gameState.maxSlots; i++) {
-                gameState.girlfriends.push({ name: "Kosong", tier: "-", rel: 0, danger: 0 });
-            }
-            updateDashboard();
-            buildShop();
-        }
-
-        function updateDashboard() {
-            document.getElementById("dash-date").innerText = gameState.date.toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year: 'numeric'});
-            document.getElementById("dash-money").innerText = "$" + gameState.money.toLocaleString();
-            document.getElementById("dash-rep").innerText = gameState.fans.toLocaleString();
-            document.getElementById("dash-club").innerText = gameState.club;
-            document.getElementById("dash-health").innerText = gameState.health + "%";
-            document.getElementById("slot-count-info").innerText = gameState.maxSlots;
-        }
-
-        function openSub(id) { document.getElementById("sub-" + id)?.classList.remove("hidden"); renderGfUI(); }
-        function closeSub() { document.querySelectorAll(".sub-screen").forEach(el => el.classList.add("hidden")); }
-
-        function simulateNextMatch() {
-            let m = realMatches[gameState.matchIndex % realMatches.length];
-            gameState.date.setDate(gameState.date.getDate() + 7);
-            gameState.matchIndex++;
-            gameState.money += 10000;
-            gameState.fans += 300;
-            gameState.health = Math.max(20, gameState.health - 10);
-            updateDashboard();
-            alert(`Laga Selesai (${m.league}): ${m.rival}\nHasil: Menang! Gaji & Bonus +$10,000 masuk.`);
-        }
-
-        function buildShop() {
-            let container = document.getElementById("shop-container");
-            let html = "";
-            const categories = ["Mobil Mewah", "Supercar", "Villa Mewah", "Jam Tangan", "Jet Pribadi"];
-            for(let i=1; i<=500; i++) {
-                let cat = categories[i % categories.length];
-                let price = (i * 1500) + 5000;
-                html += `<div class="modal-box"><h4>🛍️ ${cat} Edisi #${i}</h4><p>Barang eksklusif dunia nyata.</p><p style="color:#10b981; margin:5px 0;">Harga: $${price.toLocaleString()}</p><button class="action-btn" onclick="buyItem(${price})">Beli Barang</button></div>`;
-            }
-            container.innerHTML = html;
-        }
-
-        function buyItem(price) {
-            if(gameState.money < price) { alert("Saldo tidak cukup!"); return; }
-            gameState.money -= price;
-            gameState.fans += 100;
-            updateDashboard();
-            alert("Berhasil membeli item dunia nyata!");
-        }
-
-        function renderGfUI() {
-            let html = "";
-            gameState.girlfriends.forEach((gf, idx) => {
-                if(gf.name === "Kosong") {
-                    html += `<div style="background:#1e293b; padding:8px; margin:5px 0; border-radius:8px;"><p>Slot #${idx+1}: Kosong</p></div>`;
-                } else {
-                    html += `<div style="background:#1e293b; padding:8px; margin:5px 0; border-radius:8px;"><p><b>${gf.name}</b> (${gf.tier}) | Rel: ${gf.rel}/100 | Danger: ${gf.danger}%</p><button class="action-btn" style="padding:4px; font-size:10px;" onclick="breakUp(${idx})">Putus 💔</button></div>`;
-                }
-            });
-            document.getElementById("gf-list-ui").innerHTML = html;
-        }
-
-        function gachaGf() {
-            if(gameState.money < 2500) { alert("Saldo kurang!"); return; }
-            let emptyIdx = gameState.girlfriends.findIndex(g => g.name === "Kosong");
-            if(emptyIdx === -1) { alert("Semua slot kekasih sudah penuh!"); return; }
-            gameState.money -= 2500;
-            const pool = [
-                { name: "Zendaya", tier: "UR", rel: 50, danger: 10 },
-                { name: "Taylor Swift", tier: "UR", rel: 60, danger: 15 },
-                { name: "Sydney Sweeney", tier: "SSR", rel: 40, danger: 20 },
-                { name: "Margot Robbie", tier: "SSS", rel: 45, danger: 25 }
-            ];
-            let picked = pool[Math.floor(Math.random() * pool.length)];
-            gameState.girlfriends[emptyIdx] = picked;
-            updateDashboard();
-            renderGfUI();
-            alert(`Gacha Berhasil! Anda mendapatkan ${picked.name} (${picked.tier}).`);
-        }
-
-        function breakUp(idx) {
-            if(confirm("Yakin ingin memutuskan hubungan? Slot akan kosong.")) {
-                gameState.girlfriends[idx] = { name: "Kosong", tier: "-", rel: 0, danger: 0 };
-                renderGfUI();
-            }
-        }
-
-        function alertMenu(msg) { alert(msg + " aktif dan terintegrasi penuh."); }
-        function toggleMusic() { alert("Audio BGM Piala Dunia aktif."); }
-    </script>
+<div class="wrap">
+  <div class="top">
+    <div class="brand">⚽ RV <span>SPORTS</span> <small class="muted">FOOTBALL DES CHAMPIONS · V5</small></div>
+    <div id="datePill" class="pill"></div>
+  </div>
+  <nav id="nav"></nav>
+  <main id="app"></main>
+</div>
+<div id="modal" class="modal"><div class="modalbox"><div class="row"><h2 id="modalTitle"></h2><button class="btn small" onclick="closeModal()">✕</button></div><div id="modalBody"></div></div></div>
+<div id="toast" class="toast"></div>
+<script>
+const KEY="rv_sports_fd_champions_v6";
+const OLD_KEY="eafc_life_pro_v4";
+const LEGACY_KEY="eafc_life_pro_v3";
+const LEGACY_KEY_V2="eafcLifeProSave";
+const CREATOR_EMAILS=["sayyidrahmathamdani@gmail.com","princemarvelerlangga@gmail.com"];
+const POS=["ST","LW","RW","CAM","CM","CDM","LB","CB","RB","GK"];
+const FIRST=["Karim","Ethan","Noah","Luca"];
+const LAST=["Pratama","Wijaya","Santoso","Putra","Ramadhan","Aditya","Saputra","Nugraha"];
+const clubs=[
+ {id:"mci",name:"Manchester City",short:"MCI",league:"Premier League",strength:91,budget:220},
+ {id:"rma",name:"Real Madrid",short:"RMA",league:"La Liga",strength:92,budget:250},
+ {id:"fcb",name:"FC Barcelona",short:"FCB",league:"La Liga",strength:89,budget:170},
+ {id:"psg",name:"Paris Saint-Germain",short:"PSG",league:"Ligue 1",strength:88,budget:210},
+ {id:"bmu",name:"Bayern Munich",short:"BMU",league:"Bundesliga",strength:90,budget:190},
+ {id:"liv",name:"Liverpool",short:"LIV",league:"Premier League",strength:89,budget:180},
+ {id:"ars",name:"Arsenal",short:"ARS",league:"Premier League",strength:86,budget:145},
+ {id:"int",name:"Inter Milan",short:"INT",league:"Serie A",strength:86,budget:130},
+ {id:"acm",name:"AC Milan",short:"ACM",league:"Serie A",strength:83,budget:110},
+ {id:"aja",name:"Ajax",short:"AJA",league:"Eredivisie",strength:79,budget:80},
+ {id:"dort",name:"Dortmund",short:"BVB",league:"Bundesliga",strength:84,budget:105},
+ {id:"ben",name:"Benfica",short:"BEN",league:"Liga Portugal",strength:81,budget:90}
+];
+const SPONSORS=[
+ {name:"Nike",minRep:15,value:1.5},{name:"Adidas",minRep:25,value:2.2},{name:"Puma",minRep:35,value:3},
+ {name:"Samsung",minRep:45,value:4.5},{name:"Sony",minRep:55,value:6.5},{name:"Coca-Cola",minRep:65,value:8.5},
+ {name:"Mastercard",minRep:75,value:11},{name:"Emirates",minRep:82,value:16},{name:"Rolex",minRep:88,value:25},
+ {name:"Apple",minRep:95,value:40}
+];
+function clone(x){return JSON.parse(JSON.stringify(x))}
+function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a}
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function money(n){return "€"+Number(n).toLocaleString("id-ID")+"M"}
+function pct(n){return Math.max(0,Math.min(100,Math.round(n)))}
+function club(id){return clubs.find(c=>c.id===id)||clubs[0]}
+function starter(name){
+ return {name,age:18,pos:"ST",stats:{PAC:72,SHO:70,PAS:62,DRI:68,DEF:35,PHY:61},potential:88,xp:0,level:1,energy:88,health:96,morale:80,form:70,ovr:66,goals:0,assists:0,matches:0,trophies:0,records:0,salary:1,money:12,fans:120,followers:80,reputation:20,clubId:"aja",contract:2,release:25,inventory:[],jerseyNumber:9,photo:"",cardTier:"",cardVersion:"base"}
+}
+const REAL_PUBLIC_FIGURES=[
+ ["Ana de Armas","Actor","Cuba/Spain",1988],["Zendaya","Actor","United States",1996],["Sydney Sweeney","Actor","United States",1997],["Jenna Ortega","Actor","United States",2002],["Dua Lipa","Singer","United Kingdom",1995],["Ariana Grande","Singer","United States",1993],["Selena Gomez","Singer","United States",1992],["Taylor Swift","Singer","United States",1989],["Margot Robbie","Actor","Australia",1990],["Emma Watson","Actor","United Kingdom",1990],["Gal Gadot","Actor","Israel",1985],["Priyanka Chopra","Actor","India",1982],["Deepika Padukone","Actor","India",1986],["Lisa","Singer","Thailand",1997],["Jennie","Singer","South Korea",1996],["Rosé","Singer","New Zealand/South Korea",1997],["Jisoo","Singer","South Korea",1995],["Sabrina Carpenter","Singer","United States",1999],["Olivia Rodrigo","Singer","United States",2003],["Bella Hadid","Model","United States",1996],["Gigi Hadid","Model","United States",1995],["Emily Ratajkowski","Model","United States",1991],["Hailey Bieber","Model","United States",1996],["Camila Cabello","Singer","Cuba/United States",1997],["Megan Thee Stallion","Rapper","United States",1995],["Doja Cat","Singer","United States",1995],["Rosalía","Singer","Spain",1992],["Anya Taylor-Joy","Actor","United States/Argentina",1996],["Florence Pugh","Actor","United Kingdom",1996],["Hunter Schafer","Actor","United States",1998],["Sydney McLaughlin-Levrone","Athlete","United States",1999],["Naomi Osaka","Athlete","Japan",1997],["Iga Świątek","Athlete","Poland",2001],["Coco Gauff","Athlete","United States",2004],["Raisa","Singer","Indonesia",1990],["Maudy Ayunda","Actor/Singer","Indonesia",1994],["Cinta Laura","Actor/Singer","Indonesia",1993],["Lyodra","Singer","Indonesia",2003],["Tiara Andini","Singer","Indonesia",2001],["Prilly Latuconsina","Actor","Indonesia",1996],["Ariel Tatum","Actor","Indonesia",1996],["Tatjana Saphira","Actor","Indonesia",1997],["Chelsea Islan","Actor","Indonesia",1995],["Bunga Citra Lestari","Singer/Actor","Indonesia",1983],["Nadine Chandrawinata","Actor/Model","Indonesia",1984],["Pevita Pearce","Actor","Indonesia",1992],["Anya Geraldine","Influencer/Actor","Indonesia",1995],["Awkarin","Influencer","Indonesia",1996],["Nikita Willy","Actor","Indonesia",1994]
+];
+const EXTRA_PUBLIC_FIGURES=[
+// Asia: China, Japan, Korea, India, Southeast Asia
+["Dilraba Dilmurat","Actor","China",1992],["Yang Zi","Actor","China",1992],["Bai Lu","Actor","China",1994],["Zhao Lusi","Actor","China",1998],["Shen Yue","Actor","China",1997],["Ju Jingyi","Singer/Actor","China",1994],["Zhou Ye","Actor","China",1998],["Esther Yu","Actor","China",1995],["Ni Ni","Actor","China",1988],["Liu Shishi","Actor","China",1987],["Yang Mi","Actor","China",1986],["Angelababy","Model/Actor","China",1989],["Zhang Zifeng","Actor","China",2001],["Wang Churan","Actor","China",1999],["Guan Xiaotong","Actor","China",1997],["Ouyang Nana","Musician/Actor","Taiwan",2000],["Sana Minatozaki","Singer","Japan",1996],["Mina Myoi","Singer","Japan",1997],["Momo Hirai","Singer","Japan",1996],["Kazuha Nakamura","Singer","Japan",2003],["Suzu Hirose","Actor","Japan",1998],["Kanna Hashimoto","Actor","Japan",1999],["Minami Hamabe","Actor","Japan",2000],["Fumi Nikaido","Actor","Japan",1994],["Kasumi Arimura","Actor","Japan",1993],["Tao Tsuchiya","Actor","Japan",1995],["Nana Komatsu","Actor/Model","Japan",1996],["Mao Inoue","Actor","Japan",1987],["Satomi Ishihara","Actor","Japan",1986],["Mirei Kiritani","Actor/Model","Japan",1989],["Karina","Singer","South Korea",2000],["Winter","Singer","South Korea",2001],["Ningning","Singer","China/South Korea",2002],["Wonyoung Jang","Singer","South Korea",2004],["Yuna Shin","Singer","South Korea",2003],["Sakura Miyawaki","Singer","Japan",1998],["Chaewon Kim","Singer","South Korea",2000],["Danielle Marsh","Singer","Australia/South Korea",2005],["Hanni Pham","Singer","Vietnam/Australia",2004],["Minji Kim","Singer","South Korea",2004],["Hyein Lee","Singer","South Korea",2008],["Suzy Bae","Singer/Actor","South Korea",1994],["IU","Singer/Actor","South Korea",1993],["Han So-hee","Actor","South Korea",1994],["Kim Ji-won","Actor","South Korea",1992],["Kim Go-eun","Actor","South Korea",1991],["Park Shin-hye","Actor","South Korea",1990],["Bae Suzy","Actor/Singer","South Korea",1994],["Kim Yoo-jung","Actor","South Korea",1999],["Kim Se-jeong","Singer/Actor","South Korea",1996],["Katrina Kaif","Actor","India",1983],["Alia Bhatt","Actor","India",1993],["Shraddha Kapoor","Actor","India",1987],["Kiara Advani","Actor","India",1991],["Disha Patani","Actor","India",1992],["Janhvi Kapoor","Actor","India",1997],["Sara Ali Khan","Actor","India",1995],["Triptii Dimri","Actor","India",1994],["Rashmika Mandanna","Actor","India",1996],["Tamannaah Bhatia","Actor","India",1989],
+// Europe
+["Lily James","Actor","United Kingdom",1989],["Lily Collins","Actor","United Kingdom",1989],["Daisy Edgar-Jones","Actor","United Kingdom",1998],["Phoebe Dynevor","Actor","United Kingdom",1995],["Jodie Comer","Actor","United Kingdom",1993],["Emilia Clarke","Actor","United Kingdom",1986],["Millie Bobby Brown","Actor","United Kingdom",2004],["Maisie Williams","Actor","United Kingdom",1997],["Saoirse Ronan","Actor","Ireland",1994],["Keira Knightley","Actor","United Kingdom",1985],["Rosamund Pike","Actor","United Kingdom",1979],["Gemma Chan","Actor","United Kingdom",1982],["Naomi Scott","Actor/Singer","United Kingdom",1993],["Ella Purnell","Actor","United Kingdom",1996],["Ruth Wilson","Actor","United Kingdom",1982],["Jenna Coleman","Actor","United Kingdom",1986],["Léa Seydoux","Actor","France",1985],["Adèle Exarchopoulos","Actor","France",1993],["Lily-Rose Depp","Actor","France/United States",1999],["Adèle Haenel","Actor","France",1989],["Marion Cotillard","Actor","France",1975],["Eva Green","Actor","France",1980],["Bérénice Bejo","Actor","France",1976],["Alba Baptista","Actor","Portugal",1997],["Daniela Melchior","Actor","Portugal",1996],["Margarida Corceiro","Actor","Portugal",2002],["Úrsula Corberó","Actor","Spain",1989],["Ester Expósito","Actor","Spain",2000],["María Pedraza","Actor","Spain",1996],["Georgina Amorós","Actor","Spain",1998],["Aitana","Singer","Spain",1999],["Blanca Suárez","Actor","Spain",1988],["Clara Galle","Actor","Spain",2002],["Amaia Romero","Singer","Spain",1999],["Ana Mena","Singer","Spain",1997],["María Valverde","Actor","Spain",1987],["Danna Paola","Singer/Actor","Mexico",1995],["Úrsula Corberó","Actor","Spain",1989],["Matilda De Angelis","Actor","Italy",1995],["Miriam Leone","Actor","Italy",1985],["Ludovica Martino","Actor","Italy",1997],["Greta Ferro","Actor/Model","Italy",1995],["Miriam Dalmazio","Actor","Italy",1987],["Valentina Romani","Actor","Italy",1996],["Jasmine Trinca","Actor","Italy",1981],["Alessandra Mastronardi","Actor","Italy",1986],["Ludovica Bizzaglia","Actor","Italy",1996],["Dua Lipa","Singer","United Kingdom",1995],["Bebe Rexha","Singer","Albania/United States",1989],["Rita Ora","Singer","United Kingdom",1990],["Ellie Goulding","Singer","United Kingdom",1986],["Jess Glynne","Singer","United Kingdom",1989],["Anne-Marie","Singer","United Kingdom",1991],["Becky Hill","Singer","United Kingdom",1994],["Raye","Singer","United Kingdom",1997],["Mabel","Singer","United Kingdom",1996],["Leigh-Anne Pinnock","Singer","United Kingdom",1991],["Little Mix Jade Thirlwall","Singer","United Kingdom",1992],["Alicia Vikander","Actor","Sweden",1988],["Noomi Rapace","Actor","Sweden",1979],["Rebecca Ferguson","Actor","Sweden",1983],["Frida Gustavsson","Model/Actor","Sweden",1993],["Elsa Hosk","Model","Sweden",1988],["Sigrid","Singer","Norway",1996],["Astrid S","Singer","Norway",1996],["Nina Nesbitt","Singer","Scotland",1994],["Dafne Keen","Actor","Spain/United Kingdom",2005],["Marta Nieto","Actor","Spain",1982],["Hiba Abouk","Actor","Spain",1986],["Adriana Ugarte","Actor","Spain",1985],["Megan Montaner","Actor","Spain",1987],["Úrsula Corberó","Actor","Spain",1989],["Lara Pulver","Actor","United Kingdom",1980],["Phoebe Tonkin","Actor","Australia",1989],["Teresa Palmer","Actor","Australia",1986],["Samara Weaving","Actor","Australia",1992],["Margot Robbie","Actor","Australia",1990],
+// Americas
+["Emma Stone","Actor","United States",1988],["Jennifer Lawrence","Actor","United States",1990],["Scarlett Johansson","Actor","United States",1984],["Dakota Johnson","Actor","United States",1989],["Elizabeth Olsen","Actor","United States",1989],["Brie Larson","Actor","United States",1989],["Florence Pugh","Actor","United Kingdom",1996],["Rachel Zegler","Actor/Singer","United States",2001],["Madelyn Cline","Actor","United States",1997],["Lily-Rose Depp","Actor","United States/France",1999],["Camila Mendes","Actor","United States",1994],["Lili Reinhart","Actor","United States",1996],["Madison Beer","Singer","United States",1999],["Addison Rae","Influencer/Singer","United States",2000],["Alix Earle","Influencer","United States",2000],["Charli D'Amelio","Influencer","United States",2004],["Dixie D'Amelio","Influencer/Singer","United States",2001],["Nessa Barrett","Singer","United States",2002],["Lana Condor","Actor","United States",1997],["Chloë Grace Moretz","Actor","United States",1997],["Hailee Steinfeld","Actor/Singer","United States",1996],["Sofia Carson","Actor/Singer","United States",1993],["Victoria Justice","Actor/Singer","United States",1993],["Lucy Hale","Actor/Singer","United States",1989],["Ashley Benson","Actor","United States",1989],["Vanessa Hudgens","Actor/Singer","United States",1988],["Nina Dobrev","Actor","Canada",1989],["Shay Mitchell","Actor","Canada",1987],["Rachel McAdams","Actor","Canada",1978],["Taylor Russell","Actor","Canada",1994],["Maitreyi Ramakrishnan","Actor","Canada",2001],["Jenna Coleman","Actor","United Kingdom",1986],["Kendall Jenner","Model","United States",1995],["Kylie Jenner","Entrepreneur","United States",1997],["Kim Kardashian","Media Personality","United States",1980],["Kourtney Kardashian","Media Personality","United States",1979],["Khloé Kardashian","Media Personality","United States",1984],["Paris Hilton","Media Personality","United States",1981],["Gisele Bündchen","Model","Brazil",1980],["Bruna Marquezine","Actor","Brazil",1995],["Marina Ruy Barbosa","Actor","Brazil",1995],["Anitta","Singer","Brazil",1993],["Luísa Sonza","Singer","Brazil",1998],["Larissa Manoela","Actor","Brazil",2000],["Isis Valverde","Actor","Brazil",1987],["Giovanna Lancellotti","Actor","Brazil",1993],["Paolla Oliveira","Actor","Brazil",1982],["Sophie Charlotte","Actor","Brazil",1989],["Agatha Moreira","Actor","Brazil",1992],["Tini Stoessel","Singer/Actor","Argentina",1997],["China Suárez","Actor/Singer","Argentina",1992],["Lali Espósito","Singer/Actor","Argentina",1991],["Emilia Mernes","Singer","Argentina",1996],["Nicki Nicole","Singer","Argentina",2000],["Maria Becerra","Singer","Argentina",2000],["Cazzu","Singer","Argentina",1993],["Nathy Peluso","Singer","Argentina/Spain",1995],["Evaluna Montaner","Singer/Actor","Venezuela",1997],["Eiza González","Actor","Mexico",1990],["Aislinn Derbez","Actor","Mexico",1986],["Maite Perroni","Singer/Actor","Mexico",1983],["Belinda","Singer/Actor","Mexico/Spain",1989],["Renata Notni","Actor","Mexico",1995],["Macarena Achaga","Actor","Argentina/Mexico",1992],["Karla Souza","Actor","Mexico",1985],["Danna Paola","Singer/Actor","Mexico",1995],["Ximena Navarrete","Model","Mexico",1988],["Yalitza Aparicio","Actor","Mexico",1993],
+// Russia / CIS / Balkans / Middle East / Africa
+["Irina Shayk","Model","Russia",1986],["Svetlana Khodchenkova","Actor","Russia",1983],["Elizaveta Boyarskaya","Actor","Russia",1985],["Aglaya Tarasova","Actor","Russia",1994],["Anna Chipovskaya","Actor","Russia",1987],["Yuliya Peresild","Actor","Russia",1984],["Polina Gagarina","Singer","Russia",1987],["Vera Brezhneva","Singer","Ukraine",1982],["Tina Karol","Singer","Ukraine",1985],["Nadya Dorofeeva","Singer","Ukraine",1990],["Dasha Astafieva","Model/Singer","Ukraine",1985],["Mila Kunis","Actor","Ukraine/United States",1983],["Ana Ularu","Actor","Romania",1985],["Anamaria Vartolomei","Actor","Romania",1999],["Inna","Singer","Romania",1986],["Antonia","Singer","Romania",1989],["Alexandra Stan","Singer","Romania",1989],["Elena Mateescu","Actor","Romania",1995],["Hande Erçel","Actor","Turkey",1993],["Demet Özdemir","Actor","Turkey",1992],["Tuba Büyüküstün","Actor","Turkey",1982],["Fahriye Evcen","Actor","Turkey",1986],["Afra Saraçoğlu","Actor","Turkey",1997],["Serenay Sarıkaya","Actor","Turkey",1991],["Alina Boz","Actor","Turkey",1998],["Bensu Soral","Actor","Turkey",1991],["Elçin Sangu","Actor","Turkey",1985],["Neslihan Atagül","Actor","Turkey",1992],["Meryem Uzerli","Actor","Turkey/Germany",1983],["Huda Kattan","Entrepreneur","United Arab Emirates",1983],["Nour Arida","Influencer","Lebanon",1989],["Nadine Nassib Njeim","Actor","Lebanon",1984],["Maya Diab","Singer","Lebanon",1980],["Haifa Wehbe","Singer/Actor","Lebanon",1976],["Yasmine Sabri","Actor","Egypt",1988],["Hend Sabry","Actor","Tunisia/Egypt",1979],["Dorra Zarrouk","Actor","Tunisia",1980],["Tara Emad","Actor/Model","Egypt",1993],["Mona Zaki","Actor","Egypt",1976],["Amina Khalil","Actor","Egypt",1988],["Youssra","Actor","Egypt",1955],["Lupita Nyong'o","Actor","Kenya/Mexico",1983],["Thuso Mbedu","Actor","South Africa",1991],["Nomzamo Mbatha","Actor","South Africa",1990],["Pearl Thusi","Actor/Model","South Africa",1988],["Bonang Matheba","Media Personality","South Africa",1987],["Boity Thulo","Media Personality","South Africa",1990],["Nana Ama McBrown","Actor/TV Host","Ghana",1977],["Jackie Appiah","Actor","Ghana",1983],["Yvonne Nelson","Actor","Ghana",1985],["Joselyn Dumas","Actor/TV Host","Ghana",1980],["Temi Otedola","Influencer/Actor","Nigeria",1996],["Toke Makinwa","Media Personality","Nigeria",1984],["Osas Ighodaro","Actor","Nigeria",1990],["Ini Dima-Okojie","Actor","Nigeria",1990],["Adesua Etomi","Actor","Nigeria",1986],["Nancy Isime","Actor/TV Host","Nigeria",1991],["Mercy Johnson","Actor","Nigeria",1984],["Sharon Ooja","Actor","Nigeria",1991],["Funke Akindele","Actor","Nigeria",1977],["Yemi Alade","Singer","Nigeria",1989]
+];
+const ALL_REAL_PUBLIC_FIGURES=[...REAL_PUBLIC_FIGURES,...EXTRA_PUBLIC_FIGURES];
+const FICTION_FIRST=["Alya","Maya","Sofia","Nadia","Clara","Hana","Kiara","Zara","Bella","Mila","Aisha","Nina","Amelia","Elena","Layla","Naomi","Celine","Aria","Freya","Luna","Sienna","Isla","Mia","Chloe","Lea","Ines","Alina","Diana","Keira","Rania"];
+const FICTION_LAST=["Putri","Wijaya","Santoso","Pratama","Aditya","Saputra","Nugraha","Ramadhan","Mahendra","Kusuma","Lestari","Permata","Sari","Ananda","Hartono","Wibowo","Puspita","Utami","Halim","Surya"];
+const COUNTRIES=["Indonesia","England","Spain","France","Germany","Italy","Brazil","Argentina","Portugal","Netherlands","Japan","South Korea","United States","Australia","Canada","Mexico","Nigeria","Morocco","Turkey","Sweden"];
+function npc(i){
+ const pool=ALL_REAL_PUBLIC_FIGURES;
+ if(i<pool.length){const r=pool[i];return {id:"npc"+i,name:r[0],age:Math.max(18,2026-r[3]),job:r[1],nationality:r[2],birthYear:r[3],kind:"Public Figure",personality:pick(["Warm","Ambitious","Playful","Calm","Adventurous","Jealous"]),affection:0,trust:0,jealousy:0,status:"Stranger",history:[],chat:[],photo:""}}
+ const name=FICTION_FIRST[(i-pool.length)%FICTION_FIRST.length]+" "+FICTION_LAST[Math.floor((i-pool.length)/FICTION_FIRST.length)%FICTION_LAST.length];
+ return {id:"npc"+i,name,age:rand(18,32),job:pick(["Actor","Influencer","Designer","Doctor","Entrepreneur","Journalist","Photographer","Streamer","Model"]),nationality:pick(COUNTRIES),birthYear:rand(1994,2008),kind:"Original Character",personality:pick(["Warm","Ambitious","Playful","Calm","Jealous","Adventurous"]),affection:0,trust:0,jealousy:0,status:"Stranger",history:[],chat:[],photo:""}
+}
+function partnerCount(){return S.npc.length}
+const TROPHIES=[
+ "Premier League","FA Cup","UEFA Champions League","FIFA Club World Cup","La Liga","Copa del Rey","Serie A","Coppa Italia","Bundesliga","DFB-Pokal","Ligue 1","Coupe de France","Eredivisie","Primeira Liga","Golden Boot","Golden Glove","Ballon d'Or","The Best FIFA Men's Player","UEFA Men's Player of the Year","Kopa Trophy","Yashin Trophy","Pichichi Trophy","European Golden Shoe","FIFA World Cup","UEFA European Championship","Copa América","AFC Asian Cup","Africa Cup of Nations","CONCACAF Gold Cup","UEFA Nations League","Olympic Gold","World Player of the Year","Player of the Season","Young Player of the Season","Team of the Year","World XI"
+];
+const NATIONAL_TEAMS=["Indonesia","England","Spain","France","Germany","Italy","Brazil","Argentina","Portugal","Netherlands","Japan","South Korea","United States","Australia","Canada","Mexico","Nigeria","Morocco","Turkey","Sweden","Belgium","Croatia","Uruguay"];
+function agePeople(days){
+ const years=Math.floor(days/365); if(years<=0)return;
+ S.player.age+=years;
+ S.npc.forEach(n=>{n.age+=years;n.birthYear-=years});
+ (S.family?.children||[]).forEach(c=>{c.age+=years});
+}
+function ensureFamily(){S.family=S.family||{engagedTo:null,marriedTo:null,children:[],nextChildId:1};S.family.children=S.family.children||[]}
+function partnerById(id){return S.npc.find(n=>n.id===id)}
+function activePartner(){ensureFamily();return partnerById(S.family.marriedTo||S.family.engagedTo||S.relations[0])}
+function chatContext(n,text){
+ const t=text.toLowerCase();
+ let intent="neutral";
+ if(/cinta|sayang|rindu|kangen|love|miss/.test(t))intent="romance";
+ else if(/capek|lelah|stress|sedih|bad|buruk/.test(t))intent="support";
+ else if(/maaf|sorry|salah|marah/.test(t))intent="apology";
+ else if(/date|ketemu|jalan|makan|nonton|liburan|trip/.test(t))intent="date";
+ else if(/kerja|latihan|match|pertandingan|goal|gol|transfer|klub|club/.test(t))intent="football";
+ else if(/cemburu|jealous|cewek|perempuan|cowok|lawan/.test(t))intent="jealousy";
+ else if(/nikah|menikah|tunangan|marry|wedding/.test(t))intent="commitment";
+ const base={Warm:{romance:["Aku juga senang dengar itu. Kamu bikin aku merasa dihargai.","Aww, serius? Cerita lagi dong."],support:["Sini cerita. Aku dengerin dulu, jangan dipendam sendirian."],date:["Boleh. Kamu maunya dinner santai atau jalan-jalan?"],football:["Aku bangga lihat kamu terus berkembang. Jangan lupa istirahat juga."],jealousy:["Aku nggak mau drama, tapi aku memang bisa cemburu kalau kamu nggak jujur."],commitment:["Kalau memang kita sama-sama yakin, kita bisa ngobrolin langkah berikutnya."],apology:["Makasih sudah minta maaf. Aku butuh kamu jujur dan konsisten."],neutral:["Aku suka kalau kamu cerita begini. Lanjut dong."]},
+ Ambitious:{romance:["Aku suka hubungan yang saling mendorong untuk berkembang.","Kalau kamu serius, tunjukkan lewat tindakan juga."],support:["Ambil napas, susun ulang targetmu, lalu kita lanjut."],date:["Jadwal padat, tapi kita bisa cari waktu yang pas."],football:["Fokus ke performa. OVR naik itu bagus, tapi konsistensi lebih penting."],jealousy:["Aku nggak suka ketidakjelasan. Komunikasi yang jelas aja."],commitment:["Komitmen besar butuh rencana besar. Kita bahas baik-baik."],apology:["Oke. Buktikan perubahanmu."],neutral:["Menarik. Aku mau tahu apa rencanamu berikutnya."]},
+ Playful:{romance:["Ih, gombal banget 😭❤️","Hehe, jangan bikin aku salting dong."],support:["Sini aku hibur dulu. Mau cerita sambil makan? 😭"],date:["GAS. Tapi kamu yang pilih tempat ya 😌"],football:["Kalau cetak gol, jangan lupa selebrasi buat aku wkwk."],jealousy:["Hmmmmm... aku awasi ya 👀"],commitment:["Waduh, udah ngomongin masa depan nih? 😭"],apology:["Yaudah aku maafin... tapi traktir dulu."],neutral:["Wkwk kamu tuh ada-ada aja. Terus? "]},
+ Calm:{romance:["Aku senang mendengarnya. Kita jalani dengan tenang."],support:["Nggak apa-apa kalau hari ini berat. Kita pelan-pelan."],date:["Kedengarannya menyenangkan. Aku pilih yang santai."],football:["Jaga keseimbangan antara karier dan hidupmu."],jealousy:["Aku lebih nyaman kalau kita bicara jujur daripada menebak-nebak."],commitment:["Aku nggak mau terburu-buru, tapi aku terbuka membicarakannya."],apology:["Aku menghargai permintaan maafmu."],neutral:["Aku paham. Ceritakan dari awal kalau kamu mau."]},
+ Jealous:{romance:["Kamu serius kan sama aku?", "Jangan cuma manis di chat ya."],support:["Aku di sini. Tapi jangan menghilang begitu saja."],date:["Boleh, asal jangan batal mendadak."],football:["Aku dukung kariermu, tapi kabarin aku juga."],jealousy:["Nah, ini yang bikin aku kepikiran. Kamu dekat sama siapa?"],commitment:["Kalau kamu memang yakin, jangan kasih aku alasan buat ragu."],apology:["Aku dengar maafmu. Sekarang aku lihat tindakanmu."],neutral:["Hmm. Aku baca baik-baik dulu ya."]},
+ Adventurous:{romance:["Oke, itu terdengar seru. Aku suka energi kamu!"],support:["Kita cari sesuatu yang bikin mood kamu balik lagi."],date:["Road trip? Concert? New city? Pilih satu!"],football:["Kariermu lagi naik—ayo bikin musim ini memorable."],jealousy:["Jangan bikin petualanganmu jadi drama ya 😭"],commitment:["Kalau kita siap, aku nggak takut ambil langkah besar."],apology:["Oke, kita move forward. Tapi jangan ulangi."],neutral:["Interesting! Terus apa yang terjadi setelah itu?"]}};
+ const last=(n.chat||[]).filter(x=>x.from===n.name).slice(-3).map(x=>x.text).join(" ");
+ let reply=pick((base[n.personality]||base.Warm)[intent]||base.Warm.neutral);
+ if(last && Math.random()<.45) reply += ` Aku ingat kamu tadi bilang, "${last.slice(0,55)}".`;
+ if(n.affection>=75 && Math.random()<.5) reply += " ❤️";
+ if(n.status==="Stranger" && n.affection<15) reply=reply.replace(/❤️/g,"");
+ return reply;
+}
+function sendChat(id){
+ const n=partnerById(id),input=document.getElementById("chatInput");if(!n||!input)return;const text=input.value.trim();if(!text)return;
+ n.chat=n.chat||[];n.chat.push({from:"You",text,day:`${S.world.day}/${S.world.month}/${S.world.year}`});
+ const affectionGain=text.length>80?3:2;n.affection=Math.min(100,n.affection+affectionGain);n.trust=Math.min(100,n.trust+(text.length>40?2:1));
+ if(/cewek|perempuan|date|selingkuh/.test(text.toLowerCase()))n.jealousy=Math.min(100,n.jealousy+1);
+ const reply=chatContext(n,text);n.chat.push({from:n.name,text:reply,day:`${S.world.day}/${S.world.month}/${S.world.year}`});save();render();setTimeout(()=>openChat(id),20)
+}
+function openChat(id){const n=partnerById(id);if(!n)return;openModal(`💬 Chat — ${n.name}`,`<div class="item"><b>${n.name}</b> · ${n.job} · ${n.age} years · ${n.nationality} · ${n.status}</div><div class="matchlog" style="height:260px;margin:10px 0">${(n.chat||[]).length?(n.chat||[]).map(m=>`<p><b>${escapeHtml(m.from)}:</b> ${escapeHtml(m.text)} <span class="muted">${m.day}</span></p>`).join(""):"<div class='empty'>Belum ada chat. Mulai percakapan.</div>"}</div><div class="row"><input id="chatInput" placeholder="Ketik pesan..." onkeydown="if(event.key==='Enter')sendChat('${id}')"><button class="btn primary" onclick="sendChat('${id}')">Send</button></div>`)}
+function escapeHtml(x){return String(x).replace(/[&<>\"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','\\':'&#92;','"':'&quot;'}[c]))}
+function dateAdvance(days){days=Number(days)||1;S.world.day+=days;while(S.world.day>30){S.world.day-=30;S.world.month++;if(S.world.month>12){S.world.month=1;S.world.year++}}S.world.week=Math.floor((S.world.day-1)/7)+1;S.world.season=`${S.world.year}/${String(S.world.year+1).slice(-2)}`;agePeople(days);ensureFamily();S.family.children.forEach(c=>{c.milestones=c.milestones||[]});relationshipTick(days);}
+function relationshipTick(days){const n=activePartner();if(n){n.affection=Math.min(100,n.affection+Math.floor(days/30));if(n.status==="Partner"&&n.affection>=85&&n.trust>=70)S.family.engagedTo=n.id;if(n.status==="Engaged"&&n.affection>=90&&S.player.age>=18)S.family.marriedTo=n.id}if(S.family?.children?.length){S.family.children.forEach(c=>{if(c.age>=18&&!c.movedOut){c.movedOut=true;c.milestones.push("Moved out")}})}}
+function propose(id){const n=partnerById(id);if(!n||n.affection<65||n.trust<50)return toast("Relationship belum cukup kuat untuk lamaran.");n.status="Engaged";S.family.engagedTo=id;save();render();toast(`${n.name} menerima lamaran! 💍`)}
+function marry(id){const n=partnerById(id);if(!n||n.status!=="Engaged")return toast("Harus tunangan dulu.");n.status="Married";S.family.marriedTo=id;S.family.engagedTo=id;save();render();toast(`Selamat! Kamu menikah dengan ${n.name}.`)}
+function haveChild(){ensureFamily();const n=activePartner();if(!n||!S.family.marriedTo)return toast("Menikah dulu untuk memulai family life.");if(S.player.age<18||n.age<18)return toast("Belum memenuhi usia dewasa.");const c={id:"child"+S.family.nextChildId++,name:pick(["Rafael","Aiden","Alya","Noah","Mika","Nara","Raka","Lia"]),age:0,birthYear:S.world.year,gender:pick(["Boy","Girl"]),nationality:S.player.nationality||"Indonesia",parentId:n.id,milestones:["Born"],movedOut:false};S.family.children.push(c);save();render();toast("Keluarga bertambah! 👶")}
+function chooseNationality(){const n=prompt("Nationality pemain:",S.player.nationality||"Indonesia");if(n){S.player.nationality=n;S.player.nationalTeam=n;save();render();toast(`Nationality: ${n}`)}}
+function nationalTeam(){const nat=S.player.nationality||"Indonesia";return `<div class="card"><h3>🌍 National Team</h3><p><b>${nat}</b> · ${S.player.nationalTeamStatus||"Eligible"}</p><p class="muted">Caps ${S.player.caps||0} · Goals ${S.player.nationalGoals||0} · National Trophies ${S.player.nationalTrophies||0}</p><div class="actions"><button class="btn" onclick="chooseNationality()">Change Nationality</button><button class="btn primary" onclick="nationalMatch()">Play International Match</button></div></div>`}
+function nationalMatch(){S.player.caps=(S.player.caps||0)+1;const scored=rand(0,3);S.player.nationalGoals=(S.player.nationalGoals||0)+scored;if(rand(1,8)===1){S.player.nationalTrophies=(S.player.nationalTrophies||0)+1;S.player.trophies++;toast("International trophy won! 🏆")}else toast(`International match complete · ${scored} goal(s)`);dateAdvance(1);save();render()}
+function trophyRoom(){return `<div class="card"><h3>🏆 Trophy Cabinet</h3><div class="list">${(S.player.trophyRoom||[]).map(t=>`<div class="item row"><span>🏆 ${t.name}</span><span class="muted">${t.year}</span></div>`).join("")||`<div class="empty">Belum ada trophy. Kariermu baru mulai.</div>`}</div></div>`}
+function makeState(){
+ const p=starter("Karim");
+ return {version:5,logged:false,player:{...p,nationality:"Indonesia",nationalTeam:"Indonesia",caps:0,nationalGoals:0,nationalTrophies:0,trophyRoom:[],goals:0},world:{year:2026,month:8,day:1,week:1,season:"2026/27",weather:"Clear",news:[],events:[],marketOpen:true},
+ clubs:clone(clubs),standings:{},fixtures:[],npc:Array.from({length:1000},(_,i)=>npc(i)),relations:[],family:{engagedTo:null,marriedTo:null,children:[],nextChildId:1},businesses:[{name:"Creator Studio",type:"Media",level:1,value:3,income:1.2}],
+ sponsors:[{name:"Local Brand",deal:1,value:0.5}],social:{posts:[],trending:["#MatchDay","#FootballLife"]},
+ career:{tactic:"Balanced",managerTrust:55,startingXI:true,position:"ST",lastRating:0},achievements:[],
+ creator:{enabled:false,slots:4,email:""},tab:"home",calendar:[]
+}
+}
+let S=load(); 
+function load(){
+ try{
+  const raw4=localStorage.getItem(KEY);
+  if(raw4){
+   const x=JSON.parse(raw4);
+   if(x&&(x.version===5||x.version===4))return normalizeState({...x,version:5});
+  }
+  const old4=localStorage.getItem(OLD_KEY);
+  if(old4){const x=JSON.parse(old4);const migrated=normalizeState({...makeState(),...x,version:5});localStorage.setItem(KEY,JSON.stringify(migrated));return migrated}
+  const raw3=localStorage.getItem(LEGACY_KEY);
+  if(raw3){
+   const x=JSON.parse(raw3);
+   if(x&&x.version===3){
+    const migrated=normalizeState({...makeState(),...x,version:4});
+    localStorage.setItem(KEY,JSON.stringify(migrated));
+    return migrated;
+   }
+  }
+  const raw2=localStorage.getItem(LEGACY_KEY_V2);
+  if(raw2){
+   const x=JSON.parse(raw2);
+   const migrated=migrateV2(x);
+   localStorage.setItem(KEY,JSON.stringify(migrated));
+   return migrated;
+  }
+ }catch(e){console.warn("Save migration failed:",e)}
+ return makeState()
+}
+function normalizeState(x){
+ const base=makeState();
+ x.player={...base.player,...(x.player||{})};
+ x.player.stats={...base.player.stats,...(x.player.stats||{})};
+ x.player.inventory=Array.isArray(x.player.inventory)?x.player.inventory:[];x.player.nationality=x.player.nationality||"Indonesia";x.player.nationalTeam=x.player.nationalTeam||x.player.nationality;x.player.caps=Number(x.player.caps)||0;x.player.nationalGoals=Number(x.player.nationalGoals)||0;x.player.nationalTrophies=Number(x.player.nationalTrophies)||0;x.player.trophyRoom=Array.isArray(x.player.trophyRoom)?x.player.trophyRoom:[];x.player.jerseyNumber=Number(x.player.jerseyNumber)||9;x.player.photo=x.player.photo||"";
+ x.world={...base.world,...(x.world||{})};
+ x.career={...base.career,...(x.career||{})};
+ x.creator={...base.creator,...(x.creator||{})};
+ x.social={...base.social,...(x.social||{})};
+ x.businesses=Array.isArray(x.businesses)?x.businesses:base.businesses;
+ x.sponsors=Array.isArray(x.sponsors)?x.sponsors:base.sponsors;
+ x.npc=Array.isArray(x.npc)?x.npc:base.npc;
+ x.relations=Array.isArray(x.relations)?x.relations:[];
+ x.achievements=Array.isArray(x.achievements)?x.achievements:[];x.npc=Array.isArray(x.npc)?x.npc:[];if(x.npc.length<1000){for(let i=x.npc.length;i<1000;i++)x.npc.push(npc(i))}x.family=x.family||{engagedTo:null,marriedTo:null,children:[],nextChildId:1};x.family.children=Array.isArray(x.family.children)?x.family.children:[];
+ x.tab=x.tab||"home";
+ return x
+}
+function migrateV2(x){
+ const s=makeState();
+ const p=x?.player||{};
+ const oldStats={PAC:p.pac,SHO:p.sho,PAS:p.pas,DRI:p.dri,DEF:p.def,PHY:p.phy};
+ s.player.name=[p.first,p.last].filter(Boolean).join(" ")||"Player";
+ s.player.age=Number(p.age)||18;
+ s.player.pos=p.pos||"ST";
+ s.player.stats={...s.player.stats,...Object.fromEntries(Object.entries(oldStats).filter(([,v])=>Number.isFinite(Number(v))).map(([k,v])=>[k,Number(v)]))};
+ s.player.ovr=Number(p.ovr)||66;
+ s.player.money=Number(x.money)||12;
+ s.player.fans=Number(x.fans)||120;
+ s.player.followers=Number(x.social?.followers)||80;
+ s.player.reputation=Math.max(0,Math.round((Number(x.fans)||120)/1000));
+ s.player.energy=Number(x.energy)||88;
+ s.player.health=Number(x.health)||96;
+ s.player.morale=Number(x.morale)||80;
+ s.player.form=Number(x.career?.form)||70;
+ s.player.goals=Number(x.career?.goals)||0;
+ s.player.assists=Number(x.career?.assists)||0;
+ s.player.matches=Number(x.career?.appearances)||0;
+ s.player.trophies=Number(x.career?.trophies)||0;
+ s.world.year=Number(String(x.date||"2026-01-01").slice(0,4))||2026;
+ s.world.month=Number(String(x.date||"2026-01-01").slice(5,7))||1;
+ s.world.day=Number(String(x.date||"2026-01-01").slice(8,10))||1;
+ const oldClub=x.club?.name;
+ const found=clubs.find(c=>c.name===oldClub);
+ if(found)s.player.clubId=found.id;
+ s.social.posts=(x.social?.posts||[]).map(q=>({text:q.text||"",likes:Number(q.likes)||0,comments:Number(q.comments)||0,day:`${s.world.day}/${s.world.month}`}));
+ s.achievements=Array.isArray(x.achievements)?x.achievements:[];
+ s.logged=Boolean(x.setup);
+ s.creator={enabled:Boolean(x.creator),slots:x.creator?10:4,email:x.email||""};
+ return normalizeState(s)
+}
+function save(){localStorage.setItem(KEY,JSON.stringify(S))}
+function toast(t){let e=document.getElementById("toast");e.textContent=t;e.style.display="block";setTimeout(()=>e.style.display="none",1800)}
+function openModal(title,body){document.getElementById("modalTitle").textContent=title;document.getElementById("modalBody").innerHTML=body;document.getElementById("modal").classList.add("show")}
+function closeModal(){document.getElementById("modal").classList.remove("show")}
+function calcOVR(){let s=S.player.stats;let base=Math.round((s.PAC+s.SHO+s.PAS+s.DRI+s.DEF+s.PHY)/6);return Math.min(99,Math.round(base+(S.player.level-1)*1.4))}
+function advanceDays(n=1){n=Math.max(1,Number(n)||1);dateAdvance(n);
+ S.player.energy=Math.max(35,S.player.energy-rand(2,7));S.player.health=Math.max(50,S.player.health-rand(0,2));
+ S.player.form=Math.max(30,Math.min(100,S.player.form+rand(-3,4)));
+ S.player.morale=Math.max(20,Math.min(100,S.player.morale+rand(-2,3)));
+ let income=0;S.businesses.forEach(b=>{income+=b.income*b.level});S.player.money=Math.max(0,S.player.money+income);
+ if(Math.random()<.35) worldNews();
+ if(Math.random()<.18) transferRumor();
+ S.npc.forEach(n=>{n.affection=Math.max(0,n.affection+rand(-1,2));n.jealousy=Math.max(0,n.jealousy-rand(0,1));});
+ save();render();
+}
+function worldNews(){
+ const lines=[
+  "Transfer market heating up: a top club is preparing a huge bid.",
+  "Media praises a young wonderkid after a breakout performance.",
+  "A sponsor is scouting rising football creators.",
+  "A manager is under pressure after a poor run of results.",
+  "Fans demand more attacking football from their club.",
+  "Rumors spread about a surprise transfer before deadline day."
+ ];
+ S.world.news.unshift({day:`${S.world.day}/${S.world.month}/${S.world.year}`,text:pick(lines)});
+ S.world.news=S.world.news.slice(0,12)
+}
+function transferRumor(){
+ const c=pick(clubs.filter(c=>c.id!==s.player.clubId));
+ s.world.news.unshift({day:`${S.world.day}/${S.world.month}`,text:`${c.name} reportedly likes your profile and is monitoring your form.`})
+}
+function addXP(x){S.player.xp+=x;let need=S.player.level*100;while(S.player.xp>=need){S.player.xp-=need;S.player.level++;S.player.potential=Math.max(S.player.potential,S.player.ovr);Object.keys(S.player.stats).forEach(k=>S.player.stats[k]+=rand(0,2));toast("LEVEL UP! 🔥");need=S.player.level*100}S.player.ovr=calcOVR()}
+function train(){
+ if(S.player.energy<20)return toast("Energy kurang.");
+ S.player.energy-=20;S.player.form=Math.min(100,S.player.form+5);S.player.morale=Math.min(100,S.player.morale+2);addXP(35);
+ const k=pick(Object.keys(S.player.stats));S.player.stats[k]=Math.min(99,S.player.stats[k]+rand(1,3));
+ toast(`Training sukses: +${k}`);save();render()
+}
+function rest(){S.player.energy=Math.min(100,S.player.energy+35);S.player.health=Math.min(100,S.player.health+5);S.player.morale=Math.min(100,S.player.morale+3);advanceDays();toast("Recovery selesai.")}
+function playMatch(){
+ if(S.player.energy<30)return toast("Kamu terlalu lelah untuk main.");
+ S.player.energy-=30;S.player.matches++;
+ const c=club(S.player.clubId), opp=pick(clubs.filter(x=>x.id!==c.id));
+ const my=(S.player.ovr+S.player.form*.15+S.career.managerTrust*.08)+(Math.random()*12-6);
+ const enemy=opp.strength+(Math.random()*12-6);
+ let log=[],score=0,oppScore=0,rating=6.2+Math.random()*1.2;
+ for(let m=1;m<=90;m+=rand(7,14)){
+   let chance=Math.random();
+   if(chance<Math.max(.07,(my-enemy)/130+.10)){score++;S.player.goals++;rating+=.45;log.push(`${m}' ⚽ GOAL! ${S.player.name} finds the net.`)}
+   else if(chance<.22){S.player.assists++;rating+=.15;log.push(`${m}' 🎯 Key pass creates danger.`)}
+   else if(chance>.93){rating-=.25;log.push(`${m}' 🟨 Yellow card after a late challenge.`)}
+   else log.push(`${m}' Game flows through midfield...`)
+ }
+ if(enemy>my && score===0)oppScore=rand(1,3); else if(enemy>my)oppScore=Math.max(1,score+rand(-1,1)); else oppScore=rand(0,Math.max(1,score));
+ const result=score>oppScore?"WIN":score===oppScore?"DRAW":"LOSS";
+ if(result==="WIN"){S.player.fans+=rand(20,70);S.player.reputation+=2;S.career.managerTrust=Math.min(100,S.career.managerTrust+4)}
+ if(result==="LOSS"){S.player.morale-=5;S.career.managerTrust=Math.max(0,S.career.managerTrust-3)}
+ S.career.lastRating=pct(rating);addXP(70+Math.max(0,score)*30);
+ S.world.news.unshift({day:`${S.world.day}/${S.world.month}`,text:`${c.name} ${score}-${oppScore} ${opp.name}. ${S.player.name} rated ${pct(rating)}.`});
+ openModal("MATCH RESULT",`<div class="score">${c.short} ${score} — ${oppScore} ${opp.short}</div><p>Result: <b class="${result==="WIN"?"green":result==="LOSS"?"red":"gold"}">${result}</b> · Rating <b>${pct(rating)}</b></p><div class="matchlog">${log.map(x=>`<div>${x}</div>`).join("")}</div><br><button class="btn primary" onclick="closeModal();advanceDays()">Continue career</button>`);
+ save();render()
+}
+function signSponsor(name,value){
+ const s=SPONSORS.find(x=>x.name===name);if(!s)return;
+ if(S.sponsors.some(x=>x.name===name))return toast("Sponsor sudah aktif.");
+ if(S.player.reputation<s.minRep)return toast(`Reputation minimal ${s.minRep}.`);
+ S.sponsors.push({name:s.name,deal:12,value:s.value});
+ toast(`${s.name} sponsor deal signed!`);save();render()
+}
+function post(){
+ const text=document.getElementById("postText")?.value.trim();if(!text)return;
+ const reach=rand(15,60)+Math.round(S.player.reputation*1.5);S.player.followers+=reach;S.player.fans+=Math.round(reach*.25);
+ S.social.posts.unshift({text,likes:rand(5,Math.max(8,reach)),comments:rand(0,15),day:`${S.world.day}/${S.world.month}`});
+ document.getElementById("postText").value="";toast(`Post viral: +${reach} followers`);save();render()
+}
+function giftMenu(id){
+ const n=partnerById(id);if(!n)return;
+ const gifts=[['💐 Bunga',2,5],['🍫 Cokelat',1,3],['🎁 Hadiah kecil',4,7],['👜 Fashion',8,11],['📱 Gadget',20,15],['💎 Jewelry',50,24],['✈️ Surprise Trip',80,30]];
+ openModal(`🎁 Gift untuk ${n.name}`,`<p class="muted">Semakin cocok hadiahnya, semakin besar affection gain.</p><div class="list">${gifts.map(g=>`<div class="item row"><div><b>${g[0]}</b><br><span class="muted">€${g[1]}M · +${g[2]} affection</span></div><button class="btn gold" onclick="giveGift('${id}',${g[1]},${g[2]},'${g[0]}')">Give</button></div>`).join('')}</div>`)
+}
+function giveGift(id,cost,gain,label){const n=partnerById(id);if(!n)return;if(!S.creator.enabled&&S.player.money<cost)return toast('Uangmu belum cukup.');if(!S.creator.enabled)S.player.money-=cost;n.affection=Math.min(100,n.affection+gain);n.trust=Math.min(100,n.trust+Math.ceil(gain/8));n.history.unshift(`Received ${label} on ${S.world.day}/${S.world.month}/${S.world.year}`);closeModal();save();render();toast(`${label} diterima! Affection +${gain} ❤️`)}
+function dateNPC(id,action){if(action==='chat')return openChat(id);if(action==='gift')return giftMenu(id);if(action==='date')return datePartner(id)}
+function datePartner(id){const n=partnerById(id);if(!n)return;n.affection=Math.min(100,n.affection+12);n.trust=Math.min(100,n.trust+7);if(n.affection>=30)n.status="Dating";if(n.affection>=55)n.status="Partner";n.history.push(`Date on ${S.world.day}/${S.world.month}/${S.world.year}`);dateAdvance(1);save();render();toast(`Date with ${n.name} went well ❤️`)}
+function propose(id){const n=partnerById(id);if(!n)return;if(!S.creator.enabled&&(n.affection<65||n.trust<50))return toast("Relationship belum cukup kuat untuk lamaran.");n.status="Engaged";S.family.engagedTo=id;save();render();toast(`${n.name} menerima lamaran! 💍`)}
+function marry(id){const n=partnerById(id);if(!n||n.status!=="Engaged")return toast("Harus tunangan dulu.");n.status="Married";S.family.marriedTo=id;S.family.engagedTo=id;save();render();toast(`Selamat! Kamu menikah dengan ${n.name}.`)}
+function haveChild(){ensureFamily();const n=activePartner();if(!n)return toast("Pilih partner dulu.");if(!S.creator.enabled&&(S.player.age<18||n.age<18))return toast("Keduanya harus dewasa.");if(!S.creator.enabled&&(n.affection<80||n.trust<70))return toast("Affection minimal 80 dan trust minimal 70 untuk family planning.");const c={id:"child"+S.family.nextChildId++,name:pick(["Rafael","Aiden","Alya","Noah","Mika","Nara","Raka","Lia","Aria","Milo"]),age:0,birthYear:S.world.year,gender:pick(["Boy","Girl"]),nationality:S.player.nationality||"Indonesia",parentId:n.id,milestones:["Born"],movedOut:false};S.family.children.push(c);save();render();toast("Keluarga bertambah! 👶");}
+function chooseNationality(){const n=prompt("Nationality pemain:",S.player.nationality||"Indonesia");if(n){S.player.nationality=n;S.player.nationalTeam=n;save();render();toast(`Nationality: ${n}`)}}
+function nationalTeam(){const nat=S.player.nationality||"Indonesia";return `<div class="card"><h3>🌍 National Team</h3><p><b>${nat}</b> · ${S.player.nationalTeamStatus||"Eligible"}</p><p class="muted">Caps ${S.player.caps||0} · Goals ${S.player.nationalGoals||0} · National Trophies ${S.player.nationalTrophies||0}</p><div class="actions"><button class="btn" onclick="chooseNationality()">Change Nationality</button><button class="btn primary" onclick="nationalMatch()">Play International Match</button></div></div>`}
+function nationalMatch(){S.player.caps=(S.player.caps||0)+1;const scored=rand(0,3);S.player.nationalGoals=(S.player.nationalGoals||0)+scored;if(rand(1,8)===1){S.player.nationalTrophies=(S.player.nationalTrophies||0)+1;S.player.trophies++;addTrophy('National Team Trophy','Timnas')}dateAdvance(1);save();render();toast(`International match complete · ${scored} goal(s)`)}
+function addTrophy(name,type='Club'){S.player.trophyRoom=S.player.trophyRoom||[];S.player.trophyRoom.push({name,type,year:S.world.year});S.player.trophies=(S.player.trophies||0)+1}
+function trophyRoom(){const list=S.player.trophyRoom||[];return `<div class="card"><h3>🏆 Trophy Cabinet</h3><div class="grid">${['Club','National Team','Individual'].map(type=>`<div class="third card"><h3>${type==='Club'?'🏟️':type==='National Team'?'🌍':'👑'} ${type}</h3>${list.filter(t=>t.type===type).map(t=>`<div class="item row"><span>🏆 ${t.name}</span><span class="muted">${t.year}</span></div>`).join('')||'<div class="empty">Belum ada trophy.</div>'}</div>`).join('')}</div><br><div class="item"><b>Real-world award names are used as game labels.</b><p class="muted">Nama/brand penghargaan dipakai sebagai referensi simulasi; hasil di game sepenuhnya fiksi.</p></div></div>`}
+function invest(){
+ let b=S.businesses[0];if(S.player.money<5)return toast("Uang kurang.");
+ S.player.money-=5;b.level++;b.value+=3;b.income+=.7;toast("Business upgraded 📈");save();render()
+}
+function transferOffer(cId){const c=club(cId);const o=S.player.ovr;const fit=Math.abs(c.strength-o);const interest=pct(100-fit*4+S.player.reputation*.25+rand(-5,5));const tier=interest>=75?'Contract offer':interest>=50?'Scout/Trial':'Not interested';openModal(`📨 ${c.name}`,`<div class="item"><b>Club OVR ${c.strength}</b><p>Your OVR: <b>${o}</b></p><p>Interest: <b>${interest}%</b> · ${tier}</p><p class="muted">Club offers are matched to your OVR; higher OVR unlocks stronger clubs.</p></div>${interest>=50?`<button class="btn primary" onclick="acceptTransfer('${c.id}')">Accept Contract</button>`:''}`)}
+function acceptTransfer(id){S.player.clubId=id;S.player.salary=Math.max(1,Math.round(S.player.ovr/18));S.player.contract=4;S.player.morale=Math.min(100,S.player.morale+15);S.player.reputation+=4;S.world.news.unshift({day:`${S.world.day}/${S.world.month}`,text:`BREAKING: ${S.player.name} joins ${club(id).name}!`});closeModal();toast("Transfer complete! 🚀");save();render()}
+function setTab(t){S.tab=t;render()}
+function renderNav(){
+ const tabs=[["home","🏠 Home"],["career","⚽ Career"],["market","🔁 Transfers"],["business","💼 Business"],["social","📱 Social"],["dating","❤️ Dating"],["partners","💞 Partners"],["family","👨‍👩‍👧 Family"],["life","🏠 Life"],["shop","🛒 Shop"],["national","🇮🇩 Timnas"],["awards","🏆 Trophies"],["calendar","📅 Calendar"],["world","🌍 World"],["profile","👤 Profile"]];
+ document.getElementById("nav").innerHTML=tabs.map(([id,n])=>`<button class="${S.tab===id?"active":""}" onclick="setTab('${id}')">${n}</button>`).join("")+(S.creator.enabled?`<button class="gold" onclick="creatorConsole()">👑 Creator</button>`:"");
+}
+function headerCard(){
+ let p=S.player,c=club(p.clubId);
+ return `<div class="card"><div class="row"><div><div class="muted">${p.pos} · ${c.name}</div><div class="big">${p.ovr}</div><div class="muted">${p.name}, age ${p.age}</div></div><div class="statgrid" style="min-width:55%"><div class="stat"><span class="muted">💰 Money</span><b>${money(p.money)}</b></div><div class="stat"><span class="muted">👥 Fans</span><b>${p.fans.toLocaleString()}</b></div><div class="stat"><span class="muted">📱 Followers</span><b>${p.followers.toLocaleString()}</b></div><div class="stat"><span class="muted">⭐ Rep</span><b>${p.reputation}</b></div></div></div></div>`
+}
+function home(){
+ let p=S.player,c=club(p.clubId);
+ return headerCard()+`<div class="grid"><div class="half card"><h3>Player Condition</h3><p>Energy ${p.energy}%</p><div class="bar"><i style="width:${p.energy}%"></i></div><p>Health ${p.health}%</p><div class="bar"><i style="width:${p.health}%"></i></div><p>Morale ${p.morale}% · Form ${p.form}%</p><div class="actions"><button class="btn primary" onclick="train()">Train + XP</button><button class="btn" onclick="rest()">Rest</button><button class="btn gold" onclick="playMatch()">Play Match</button></div></div>
+ <div class="half card"><h3>Next Chapter</h3><p>You are <b>${c.name}</b>'s ${p.pos}. Manager trust: <b>${S.career.managerTrust}%</b>.</p><p>Last match rating: <b>${S.career.lastRating||"—"}</b>. Goals: <b>${p.goals}</b>, assists: <b>${p.assists}</b>.</p><div class="actions"><button class="btn" onclick="setTab('market')">Check Transfers</button><button class="btn" onclick="setTab('world')">World News</button></div></div>
+ <div class="half card"><h3>Breaking News</h3><div class="list">${S.world.news.slice(0,5).map(n=>`<div class="item"><small class="muted">${n.day}</small><br>${n.text}</div>`).join("")||`<div class="empty">World is quiet... for now.</div>`}</div></div>
+ <div class="half card"><h3>Attributes</h3><div class="statgrid">${Object.entries(p.stats).map(([k,v])=>`<div class="stat"><span>${k}</span><b>${v}</b></div>`).join("")}</div></div></div>`
+}
+function career(){
+ return headerCard()+`<div class="grid"><div class="half card"><h3>Career Hub</h3><p>Season <b>${S.world.season}</b> · ${club(S.player.clubId).league}</p><div class="statgrid"><div class="stat">Matches<b>${S.player.matches}</b></div><div class="stat">Goals<b>${S.player.goals}</b></div><div class="stat">Assists<b>${S.player.assists}</b></div><div class="stat">Trophies<b>${S.player.trophies}</b></div></div><br><div class="actions"><button class="btn gold" onclick="playMatch()">⚽ Play Match</button><button class="btn primary" onclick="train()">🏋 Train</button></div></div>
+ <div class="half card"><h3>Tactical Role</h3><select onchange="S.career.tactic=this.value;save();render()">${["Balanced","Attacking","Possession","Counter","Defensive"].map(x=>`<option ${x===S.career.tactic?"selected":""}>${x}</option>`).join("")}</select><p class="muted">Tactics influence your match probability and manager trust in future versions of the simulation.</p></div>
+ <div class="card"><h3>Development</h3><p>Level ${S.player.level} · XP ${S.player.xp}/${S.player.level*100} · Potential ${S.player.potential}</p><div class="bar"><i style="width:${S.player.xp/(S.player.level*100)*100}%"></i></div><br><div class="actions">${Object.entries(S.player.stats).map(([k,v])=>`<button class="btn small" onclick="upgradeStat('${k}')">${k} +1 (${v})</button>`).join("")}</div></div></div>`
+}
+function upgradeStat(k){if(S.player.xp<20)return toast("Butuh 20 XP.");S.player.xp-=20;S.player.stats[k]=Math.min(99,S.player.stats[k]+1);S.player.ovr=calcOVR();save();render()}
+function market(){
+ return headerCard()+`<div class="card"><h3>Transfer Market</h3><p class="muted">Interest reacts to your OVR, form, reputation and club level.</p><div class="list">${clubs.filter(c=>c.id!==S.player.clubId).sort((a,b)=>b.strength-a.strength).map(c=>{let interest=pct(S.player.reputation+S.player.ovr*.55+c.strength*.12+rand(-8,8));return `<div class="item row"><div><b>${c.name}</b><br><span class="muted">${c.league} · Strength ${c.strength}</span><br><span class="tag">${interest>70?"High interest":interest>45?"Watching":"Low interest"}</span></div><button class="btn ${interest>65?"primary":""}" onclick="transferOffer('${c.id}')">${interest>65?"Offer":"Scout"}</button></div>`}).join("")}</div></div>`
+}
+function business(){
+ return headerCard()+`<div class="grid"><div class="half card"><h3>Business Empire</h3>${S.businesses.map((b,i)=>`<div class="item"><div class="row"><b>${b.name}</b><span>Lv ${b.level}</span></div><p class="muted">${b.type} · Value ${money(b.value)} · Income ${b.income.toFixed(1)}M/day</p></div>`).join("")}<br><button class="btn primary" onclick="invest()">Upgrade business — €5M</button></div><div class="half card"><h3>Sponsors</h3>${S.sponsors.map(s=>`<div class="item"><b>${s.name}</b><br><span class="muted">Deal ${s.deal} · ${s.value}M/day</span></div>`).join("")}
+ <hr><h4>Sponsor Marketplace</h4>${SPONSORS.map(s=>`<div class="item row"><div><b>${s.name}</b><br><span class="muted">Requires ${s.minRep} reputation</span></div><button class="btn small ${S.sponsors.some(x=>x.name===s.name)?"":"primary"}" onclick="signSponsor('${s.name}',${s.value})">${S.sponsors.some(x=>x.name===s.name)?"Active":"Sign"}</button></div>`).join("")}
+ <p class="muted">Better reputation unlocks better sponsorships.</p></div></div>`
+}
+function social(){
+ return headerCard()+`<div class="grid"><div class="half card"><h3>Post</h3><textarea id="postText" rows="4" style="width:100%;background:#08130e;color:white;border:1px solid var(--line);border-radius:10px;padding:10px" placeholder="What's happening in your football life?"></textarea><br><br><button class="btn primary" onclick="post()">Publish 🚀</button></div><div class="half card"><h3>Trending</h3>${S.social.trending.map(x=>`<span class="tag">${x}</span>`).join("")}<hr style="border-color:var(--line)"><div class="feed list">${S.social.posts.map(p=>`<div class="item"><b>@${S.player.name}</b> · <small>${p.day}</small><p>${p.text}</p><span class="muted">❤️ ${p.likes} · 💬 ${p.comments} · +followers</span></div>`).join("")||`<div class="empty">No posts yet.</div>`}</div></div></div>`
+}
+function cardTier(ovr){if(ovr<=60)return ['bronze','Base'];if(ovr<70)return ['green','Rising'];if(ovr<80)return ['purple','Elite'];if(ovr<90)return ['silver','Star'];if(ovr<97)return ['gold','Gold'];if(ovr===97)return ['gold97','Champions'];if(ovr===98)return ['gold98','Champions'];const versions=['Wonderkid','Superstar','GOAT','Legendary','Myth'];return ['myth',''+versions[(S.player.level+S.player.matches)%versions.length]]}
+function characterCard(){const p=S.player,t=cardTier(p.ovr);return `<div class="character-card ${t[0]}"><div class="cc-head"><span>RV SPORTS</span><b>${t[1]}</b></div><div class="cc-photo">${p.photo?`<img src="${p.photo}" alt="Player">`:'⚽'}</div><div class="cc-ovr">${p.ovr}</div><div class="cc-name">${p.name}</div><div class="cc-meta">${p.pos} · ${p.nationality} · ${club(p.clubId).short}</div><div class="cc-meta">${club(p.clubId).name}</div><div class="cc-meta">Jersey #${p.jerseyNumber||9}</div></div>`}
+function dating(){const slots=S.creator.enabled?10:4;return headerCard()+`<div class="card"><div class="row"><div><h3>❤️ Partner Universe</h3><p class="muted">${partnerCount()} pilihan · public figures + original characters.</p></div><span class="tag">Slots ${S.relations.length}/${slots}</span></div><div class="grid">${S.npc.slice(0,120).map(n=>`<div class="third card"><div class="row"><h3>${escapeHtml(n.name)}</h3><span class="tag">${n.status}</span></div><p class="muted">${n.age} · ${escapeHtml(n.job)} · ${escapeHtml(n.nationality)}</p><p>❤️ ${n.affection} · 🤝 ${n.trust} · 😤 ${n.jealousy}</p><div class="bar"><i style="width:${n.affection}%"></i></div><div class="actions"><button class="btn small" onclick="viewPartner('${n.id}')">Profile</button><button class="btn small" onclick="openChat('${n.id}')">Chat</button><button class="btn small" onclick="datePartner('${n.id}')">Date</button><button class="btn small gold" onclick="giftMenu('${n.id}')">Gift</button></div></div>`).join('')}</div><p class="muted">Gunakan menu Partners untuk mencari seluruh database 1.000 karakter.</p></div>`}
+function viewPartner(id){const n=partnerById(id);if(!n)return;openModal(`👤 ${escapeHtml(n.name)}`,`<div class="item"><h3>${escapeHtml(n.name)}</h3><p>${escapeHtml(n.kind)} · ${escapeHtml(n.job)}</p><p>Age: ${n.age} · Nationality: ${escapeHtml(n.nationality)}</p><p>Personality: ${n.personality}</p><p>Relationship: ${n.status}</p><p>❤️ Affection: ${n.affection}% · 🤝 Trust: ${n.trust}% · 😤 Jealousy: ${n.jealousy}%</p><p class="muted">Profile is a simulated game profile.</p></div><div class="actions"><button class="btn primary" onclick="datePartner('${id}')">Ask on a Date</button><button class="btn" onclick="openChat('${id}')">Open Chat</button><button class="btn gold" onclick="giftMenu('${id}')">Gift</button>${n.status==='Partner'?`<button class="btn gold" onclick="propose('${id}')">Propose 💍</button>`:''}${n.status==='Engaged'?`<button class="btn gold" onclick="marry('${id}')">Marry 💒</button>`:''}${(n.affection>=80&&n.trust>=70)||S.creator.enabled?`<button class="btn primary" onclick="haveChild()">Family Planning 👶</button>`:''}</div>`)}
+function world(){
+ let table=clubs.map(c=>({c,p:rand(0,20),w:rand(0,7),d:rand(0,4),l:rand(0,6)})).sort((a,b)=>b.p-a.p);
+ return headerCard()+`<div class="grid"><div class="half card"><h3>World News</h3><div class="list">${S.world.news.map(n=>`<div class="item"><small class="muted">${n.day}</small><br>${n.text}</div>`).join("")}</div></div><div class="half card"><h3>League Snapshot</h3><div class="list">${table.slice(0,8).map((x,i)=>`<div class="item row"><span>#${i+1} ${x.c.short} <small class="muted">${x.c.name}</small></span><b>${x.p} pts</b></div>`).join("")}</div></div><div class="card"><h3>🏆 Milestones</h3><div class="list">${S.achievements.length?S.achievements.map(a=>`<div class="item">🏅 ${a}</div>`).join(""):`<div class="empty">No achievements yet.</div>`}</div><br><button class="btn gold" onclick="checkMilestones()">Check Milestones</button></div><div class="card"><h3>Time & World Simulation</h3><p>${S.world.day}/${S.world.month}/${S.world.year} · Week ${S.world.week} · Weather: ${S.world.weather}</p><div class="actions"><button class="btn" onclick="advanceDays()">Advance 1 Day</button><button class="btn" onclick="advanceDays(7)">Advance 1 Week</button><button class="btn primary" onclick="advanceDays(30)">Advance 1 Month</button></div></div></div>`
+}
+function life(){
+ const p=S.player;
+ const recovery=Math.max(1,Math.round((100-p.health)*.08)+1);
+ return headerCard()+`<div class="grid">
+  <div class="half card"><h3>🏠 Daily Life</h3>
+   <div class="statgrid">
+    <div class="stat"><span class="muted">Health</span><b>${p.health}%</b></div>
+    <div class="stat"><span class="muted">Energy</span><b>${p.energy}%</b></div>
+    <div class="stat"><span class="muted">Morale</span><b>${p.morale}%</b></div>
+    <div class="stat"><span class="muted">Net Worth</span><b>${money(netWorth())}</b></div>
+   </div><br>
+   <div class="actions"><button class="btn primary" onclick="rest()">Rest + Day</button><button class="btn" onclick="medicalRecovery()">Medical Recovery</button></div>
+  </div>
+  <div class="half card"><h3>📦 Inventory</h3>
+   <div class="list">${p.inventory.length?p.inventory.map(i=>`<div class="item row"><span>${i.icon||"📦"} ${i.name}</span><span class="muted">${money(i.value)}M</span></div>`).join(""):`<div class="empty">Belum punya barang. Coba belanja dulu.</div>`}</div>
+  </div>
+ </div>`
+}
+function netWorth(){
+ const items=(S.player.inventory||[]).reduce((a,x)=>a+Number(x.value||0),0);
+ const businesses=(S.businesses||[]).reduce((a,b)=>a+Number(b.value||0),0);
+ return Math.round(S.player.money+items+businesses)
+}
+function medicalRecovery(){
+ const cost=Math.max(1,Math.round((100-S.player.health)*.15)+recoveryBaseCost());
+ if(S.player.health>=100)return toast("Health kamu udah full.");
+ if(S.player.money<cost)return toast(`Butuh ${money(cost)}M buat recovery.`);
+ S.player.money-=cost;S.player.health=100;S.player.energy=Math.min(100,S.player.energy+15);toast("Medical recovery selesai.");save();render()
+}
+function recoveryBaseCost(){return 1}
+const SHOP_ITEMS=[
+ ["Boots Pro X",2.5,"football","⚽"],["Training GPS",5,"football","📡"],["Recovery Gun",1.8,"health","💚"],
+ ["Gaming PC",4.5,"tech","💻"],["Smartphone Ultra",1.8,"tech","📱"],["Luxury Watch",35,"luxury","⌚"],
+ ["Sports Car",180,"vehicle","🚗"],["Supercar",420,"vehicle","🏎️"],["Penthouse",1800,"property","🏙️"],
+ ["Villa",3500,"property","🏡"],["Private Jet",25000,"vehicle","✈️"],["Yacht",12000,"vehicle","🛥️"],
+ ["Designer Suit",8.5,"fashion","🕴️"],["Limited Sneakers",3,"fashion","👟"],["Home Gym",25,"health","🏋️"],
+ ["Beach House",2200,"property","🏖️"],["Electric SUV",95,"vehicle","🚙"],["Studio Camera",7,"tech","📷"],
+ ["Laptop Pro",3.2,"tech","💻"],["Diamond Watch",120,"luxury","💎"]
+].map((x,i)=>({id:i+1,name:x[0],price:x[1],cat:x[2],icon:x[3]}));
+function shop(){
+ return headerCard()+`<div class="card"><div class="row"><div><h3>🛒 Lifestyle Shop</h3><p class="muted">Equipment, vehicles, property and flex items. Prices are in €M.</p></div><span class="tag">Balance: ${money(S.player.money)}M</span></div><hr><div class="grid">${SHOP_ITEMS.map(x=>`<div class="third card"><div class="big">${x.icon}</div><b>${x.name}</b><div class="muted">${x.cat}</div><div class="gold">${money(x.price)}M</div><button class="btn ${S.player.money>=x.price?"primary":""}" style="margin-top:8px;width:100%" onclick="buyItem(${x.id})">${S.player.money>=x.price?"Buy":"Too Expensive"}</button></div>`).join("")}</div></div>`
+}
+function buyItem(id){
+ const x=SHOP_ITEMS.find(i=>i.id===id);if(!x)return;
+ if(S.player.money<x.price)return toast("Saldo tidak cukup.");
+ S.player.money-=x.price;S.player.inventory.push({name:x.name,value:x.price,icon:x.icon,cat:x.cat});
+ toast(`${x.name} purchased 🛍️`);save();render()
+}
+function checkMilestones(){
+ const checks=[
+  [S.player.goals>=10,"10 Career Goals"],[S.player.assists>=10,"10 Career Assists"],
+  [S.player.fans>=100000,"100K Fans"],[S.player.ovr>=80,"OVR 80 Club"],
+  [netWorth()>=1000,"€1B Net Worth"],[S.businesses.some(b=>b.level>=5),"Business Level 5"]
+ ];
+ checks.forEach(([ok,name])=>{if(ok&&!S.achievements.includes(name))S.achievements.push(name)});
+ save();toast("Milestones checked 🏆");render()
+}
+function partners(){
+ const q=(prompt("Cari partner berdasarkan nama/job/nationality (kosong = tampilkan semua):","")||"").toLowerCase();let list=S.npc.filter(n=>!q||`${n.name} ${n.job} ${n.nationality}`.toLowerCase().includes(q)).slice(0,60);
+ return headerCard()+`<div class="card"><div class="row"><div><h3>❤️ Partner Universe</h3><p class="muted">${partnerCount()} pilihan · public figures + original characters · usia berkembang mengikuti kalender.</p></div><span class="tag">${list.length} shown</span></div><div class="grid">${list.map(n=>`<div class="third card"><div class="row"><b>${n.name}</b><span class="tag">${n.kind}</span></div><p>${n.job} · ${n.age} · ${n.nationality}</p><p class="muted">${n.personality} · ❤️ ${n.affection}% · Trust ${n.trust}% · ${n.status}</p><div class="actions"><button class="btn small" onclick="viewPartner('${n.id}')">Profile</button><button class="btn small" onclick="openChat('${n.id}')">Chat</button><button class="btn small primary" onclick="datePartner('${n.id}')">Date</button></div></div>`).join("")}</div></div>`}
+function viewPartner(id){const n=partnerById(id);if(!n)return;openModal(`👤 ${n.name}`,`<div class="item"><h3>${n.name}</h3><p>${n.kind} · ${n.job}</p><p>Age: ${n.age} · Nationality: ${n.nationality}</p><p>Personality: ${n.personality}</p><p>Relationship: ${n.status}</p><p>Affection: ${n.affection}% · Trust: ${n.trust}% · Jealousy: ${n.jealousy}%</p></div><div class="actions"><button class="btn primary" onclick="datePartner('${id}')">Ask on a Date</button><button class="btn" onclick="openChat('${id}')">Open Chat</button>${n.status==='Partner'?`<button class="btn gold" onclick="propose('${id}')">Propose 💍</button>`:''}${n.status==='Engaged'?`<button class="btn gold" onclick="marry('${id}')">Marry 💒</button>`:''}</div>`)}
+function datePartner(id){const n=partnerById(id);if(!n)return;n.affection=Math.min(100,n.affection+12);n.trust=Math.min(100,n.trust+7);if(n.affection>=30)n.status="Dating";if(n.affection>=55)n.status="Partner";n.history.push(`Date on ${S.world.day}/${S.world.month}/${S.world.year}`);dateAdvance(1);save();render();toast(`Date with ${n.name} went well ❤️`)}
+function family(){ensureFamily();const n=activePartner();return headerCard()+`<div class="grid"><div class="half card"><h3>💍 Family Status</h3><p>Partner: ${n?n.name:"None"}</p><p>Status: ${n?n.status:"Single"}</p><p>Engaged: ${S.family.engagedTo?"Yes":"No"} · Married: ${S.family.marriedTo?"Yes":"No"}</p><div class="actions">${n&&n.status==='Partner'?`<button class="btn gold" onclick="propose('${n.id}')">Propose</button>`:''}${n&&n.status==='Engaged'?`<button class="btn gold" onclick="marry('${n.id}')">Wedding</button>`:''}${n&&S.family.marriedTo?`<button class="btn primary" onclick="haveChild()">Have a Child</button>`:''}</div></div><div class="half card"><h3>👶 Children</h3><div class="list">${S.family.children.map(c=>`<div class="item row"><span>${c.gender==='Girl'?'👧':'👦'} ${c.name}</span><span>Age ${c.age}${c.movedOut?' · Independent':''}</span></div>`).join("")||`<div class="empty">Belum ada anak.</div>`}</div></div></div>`}
+function calendar(){return headerCard()+`<div class="card"><h3>📅 Career Calendar</h3><p class="muted">${S.world.day}/${S.world.month}/${S.world.year} · ${S.world.season}</p><div class="actions"><button class="btn" onclick="dateAdvance(1);save();render()">+1 Day</button><button class="btn" onclick="dateAdvance(7);save();render()">+1 Week</button><button class="btn primary" onclick="dateAdvance(30);save();render()">+1 Month</button></div><hr><div class="list"><div class="item">⚽ Club Match — weekly simulation</div><div class="item">🌍 International Break — every 90 days</div><div class="item">🏆 Awards Night — yearly</div><div class="item">🎂 Birthdays & family milestones — automatic</div></div></div>`}
+function awards(){return headerCard()+trophyRoom()+nationalTeam()}
+function profile(){
+ let p=S.player;
+ return headerCard()+characterCard()+`<div class="grid"><div class="half card"><h3>Profile</h3><div class="formgrid"><label>Name<input id="nm" value="${p.name}"></label><label>Position<select id="ps">${POS.map(x=>`<option ${x===p.pos?"selected":""}>${x}</option>`).join("")}</select></label><label>Age<input id="age" type="number" value="${p.age}"></label><label>Nationality<input id="nat" value="${p.nationality||"Indonesia"}"></label><label>Jersey Number<input id="jersey" type="number" min="1" max="99" value="${p.jerseyNumber||9}"></label><label>Potential<input id="pot" type="number" value="${p.potential}"></label><label>Player Photo<input id="photoFile" type="file" accept="image/*" onchange="loadPlayerPhoto(event)"></label></div><br><button class="btn primary" onclick="saveProfile()">Save Profile</button></div><div class="half card"><h3>Career Records</h3><p>Matches: ${p.matches}</p><p>Goals: ${p.goals}</p><p>Assists: ${p.assists}</p><p>Trophies: ${p.trophies}</p><p>Contract: ${p.contract} years · Release clause ${money(p.release)}</p><button class="btn danger" onclick="resetGame()">Reset Universe</button></div></div>`
+}
+function saveProfile(){S.player.name=document.getElementById("nm").value||"Player";S.player.pos=document.getElementById("ps").value;S.player.age=Number(document.getElementById("age").value);S.player.nationality=document.getElementById("nat").value||"Indonesia";S.player.nationalTeam=S.player.nationality;S.player.potential=Number(document.getElementById("pot").value);S.player.jerseyNumber=Math.max(1,Math.min(99,Number(document.getElementById("jersey").value)||9));save();render();toast("Profile updated")}
+function loadPlayerPhoto(e){const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>{S.player.photo=r.result;save();render();toast('Photo pemain tersimpan 📸')};r.readAsDataURL(f)}
+function creatorConsole(){
+ if(!S.creator.enabled)return;
+ openModal("👑 CREATOR MODE",`<p><b>Universe control:</b> ${S.creator.slots} relationship slots · ${S.creator.email||"creator account"}</p><div class="formgrid">
+ <label>Money (M)<input id="cmoney" type="number" value="${S.player.money}"></label><label>Fans<input id="cfans" type="number" value="${S.player.fans}"></label>
+ <label>Followers<input id="cfollowers" type="number" value="${S.player.followers}"></label><label>Reputation<input id="crep" type="number" value="${S.player.reputation}"></label>
+ <label>OVR<input id="covr" type="number" value="${S.player.ovr}"></label><label>Age<input id="cage" type="number" value="${S.player.age}"></label></div><br>
+ <div class="actions"><button class="btn primary" onclick="godSave()">Apply Changes</button><button class="btn gold" onclick="godMax()">MAX EVERYTHING</button><button class="btn" onclick="spawnNews()">Spawn World Event</button><button class="btn" onclick="creatorTime()">Time Travel</button><button class="btn danger" onclick="S.creator.enabled=false;S.creator.slots=4;save();closeModal();render()">Disable Creator</button></div>
+ <hr style="border-color:var(--line)"><h3>Relationship Control</h3><div class="list">${S.npc.map(n=>`<div class="item row"><span>${n.name} · ${n.status}</span><button class="btn small" onclick="forcePartner('${n.id}')">Force Partner</button></div>`).join("")}</div>`)
+}
+function godSave(){S.player.money=Number(document.getElementById("cmoney").value);S.player.fans=Number(document.getElementById("cfans").value);S.player.followers=Number(document.getElementById("cfollowers").value);S.player.reputation=Number(document.getElementById("crep").value);S.player.ovr=Math.min(99,Number(document.getElementById("covr").value));S.player.age=Number(document.getElementById("cage").value);save();closeModal();render();toast("Universe edited 👑")}
+function godMax(){S.player.money=999999;S.player.fans=9999999;S.player.followers=9999999;S.player.reputation=100;S.player.ovr=99;S.player.potential=99;S.player.energy=100;S.player.health=100;S.player.morale=100;S.player.form=100;Object.keys(S.player.stats).forEach(k=>S.player.stats[k]=99);S.player.level=50;save();closeModal();render();toast("GOD MODE ACTIVE 🗿")}
+function spawnNews(){worldNews();S.world.news[0].text="👑 CREATOR EVENT: "+pick(["A mega sponsor enters the league!","A mysterious transfer scandal shakes football!","A wonderkid appears out of nowhere!","A legendary manager returns!"]);save();creatorConsole()}
+function creatorTime(){let n=prompt("Advance days:", "365");if(n){advanceDays(Number(n));closeModal();toast("Time travel complete.")}}
+function forcePartner(id){let n=S.npc.find(x=>x.id===id);n.affection=100;n.trust=100;n.status="Partner";if(!S.relations.includes(id))S.relations.push(id);save();creatorConsole()}
+function resetGame(){const first=confirm('RESET TOTAL: semua career, relationship, family, trophies, inventory, money dan calendar akan kembali ke awal. Lanjut?');if(!first)return;const second=confirm('Yakin 100%? Ini tidak bisa dibatalkan.');if(!second)return;localStorage.removeItem(KEY);localStorage.removeItem(OLD_KEY);localStorage.removeItem(LEGACY_KEY);localStorage.removeItem(LEGACY_KEY_V2);location.reload()}
+function render(){
+ S.player.ovr=calcOVR();renderNav();document.getElementById("datePill").textContent=`${S.world.day}/${S.world.month}/${S.world.year} · ${S.world.season}`;
+ let view={home,career,market,business,social,dating,partners,family,life,shop,national:()=>headerCard()+nationalTeam(),awards,calendar,world,profile}[S.tab]||home;document.getElementById("app").innerHTML=view()
+}
+function login(){
+ openModal("WELCOME TO EAFC LIFE PRO",`<p>Build a football career while your social life, money, relationships and the football universe react to your decisions.</p>
+ <label>Name<input id="loginName" value="${S.player.name}"></label><br>
+ <label>Email<input id="loginEmail" type="email" placeholder="you@example.com" value="${S.creator.email||""}"></label><br><br>
+ <button class="btn primary" onclick="startCareer()">Start Career</button>
+ <p class="muted">Creator Mode otomatis terbuka untuk email creator yang terdaftar.</p>`)
+}
+function startCareer(){
+ const name=document.getElementById("loginName").value.trim()||"Player";
+ const email=document.getElementById("loginEmail").value.trim().toLowerCase();
+ S.player.name=name;S.creator.email=email;
+ if(CREATOR_EMAILS.includes(email)){S.creator.enabled=true;S.creator.slots=10;S.player.money=Math.max(S.player.money,50000);S.player.fans=Math.max(S.player.fans,500000);S.player.reputation=Math.max(S.player.reputation,90);toast("👑 Creator Mode unlocked!")}
+ S.logged=true;save();closeModal();render()
+}
+if(location.hash==="#creator"){S.creator.enabled=true;S.creator.slots=10}
+render();
+if(!S.logged)login();
+</script>
 </body>
 </html>

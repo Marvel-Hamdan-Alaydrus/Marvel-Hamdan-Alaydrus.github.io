@@ -60,7 +60,10 @@ const SPONSORS=[
 function clone(x){return JSON.parse(JSON.stringify(x))}
 function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a}
 function pick(a){return a[Math.floor(Math.random()*a.length)]}
+const LIMITS={OVR:99,STAT:99,POTENTIAL:99,LEVEL:50,AGE:45,REPUTATION:100,ENERGY:100,HEALTH:100,MORALE:100,FORM:100,AFFECTION:100,TRUST:100,JEALOUSY:100,FANS:600000000,FOLLOWERS:1000000000,MONEY_M:10000,SALARY_M:100,RELEASE_M:1000};
 function money(n){return "€"+Number(n).toLocaleString("id-ID")+"M"}
+function clampPlayer(){const p=S.player;if(!p)return;p.ovr=Math.max(1,Math.min(LIMITS.OVR,Number(p.ovr)||1));p.potential=Math.max(p.ovr,Math.min(LIMITS.POTENTIAL,Number(p.potential)||p.ovr));p.level=Math.max(1,Math.min(LIMITS.LEVEL,Number(p.level)||1));p.age=Math.max(16,Math.min(LIMITS.AGE,Number(p.age)||18));p.reputation=pct(Math.min(LIMITS.REPUTATION,Number(p.reputation)||0));p.energy=pct(p.energy);p.health=pct(p.health);p.morale=pct(p.morale);p.form=pct(p.form);p.fans=Math.max(0,Math.min(LIMITS.FANS,Math.floor(Number(p.fans)||0)));p.followers=Math.max(0,Math.min(LIMITS.FOLLOWERS,Math.floor(Number(p.followers)||0)));p.money=Math.max(0,Math.min(LIMITS.MONEY_M,Number(p.money)||0));p.salary=Math.max(0,Math.min(LIMITS.SALARY_M,Number(p.salary)||0));p.release=Math.max(0,Math.min(LIMITS.RELEASE_M,Number(p.release)||0));if(p.stats)Object.keys(p.stats).forEach(k=>p.stats[k]=Math.max(1,Math.min(LIMITS.STAT,Number(p.stats[k])||1)));return p}
+function clampWorld(){if(!S)return;clampPlayer();(S.npc||[]).forEach(n=>{n.age=Math.max(18,Math.min(100,Number(n.age)||18));n.affection=pct(n.affection);n.trust=pct(n.trust);n.jealousy=pct(n.jealousy)});(S.family?.children||[]).forEach(c=>c.age=Math.max(0,Math.min(100,Number(c.age)||0)));}
 function pct(n){return Math.max(0,Math.min(100,Math.round(n)))}
 function club(id){return clubs.find(c=>c.id===id)||clubs[0]}
 function starter(name){
@@ -232,11 +235,11 @@ function migrateV2(x){
  s.creator={enabled:Boolean(x.creator),slots:x.creator?10:4,email:x.email||""};
  return normalizeState(s)
 }
-function save(){localStorage.setItem(KEY,JSON.stringify(S))}
+function save(){clampWorld();localStorage.setItem(KEY,JSON.stringify(S))}
 function toast(t){let e=document.getElementById("toast");e.textContent=t;e.style.display="block";setTimeout(()=>e.style.display="none",1800)}
 function openModal(title,body){document.getElementById("modalTitle").textContent=title;document.getElementById("modalBody").innerHTML=body;document.getElementById("modal").classList.add("show")}
 function closeModal(){document.getElementById("modal").classList.remove("show")}
-function calcOVR(){let s=S.player.stats;let base=Math.round((s.PAC+s.SHO+s.PAS+s.DRI+s.DEF+s.PHY)/6);return Math.min(99,Math.round(base+(S.player.level-1)*1.4))}
+function calcOVR(){let s=S.player.stats;let base=Math.round((s.PAC+s.SHO+s.PAS+s.DRI+s.DEF+s.PHY)/6);return Math.min(LIMITS.OVR,Math.round(base+(S.player.level-1)*1.4))}
 function advanceDays(n=1){n=Math.max(1,Number(n)||1);dateAdvance(n);
  S.player.energy=Math.max(35,S.player.energy-rand(2,7));S.player.health=Math.max(50,S.player.health-rand(0,2));
  S.player.form=Math.max(30,Math.min(100,S.player.form+rand(-3,4)));
@@ -263,7 +266,7 @@ function transferRumor(){
  const c=pick(clubs.filter(c=>c.id!==s.player.clubId));
  s.world.news.unshift({day:`${S.world.day}/${S.world.month}`,text:`${c.name} reportedly likes your profile and is monitoring your form.`})
 }
-function addXP(x){S.player.xp+=x;let need=S.player.level*100;while(S.player.xp>=need){S.player.xp-=need;S.player.level++;S.player.potential=Math.max(S.player.potential,S.player.ovr);Object.keys(S.player.stats).forEach(k=>S.player.stats[k]+=rand(0,2));toast("LEVEL UP! 🔥");need=S.player.level*100}S.player.ovr=calcOVR()}
+function addXP(x){S.player.xp+=x;let need=S.player.level*100;while(S.player.xp>=need && S.player.level<LIMITS.LEVEL){S.player.xp-=need;S.player.level++;S.player.potential=Math.max(S.player.potential,S.player.ovr);Object.keys(S.player.stats).forEach(k=>S.player.stats[k]=Math.min(LIMITS.STAT,S.player.stats[k]+rand(0,2)));toast("LEVEL UP! 🔥");need=S.player.level*100}S.player.ovr=calcOVR()}
 function train(){
  if(S.player.energy<20)return toast("Energy kurang.");
  S.player.energy-=20;S.player.form=Math.min(100,S.player.form+5);S.player.morale=Math.min(100,S.player.morale+2);addXP(35);
@@ -332,7 +335,7 @@ function acceptTransfer(id){S.player.clubId=id;S.player.salary=Math.max(1,Math.r
 function setTab(t){S.tab=t;render()}
 function renderNav(){
  const tabs=[["home","🏠 Home"],["career","⚽ Career"],["market","🔁 Transfers"],["business","💼 Business"],["social","📱 Social"],["dating","❤️ Dating"],["partners","💞 Partners"],["family","👨‍👩‍👧 Family"],["life","🏠 Life"],["shop","🛒 Shop"],["national","🇮🇩 Timnas"],["awards","🏆 Trophies"],["calendar","📅 Calendar"],["world","🌍 World"],["profile","👤 Profile"]];
- document.getElementById("nav").innerHTML=tabs.map(([id,n])=>`<button class="${S.tab===id?"active":""}" onclick="setTab('${id}')">${n}</button>`).join("")+(S.creator.enabled?`<button class="gold" onclick="creatorConsole()">👑 Creator</button>`:"");
+ document.getElementById("nav").innerHTML=tabs.map(([id,n])=>`<button class="${S.tab===id?"active":""}" onclick="setTab('${id}')">${n}</button>`).join("")+(S.creator.enabled?`<button class="gold" onclick="creatorConsole()">👑 Creator</button>`:`<button class="gold" onclick="creatorRecovery()">🔐 Admin Recovery</button>`);
 }
 function headerCard(){
  let p=S.player,c=club(p.clubId);
@@ -437,10 +440,16 @@ function calendar(){return headerCard()+`<div class="card"><h3>📅 Career Calen
 function awards(){return headerCard()+trophyRoom()+nationalTeam()}
 function profile(){
  let p=S.player;
- return headerCard()+characterCard()+`<div class="grid"><div class="half card"><h3>Profile</h3><div class="formgrid"><label>Name<input id="nm" value="${p.name}"></label><label>Position<select id="ps">${POS.map(x=>`<option ${x===p.pos?"selected":""}>${x}</option>`).join("")}</select></label><label>Age<input id="age" type="number" value="${p.age}"></label><label>Nationality<input id="nat" value="${p.nationality||"Indonesia"}"></label><label>Jersey Number<input id="jersey" type="number" min="1" max="99" value="${p.jerseyNumber||9}"></label><label>Potential<input id="pot" type="number" value="${p.potential}"></label><label>Player Photo<input id="photoFile" type="file" accept="image/*" onchange="loadPlayerPhoto(event)"></label></div><br><button class="btn primary" onclick="saveProfile()">Save Profile</button></div><div class="half card"><h3>Career Records</h3><p>Matches: ${p.matches}</p><p>Goals: ${p.goals}</p><p>Assists: ${p.assists}</p><p>Trophies: ${p.trophies}</p><p>Contract: ${p.contract} years · Release clause ${money(p.release)}</p><button class="btn danger" onclick="resetGame()">Reset Universe</button></div></div>`
+ return headerCard()+characterCard()+`<div class="grid"><div class="half card"><h3>Profile</h3><div class="formgrid"><label>Name<input id="nm" value="${p.name}"></label><label>Position<select id="ps">${POS.map(x=>`<option ${x===p.pos?"selected":""}>${x}</option>`).join("")}</select></label><label>Age<input id="age" type="number" min="16" max="45" value="${p.age}"></label><label>Nationality<input id="nat" value="${p.nationality||"Indonesia"}"></label><label>Jersey Number<input id="jersey" type="number" min="1" max="99" value="${p.jerseyNumber||9}"></label><label>Potential<input id="pot" type="number" min="1" max="99" value="${p.potential}"></label><label>Player Photo<input id="photoFile" type="file" accept="image/*" onchange="loadPlayerPhoto(event)"></label></div><br><button class="btn primary" onclick="saveProfile()">Save Profile</button></div><div class="half card"><h3>Career Records</h3><p>Matches: ${p.matches}</p><p>Goals: ${p.goals}</p><p>Assists: ${p.assists}</p><p>Trophies: ${p.trophies}</p><p>Contract: ${p.contract} years · Release clause ${money(p.release)}</p><button class="btn danger" onclick="resetGame()">Reset Universe</button><button class="btn gold" onclick="creatorRecovery()">🔐 Admin Recovery</button></div></div>`
 }
 function saveProfile(){S.player.name=document.getElementById("nm").value||"Player";S.player.pos=document.getElementById("ps").value;S.player.age=Number(document.getElementById("age").value);S.player.nationality=document.getElementById("nat").value||"Indonesia";S.player.nationalTeam=S.player.nationality;S.player.potential=Number(document.getElementById("pot").value);S.player.jerseyNumber=Math.max(1,Math.min(99,Number(document.getElementById("jersey").value)||9));save();render();toast("Profile updated")}
 function loadPlayerPhoto(e){const f=e.target.files?.[0];if(!f)return;const r=new FileReader();r.onload=()=>{S.player.photo=r.result;save();render();toast('Photo pemain tersimpan 📸')};r.readAsDataURL(f)}
+function creatorRecovery(){
+ const email=(prompt("Admin Recovery — masukkan email creator:",S.creator.email||"")||"").trim().toLowerCase();
+ if(!CREATOR_EMAILS.includes(email))return toast("Email creator tidak terdaftar.");
+ S.creator.enabled=true;S.creator.slots=10;S.creator.email=email;S.logged=true;
+ save();render();toast("👑 Creator Mode berhasil dipulihkan!");
+}
 function creatorConsole(){
  if(!S.creator.enabled)return;
  openModal("👑 CREATOR MODE",`<p><b>Universe control:</b> ${S.creator.slots} relationship slots · ${S.creator.email||"creator account"}</p><div class="formgrid">
@@ -450,8 +459,8 @@ function creatorConsole(){
  <div class="actions"><button class="btn primary" onclick="godSave()">Apply Changes</button><button class="btn gold" onclick="godMax()">MAX EVERYTHING</button><button class="btn" onclick="spawnNews()">Spawn World Event</button><button class="btn" onclick="creatorTime()">Time Travel</button><button class="btn danger" onclick="S.creator.enabled=false;S.creator.slots=4;save();closeModal();render()">Disable Creator</button></div>
  <hr style="border-color:var(--line)"><h3>Relationship Control</h3><div class="list">${S.npc.map(n=>`<div class="item row"><span>${n.name} · ${n.status}</span><button class="btn small" onclick="forcePartner('${n.id}')">Force Partner</button></div>`).join("")}</div>`)
 }
-function godSave(){S.player.money=Number(document.getElementById("cmoney").value);S.player.fans=Number(document.getElementById("cfans").value);S.player.followers=Number(document.getElementById("cfollowers").value);S.player.reputation=Number(document.getElementById("crep").value);S.player.ovr=Math.min(99,Number(document.getElementById("covr").value));S.player.age=Number(document.getElementById("cage").value);save();closeModal();render();toast("Universe edited 👑")}
-function godMax(){S.player.money=999999;S.player.fans=9999999;S.player.followers=9999999;S.player.reputation=100;S.player.ovr=99;S.player.potential=99;S.player.energy=100;S.player.health=100;S.player.morale=100;S.player.form=100;Object.keys(S.player.stats).forEach(k=>S.player.stats[k]=99);S.player.level=50;save();closeModal();render();toast("GOD MODE ACTIVE 🗿")}
+function godSave(){S.player.money=Math.min(LIMITS.MONEY_M,Math.max(0,Number(document.getElementById("cmoney").value)||0));S.player.fans=Math.min(LIMITS.FANS,Math.max(0,Number(document.getElementById("cfans").value)||0));S.player.followers=Math.min(LIMITS.FOLLOWERS,Math.max(0,Number(document.getElementById("cfollowers").value)||0));S.player.reputation=pct(Number(document.getElementById("crep").value));S.player.ovr=Math.min(LIMITS.OVR,Math.max(1,Number(document.getElementById("covr").value)||1));S.player.age=Math.max(16,Math.min(LIMITS.AGE,Number(document.getElementById("cage").value)||18));save();closeModal();render();toast("Universe edited 👑") }
+function godMax(){S.player.money=LIMITS.MONEY_M;S.player.fans=LIMITS.FANS;S.player.followers=LIMITS.FOLLOWERS;S.player.reputation=100;S.player.ovr=99;S.player.potential=99;S.player.energy=100;S.player.health=100;S.player.morale=100;S.player.form=100;Object.keys(S.player.stats).forEach(k=>S.player.stats[k]=99);S.player.level=50;save();closeModal();render();toast("GOD MODE ACTIVE 🗿") }
 function spawnNews(){worldNews();S.world.news[0].text="👑 CREATOR EVENT: "+pick(["A mega sponsor enters the league!","A mysterious transfer scandal shakes football!","A wonderkid appears out of nowhere!","A legendary manager returns!"]);save();creatorConsole()}
 function creatorTime(){let n=prompt("Advance days:", "365");if(n){advanceDays(Number(n));closeModal();toast("Time travel complete.")}}
 function forcePartner(id){let n=S.npc.find(x=>x.id===id);n.affection=100;n.trust=100;n.status="Partner";if(!S.relations.includes(id))S.relations.push(id);save();creatorConsole()}
@@ -465,7 +474,7 @@ function login(){
  <label>Name<input id="loginName" value="${S.player.name}"></label><br>
  <label>Email<input id="loginEmail" type="email" placeholder="you@example.com" value="${S.creator.email||""}"></label><br><br>
  <button class="btn primary" onclick="startCareer()">Start Career</button>
- <p class="muted">Creator Mode otomatis terbuka untuk email creator yang terdaftar.</p>`)
+ <p class="muted">Creator Mode dapat dipulihkan kapan saja lewat tombol Admin Recovery dengan email creator yang terdaftar.</p>`)
 }
 function startCareer(){
  const name=document.getElementById("loginName").value.trim()||"Player";

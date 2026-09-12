@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>E-Football: Be A Pro</title>
+    <!-- Menggunakan Google Fonts untuk kesan modern -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #0a0f1d, #1a2942, #0d1b2a);
+            color: #ffffff;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 480px; /* Ukuran pas ala UI game mobile */
+            background: rgba(15, 23, 42, 0.85);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
+            padding: 30px 20px;
+            text-align: center;
+        }
+
+        /* Header Game */
+        .game-title {
+            font-size: 28px;
+            font-weight: 900;
+            color: #00d2ff;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            margin-bottom: 5px;
+            text-shadow: 0 0 10px rgba(0, 210, 255, 0.5);
+        }
+
+        .game-subtitle {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        /* Tampilan Form Email Creator */
+        .email-section {
+            background: rgba(30, 41, 59, 0.6);
+            padding: 15px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .email-section label {
+            display: block;
+            font-size: 12px;
+            color: #cbd5e1;
+            margin-bottom: 8px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .email-section input {
+            width: 100%;
+            padding: 10px 12px;
+            background: #0f172a;
+            border: 1px solid #334155;
+            border-radius: 8px;
+            color: #fff;
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .email-section input:focus {
+            border-color: #00d2ff;
+            box-shadow: 0 0 8px rgba(0, 210, 255, 0.3);
+        }
+
+        .status-badge {
+            margin-top: 8px;
+            font-size: 11px;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .status-badge.creator {
+            color: #10b981;
+        }
+
+        .status-badge.user {
+            color: #f59e0b;
+        }
+
+        /* Menu Pilihan Utama */
+        .menu-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .menu-btn {
+            background: linear-gradient(135deg, #1e293b, #334155);
+            color: #ffffff;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 14px;
+            border-radius: 12px;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .menu-btn:hover {
+            background: linear-gradient(135deg, #00d2ff, #3a7bd5);
+            color: #0f172a;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 210, 255, 0.4);
+            border-color: transparent;
+        }
+
+        .menu-btn span {
+            font-size: 18px;
+        }
+
+        /* Hidden class untuk navigasi layar nanti */
+        .hidden {
+            display: none !important;
+        }
+
+        /* Tombol Kembali / Navigasi Sementara */
+        .back-btn {
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- HOME PAGE SCREEN -->
+        <div id="home-screen">
+            <div class="game-title">E-Football</div>
+            <div class="game-subtitle">Be A Pro Career Simulator</div>
+
+            <!-- Input Email untuk Deteksi Creator / User -->
+            <div class="email-section">
+                <label for="user-email">Masukkan Email Anda:</label>
+                <input type="email" id="user-email" placeholder="contoh: admin@creator.com" oninput="checkEmailRole()">
+                <div id="role-status" class="status-badge user">Status: Standard User (Mode Acak)</div>
+            </div>
+
+            <!-- Pilihan Menu Utama -->
+            <div class="menu-list">
+                <button class="menu-btn" onclick="selectMenu('Karier Baru')">
+                    Karier Baru <span>⚽</span>
+                </button>
+                <button class="menu-btn" onclick="selectMenu('Mode Club')">
+                    Mode Club <span>🛡️</span>
+                </button>
+                <button class="menu-btn" onclick="selectMenu('Mode Kejuaraan Dunia')">
+                    Mode Kejuaraan Dunia <span>🏆</span>
+                </button>
+                <button class="menu-btn" onclick="selectMenu('Permainan Tersimpan')">
+                    Permainan Tersimpan <span>💾</span>
+                </button>
+                <button class="menu-btn" onclick="selectMenu('Pencapaian')">
+                    Pencapaian <span>🏅</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- SCREEN KONTEN SEMENTARA (UNTUK UJI KLIK MENU) -->
+        <div id="sub-screen" class="hidden">
+            <h2 id="screen-title" style="color: #00d2ff; margin-bottom: 15px;"></h2>
+            <p id="screen-desc" style="color: #94a3b8; font-size: 14px; margin-bottom: 20px;"></p>
+            <button class="back-btn" onclick="goHome()">Kembali ke Home</button>
+        </div>
+    </div>
+
+    <script>
+        // DAFTAR EMAIL CREATOR (Ganti atau tambahkan email Anda di sini)
+        const creatorEmails = [
+            "admin@creator.com",
+            "creatorasli@gmail.com",
+            "ownerfc@pro.com"
+        ];
+
+        let isCreatorMode = false;
+
+        // Fungsi untuk mendeteksi apakah email yang diketik adalah email Creator
+        function checkEmailRole() {
+            const emailInput = document.getElementById("user-email").value.trim().toLowerCase();
+            const statusBadge = document.getElementById("role-status");
+
+            if (creatorEmails.includes(emailInput)) {
+                isCreatorMode = true;
+                statusBadge.className = "status-badge creator";
+                statusBadge.innerText = "Status: 👑 Creator Mode Aktif (Custom Customization)";
+            } else {
+                isCreatorMode = false;
+                statusBadge.className = "status-badge user";
+                statusBadge.innerText = "Status: Standard User (Mode Random/Acak)";
+            }
+        }
+
+        // Fungsi Simulasi Pindah Menu
+        function selectMenu(menuName) {
+            const emailInput = document.getElementById("user-email").value.trim();
+            
+            // Validasi kecil jika klik Karier Baru
+            if (menuName === 'Karier Baru' && emailInput === "") {
+                alert("Harap masukkan email terlebih dahulu untuk menentukan mode Anda!");
+                document.getElementById("user-email").focus();
+                return;
+            }
+
+            // Sembunyikan home screen, tampilkan sub-screen
+            document.getElementById("home-screen").classList.add("hidden");
+            const subScreen = document.getElementById("sub-screen");
+            subScreen.classList.remove("hidden");
+
+            document.getElementById("screen-title").innerText = menuName;
+            
+            if (menuName === 'Karier Baru') {
+                document.getElementById("screen-desc").innerText = 
+                    `Berhasil masuk ke ${menuName}! Mode aktif Anda: ${isCreatorMode ? 'Custom Creator' : 'Standard (Acak)'}. Selanjutnya kita akan masuk ke tahap pemilihan Level Awal & Kesulitan.`;
+            } else {
+                document.getElementById("screen-desc").innerText = `Halaman untuk fitur ${menuName} sedang dipersiapkan.`;
+            }
+        }
+
+        // Fungsi Kembali ke Home
+        function goHome() {
+            document.getElementById("sub-screen").classList.add("hidden");
+            document.getElementById("home-screen").classList.remove("hidden");
+        }
+    </script>
+</body>
+</html>

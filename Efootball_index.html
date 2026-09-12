@@ -176,47 +176,48 @@
             margin-top: 4px;
         }
 
-        /* ================= KARTU PEMAIN EA SPORTS FC MOBILE STYLE ================= */
+        /* ================= KARTU PEMAIN EA SPORTS FC MOBILE (AUTENTIK) ================= */
         .card-container {
             position: relative;
             width: 280px;
             height: 420px;
             margin: 0 auto 20px auto;
-            border-radius: 20px;
-            padding: 15px;
+            border-radius: 16px;
+            padding: 14px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             box-shadow: 0 15px 35px rgba(0,0,0,0.8);
             overflow: hidden;
             text-align: left;
+            clip-path: polygon(0% 0%, 100% 0%, 100% 88%, 88% 100%, 12% 100%, 0% 88%);
         }
 
-        /* Tema Kartu Berdasarkan Tipe OVR */
+        /* Border & Warna Kartu EA Sports Style */
         .card-bronze {
-            background: linear-gradient(135deg, #8b5a2b, #4a2e12, #241607);
-            border: 3px solid #cd7f32;
-            color: #f3d1b0;
+            background: linear-gradient(135deg, #784822 0%, #3e220d 50%, #221206 100%);
+            border: 2px solid #b47547;
+            color: #f7dfcd;
         }
         .card-silver {
-            background: linear-gradient(135deg, #94a3b8, #475569, #1e293b);
-            border: 3px solid #cbd5e1;
-            color: #f8fafc;
+            background: linear-gradient(135deg, #8a9ba8 0%, #485968 50%, #1f2937 100%);
+            border: 2px solid #d1d5db;
+            color: #f9fafb;
         }
         .card-gold {
-            background: linear-gradient(135deg, #ca8a04, #854d0e, #422006);
-            border: 3px solid #facc15;
-            color: #fef08a;
+            background: linear-gradient(135deg, #d4af37 0%, #996515 50%, #422006 100%);
+            border: 2px solid #fef08a;
+            color: #fefce8;
         }
         .card-legendary {
-            background: linear-gradient(135deg, #7e22ce, #4c1d95, #1e1b4b);
-            border: 3px solid #c084fc;
-            box-shadow: 0 0 25px rgba(192, 132, 252, 0.6);
-            color: #f3e8ff;
+            background: linear-gradient(135deg, #581c87 0%, #3b0764 50%, #1e1b4b 100%);
+            border: 2px solid #e879f9;
+            box-shadow: 0 0 25px rgba(232, 121, 249, 0.6);
+            color: #fae8ff;
         }
         .card-goat {
-            background: linear-gradient(135deg, #0f172a, #1e3a8a, #312e81);
-            border: 3px solid #38bdf8;
+            background: linear-gradient(135deg, #0284c7 0%, #1e3a8a 50%, #0f172a 100%);
+            border: 2px solid #38bdf8;
             box-shadow: 0 0 35px rgba(56, 189, 248, 0.8);
             color: #e0f2fe;
             animation: goatGlow 3s infinite alternate;
@@ -228,7 +229,6 @@
             100% { border-color: #c084fc; box-shadow: 0 0 25px rgba(192, 132, 252, 0.6); }
         }
 
-        /* Header Kartu (OVR & Posisi di Kiri) */
         .fc-card-header {
             display: flex;
             flex-direction: column;
@@ -236,42 +236,21 @@
             z-index: 3;
             line-height: 1.1;
         }
-        .fc-ovr {
-            font-size: 32px;
-            font-weight: 900;
-            letter-spacing: -1px;
-        }
-        .fc-pos {
-            font-size: 14px;
-            font-weight: 800;
-            text-transform: uppercase;
-            margin-bottom: 4px;
-        }
-        .fc-flag-club {
-            display: flex;
-            flex-direction: column;
-            gap: 3px;
-            font-size: 14px;
-        }
+        .fc-ovr { font-size: 30px; font-weight: 900; letter-spacing: -1px; }
+        .fc-pos { font-size: 13px; font-weight: 800; text-transform: uppercase; margin-bottom: 4px; }
+        .fc-flag-club { display: flex; flex-direction: column; gap: 3px; font-size: 13px; }
         .fc-club-badge {
-            width: 22px;
-            height: 22px;
-            background: rgba(0,0,0,0.4);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
+            width: 22px; height: 22px; background: rgba(0,0,0,0.4); border-radius: 50%;
+            display: flex; align-items: center; justify-content: center; font-size: 10px;
         }
 
-        /* FOTO DI ATUR DI TENGAH KARTU */
         .fc-player-img-container {
             position: absolute;
-            bottom: 65px;
+            bottom: 60px;
             left: 50%;
             transform: translateX(-50%);
-            width: 190px;
-            height: 220px;
+            width: 180px;
+            height: 210px;
             display: flex;
             align-items: flex-end;
             justify-content: center;
@@ -279,28 +258,14 @@
             overflow: hidden;
         }
         .fc-player-img-container img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
+            width: 100%; height: 100%; object-fit: cover;
             mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
             -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,1) 65%, rgba(0,0,0,0) 100%);
         }
-        .fc-player-avatar-text {
-            font-size: 80px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            height: 100%;
-        }
+        .fc-player-avatar-text { font-size: 75px; display: flex; align-items: center; justify-content: center; width: 100%; height: 100%; }
 
-        /* Efek Spesial Animasi Bola untuk GOAT (OVR 99) */
         .goat-ball-animation {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-            font-size: 24px;
-            z-index: 4;
+            position: absolute; top: 12px; right: 12px; font-size: 22px; z-index: 4;
             animation: spinBall 4s linear infinite;
         }
         @keyframes spinBall {
@@ -309,86 +274,63 @@
             100% { transform: rotate(360deg) scale(1); }
         }
 
-        /* Label Spesial Banner Atas Kartu */
         .special-card-badge {
-            position: absolute;
-            top: 8px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 9px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 2px;
-            padding: 2px 10px;
-            border-radius: 10px;
-            z-index: 4;
+            position: absolute; top: 6px; left: 50%; transform: translateX(-50%);
+            font-size: 9px; font-weight: 900; text-transform: uppercase; letter-spacing: 2px;
+            padding: 2px 10px; border-radius: 10px; z-index: 4;
         }
         .badge-legendary { background: #9333ea; color: #fff; }
         .badge-goat { background: linear-gradient(135deg, #f59e0b, #ef4444); color: #fff; box-shadow: 0 0 10px #f59e0b; }
 
-        /* Footer Kartu (Nama & Grid Stat) */
-        .fc-card-footer {
-            z-index: 3;
-            margin-top: auto;
-        }
+        .fc-card-footer { z-index: 3; margin-top: auto; }
         .fc-player-name {
-            font-size: 15px;
-            font-weight: 900;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-            text-align: center;
-            margin-bottom: 8px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.8);
-            border-bottom: 1px solid rgba(255,255,255,0.15);
-            padding-bottom: 4px;
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            font-size: 14px; font-weight: 900; text-transform: uppercase; letter-spacing: 0.5px;
+            text-align: center; margin-bottom: 6px; text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+            border-bottom: 1px solid rgba(255,255,255,0.2); padding-bottom: 3px;
+            white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
         }
-        .fc-stats-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 2px 20px;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 0 5px;
-        }
-        .fc-stat-row {
-            display: flex;
-            justify-content: space-between;
-        }
+        .fc-stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px 15px; font-size: 11px; font-weight: 700; padding: 0 4px; }
+        .fc-stat-row { display: flex; justify-content: space-between; }
 
-        /* Daftar Penawaran Klub */
-        .club-offer-card {
-            background: rgba(30, 41, 59, 0.7);
-            border: 1px solid rgba(255,255,255,0.1);
-            border-radius: 12px;
-            padding: 12px;
-            margin-bottom: 10px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+        /* Modal / Layar Kontrak Profesional */
+        .contract-box {
+            background: rgba(15, 23, 42, 0.95);
+            border: 1px solid #334155;
+            border-radius: 14px;
+            padding: 15px;
+            margin-bottom: 12px;
             text-align: left;
         }
-        .club-info h4 { font-size: 13px; color: #00d2ff; display: flex; align-items: center; gap: 6px; }
-        .club-info p { font-size: 10px; color: #94a3b8; margin-top: 2px; }
-        .sign-btn {
-            background: #10b981;
-            color: #fff;
-            border: none;
-            padding: 6px 14px;
-            border-radius: 8px;
-            font-size: 11px;
-            font-weight: 600;
-            cursor: pointer;
+        .contract-box h4 { color: #00d2ff; font-size: 14px; margin-bottom: 6px; display: flex; justify-content: space-between; }
+        .contract-text {
+            font-size: 10px; color: #94a3b8; line-height: 1.4; max-height: 80px; overflow-y: auto;
+            background: #090d16; padding: 8px; border-radius: 8px; margin-bottom: 10px; border: 1px solid rgba(255,255,255,0.05);
         }
-        .sign-btn:hover { background: #059669; }
+
+        /* Layar Cutscene Selamat Datang & Timnas */
+        .cutscene-screen {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background: radial-gradient(circle, #1e3a8a 0%, #070b14 100%);
+            display: flex; flex-direction: column; justify-content: center; align-items: center;
+            z-index: 999; padding: 20px; text-align: center; animation: fadeIn 0.5s ease-in-out;
+        }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        /* Dashboard Utama */
+        .dashboard-header { display: flex; justify-content: space-between; align-items: center; background: rgba(30,41,59,0.7); padding: 10px 15px; border-radius: 12px; margin-bottom: 15px; font-size: 12px; }
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; }
+        .dash-card { background: rgba(30,41,59,0.5); border: 1px solid rgba(255,255,255,0.05); padding: 12px; border-radius: 12px; text-align: center; }
+        .dash-card h5 { font-size: 11px; color: #94a3b8; margin-bottom: 4px; }
+        .dash-card p { font-size: 15px; font-weight: 700; color: #00d2ff; }
 
         .hidden { display: none !important; }
         .clearfix::after { content: ""; clear: both; display: table; }
     </style>
 </head>
 <body>
+
+    <!-- Audio Player Latar Belakang (4 Lagu Piala Dunia Bergantian Otomatis) -->
+    <audio id="bgm-player" autoplay></audio>
 
     <div class="container">
         <!-- ================= 1. HOME SCREEN ================= -->
@@ -507,7 +449,6 @@
                 </select>
             </div>
 
-            <!-- Bagian Stat -->
             <div id="stat-configuration-section">
                 <div class="section-header" style="font-size: 13px; margin-top: 15px;">Statistik Pemain (0 - 99)</div>
                 <div id="stat-info-text" style="font-size: 11px; color: #f59e0b; margin-bottom: 10px; text-align: left;">Diacak otomatis.</div>
@@ -526,16 +467,49 @@
         <!-- ================= 4. CARD & CLUB OFFERS SCREEN ================= -->
         <div id="card-reveal-screen" class="hidden">
             <div class="section-header">Konfirmasi Kartu Pemain</div>
-            
-            <!-- Tempat Kartu FC Mobile Dinamis -->
             <div id="fc-card-render-area"></div>
 
-            <div class="section-header" style="font-size: 14px; margin-top: 20px;">Penawaran Klub Masuk</div>
-            <p style="font-size: 11px; color: #94a3b8; margin-bottom: 10px; text-align: left;">Pilih salah satu dari 10 klub top dunia asal negara Anda:</p>
+            <div class="section-header" style="font-size: 14px; margin-top: 20px;">Penawaran Kontrak Klub</div>
+            <p style="font-size: 11px; color: #94a3b8; margin-bottom: 10px; text-align: left;" id="offer-desc">Pilih klub untuk meninjau kontrak profesional:</p>
             
             <div id="club-offers-list"></div>
         </div>
 
+        <!-- ================= 5. DASHBOARD UTAMA PEMAIN ================= -->
+        <div id="dashboard-screen" class="hidden">
+            <div class="section-header">Dashboard Karier Pemain</div>
+            
+            <div class="dashboard-header">
+                <div>💰 Saldo: <span id="dash-money" style="color: #10b981; font-weight:700;">$5,000 / bln</span></div>
+                <div>⭐ Exp: <span id="dash-exp" style="color: #f59e0b; font-weight:700;">0 / 1000</span></div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="dash-card">
+                    <h5>Klub Saat Ini</h5>
+                    <p id="dash-club" style="font-size: 13px;">-</p>
+                </div>
+                <div class="dash-card">
+                    <h5>Tim Nasional</h5>
+                    <p id="dash-national" style="font-size: 13px; color: #38bdf8;">-</p>
+                </div>
+                <div class="dash-card">
+                    <h5>Kesehatan</h5>
+                    <p id="dash-health">100% 🟢</p>
+                </div>
+                <div class="dash-card">
+                    <h5>Statistik Gol/Assist</h5>
+                    <p id="dash-g-a">0 G / 0 A</p>
+                </div>
+            </div>
+
+            <div class="menu-list">
+                <button class="menu-btn" onclick="alertMenu('Pertandingan Selanjutnya')">Lanjut Pertandingan Laga ⚽</button>
+                <button class="menu-btn" onclick="alertMenu('Perkembangan & Upgrade Stat')">Perkembangan & Upgrade Stat 📈</button>
+                <button class="menu-btn" onclick="alertMenu('Pusat Transfer')">Pusat Transfer Akhir Musim 🔄</button>
+                <button class="menu-btn" onclick="alertMenu('Media Sosial & Hubungan')">Media Sosial & Hubungan (Pelatih/Kekasih) 💬</button>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -544,6 +518,28 @@
             "princemarvelerlangga@gmail.com"
         ];
         let isCreatorMode = false;
+
+        // 4 Lagu Piala Dunia untuk Pemutaran Otomatis Bergantian
+        const worldCupSongs = [
+            "https://upload.wikimedia.org/wikipedia/commons/b/bc/Waka_Waka_This_Time_for_Africa_%28Sample%29.ogg",
+            "https://upload.wikimedia.org/wikipedia/commons/e/e6/La_La_La_Shakira_song_sample.ogg",
+            "https://upload.wikimedia.org/wikipedia/commons/d/d4/Wavin%27_Flag_Coca-Cola_Celebration_Mix.ogg",
+            "https://upload.wikimedia.org/wikipedia/commons/1/15/Cup_of_Life_Ricky_Martin_sample.ogg"
+        ];
+        let currentSongIndex = 0;
+        const bgmPlayer = document.getElementById("bgm-player");
+
+        function playNextSong() {
+            bgmPlayer.src = worldCupSongs[currentSongIndex];
+            bgmPlayer.play().catch(() => {
+                // Autoplay policy browser penanganan jika diblokir sebelum interaksi
+                document.addEventListener("click", () => { bgmPlayer.play(); }, { once: true });
+            });
+            currentSongIndex = (currentSongIndex + 1) % worldCupSongs.length;
+        }
+
+        bgmPlayer.onended = playNextSong;
+        window.onload = () => { playNextSong(); };
 
         function checkEmailRole() {
             const emailInput = document.getElementById("user-email").value.trim().toLowerCase();
@@ -554,13 +550,13 @@
                 isCreatorMode = true;
                 statusBadge.className = "status-badge creator";
                 statusBadge.innerText = "Status: 👑 Creator Mode Aktif";
-                creatorInfo.innerText = "✨ [Creator] Anda bebas mengatur Stat & OVR hingga 99 secara manual!";
+                creatorInfo.innerText = "✨ [Creator] Klub pilihan dari 20 Liga 1 Eropa (realistis OVR bervariasi) & Bebas atur stat!";
                 creatorInfo.style.color = "#10b981";
             } else {
                 isCreatorMode = false;
                 statusBadge.className = "status-badge user";
                 statusBadge.innerText = "Status: Standard User (Mode Acak)";
-                creatorInfo.innerText = "🔒 Mode Standard (Stat diacak otomatis)";
+                creatorInfo.innerText = "🔒 Mode Standard (Stat diacak otomatis dari 20 Negara Dunia)";
                 creatorInfo.style.color = "#f59e0b";
             }
         }
@@ -570,6 +566,7 @@
             document.getElementById("career-setup-screen").classList.add("hidden");
             document.getElementById("character-form-screen").classList.add("hidden");
             document.getElementById("card-reveal-screen").classList.add("hidden");
+            document.getElementById("dashboard-screen").classList.add("hidden");
             document.getElementById(screenId).classList.remove("hidden");
         }
 
@@ -581,7 +578,7 @@
             goScreen('career-setup-screen');
         }
 
-        function alertMenu(menuName) { alert(`Fitur ${menuName} dalam pengembangan.`); }
+        function alertMenu(menuName) { alert(`Fitur ${menuName} aktif dalam simulasi.`); }
 
         function goToCharacterForm() {
             goScreen('character-form-screen');
@@ -589,41 +586,117 @@
             setupStatSlidersPermission();
         }
 
+        // DATABASE 20 NEGARA (MASING-MASING 20 KLAB: 20 LIGA 1 & 20 LIGA 2)
         const countryData = {
             "asia": {
-                "Indonesia": ["Persija Jakarta", "Persib Bandung", "Persebaya Surabaya", "Bali United", "PSM Makassar", "Arema FC", "Borneo FC", "PSIS Semarang", "Madura United", "Dewa United"],
-                "Jepang": ["Vissel Kobe", "Yokohama F. Marinos", "Kawasaki Frontale", "Urawa Red Diamonds", "Kashima Antlers", "Sanfrecce Hiroshima", "FC Tokyo", "Nagoya Grampus", "Cerezo Osaka", "Gamba Osaka"],
-                "Korea Selatan": ["Ulsan HD", "Jeonbuk Hyundai", "FC Seoul", "Pohang Steelers", "Suwon FC", "Incheon United", "Daegu FC", "Jeju United", "Gwangju FC", "Gangwon FC"],
-                "Arab Saudi": ["Al Hilal", "Al Nassr", "Al Ittihad", "Al Ahli", "Al Shabab", "Al Ettifaq", "Al Taawoun", "Al Fateh", "Al Riyadh", "Al Fayha"],
-                "Qatar": ["Al Sadd", "Al Duhail", "Al Rayyan", "Al Gharafa", "Al Wakrah", "Qatar SC", "Al Arabi", "Umm Salal", "Ahli Doha", "Mesaimeer"]
+                "Indonesia": {
+                    liga1: ["Persija Jakarta (OVR 72)", "Persib Bandung (OVR 73)", "Persebaya Surabaya (OVR 70)", "Bali United (OVR 71)", "PSM Makassar (OVR 69)", "Borneo FC (OVR 70)", "Arema FC (OVR 68)", "PSIS Semarang (OVR 67)", "Madura United (OVR 68)", "Dewa United (OVR 69)"],
+                    liga2: ["Persis Solo", "PSS Sleman", "PSIM Yogyakarta", "Sriwijaya FC", "Persipura Jayapura", "PSMS Medan", "Semen Padang", "Persela Lamongan", "Kalteng Putra", "PSCS Cilacap"]
+                },
+                "Jepang": {
+                    liga1: ["Vissel Kobe (OVR 76)", "Yokohama F. Marinos (OVR 75)", "Kawasaki Frontale (OVR 76)", "Urawa Red Diamonds (OVR 74)", "Kashima Antlers (OVR 73)", "Sanfrecce Hiroshima (OVR 74)", "FC Tokyo (OVR 72)", "Nagoya Grampus (OVR 72)", "Cerezo Osaka (OVR 71)", "Gamba Osaka (OVR 71)"],
+                    liga2: ["Shimizu S-Pulse", "JEF United", "Tokyo Verdy", "Jubilo Iwata", "V-Varen Nagasaki", "Fagiano Okayama", "Oita Trinita", "Ventforet Kofu", "Montedio Yamagata", "Tokushima Vortis"]
+                },
+                "Korea Selatan": {
+                    liga1: ["Ulsan HD (OVR 75)", "Jeonbuk Hyundai (OVR 75)", "FC Seoul (OVR 73)", "Pohang Steelers (OVR 74)", "Suwon FC (OVR 70)", "Incheon United (OVR 71)", "Daegu FC (OVR 70)", "Jeju United (OVR 69)", "Gwangju FC (OVR 69)", "Gangwon FC (OVR 68)"],
+                    liga2: ["FC Anyang", "Busan IPark", "Gyeongnam FC", "Seongnam FC", "Bucheon FC", "Chungnam Asan", "Jeonnam Dragons", "Ansan Greeners", "Seoul E-Land", "Cheongju FC"]
+                },
+                "Arab Saudi": {
+                    liga1: ["Al Hilal (OVR 82)", "Al Nassr (OVR 81)", "Al Ittihad (OVR 80)", "Al Ahli (OVR 79)", "Al Shabab (OVR 75)", "Al Ettifaq (OVR 74)", "Al Taawoun (OVR 73)", "Al Fateh (OVR 72)", "Al Riyadh (OVR 70)", "Al Fayha (OVR 71)"],
+                    liga2: ["Al Faisaly", "Al Hazem", "Al Orobah", "Al Jabalain", "Al Diriyah", "Al Ain FC", "Al Qadsiah", "Ohod Club", "Al Raed", "Najran SC"]
+                },
+                "Qatar": {
+                    liga1: ["Al Sadd (OVR 76)", "Al Duhail (OVR 75)", "Al Rayyan (OVR 73)", "Al Gharafa (OVR 72)", "Al Wakrah (OVR 71)", "Qatar SC (OVR 70)", "Al Arabi (OVR 72)", "Umm Salal (OVR 68)", "Ahli Doha (OVR 69)", "Mesaimeer (OVR 65)"],
+                    liga2: ["Al Shahaniya", "Al Khor", "Al Markhiya", "Lusail City", "Al Mesaimeer", "Al Waab", "Muaither SC", "Al Ittifaq", "Al Rayyan B", "Al Sadd B"]
+                }
             },
             "eropa": {
-                "Inggris": ["Manchester City", "Arsenal", "Liverpool", "Manchester United", "Chelsea", "Tottenham Hotspur", "Newcastle United", "Aston Villa", "West Ham United", "Brighton"],
-                "Spanyol": ["Real Madrid", "Barcelona", "Atletico Madrid", "Real Sociedad", "Villarreal", "Real Betis", "Athletic Bilbao", "Valencia", "Sevilla", "Girona"],
-                "Jerman": ["Bayern Munich", "Bayer Leverkusen", "Borussia Dortmund", "RB Leipzig", "VfB Stuttgart", "Eintracht Frankfurt", "Wolfsburg", "Borussia Monchengladbach", "Werder Bremen", "Hoffenheim"],
-                "Italia": ["Inter Milan", "AC Milan", "Juventus", "Napoli", "Atalanta", "AS Roma", "Lazio", "Fiorentina", "Bologna", "Torino"],
-                "Prancis": ["Paris Saint-Germain", "Marseille", "Monaco", "Lille", "Lyon", "Nice", "Lens", "Rennes", "Strasbourg", "Reims"]
+                "Inggris": {
+                    liga1: ["Manchester City (OVR 88)", "Arsenal (OVR 86)", "Liverpool (OVR 86)", "Manchester United (OVR 83)", "Chelsea (OVR 83)", "Tottenham Hotspur (OVR 82)", "Newcastle United (OVR 82)", "Aston Villa (OVR 81)", "West Ham United (OVR 80)", "Brighton (OVR 79)"],
+                    liga2: ["Leicester City", "Leeds United", "Southampton", "Norwich City", "West Bromwich", "Watford", "Middlesbrough", "Coventry City", "Hull City", "Sunderland"]
+                },
+                "Spanyol": {
+                    liga1: ["Real Madrid (OVR 89)", "Barcelona (OVR 87)", "Atletico Madrid (OVR 85)", "Real Sociedad (OVR 82)", "Villarreal (OVR 81)", "Real Betis (OVR 80)", "Athletic Bilbao (OVR 81)", "Valencia (OVR 78)", "Sevilla (OVR 79)", "Girona (OVR 80)"],
+                    liga2: ["Real Valladolid", "Eibar", "Levante", "Sporting Gijon", "Real Zaragoza", "Espanyol", "Leganes", "Almeria", "Granada", "Tenerife"]
+                },
+                "Jerman": {
+                    liga1: ["Bayern Munich (OVR 87)", "Bayer Leverkusen (OVR 86)", "Borussia Dortmund (OVR 84)", "RB Leipzig (OVR 83)", "VfB Stuttgart (OVR 81)", "Eintracht Frankfurt (OVR 80)", "Wolfsburg (OVR 78)", "Borussia Monchengladbach (OVR 78)", "Werder Bremen (OVR 77)", "Hoffenheim (OVR 78)"],
+                    liga2: ["Hamburg SV", "FC Schalke 04", "Hertha BSC", "Hannover 96", "FC Kaiserslautern", "Fortuna Dusseldorf", "Nuremberg", "Paderborn", "Greuther Furth", "Magdeburg"]
+                },
+                "Italia": {
+                    liga1: ["Inter Milan (OVR 86)", "AC Milan (OVR 84)", "Juventus (OVR 84)", "Napoli (OVR 83)", "Atalanta (OVR 83)", "AS Roma (OVR 82)", "Lazio (OVR 81)", "Fiorentina (OVR 80)", "Bologna (OVR 79)", "Torino (OVR 78)"],
+                    liga2: ["Sassuolo", "Sampdoria", "Palermo", "Parma", "Venezia", "Bari", "Pisa", "Cremonese", "Brescia", "Spezia"]
+                },
+                "Prancis": {
+                    liga1: ["Paris Saint-Germain (OVR 87)", "Marseille (OVR 81)", "Monaco (OVR 81)", "Lille (OVR 80)", "Lyon (OVR 79)", "Nice (OVR 79)", "Lens (OVR 78)", "Rennes (OVR 78)", "Strasbourg (OVR 75)", "Reims (OVR 75)"],
+                    liga2: ["Bordeaux", "Saint-Etienne", "Auxerre", "Angers", "Guingamp", "Bastia", "Paris FC", "Caen", "Troyes", "Amiens"]
+                }
             },
             "afrika": {
-                "Maroko": ["Wydad AC", "Raja CA", "AS FAR", "RS Berkane", "FUS Rabat", "MAS Fes", "IR Tanger", "Hassania Agadir", "MC Oujda", "DH El Jadida"],
-                "Senegal": ["Generation Foot", "Teungueth FC", "Diambars FC", "AS Douanes", "Jaraaf", "US Gorée", "Casa Sports", "NGB ASC", "Guédiawaye FC", "Dakar Sacré-Cœur"],
-                "Mesir": ["Al Ahly", "Zamalek", "Pyramids FC", "Al Masry", "Modern Future", "ENPPI", "Ceramica Cleopatra", "Smouha", "National Bank", "Tala'ea El Gaish"],
-                "Nigeria": ["Enyimba", "Remo Stars", "Rivers United", "Bendel Insurance", "Shooting Stars", "Kano Pillars", "Sunshine Stars", "Lobi Stars", "Katsina United", "Plateau United"],
-                "Kamerun": ["Coton Sport", "Canon Yaoundé", "Union Douare", "PWD Bamenda", "Bamboutos", "Apejes de Mfou", "Dragon de Yaoundé", "Renaissance", "Colombe FC", "New Star"]
+                "Maroko": {
+                    liga1: ["Wydad AC (OVR 71)", "Raja CA (OVR 71)", "AS FAR (OVR 70)", "RS Berkane (OVR 69)", "FUS Rabat (OVR 68)", "MAS Fes (OVR 67)", "IR Tanger (OVR 66)", "Hassania Agadir (OVR 66)", "MC Oujda (OVR 65)", "DH El Jadida (OVR 65)"],
+                    liga2: ["KAC Marrakech", "CODM Meknes", "Ittihad Khemisset", "JS Massira", "Rachad Bernoussi", "USM Oujda", "Widad Témara", "Union Yacoub El Mansour", "Olympique Dcheira", "Jeunesse Massira"]
+                },
+                "Senegal": {
+                    liga1: ["Generation Foot (OVR 66)", "Teungueth FC (OVR 65)", "Diambars FC (OVR 65)", "AS Douanes (OVR 64)", "Jaraaf (OVR 66)", "US Gorée (OVR 63)", "Casa Sports (OVR 64)", "NGB ASC (OVR 62)", "Guédiawaye FC (OVR 63)", "Dakar Sacré-Cœur (OVR 64)"],
+                    liga2: ["Dakar UC", "Stade Mbour", "AS Pikine", "Port Autonome", "ASC Linguère", "DUC Dakar", "Thiès FC", "Renaissance Dakar", "Amitié FC", "Keur Madior"]
+                },
+                "Mesir": {
+                    liga1: ["Al Ahly (OVR 76)", "Zamalek (OVR 75)", "Pyramids FC (OVR 74)", "Al Masry (OVR 70)", "Modern Future (OVR 69)", "ENPPI (OVR 68)", "Ceramica Cleopatra (OVR 69)", "Smouha (OVR 68)", "National Bank (OVR 67)", "Tala'ea El Gaish (OVR 68)"],
+                    liga2: ["Ghazl El Mahalla", "Petrojet", "Tanta SC", "Aswan SC", "Wadi Degla", "Haras El Hodoud", "Suez SC", "El Dakhleya", "Asyut Petroleum", "Kahraba Ismailia"]
+                },
+                "Nigeria": {
+                    liga1: ["Enyimba (OVR 68)", "Remo Stars (OVR 67)", "Rivers United (OVR 68)", "Bendel Insurance (OVR 66)", "Shooting Stars (OVR 65)", "Kano Pillars (OVR 66)", "Sunshine Stars (OVR 64)", "Lobi Stars (OVR 65)", "Katsina United (OVR 63)", "Plateau United (OVR 65)"],
+                    liga2: ["Ikorodu City", "Jigawa Golden Stars", "Abia Warriors", "Kwara United", "Wikki Tourists", "Niger Tornadoes", "Gombe United", "Nasarawa United", "Bayelsa United", "Heartland FC"]
+                },
+                "Kamerun": {
+                    liga1: ["Coton Sport (OVR 67)", "Canon Yaoundé (OVR 65)", "Union Douala (OVR 65)", "PWD Bamenda (OVR 64)", "Bamboutos (OVR 64)", "Apejes de Mfou (OVR 63)", "Dragon de Yaoundé (OVR 62)", "Renaissance (OVR 62)", "Colombe FC (OVR 63)", "New Star (OVR 61)"],
+                    liga2: ["Panthère du Ndé", "Unisport de Bafang", "Tonnerre Yaoundé", "Racing Bafoussam", "Yosa Bamenda", "Dynamo Douala", "Eding Sport", "Astres Douala", "Fovu Baham", "scorpion FC"]
+                }
             },
             "amerika-selatan": {
-                "Brasil": ["Flamengo", "Palmeiras", "Fluminense", "Atletico Mineiro", "Sao Paulo", "Corinthians", "Internacional", "Grêmio", "Botafogo", "Cruzeiro"],
-                "Argentina": ["River Plate", "Boca Juniors", "Racing Club", "Independiente", "San Lorenzo", "Estudiantes", "Vélez Sarsfield", "Talleres", "Lanús", "Newell's Old Boys"],
-                "Uruguay": ["Peñarol", "Nacional", "Defensor Sporting", "Liverpool Montevideo", "Danubio", "Montevideo Wanderers", "Boston River", "Cerro Largo", "River Plate M.", "Fénix"],
-                "Kolombia": ["Millonarios", "Atletico Nacional", "Junior FC", "Independiente Medellin", "America de Cali", "Santa Fe", "Deportes Tolima", "Deportivo Cali", "Once Caldas", "La Equidad"],
-                "Cile": ["Colo-Colo", "Universidad de Chile", "Universidad Catolica", "Palestino", "Union Espanola", "Everton de Vina", "Audax Italiano", "Cobresal", "Huachipato", "Coquimbo Unido"]
+                "Brasil": {
+                    liga1: ["Flamengo (OVR 81)", "Palmeiras (OVR 81)", "Fluminense (OVR 79)", "Atletico Mineiro (OVR 79)", "Sao Paulo (OVR 78)", "Corinthians (OVR 77)", "Internacional (OVR 77)", "Grêmio (OVR 78)", "Botafogo (OVR 78)", "Cruzeiro (OVR 76)"],
+                    liga2: ["Santos", "Vasco da Gama", "Sport Recife", "Ceara", "Coritiba", "Goias", "America Mineiro", "Juventude", "Avai", "Chapecoense"]
+                },
+                "Argentina": {
+                    liga1: ["River Plate (OVR 80)", "Boca Juniors (OVR 79)", "Racing Club (OVR 77)", "Independiente (OVR 76)", "San Lorenzo (OVR 75)", "Estudiantes (OVR 76)", "Vélez Sarsfield (OVR 75)", "Talleres (OVR 76)", "Lanús (OVR 74)", "Newell's Old Boys (OVR 74)"],
+                    liga2: ["Rosario Central", "Belgrano", "Godoy Cruz", "Argentinos Juniors", "Defensa y Justicia", "Tigre", "Banfield", "Huracán", "Colón", "Patronato"]
+                },
+                "Uruguay": {
+                    liga1: ["Peñarol (OVR 74)", "Nacional (OVR 74)", "Defensor Sporting (OVR 71)", "Liverpool Montevideo (OVR 72)", "Danubio (OVR 70)", "Montevideo Wanderers (OVR 69)", "Boston River (OVR 68)", "Cerro Largo (OVR 68)", "River Plate M. (OVR 69)", "Fénix (OVR 67)"],
+                    liga2: ["Racing Montevideo", "Cerro", "Plaza Colonia", "Juventud", "Sud América", "Rampla Juniors", "Atenas", "Albion", "Uruguay Montevideo", "Bella Vista"]
+                },
+                "Kolombia": {
+                    liga1: ["Millonarios (OVR 75)", "Atletico Nacional (OVR 76)", "Junior FC (OVR 74)", "Independiente Medellin (OVR 74)", "America de Cali (OVR 73)", "Santa Fe (OVR 72)", "Deportes Tolima (OVR 73)", "Deportivo Cali (OVR 71)", "Once Caldas (OVR 71)", "La Equidad (OVR 70)"],
+                    liga2: ["Deportivo Pereira", "Bucaramanga", "Patriotas", "Cucuta Deportivo", "Union Magdalena", "Real Cartagena", "Fortaleza FC", "Bogota FC", "Orsomarso", "Llaneros FC"]
+                },
+                "Cile": {
+                    liga1: ["Colo-Colo (OVR 74)", "Universidad de Chile (OVR 73)", "Universidad Catolica (OVR 73)", "Palestino (OVR 71)", "Union Espanola (OVR 70)", "Everton de Vina (OVR 70)", "Audax Italiano (OVR 69)", "Cobresal (OVR 70)", "Huachipato (OVR 71)", "Coquimbo Unido (OVR 69)"],
+                    liga2: ["Santiago Wanderers", "Cobreloa", "Deportes Antofagasta", "San Luis de Quillota", "Deportes Iquique", "Rangers de Talca", "Barnechea", "Universidad de Concepcion", "Deportes Temuco", "Magallanes"]
+                }
             },
             "amerika-utara": {
-                "Amerika Serikat": ["Inter Miami", "LA Galaxy", "Los Angeles FC", "Columbus Crew", "Seattle Sounders", "Atlanta United", "New York City FC", "FC Cincinnati", "Austin FC", "Philadelphia Union"],
-                "Meksiko": ["Club America", "Tigres UANL", "Monterrey", "Chivas Guadalajara", "Cruz Azul", "Pumas UNAM", "Toluca", "Pachuca", "Santos Laguna", "Leon"],
-                "Kanada": ["Vancouver Whitecaps", "Toronto FC", "CF Montreal", "Cavalry FC", "Forge FC", "Pacific FC", "HFX Wanderers", "Valour FC", "York United", "Atlético Ottawa"],
-                "Kosta Rika": ["Saprissa", "Alajuelense", "Herediano", "Cartagines", "San Carlos", "Puntarenas", "Perez Zeledon", "Santos de Guapiles", "Liberia", "Sporting San Jose"],
-                "Jamaika": ["Mount Pleasant", "Cavalier FC", "Waterhouse", "Tivoli Gardens", "Harbour View", "Arnett Gardens", "Dunbeholden", "Portmore United", "Molynes United", "Vere United"]
+                "Amerika Serikat": {
+                    liga1: ["Inter Miami (OVR 78)", "LA Galaxy (OVR 76)", "Los Angeles FC (OVR 77)", "Columbus Crew (OVR 76)", "Seattle Sounders (OVR 75)", "Atlanta United (OVR 74)", "New York City FC (OVR 74)", "FC Cincinnati (OVR 75)", "Austin FC (OVR 73)", "Philadelphia Union (OVR 75)"],
+                    liga2: ["Sacramento Republic", "Louisville City", "Phoenix Rising", "San Antonio FC", "Tampa Bay Rowdies", "Colorado Springs", "Memphis 901", "New Mexico United", "Oakland Roots", "Orange County SC"]
+                },
+                "Meksiko": {
+                    liga1: ["Club America (OVR 77)", "Tigres UANL (OVR 76)", "Monterrey (OVR 76)", "Chivas Guadalajara (OVR 74)", "Cruz Azul (OVR 75)", "Pumas UNAM (OVR 73)", "Toluca (OVR 74)", "Pachuca (OVR 75)", "Santos Laguna (OVR 72)", "Leon (OVR 73)"],
+                    liga2: ["Atlante", "Celaya", "Leones Negros", "Mineros de Zacatecas", "Correcaminos", "Cancún FC", "Cimarrones", "Venados FC", "Tapatío", "Alebrijes de Oaxaca"]
+                },
+                "Kanada": {
+                    liga1: ["Vancouver Whitecaps (OVR 73)", "Toronto FC (OVR 73)", "CF Montreal (OVR 72)", "Cavalry FC (OVR 67)", "Forge FC (OVR 68)", "Pacific FC (OVR 66)", "HFX Wanderers (OVR 65)", "Valour FC (OVR 64)", "York United (OVR 65)", "Atlético Ottawa (OVR 66)"],
+                    liga2: ["Sigma FC", "Blizzard SC", "FC London", "Vaughan Azzurri", "Oakville Blue Devils", "Master's FA", "North Toronto", "St. Catharines", "ProStars FC", "Simcoe County"]
+                },
+                "Kosta Rika": {
+                    liga1: ["Saprissa (OVR 72)", "Alajuelense (OVR 72)", "Herediano (OVR 71)", "Cartagines (OVR 70)", "San Carlos (OVR 68)", "Puntarenas (OVR 67)", "Perez Zeledon (OVR 67)", "Santos de Guapiles (OVR 68)", "Liberia (OVR 66)", "Sporting San Jose (OVR 68)"],
+                    liga2: ["Municipal Grecia", "AD Carmelita", "Uruguay de Coronado", "Escorpiones de Belén", "Quepos Cambute", "Jicaral Sercoba", "Puerto Golfito", "AD Aserrí", "Barrio México", "Cariari Pococí"]
+                },
+                "Jamaika": {
+                    liga1: ["Mount Pleasant (OVR 67)", "Cavalier FC (OVR 67)", "Waterhouse (OVR 66)", "Tivoli Gardens (OVR 65)", "Harbour View (OVR 65)", "Arnett Gardens (OVR 64)", "Dunbeholden (OVR 64)", "Portmore United (OVR 65)", "Molynes United (OVR 62)", "Vere United (OVR 63)"],
+                    liga2: ["Chapelton Maroons", "Montego Bay United", "Falmouth United", "Seba United", "Negril FC", "St. Ann Lions", "Clarendon FC", "Manchester United Jam", "Portland FC", "St. Thomas FC"]
+                }
             }
         };
 
@@ -688,6 +761,8 @@
             });
         }
 
+        let globalCharData = {};
+
         function finishCharacterCreation() {
             const firstName = document.getElementById("char-firstname").value.trim();
             const lastName = document.getElementById("char-lastname").value.trim();
@@ -703,28 +778,37 @@
             let avgOvr = Math.round((spd + sht + pas + dri + def + phy) / 6);
             if (avgOvr > 99) avgOvr = 99;
 
-            let pos = document.getElementById("char-position").value;
-            let country = document.getElementById("char-country").value;
-            let shirtName = document.getElementById("char-shirtname").value.trim() || (firstName.charAt(0) + ". " + lastName).toUpperCase();
-            let num = document.getElementById("char-number").value;
+            globalCharData = {
+                firstName, lastName,
+                shirtName: document.getElementById("char-shirtname").value.trim() || (firstName.charAt(0) + ". " + lastName).toUpperCase(),
+                continent: document.getElementById("char-continent").value,
+                country: document.getElementById("char-country").value,
+                number: document.getElementById("char-number").value,
+                position: document.getElementById("char-position").value,
+                ovr: avgOvr,
+                spd, sht, pas, dri, def, phy,
+                avatarType: document.getElementById("char-avatar-type").value,
+                systemAvatar: document.getElementById("char-system-avatar").value,
+                customUrl: document.getElementById("char-custom-url").value.trim()
+            };
 
-            renderFCCard(avgOvr, pos, shirtName, country, num, spd, sht, pas, dri, def, phy);
-            generateClubOffers(country, avgOvr);
+            renderFCCard(globalCharData);
+            generateClubOffers(globalCharData);
             goScreen('card-reveal-screen');
         }
 
-        function renderFCCard(ovr, pos, name, country, num, spd, sht, pas, dri, def, phy) {
+        function renderFCCard(data) {
             let cardClass = "card-bronze";
             let specialBadgeHtml = "";
 
-            if (ovr >= 70 && ovr < 85) {
+            if (data.ovr >= 70 && data.ovr < 85) {
                 cardClass = "card-silver";
-            } else if (ovr >= 85 && ovr < 95) {
+            } else if (data.ovr >= 85 && data.ovr < 95) {
                 cardClass = "card-gold";
-            } else if (ovr >= 95 && ovr < 99) {
+            } else if (data.ovr >= 95 && data.ovr < 99) {
                 cardClass = "card-legendary";
                 specialBadgeHtml = `<div class="special-card-badge badge-legendary">⭐ Legendary ⭐</div>`;
-            } else if (ovr >= 99) {
+            } else if (data.ovr >= 99) {
                 cardClass = "card-goat";
                 specialBadgeHtml = `
                     <div class="special-card-badge badge-goat">🐐 G.O.A.T 🐐</div>
@@ -733,81 +817,125 @@
             }
 
             let avatarHtml = "";
-            let avatarType = document.getElementById("char-avatar-type").value;
-            if (avatarType === "system") {
-                let emoji = document.getElementById("char-system-avatar").value;
-                avatarHtml = `<div class="fc-player-avatar-text">${emoji}</div>`;
+            if (data.avatarType === "system") {
+                avatarHtml = `<div class="fc-player-avatar-text">${data.systemAvatar}</div>`;
             } else {
-                let url = document.getElementById("char-custom-url").value.trim();
-                if (url) {
-                    avatarHtml = `<img src="${url}" alt="Player">`;
-                } else {
-                    avatarHtml = `<div class="fc-player-avatar-text">👤</div>`;
-                }
+                avatarHtml = data.customUrl ? `<img src="${data.customUrl}" alt="Player">` : `<div class="fc-player-avatar-text">👤</div>`;
             }
 
-            const renderArea = document.getElementById("fc-card-render-area");
-            renderArea.innerHTML = `
+            document.getElementById("fc-card-render-area").innerHTML = `
                 <div class="card-container ${cardClass}">
                     ${specialBadgeHtml}
                     <div class="fc-card-header">
-                        <div class="fc-ovr">${ovr}</div>
-                        <div class="fc-pos">${pos}</div>
+                        <div class="fc-ovr">${data.ovr}</div>
+                        <div class="fc-pos">${data.position}</div>
                         <div class="fc-flag-club">
                             <span>📍</span>
-                            <div class="fc-club-badge" title="${country}">🛡️</div>
+                            <div class="fc-club-badge" title="${data.country}">🛡️</div>
                         </div>
                     </div>
-
-                    <div class="fc-player-img-container">
-                        ${avatarHtml}
-                    </div>
-
+                    <div class="fc-player-img-container">${avatarHtml}</div>
                     <div class="fc-card-footer">
-                        <div class="fc-player-name">${name}</div>
+                        <div class="fc-player-name">${data.shirtName}</div>
                         <div class="fc-stats-grid">
-                            <div class="fc-stat-row"><span>PAC</span><span>${spd}</span></div>
-                            <div class="fc-stat-row"><span>DRI</span><span>${dri}</span></div>
-                            <div class="fc-stat-row"><span>SHO</span><span>${sht}</span></div>
-                            <div class="fc-stat-row"><span>DEF</span><span>${def}</span></div>
-                            <div class="fc-stat-row"><span>PAS</span><span>${pas}</span></div>
-                            <div class="fc-stat-row"><span>PHY</span><span>${phy}</span></div>
+                            <div class="fc-stat-row"><span>PAC</span><span>${data.spd}</span></div>
+                            <div class="fc-stat-row"><span>DRI</span><span>${data.dri}</span></div>
+                            <div class="fc-stat-row"><span>SHO</span><span>${data.sht}</span></div>
+                            <div class="fc-stat-row"><span>DEF</span><span>${data.def}</span></div>
+                            <div class="fc-stat-row"><span>PAS</span><span>${data.pas}</span></div>
+                            <div class="fc-stat-row"><span>PHY</span><span>${data.phy}</span></div>
                         </div>
                     </div>
                 </div>
             `;
         }
 
-        function generateClubOffers(country, ovr) {
+        function generateClubOffers(data) {
             const listEl = document.getElementById("club-offers-list");
             listEl.innerHTML = "";
 
-            const continent = document.getElementById("char-continent").value;
-            let clubsArray = countryData[continent][country] || ["Klub Lokal 1", "Klub Lokal 2"];
+            let poolClubs = [];
+            if (isCreatorMode) {
+                // Khusus Creator: Ambil dari 20 Liga 1 Eropa (misal pool klub Inggris, Spanyol, Jerman, Italia, Prancis)
+                const euroCountries = ["Inggris", "Spanyol", "Jerman", "Italia", "Prancis"];
+                euroCountries.forEach(c => {
+                    if (countryData["eropa"][c]) {
+                        poolClubs = poolClubs.concat(countryData["eropa"][c].liga1);
+                    }
+                });
+            } else {
+                // Standard User: Ambil Liga 1 & Liga 2 dari negara pilihannya
+                const selectedCountryObj = countryData[data.continent][data.country];
+                if (selectedCountryObj) {
+                    poolClubs = poolClubs.concat(selectedCountryObj.liga1, selectedCountryObj.liga2);
+                } else {
+                    poolClubs = ["Klub Lokal A", "Klub Lokal B"];
+                }
+            }
 
-            let shuffled = [...clubsArray].sort(() => 0.5 - Math.random());
+            let shuffled = [...poolClubs].sort(() => 0.5 - Math.random());
             let selectedClubs = shuffled.slice(0, 4);
 
-            selectedClubs.forEach((clubName, index) => {
-                let tier = index < 2 ? "Liga Utama (Tier 1)" : "Divisi 2 (Tier 2)";
-                let ratingKlub = index < 2 ? ovr + 3 : ovr - 2;
-                if (ratingKlub > 99) ratingKlub = 99;
-
+            selectedClubs.forEach((clubStr) => {
                 let card = document.createElement("div");
                 card.className = "club-offer-card";
                 card.innerHTML = `
                     <div class="club-info">
-                        <h4>🛡️ ${clubName}</h4>
-                        <p>${tier} | Rekomendasi OVR: ${ratingKlub}</p>
+                        <h4>🛡️ ${clubStr}</h4>
+                        <p>Kontrak Profesional Durasi 2 Musim Bersama Gaji Kompetitif</p>
                     </div>
-                    <button class="sign-btn" onclick="selectClub('${clubName}')">Pilih Kontrak</button>
+                    <button class="sign-btn" onclick="showContractModal('${clubStr}')">Tinjau Kontrak</button>
                 `;
                 listEl.appendChild(card);
             });
         }
 
-        function selectClub(clubName) {
-            alert(`Selamat! Anda resmi menandatangani kontrak profesional bersama ${clubName}. Gameplay menuju Dashboard Utama akan segera dimulai.`);
+        function showContractModal(clubName) {
+            const listEl = document.getElementById("club-offers-list");
+            listEl.innerHTML = `
+                <div class="contract-box">
+                    <h4><span>📝 Dokumen Kontrak Resmi</span><span>🛡️ ${clubName}</span></h4>
+                    <div class="contract-text">
+                        PERJANJIAN KERJA PROFESIONAL ATLET SEPAK BOLA<br><br>
+                        Para Pihak yang bertanda tangan di bawah ini sepakat untuk mengikatkan diri dalam kontrak kerja profesional terhitung sejak musim kompetisi berjalan. Pemain <b>${globalCharData.firstName} ${globalCharData.lastName}</b> (No. Punggung ${globalCharData.number}, Posisi ${globalCharData.position}) akan menerima fasilitas penuh klub, hak citra, serta bonus penampilan sesuai standar liga.<br><br>
+                        Segala klausul kedisiplinan dan performa tunduk pada regulasi manajemen klub.
+                    </div>
+                    <button class="action-btn" onclick="assignClub('${clubName}')">Assign / Tanda Tangan Kontrak ✍️</button>
+                </div>
+            `;
+            document.getElementById("offer-desc").innerText = "Harap baca pasal kontrak profesional dengan seksama sebelum melakukan tanda tangan.";
+        }
+
+        function assignClub(clubName) {
+            // Cutscene Selamat Datang
+            let cutscene = document.createElement("div");
+            cutscene.className = "cutscene-screen";
+            cutscene.innerHTML = `
+                <h1 style="color: #00d2ff; font-size: 26px; margin-bottom: 15px;">WELCOME TO ${clubName.toUpperCase()}!</h1>
+                <p style="color: #cbd5e1; font-size: 14px; margin-bottom: 25px;">Konferensi pers penyambutan pemain bintang baru resmi dimulai.</p>
+                <button class="action-btn" style="max-width: 200px; margin: 0 auto;" onclick="proceedToDashboard('${clubName}')">Lanjutkan ke Karier ➔</button>
+            `;
+            document.body.appendChild(cutscene);
+        }
+
+        function proceedToDashboard(clubName) {
+            // Hapus cutscene
+            document.querySelector(".cutscene-screen").remove();
+
+            // Set Data Dashboard
+            document.getElementById("dash-club").innerText = clubName;
+            document.getElementById("dash-money").innerText = "$12,000 / bln";
+
+            // Pengecekan Timnas jika OVR > 80
+            let nationalTeamText = "Tidak Terpanggil";
+            if (globalCharData.ovr >= 80) {
+                nationalTeamText = "Timnas " + globalCharData.country + " ⭐ (Dipanggil)";
+            } else {
+                nationalTeamText = "Akademi / Belum Dipanggil (Syarat OVR > 80)";
+            }
+            document.getElementById("dash-national").innerText = nationalTeamText;
+
+            goScreen('dashboard-screen');
         }
     </script>
 </body>

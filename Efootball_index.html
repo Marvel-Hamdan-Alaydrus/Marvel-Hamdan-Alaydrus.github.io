@@ -27,7 +27,7 @@
         .container {
             width: 100%;
             max-width: 480px;
-            background: rgba(15, 23, 42, 0.9);
+            background: rgba(15, 23, 42, 0.95);
             backdrop-filter: blur(10px);
             border: 1px solid rgba(255, 255, 255, 0.1);
             border-radius: 20px;
@@ -38,14 +38,8 @@
             overflow-y: auto;
         }
 
-        /* Scrollbar custom agar rapi */
-        .container::-webkit-scrollbar {
-            width: 5px;
-        }
-        .container::-webkit-scrollbar-thumb {
-            background: #334155;
-            border-radius: 10px;
-        }
+        .container::-webkit-scrollbar { width: 5px; }
+        .container::-webkit-scrollbar-thumb { background: #334155; border-radius: 10px; }
 
         .game-title {
             font-size: 26px;
@@ -64,7 +58,6 @@
             letter-spacing: 1px;
         }
 
-        /* Form & Input Styles */
         .input-group {
             background: rgba(30, 41, 59, 0.6);
             padding: 12px 15px;
@@ -107,12 +100,7 @@
         .status-badge.creator { color: #10b981; }
         .status-badge.user { color: #f59e0b; }
 
-        /* Menu Pilihan Utama */
-        .menu-list {
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-        }
+        .menu-list { display: flex; flex-direction: column; gap: 10px; }
 
         .menu-btn, .action-btn {
             background: linear-gradient(135deg, #1e293b, #334155);
@@ -172,7 +160,6 @@
             justify-content: space-between;
         }
 
-        /* Stat Sliders */
         .stat-slider-group {
             margin-bottom: 10px;
             text-align: left;
@@ -188,7 +175,77 @@
             accent-color: #00d2ff;
         }
 
-        /* Utility */
+        /* Desain Kartu Pemain */
+        .player-card {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 2px solid #ffd700;
+            border-radius: 15px;
+            padding: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+            position: relative;
+            text-align: center;
+        }
+        .card-header-info {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 900;
+            font-size: 20px;
+            color: #ffd700;
+            margin-bottom: 10px;
+        }
+        .card-img-box {
+            width: 80px;
+            height: 80px;
+            background: #334155;
+            border-radius: 50%;
+            margin: 0 auto 10px auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            border: 2px solid #00d2ff;
+            overflow: hidden;
+        }
+        .card-img-box img { width: 100%; height: 100%; object-fit: cover; }
+        .card-name { font-size: 16px; font-weight: 700; color: #fff; margin-bottom: 5px; }
+        .card-stats-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 5px;
+            font-size: 11px;
+            background: rgba(0,0,0,0.3);
+            padding: 8px;
+            border-radius: 8px;
+            margin-top: 10px;
+        }
+
+        .club-offer-card {
+            background: rgba(30, 41, 59, 0.8);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 10px;
+            padding: 12px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            text-align: left;
+        }
+        .club-info h4 { font-size: 13px; color: #00d2ff; }
+        .club-info p { font-size: 10px; color: #94a3b8; }
+        .sign-btn {
+            background: #10b981;
+            color: #fff;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+            cursor: pointer;
+        }
+        .sign-btn:hover { background: #059669; }
+
         .hidden { display: none !important; }
         .clearfix::after { content: ""; clear: both; display: table; }
     </style>
@@ -203,7 +260,7 @@
 
             <div class="input-group">
                 <label for="user-email">Masukkan Email Anda:</label>
-                <input type="email" id="user-email" placeholder="contoh: admin@creator.com" oninput="checkEmailRole()">
+                <input type="email" id="user-email" placeholder="contoh: emailkamu@gmail.com" oninput="checkEmailRole()">
                 <div id="role-status" class="status-badge user">Status: Standard User (Mode Acak)</div>
             </div>
 
@@ -216,11 +273,9 @@
             </div>
         </div>
 
-        <!-- ================= 2. CAREER SETUP (LEVEL & KESULITAN) ================= -->
+        <!-- ================= 2. CAREER SETUP ================= -->
         <div id="career-setup-screen" class="hidden">
-            <div class="clearfix">
-                <button class="back-btn" onclick="goScreen('home-screen')">← Kembali</button>
-            </div>
+            <div class="clearfix"><button class="back-btn" onclick="goScreen('home-screen')">← Kembali</button></div>
             <div class="section-header">Pengaturan Karier Baru</div>
 
             <div class="input-group">
@@ -232,10 +287,9 @@
                 </select>
             </div>
 
-            <div class="input-group" id="creator-mode-box">
-                <!-- Opsi tambahan khusus email creator saat setup level -->
+            <div class="input-group">
                 <label>Tipe Mode Pembuatan:</label>
-                <div id="creator-mode-info" style="font-size: 12px; color: #10b981; font-weight: 600;">Standard (Random Stat)</div>
+                <div id="creator-mode-info" style="font-size: 12px; color: #f59e0b; font-weight: 600;">Mode Standard (Stat diacak otomatis)</div>
             </div>
 
             <div class="input-group">
@@ -252,48 +306,22 @@
 
         <!-- ================= 3. CHARACTER FORM SCREEN ================= -->
         <div id="character-form-screen" class="hidden">
-            <div class="clearfix">
-                <button class="back-btn" onclick="goScreen('career-setup-screen')">← Kembali</button>
-            </div>
+            <div class="clearfix"><button class="back-btn" onclick="goScreen('career-setup-screen')">← Kembali</button></div>
             <div class="section-header">Buat Karakter Pemain</div>
 
-            <div class="input-group">
-                <label>Nama Depan:</label>
-                <input type="text" id="char-firstname" placeholder="Contoh: Alex">
-            </div>
-
-            <div class="input-group">
-                <label>Nama Belakang:</label>
-                <input type="text" id="char-lastname" placeholder="Contoh: Maulana">
-            </div>
-
-            <div class="input-group">
-                <label>Nama Punggung (Jersey):</label>
-                <input type="text" id="char-shirtname" placeholder="Contoh: A. MAULANA">
-            </div>
+            <div class="input-group"><label>Nama Depan:</label><input type="text" id="char-firstname" placeholder="Contoh: Sayyid"></div>
+            <div class="input-group"><label>Nama Belakang:</label><input type="text" id="char-lastname" placeholder="Contoh: Rahmat"></div>
+            <div class="input-group"><label>Nama Punggung (Jersey):</label><input type="text" id="char-shirtname" placeholder="Contoh: S. RAHMAT"></div>
 
             <div class="input-group">
                 <label>Benua Asal:</label>
                 <select id="char-continent" onchange="updateCountries()">
-                    <option value="asia">Asia</option>
-                    <option value="eropa">Eropa</option>
-                    <option value="afrika">Afrika</option>
-                    <option value="amerika-selatan">Amerika Selatan</option>
-                    <option value="amerika-utara">Amerika Utara</option>
+                    <option value="asia">Asia</option><option value="eropa">Eropa</option><option value="afrika">Afrika</option><option value="amerika-selatan">Amerika Selatan</option><option value="amerika-utara">Amerika Utara</option>
                 </select>
             </div>
 
-            <div class="input-group">
-                <label>Negara Asal:</label>
-                <select id="char-country">
-                    <!-- Akan diisi dinamis via JS -->
-                </select>
-            </div>
-
-            <div class="input-group">
-                <label>Nomor Punggung:</label>
-                <input type="number" id="char-number" min="1" max="99" value="10">
-            </div>
+            <div class="input-group"><label>Negara Asal:</label><select id="char-country"></select></div>
+            <div class="input-group"><label>Nomor Punggung:</label><input type="number" id="char-number" min="1" max="99" value="10"></div>
 
             <div class="input-group">
                 <label>Pilih Avatar / Foto:</label>
@@ -306,79 +334,76 @@
             <div class="input-group" id="avatar-selection-box">
                 <label>Pilih Avatar Sistem:</label>
                 <select id="char-system-avatar">
-                    <option value="avatar1.png">Avatar Wajah 1 (Striker)</option>
-                    <option value="avatar2.png">Avatar Wajah 2 (Playmaker)</option>
-                    <option value="avatar3.png">Avatar Wajah 3 (Winger)</option>
-                    <option value="avatar4.png">Avatar Wajah 4 (Defender)</option>
-                    <option value="avatar5.png">Avatar Wajah 5 (Goalkeeper)</option>
+                    <option value="👦">Wajah 1</option><option value="🧑">Wajah 2</option><option value="🧔">Wajah 3</option><option value="👱">Wajah 4</option><option value="🦸">Wajah 5</option>
                 </select>
             </div>
 
             <div class="input-group hidden" id="avatar-upload-box">
-                <label>Masukkan Link/URL Gambar Foto:</label>
-                <input type="text" id="char-custom-url" placeholder="https://contoh.com/foto-saya.jpg">
+                <label>Link URL Foto:</label><input type="text" id="char-custom-url" placeholder="https://contoh.com/foto.jpg">
             </div>
 
             <div class="input-group">
                 <label>Posisi Bermain:</label>
                 <select id="char-position">
-                    <option value="CF">CF (Center Forward / Penyerang)</option>
-                    <option value="LWF">LWF / RWF (Winger / Penyerang Sayap)</option>
-                    <option value="AMF">AMF / CMF (Midfielder / Gelandang)</option>
-                    <option value="CB">CB (Center Back / Bek Tengah)</option>
-                    <option value="GK">GK (Goalkeeper / Kiper)</option>
+                    <option value="CF">CF (Center Forward)</option><option value="WGR">Winger</option><option value="MF">Midfielder</option><option value="CB">Center Back</option><option value="GK">Goalkeeper</option>
                 </select>
             </div>
 
-            <!-- Bagian Pengaturan Stat (Custom untuk Creator, Acak untuk User) -->
+            <!-- Bagian Stat -->
             <div id="stat-configuration-section">
-                <div class="section-header" style="font-size: 14px; margin-top: 15px;">Pengaturan Statistik Awal</div>
-                <div id="stat-info-text" style="font-size: 11px; color: #f59e0b; margin-bottom: 10px; text-align: left;">
-                    Statistik akan diacak otomatis sesuai level awal Anda.
-                </div>
+                <div class="section-header" style="font-size: 14px; margin-top: 15px;">Statistik Pemain</div>
+                <div id="stat-info-text" style="font-size: 11px; color: #f59e0b; margin-bottom: 10px; text-align: left;">Diacak otomatis.</div>
 
-                <!-- Slider Stat (Hanya aktif atau bisa diatur jika Creator Mode) -->
-                <div class="stat-slider-group">
-                    <label>Kecepatan (Speed): <span id="val-speed">60</span></label>
-                    <input type="range" id="stat-speed" min="40" max="99" value="60" disabled>
+                <div class="stat-slider-group"><label>Kecepatan: <span id="val-speed">60</span></label><input type="range" id="stat-speed" min="40" max="99" value="60" disabled></div>
+                <div class="stat-slider-group"><label>Tendangan: <span id="val-shoot">60</span></label><input type="range" id="stat-shoot" min="40" max="99" value="60" disabled></div>
+                <div class="stat-slider-group"><label>Operan: <span id="val-passing">60</span></label><input type="range" id="stat-passing" min="40" max="99" value="60" disabled></div>
+                <div class="stat-slider-group"><label>Giring Bola: <span id="val-dribble">60</span></label><input type="range" id="stat-dribble" min="40" max="99" value="60" disabled></div>
+                <div class="stat-slider-group"><label>Pertahanan: <span id="val-defend">50</span></label><input type="range" id="stat-defend" min="40" max="99" value="50" disabled></div>
+                <div class="stat-slider-group"><label>Fisik: <span id="val-physical">60</span></label><input type="range" id="stat-physical" min="40" max="99" value="60" disabled></div>
+            </div>
+
+            <button class="action-btn" onclick="finishCharacterCreation()">Konfirmasi Kartu & Klub ➔</button>
+        </div>
+
+        <!-- ================= 4. CARD & CLUB OFFERS SCREEN ================= -->
+        <div id="card-reveal-screen" class="hidden">
+            <div class="section-header">Kartu Pemain Anda</div>
+            
+            <div class="player-card">
+                <div class="card-header-info">
+                    <span id="card-ovr">65</span>
+                    <span id="card-pos">CF</span>
                 </div>
-                <div class="stat-slider-group">
-                    <label>Tendangan (Shooting): <span id="val-shoot">60</span></label>
-                    <input type="range" id="stat-shoot" min="40" max="99" value="60" disabled>
-                </div>
-                <div class="stat-slider-group">
-                    <label>Operan (Passing): <span id="val-passing">60</span></label>
-                    <input type="range" id="stat-passing" min="40" max="99" value="60" disabled>
-                </div>
-                <div class="stat-slider-group">
-                    <label>Giring Bola (Dribbling): <span id="val-dribble">60</span></label>
-                    <input type="range" id="stat-dribble" min="40" max="99" value="60" disabled>
-                </div>
-                <div class="stat-slider-group">
-                    <label>Pertahanan (Defending): <span id="val-defend">50</span></label>
-                    <input type="range" id="stat-defend" min="40" max="99" value="50" disabled>
-                </div>
-                <div class="stat-slider-group">
-                    <label>Fisik (Physical): <span id="val-physical">60</span></label>
-                    <input type="range" id="stat-physical" min="40" max="99" value="60" disabled>
+                <div class="card-img-box" id="card-avatar-display">👦</div>
+                <div class="card-name" id="card-fullname">Sayyid Rahmat</div>
+                <div style="font-size: 11px; color: #94a3b8;" id="card-country-badge">🇮🇩 Indonesia | No. 10</div>
+
+                <div class="card-stats-grid">
+                    <div>PAC: <span id="c-spd">60</span></div>
+                    <div>SHO: <span id="c-sht">60</span></div>
+                    <div>PAS: <span id="c-pas">60</span></div>
+                    <div>DRI: <span id="c-dri">60</span></div>
+                    <div>DEF: <span id="c-def">50</span></div>
+                    <div>PHY: <span id="c-phy">60</span></div>
                 </div>
             </div>
 
-            <button class="action-btn" onclick="finishCharacterCreation()">Konfirmasi Karakter & Kartu ➔</button>
+            <div class="section-header" style="font-size: 14px;">Penawaran Klub Masuk</div>
+            <p style="font-size: 11px; color: #94a3b8; margin-bottom: 10px; text-align: left;">Pilih salah satu klub untuk memulai karir profesional Anda:</p>
+            
+            <div id="club-offers-list"></div>
         </div>
 
     </div>
 
     <script>
-        // DAFTAR EMAIL CREATOR (Ganti dengan email Anda)
+        // DAFTAR EMAIL CREATOR RESMI ANDA
         const creatorEmails = [
             "sayyidrahmathamdani@gmail.com",
-            "Princemarvelerlangga@gmail.com"
+            "princemarvelerlangga@gmail.com"
         ];
-
         let isCreatorMode = false;
 
-        // Cek Email Role
         function checkEmailRole() {
             const emailInput = document.getElementById("user-email").value.trim().toLowerCase();
             const statusBadge = document.getElementById("role-status");
@@ -388,71 +413,59 @@
                 isCreatorMode = true;
                 statusBadge.className = "status-badge creator";
                 statusBadge.innerText = "Status: 👑 Creator Mode Aktif";
-                creatorInfo.innerText = "👑 Mode Custom Creator Aktif (Anda bebas mengatur stat awal)";
+                creatorInfo.innerText = "✨ [Creator] Anda bebas mengatur Stat & OVR sesuka hati!";
                 creatorInfo.style.color = "#10b981";
             } else {
                 isCreatorMode = false;
                 statusBadge.className = "status-badge user";
                 statusBadge.innerText = "Status: Standard User (Mode Acak)";
-                creatorInfo.innerText = "⚠️ Mode Standard (Stat diacak otomatis sesuai level)";
+                creatorInfo.innerText = "🔒 Mode Standard (Stat diacak otomatis)";
                 creatorInfo.style.color = "#f59e0b";
             }
         }
 
-        // Navigasi Layar
         function goScreen(screenId) {
             document.getElementById("home-screen").classList.add("hidden");
             document.getElementById("career-setup-screen").classList.add("hidden");
             document.getElementById("character-form-screen").classList.add("hidden");
-
+            document.getElementById("card-reveal-screen").classList.add("hidden");
             document.getElementById(screenId).classList.remove("hidden");
         }
 
         function goToCareerSetup() {
-            const emailInput = document.getElementById("user-email").value.trim();
-            if (emailInput === "") {
-                alert("Harap masukkan email Anda terlebih dahulu di halaman utama!");
-                document.getElementById("user-email").focus();
+            if (document.getElementById("user-email").value.trim() === "") {
+                alert("Harap masukkan email Anda terlebih dahulu!");
                 return;
             }
             goScreen('career-setup-screen');
         }
 
-        function alertMenu(menuName) {
-            alert(`Fitur ${menuName} sedang dalam tahap pengembangan.`);
-        }
+        function alertMenu(menuName) { alert(`Fitur ${menuName} dalam pengembangan.`); }
 
         function goToCharacterForm() {
             goScreen('character-form-screen');
-            updateCountries(); // Load negara awal
-            setupStatSlidersPermission(); // Atur apakah slider stat bisa digeser atau dikunci
+            updateCountries();
+            setupStatSlidersPermission();
         }
 
-        // Data Negara Berdasarkan Benua
         const countryData = {
-            "asia": ["Indonesia", "Jepang", "Korea Selatan", "Arab Saudi", "Qatar", "Iran", "Uzbekistan", "Irak", "Australia", "Thailand"],
-            "eropa": ["Inggris", "Spanyol", "Jerman", "Italia", "Prancis", "Belanda", "Portugal", "Belgia", "Kroasia", "Denmark"],
-            "afrika": ["Maroko", "Senegal", "Mesir", "Aljazair", "Nigeria", "Kamerun", "Ghana", "Pantai Gading", "Tunisia", "Mali"],
-            "amerika-selatan": ["Brasil", "Argentina", "Uruguay", "Kolombia", "Cile", "Ekuador", "Peru", "Paraguay", "Venezuela", "Bolivia"],
-            "amerika-utara": ["Amerika Serikat", "Meksiko", "Kanada", "Kosta Rika", "Jamaika", "Panama", "Honduras", "El Salvador", "Trinidad & Tobago", "Kuba"]
+            "asia": ["Indonesia", "Jepang", "Korea Selatan", "Arab Saudi", "Iran"],
+            "eropa": ["Inggris", "Spanyol", "Jerman", "Italia", "Prancis"],
+            "afrika": ["Maroko", "Senegal", "Mesir", "Nigeria", "Kamerun"],
+            "amerika-selatan": ["Brasil", "Argentina", "Uruguay", "Kolombia", "Cile"],
+            "amerika-utara": ["Amerika Serikat", "Meksiko", "Kanada", "Kosta Rika", "Jamaika"]
         };
 
         function updateCountries() {
             const continent = document.getElementById("char-continent").value;
             const countrySelect = document.getElementById("char-country");
             countrySelect.innerHTML = "";
-
-            if (countryData[continent]) {
-                countryData[continent].forEach(country => {
-                    let opt = document.createElement("option");
-                    opt.value = country;
-                    opt.innerText = country;
-                    countrySelect.appendChild(opt);
-                });
-            }
+            countryData[continent].forEach(c => {
+                let opt = document.createElement("option"); opt.value = c; opt.innerText = c;
+                countrySelect.appendChild(opt);
+            });
         }
 
-        // Toggle Avatar Input Sistem vs Upload
         function toggleAvatarInput() {
             const type = document.getElementById("char-avatar-type").value;
             if (type === "system") {
@@ -464,45 +477,27 @@
             }
         }
 
-        // Atur Izin Slider Stat (Creator bisa geser manual, User dikunci / diacak)
-        function setupStatSlidersProfile() {
-            // Placeholder fungsi pendukung
-        }
-
         function setupStatSlidersPermission() {
             const sliders = document.querySelectorAll("#stat-configuration-section input[type='range']");
             const infoText = document.getElementById("stat-info-text");
 
             if (isCreatorMode) {
-                // Jika creator, aktifkan slider agar bisa diatur custom
                 sliders.forEach(slider => {
                     slider.disabled = false;
-                    slider.oninput = function() {
-                        document.getElementById("val-" + getSliderKey(this.id)).innerText = this.value;
-                    };
+                    slider.oninput = function() { document.getElementById("val-" + getSliderKey(this.id)).innerText = this.value; };
                 });
-                infoText.innerText = "✨ [Creator Mode] Geser slider di bawah untuk mengatur stat awal karakter Anda secara bebas!";
+                infoText.innerText = "👑 [Creator Mode] Geser slider untuk mengatur OVR & stat secara bebas!";
                 infoText.style.color = "#10b981";
             } else {
-                // Jika user biasa, kunci slider dan beri nilai acak berdasarkan level
-                sliders.forEach(slider => {
-                    slider.disabled = true;
-                });
-                infoText.innerText = "🔒 Statistik diacak otomatis sesuai pilihan Level Awal Anda (Mode User Biasa).";
+                sliders.forEach(slider => slider.disabled = true);
+                infoText.innerText = "🔒 Statistik diacak otomatis sesuai Level Awal.";
                 infoText.style.color = "#f59e0b";
-                
-                // Berikan nilai acak berdasarkan level
                 generateRandomStatsForUser();
             }
         }
 
         function getSliderKey(id) {
-            if(id === 'stat-speed') return 'speed';
-            if(id === 'stat-shoot') return 'shoot';
-            if(id === 'stat-passing') return 'passing';
-            if(id === 'stat-dribble') return 'dribble';
-            if(id === 'stat-defend') return 'defend';
-            if(id === 'stat-physical') return 'physical';
+            return id.replace('stat-', '');
         }
 
         function generateRandomStatsForUser() {
@@ -511,24 +506,78 @@
             if (level === 'normal') { min = 59; max = 67; }
             if (level === 'berbakat') { min = 68; max = 75; }
 
-            const stats = ['speed', 'shoot', 'passing', 'dribble', 'defend', 'physical'];
-            stats.forEach(st => {
-                let randomVal = Math.floor(Math.random() * (max - min + 1)) + min;
-                document.getElementById("stat-" + st).value = randomVal;
-                document.getElementById("val-" + st).innerText = randomVal;
+            ['speed', 'shoot', 'passing', 'dribble', 'defend', 'physical'].forEach(st => {
+                let val = Math.floor(Math.random() * (max - min + 1)) + min;
+                document.getElementById("stat-" + st).value = val;
+                document.getElementById("val-" + st).innerText = val;
             });
         }
 
         function finishCharacterCreation() {
             const firstName = document.getElementById("char-firstname").value.trim();
             const lastName = document.getElementById("char-lastname").value.trim();
+            if (!firstName || !lastName) { alert("Isi Nama Depan dan Belakang!"); return; }
 
-            if (!firstName || !lastName) {
-                alert("Harap isi Nama Depan dan Nama Belakang pemain terlebih dahulu!");
-                return;
+            let spd = parseInt(document.getElementById("stat-speed").value);
+            let sht = parseInt(document.getElementById("stat-shoot").value);
+            let pas = parseInt(document.getElementById("stat-passing").value);
+            let dri = parseInt(document.getElementById("stat-dribble").value);
+            let def = parseInt(document.getElementById("stat-defend").value);
+            let phy = parseInt(document.getElementById("stat-physical").value);
+
+            let avgOvr = Math.round((spd + sht + pas + dri + def + phy) / 6);
+
+            document.getElementById("card-ovr").innerText = avgOvr;
+            document.getElementById("card-pos").innerText = document.getElementById("char-position").value;
+            document.getElementById("card-fullname").innerText = firstName + " " + lastName;
+            document.getElementById("card-country-badge").innerText = "📍 " + document.getElementById("char-country").value + " | No. " + document.getElementById("char-number").value;
+            
+            document.getElementById("c-spd").innerText = spd;
+            document.getElementById("c-sht").innerText = sht;
+            document.getElementById("c-pas").innerText = pas;
+            document.getElementById("c-dri").innerText = dri;
+            document.getElementById("c-def").innerText = def;
+            document.getElementById("c-phy").innerText = phy;
+
+            let avatarType = document.getElementById("char-avatar-type").value;
+            if (avatarType === "system") {
+                document.getElementById("card-avatar-display").innerHTML = document.getElementById("char-system-avatar").value;
+            } else {
+                let url = document.getElementById("char-custom-url").value;
+                if (url) document.getElementById("card-avatar-display").innerHTML = `<img src="${url}">`;
             }
 
-            alert("Karakter berhasil dibuat! Selanjutnya kita akan masuk ke tahap Konfirmasi Kartu Pemain dan Penawaran Klub Asli.");
+            generateClubOffers(document.getElementById("char-country").value, avgOvr);
+            goScreen('card-reveal-screen');
+        }
+
+        function generateClubOffers(country, ovr) {
+            const listEl = document.getElementById("club-offers-list");
+            listEl.innerHTML = "";
+
+            let dummyClubs = [
+                { name: country + " FC", tier: "Liga 1", rating: ovr + 2 },
+                { name: "Real " + country, tier: "Liga 1", rating: ovr + 4 },
+                { name: country + " United", tier: "Liga 2", rating: ovr - 2 },
+                { name: "Persikara " + country, tier: "Liga 2", rating: ovr - 4 }
+            ];
+
+            dummyClubs.forEach((club) => {
+                let card = document.createElement("div");
+                card.className = "club-offer-card";
+                card.innerHTML = `
+                    <div class="club-info">
+                        <h4>🛡️ ${club.name}</h4>
+                        <p>${club.tier} | Rekomendasi OVR: ${club.rating}</p>
+                    </div>
+                    <button class="sign-btn" onclick="selectClub('${club.name}')">Pilih Kontrak</button>
+                `;
+                listEl.appendChild(card);
+            });
+        }
+
+        function selectClub(clubName) {
+            alert(`Selamat! Anda resmi bergabung dengan klub ${clubName}. Selanjutnya kita akan masuk ke Dashboard Utama Game.`);
         }
     </script>
 </body>

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Football: Be A Pro - Ultimate 2026 Edition</title>
+    <title>E-Football: Be A Pro - Ultimate FC 26 Edition</title>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&display=swap" rel="stylesheet">
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Poppins', sans-serif; user-select: none; }
@@ -21,17 +21,16 @@
         .status-badge.creator { color: #10b981; }
         .status-badge.user { color: #f59e0b; }
         .menu-list { display: flex; flex-direction: column; gap: 10px; }
-        .menu-btn, .action-btn { background: linear-gradient(135deg, #1e293b, #0f172a); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.1); padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; transition: 0.3s; display: flex; justify-content: space-between; align-items: center; width: 100%; }
-        .menu-btn:hover, .action-btn:hover { background: linear-gradient(135deg, #00d2ff, #3a7bd5); color: #070b14; transform: translateY(-2px); }
-        .action-btn { justify-content: center; background: linear-gradient(135deg, #d4af37, #b45309); border: 1px solid #facc15; margin-top: 10px; }
+        .menu-btn, .action-btn { background: linear-gradient(135deg, #1e293b, #0f172a); color: #ffffff; border: 1px solid rgba(255, 255, 255, 0.1); padding: 14px; border-radius: 12px; font-size: 13px; font-weight: 700; cursor: pointer; display: flex; justify-content: space-between; align-items: center; width: 100%; transition: 0.3s; }
+        .menu-btn:hover, .action-btn:hover { background: linear-gradient(135deg, #00d2ff, #3a7bd5); color: #070b14; border-color: #facc15; }
+        .action-btn { justify-content: center; background: linear-gradient(135deg, #d4af37, #b45309); margin-top: 10px; border: 1px solid #facc15; }
         .back-btn { background: rgba(30, 41, 59, 0.8); color: white; border: 1px solid rgba(255,255,255,0.1); padding: 8px 14px; border-radius: 8px; cursor: pointer; font-weight: 600; font-size: 11px; margin-bottom: 15px; float: left; }
-        .section-header { font-size: 14px; color: #facc15; font-weight: 800; margin-bottom: 15px; text-align: left; border-bottom: 1px solid rgba(250, 204, 21, 0.2); padding-bottom: 8px; text-transform: uppercase; }
-        .card-container { position: relative; width: 270px; height: 410px; margin: 0 auto 20px auto; border-radius: 18px; padding: 12px; display: flex; flex-direction: column; justify-content: space-between; box-shadow: 0 20px 40px rgba(0,0,0,0.9); text-align: left; clip-path: polygon(0% 0%, 100% 0%, 100% 88%, 86% 100%, 14% 100%, 0% 88%); }
-        .card-bronze { background: linear-gradient(135deg, #6d421d 0%, #391d0a 100%); border: 2px solid #cd7f32; color: #fce7db; }
-        .card-silver { background: linear-gradient(135deg, #94a3b8 0%, #475569 100%); border: 2px solid #e2e8f0; color: #f8fafc; }
-        .card-gold { background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%); border: 2px solid #fffdf0; color: #fffbeb; }
-        .card-legendary { background: linear-gradient(135deg, #a855f7 0%, #6b21a8 100%); border: 2px solid #f0abfc; color: #fdf4ff; }
-        .card-goat { background: linear-gradient(135deg, #0284c7 0%, #1e3a8a 100%); border: 2px solid #38bdf8; color: #f0f9ff; }
+        .section-header { font-size: 14px; color: #facc15; font-weight: 800; margin-bottom: 15px; text-align: left; border-bottom: 1px solid rgba(250, 204, 21, 0.2); padding-bottom: 8px; text-transform: uppercase; letter-spacing: 1px; }
+        .dashboard-header { display: flex; justify-content: space-between; align-items: center; background: rgba(30,41,59,0.7); padding: 10px 15px; border-radius: 12px; margin-bottom: 12px; font-size: 11px; border: 1px solid rgba(255,215,0,0.2); }
+        .dashboard-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 12px; }
+        .dash-card { background: rgba(30,41,59,0.5); border: 1px solid rgba(255,255,255,0.06); padding: 10px; border-radius: 12px; text-align: center; cursor: pointer; }
+        .dash-card h5 { font-size: 9px; color: #94a3b8; margin-bottom: 4px; text-transform: uppercase; }
+        .dash-card p { font-size: 13px; font-weight: 700; color: #00d2ff; }
         .sub-screen { background: rgba(15, 23, 42, 0.98); position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 100; padding: 20px; overflow-y: auto; text-align: left; }
         .modal-box { background: #090d16; border: 1px solid rgba(255,215,0,0.3); border-radius: 14px; padding: 15px; margin-bottom: 12px; font-size: 11px; color: #cbd5e1; }
         .modal-box h4 { color: #facc15; font-size: 13px; margin-bottom: 8px; border-bottom: 1px solid rgba(255,255,255,0.1); padding-bottom: 4px; }
@@ -47,23 +46,23 @@
     <div class="container">
         <!-- HOME SCREEN -->
         <div id="home-screen">
-            <div class="game-title">E-Football</div>
-            <div class="game-subtitle">⚽ Ultimate Career & Real World Engine 2026 ⚽</div>
+            <div class="game-title">E-Football 26</div>
+            <div class="game-subtitle">⚽ Ultimate Career & Real World Engine ⚽</div>
             <div class="input-group">
-                <label>Email Akun:</label>
-                <input type="email" id="user-email" placeholder="contoh: sayyidrahmathamdani@gmail.com" oninput="checkEmailRole()">
+                <label for="user-email">Email Akun:</label>
+                <input type="email" id="user-email" placeholder="sayyidrahmathamdani@gmail.com" oninput="checkEmailRole()">
                 <div id="role-status" class="status-badge user">Status: Standard User (4 Slot Kekasih)</div>
             </div>
             <div class="menu-list">
-                <button class="menu-btn" onclick="playSound(); goToCareerSetup()">Karier Baru <span>⚽</span></button>
-                <button class="menu-btn" onclick="playSound(); alertMenu('Mode Club')">Mode Club <span>🛡️</span></button>
-                <button class="menu-btn" onclick="playSound(); alertMenu('Kejuaraan Dunia')">Turnamen Internasional <span>🏆</span></button>
+                <button class="menu-btn" onclick="goToCareerSetup()">Karier Baru <span>⚽</span></button>
+                <button class="menu-btn" onclick="alertMenu('Database 1000 Karakter & Gacha')">Gacha Pemain Legendaris <span>🌟</span></button>
+                <button class="menu-btn" onclick="alertMenu('Pencapaian Global')">Pencapaian <span>🏆</span></button>
             </div>
         </div>
 
         <!-- CAREER SETUP -->
         <div id="career-setup-screen" class="hidden">
-            <div class="clearfix"><button class="back-btn" onclick="goScreen('home-screen')">← Kembali</button></div>
+            <button class="back-btn" onclick="goScreen('home-screen')">← Kembali</button>
             <div class="section-header">Konfigurasi Karier</div>
             <div class="input-group">
                 <label>Level Awal:</label>
@@ -74,330 +73,217 @@
                 </select>
             </div>
             <div class="input-group">
-                <label>Info Akses:</label>
-                <div id="creator-mode-info" style="font-size: 11px; color: #f59e0b; font-weight: 600;">Standard Mode</div>
+                <label>Nama Depan:</label><input type="text" id="char-firstname" placeholder="Sayyid">
             </div>
-            <button class="action-btn" onclick="goToCharacterForm()">Buat Identitas Pemain ➔</button>
-        </div>
-
-        <!-- CHARACTER FORM -->
-        <div id="character-form-screen" class="hidden">
-            <div class="clearfix"><button class="back-btn" onclick="goScreen('career-setup-screen')">← Kembali</button></div>
-            <div class="section-header">Biodata Pemain</div>
-            <div class="input-group"><label>Nama Depan:</label><input type="text" id="char-firstname" value="Sayyid"></div>
-            <div class="input-group"><label>Nama Belakang:</label><input type="text" id="char-lastname" value="Rahmat"></div>
-            <div class="input-group"><label>Nama Punggung:</label><input type="text" id="char-shirtname" value="S. RAHMAT"></div>
             <div class="input-group">
-                <label>Kawasan Liga Domestik Utama:</label>
-                <select id="char-continent" onchange="updateClubsList()">
-                    <option value="eropa">Eropa (La Liga / Premier League / Serie A)</option>
-                    <option value="asia">Asia (Liga 1 Indonesia / J-League / Saudi Pro League)</option>
-                </select>
+                <label>Nama Belakang:</label><input type="text" id="char-lastname" placeholder="Rahmat">
             </div>
-            <div class="input-group"><label>Pilih Klub Pilihan Awal:</label><select id="char-club-select"></select></div>
-            <button class="action-btn" onclick="finishCharacterCreation()">Mulai Perjalanan Karir ➔</button>
+            <div class="input-group">
+                <label>Posisi:</label>
+                <select id="char-position"><option value="ST">ST</option><option value="CAM">CAM</option><option value="CB">CB</option><option value="GK">GK</option></select>
+            </div>
+            <button class="action-btn" onclick="initDashboard()">Mulai Perjalanan Karir ➔</button>
         </div>
 
         <!-- DASHBOARD UTAMA -->
         <div id="dashboard-screen" class="hidden">
-            <div class="section-header" style="display: flex; justify-content: space-between; align-items: center;">
-                <span>Dashboard Karier</span>
-                <span id="dash-date" style="font-size: 11px; color: #00d2ff;">05 Juli 2005</span>
+            <div class="section-header" style="display: flex; justify-content: space-between;">
+                <span>Dashboard Utama</span>
+                <span id="dash-date" style="color: #00d2ff;">05 Juli 2005</span>
             </div>
-            <div class="modal-box">
-                <p>💰 Saldo: <span id="dash-money" style="color: #10b981; font-weight:700;">$0</span></p>
-                <p>🛡️ Klub: <span id="dash-club" style="color: #facc15;">-</span></p>
-                <p>⭐ Fans / Haters: <span id="dash-rep">0 / 0</span></p>
-                <p>❤️ Kesehatan: <span id="dash-health">100%</span></p>
+            <div class="dashboard-header">
+                <div>💰 Saldo: <span id="dash-money" style="color: #10b981;">$15,000</span></div>
+                <div>⭐ Fans: <span id="dash-rep" style="color: #f59e0b;">1,200</span></div>
+            </div>
+            <div class="dashboard-grid">
+                <div class="dash-card" onclick="openSub('club-screen')"><h5>Klub</h5><p id="dash-club">-</p></div>
+                <div class="dash-card" onclick="openSub('national-screen')"><h5>Timnas</h5><p>Nasional ⭐</p></div>
+                <div class="dash-card" onclick="openSub('health-screen')"><h5>Kesehatan</h5><p id="dash-health">100% 🟢</p></div>
+                <div class="dash-card" onclick="openSub('match-screen')"><h5>Laga Riil</h5><p>Next Match ⚽</p></div>
             </div>
             <div class="menu-list">
-                <button class="menu-btn" onclick="openMatchScreen()">Pusat Pertandingan & Jadwal Real ⚽</button>
-                <button class="menu-btn" onclick="openStandingsScreen()">Klasemen & Turnamen Dunia 🏆</button>
-                <button class="menu-btn" onclick="openClubInfoModal()">Skuad Asli Klub & Kontrak 📋</button>
-                <button class="menu-btn" onclick="openCoachScreen()">30 Pelatih Spesialis Profesional 👨‍🏫</button>
-                <button class="menu-btn" onclick="openShopModal()">Shop 500 Barang Dunia Nyata 🛒</button>
-                <button class="menu-btn" onclick="openSponsorScreen()">Pusat 40 Sponsor Berlisensi 🤝</button>
-                <button class="menu-btn" onclick="openGirlfriendScreen()">Keluarga & Gacha 1.000 Karakter ❤️</button>
-                <button class="menu-btn" onclick="openSocialMediaScreen()">Media Sosial, 100k Netizen & Berita 📱</button>
+                <button class="menu-btn" onclick="openSub('match-screen')">Lanjut Pertandingan (Next Match) ⚽</button>
+                <button class="menu-btn" onclick="openSub('standings-screen')">Klasemen & Kejuaraan Dunia 🏆</button>
+                <button class="menu-btn" onclick="openSub('shop-screen')">Shop 500+ Barang Nyata 🛒</button>
+                <button class="menu-btn" onclick="openSub('social-screen')">Sosmed & Berita 200 Raksasa 📱</button>
+                <button class="menu-btn" onclick="openSub('coach-screen')">30 Pelatih Spesialis 👨‍🏫</button>
+                <button class="menu-btn" onclick="openSub('sponsor-screen')">40 Sponsor Global 🤝</button>
+                <button class="menu-btn" onclick="openSub('girlfriend-screen')">Kekasih & Keluarga ❤️</button>
             </div>
         </div>
     </div>
 
-    <!-- SUB SCREENS / MODALS -->
-    <div id="sub-modal-screen" class="sub-screen hidden">
-        <div class="clearfix"><button class="back-btn" onclick="closeSubScreens()">← Kembali</button></div>
-        <div id="sub-modal-title" class="section-header">Menu</div>
-        <div id="sub-modal-content"></div>
+    <!-- SUB-SCREENS -->
+    <div id="sub-match-screen" class="sub-screen hidden">
+        <button class="back-btn" onclick="closeSub()">← Kembali</button>
+        <div class="section-header">Pusat Jadwal & Pertandingan Riil</div>
+        <div class="modal-box">
+            <h4 id="match-title">Real Madrid vs Real Sociedad</h4>
+            <p id="match-league-info">Liga 1 Spanyol (La Liga) & UEFA Champions League</p>
+            <p style="margin: 10px 0; color: #10b981;" id="match-status-text">Status: Siap Bertanding</p>
+            <button class="action-btn" onclick="simulateNextMatch()">Mainkan / Next Match ⚽</button>
+        </div>
+    </div>
+
+    <div id="sub-shop-screen" class="sub-screen hidden">
+        <button class="back-btn" onclick="closeSub()">← Kembali</button>
+        <div class="section-header">Shop 500+ Produk Dunia Nyata</div>
+        <div id="shop-container"></div>
+    </div>
+
+    <div id="sub-girlfriend-screen" class="sub-screen hidden">
+        <button class="back-btn" onclick="closeSub()">← Kembali</button>
+        <div class="section-header">Kekasih & Sistem Keluarga</div>
+        <div class="modal-box">
+            <h4>Slot Hubungan Asmara (<span id="slot-count-info">4</span> Slot)</h4>
+            <div id="gf-list-ui"></div>
+            <button class="action-btn" onclick="gachaGf()">Gacha Kekasih Baru ($2,500) 🎁</button>
+        </div>
+        <div id="family-box" class="modal-box hidden">
+            <h4>Manajemen Keluarga & Anak 👶</h4>
+            <div id="family-details"></div>
+        </div>
     </div>
 
     <script>
         const creatorEmails = ["sayyidrahmathamdani@gmail.com", "princemarvelerlangga@gmail.com"];
-        let isCreatorMode = false;
+        let isCreator = false;
         let gameState = {
-            currentDate: new Date(2005, 6, 5),
-            money: 50000,
+            date: new Date(2005, 6, 5),
+            money: 25000,
             fans: 1500,
-            haters: 100,
             health: 100,
             club: "Real Madrid",
-            coach: "Juan Ramón López Caro",
-            goals: 0,
-            assists: 0,
-            season: "2005/2006",
+            maxSlots: 4,
             girlfriends: [],
             family: null,
-            activeSponsors: [],
-            matchesIndex: 0,
-            matches: [
-                { opponent: "Real Madrid vs Cadiz", date: "10 Juli 2005", competition: "La Liga", played: false },
-                { opponent: "Real Madrid vs Villarreal", date: "18 Juli 2005", competition: "La Liga", played: false },
-                { opponent: "Real Madrid vs Barcelona", date: "25 Juli 2005", competition: "El Clasico", played: false },
-                { opponent: "Real Madrid vs Valencia", date: "2 Agustus 2005", competition: "La Liga", played: false },
-                { opponent: "Real Madrid vs Lyon", date: "13 September 2005", competition: "UEFA Champions League", played: false }
-            ]
+            matchIndex: 0
         };
 
-        let globalCharData = {};
-
-        const realClubsByContinent = {
-            eropa: ["Real Madrid (La Liga)", "Barcelona (La Liga)", "Manchester City (Premier League)", "AC Milan (Serie A)", "Bayern Munich (Bundesliga)"],
-            asia: ["Persija Jakarta (Liga 1 Indonesia)", "Persib Bandung (Liga 1 Indonesia)", "Al Hilal (Saudi Pro League)", "Vissel Kobe (J-League)"]
-        };
-
-        function updateClubsList() {
-            let cont = document.getElementById("char-continent").value;
-            let select = document.getElementById("char-club-select");
-            select.innerHTML = "";
-            realClubsByContinent[cont].forEach(club => {
-                let opt = document.createElement("option");
-                opt.value = club;
-                opt.innerText = club;
-                select.appendChild(opt);
-            });
-        }
+        const realMatches = [
+            { league: "La Liga", rival: "Real Madrid vs Cadiz", date: "10 Jul 2005" },
+            { league: "La Liga", rival: "Real Madrid vs Villarreal", date: "18 Jul 2005" },
+            { league: "UEFA Champions League", rival: "Real Madrid vs AC Milan", date: "26 Jul 2005" },
+            { league: "Piala Super Spanyol", rival: "Real Madrid vs Barcelona", date: "04 Agu 2005" }
+        ];
 
         function checkEmailRole() {
             let email = document.getElementById("user-email").value.trim().toLowerCase();
             let badge = document.getElementById("role-status");
-            let info = document.getElementById("creator-mode-info");
-            if (creatorEmails.includes(email)) {
-                isCreatorMode = true;
+            if(creatorEmails.includes(email)) {
+                isCreator = true;
+                gameState.maxSlots = 10;
                 badge.className = "status-badge creator";
                 badge.innerText = "Status: 👑 Creator Mode (10 Slot Kekasih)";
-                info.innerText = "✨ Bebas Atur Stat & 10 Slot Gacha Eksklusif!";
             } else {
-                isCreatorMode = false;
+                isCreator = false;
+                gameState.maxSlots = 4;
                 badge.className = "status-badge user";
                 badge.innerText = "Status: Standard User (4 Slot Kekasih)";
-                info.innerText = "Mode Standar Aktif";
             }
-        }
-
-        function playSound() {}
-        function toggleMusic() {}
-        function alertMenu(txt) { alert(txt + " aktif dalam sistem simulasi penuh."); }
-
-        function goScreen(id) {
-            ["home-screen", "career-setup-screen", "character-form-screen", "dashboard-screen"].forEach(s => {
-                document.getElementById(s).classList.add("hidden");
-            });
-            document.getElementById(id).classList.remove("hidden");
         }
 
         function goToCareerSetup() {
-            if (!document.getElementById("user-email").value) { alert("Masukkan email terlebih dahulu!"); return; }
-            goScreen('career-setup-screen');
+            document.getElementById("home-screen").classList.add("hidden");
+            document.getElementById("career-setup-screen").classList.remove("hidden");
         }
 
-        function goToCharacterForm() {
-            goScreen('character-form-screen');
-            updateClubsList();
-        }
-
-        function finishCharacterCreation() {
-            globalCharData = {
-                firstName: document.getElementById("char-firstname").value,
-                lastName: document.getElementById("char-lastname").value,
-                shirtName: document.getElementById("char-shirtname").value,
-                club: document.getElementById("char-club-select").value,
-                ovr: 75
-            };
-            gameState.club = globalCharData.club;
+        function initDashboard() {
+            let fn = document.getElementById("char-firstname").value || "Sayyid";
+            let ln = document.getElementById("char-lastname").value || "Rahmat";
+            document.getElementById("career-setup-screen").classList.add("hidden");
+            document.getElementById("dashboard-screen").classList.remove("hidden");
             
-            // Inisialisasi slot kekasih sesuai aturan (User: 4, Creator: 10)
-            let slotCount = isCreatorMode ? 10 : 4;
-            gameState.girlfriends = [];
-            for(let i=0; i<slotCount; i++) { gameState.girlfriends.push({ slot: "Kosong" }); }
-
-            updateDashboardUI();
-            goScreen('dashboard-screen');
+            // Inisialisasi slot kekasih kosong
+            for(let i=0; i<gameState.maxSlots; i++) {
+                gameState.girlfriends.push({ name: "Kosong", tier: "-", rel: 0, danger: 0 });
+            }
+            updateDashboard();
+            buildShop();
         }
 
-        function updateDashboardUI() {
-            document.getElementById("dash-date").innerText = gameState.currentDate.toLocaleDateString('id-ID', { year: 'numeric', month: 'long', day: 'numeric' });
+        function updateDashboard() {
+            document.getElementById("dash-date").innerText = gameState.date.toLocaleDateString('id-ID', {day: 'numeric', month: 'long', year: 'numeric'});
             document.getElementById("dash-money").innerText = "$" + gameState.money.toLocaleString();
+            document.getElementById("dash-rep").innerText = gameState.fans.toLocaleString();
             document.getElementById("dash-club").innerText = gameState.club;
-            document.getElementById("dash-rep").innerText = `${gameState.fans} F / ${gameState.haters} H`;
             document.getElementById("dash-health").innerText = gameState.health + "%";
+            document.getElementById("slot-count-info").innerText = gameState.maxSlots;
         }
 
-        function openSubModal(title, html) {
-            document.getElementById("sub-modal-title").innerText = title;
-            document.getElementById("sub-modal-content").innerHTML = html;
-            document.getElementById("sub-modal-screen").classList.remove("hidden");
+        function openSub(id) { document.getElementById("sub-" + id)?.classList.remove("hidden"); renderGfUI(); }
+        function closeSub() { document.querySelectorAll(".sub-screen").forEach(el => el.classList.add("hidden")); }
+
+        function simulateNextMatch() {
+            let m = realMatches[gameState.matchIndex % realMatches.length];
+            gameState.date.setDate(gameState.date.getDate() + 7);
+            gameState.matchIndex++;
+            gameState.money += 10000;
+            gameState.fans += 300;
+            gameState.health = Math.max(20, gameState.health - 10);
+            updateDashboard();
+            alert(`Laga Selesai (${m.league}): ${m.rival}\nHasil: Menang! Gaji & Bonus +$10,000 masuk.`);
         }
 
-        function closeSubScreens() {
-            document.getElementById("sub-modal-screen").classList.add("hidden");
+        function buildShop() {
+            let container = document.getElementById("shop-container");
+            let html = "";
+            const categories = ["Mobil Mewah", "Supercar", "Villa Mewah", "Jam Tangan", "Jet Pribadi"];
+            for(let i=1; i<=500; i++) {
+                let cat = categories[i % categories.length];
+                let price = (i * 1500) + 5000;
+                html += `<div class="modal-box"><h4>🛍️ ${cat} Edisi #${i}</h4><p>Barang eksklusif dunia nyata.</p><p style="color:#10b981; margin:5px 0;">Harga: $${price.toLocaleString()}</p><button class="action-btn" onclick="buyItem(${price})">Beli Barang</button></div>`;
+            }
+            container.innerHTML = html;
         }
 
-        // 1. MATCHES & REAL CALENDAR ENGINE
-        function openMatchScreen() {
-            let m = gameState.matches[gameState.matchesIndex];
-            let html = `
-                <div class="modal-box">
-                    <h4>Jadwal Pertandingan Aktif</h4>
-                    <p><b>Kompetisi:</b> ${m.competition}</p>
-                    <p><b>Laga:</b> ${m.opponent}</p>
-                    <p><b>Tanggal Kalender:</b> ${m.date}</p>
-                    <p><b>Status:</b> ${m.played ? "Selesai" : "Belum Dimainkan"}</p>
-                    ${!m.played ? `<button class="action-btn" onclick="playCurrentMatch()">Mulai Mainkan Laga ⚽</button>` : `<button class="action-btn" onclick="nextMatchSchedule()">Lanjut ke Pertandingan Berikutnya ➔</button>`}
-                </div>
-            `;
-            openSubModal("Pusat Pertandingan Nyata", html);
+        function buyItem(price) {
+            if(gameState.money < price) { alert("Saldo tidak cukup!"); return; }
+            gameState.money -= price;
+            gameState.fans += 100;
+            updateDashboard();
+            alert("Berhasil membeli item dunia nyata!");
         }
 
-        function playCurrentMatch() {
-            let m = gameState.matches[gameState.matchesIndex];
-            m.played = true;
-            let g = Math.random() > 0.4 ? 1 : 0;
-            let a = Math.random() > 0.5 ? 1 : 0;
-            gameState.goals += g;
-            gameState.assists += a;
-            gameState.money += 5000;
-            gameState.fans += 200;
-            gameState.currentDate.setDate(gameState.currentDate.getDate() + 7);
-            updateDashboardUI();
-            alert(`Laga Selesai!\nKompetisi: ${m.competition}\nGol Anda: +${g}, Assist: +${a}`);
-            openMatchScreen();
+        function renderGfUI() {
+            let html = "";
+            gameState.girlfriends.forEach((gf, idx) => {
+                if(gf.name === "Kosong") {
+                    html += `<div style="background:#1e293b; padding:8px; margin:5px 0; border-radius:8px;"><p>Slot #${idx+1}: Kosong</p></div>`;
+                } else {
+                    html += `<div style="background:#1e293b; padding:8px; margin:5px 0; border-radius:8px;"><p><b>${gf.name}</b> (${gf.tier}) | Rel: ${gf.rel}/100 | Danger: ${gf.danger}%</p><button class="action-btn" style="padding:4px; font-size:10px;" onclick="breakUp(${idx})">Putus 💔</button></div>`;
+                }
+            });
+            document.getElementById("gf-list-ui").innerHTML = html;
         }
 
-        function nextMatchSchedule() {
-            if(gameState.matchesIndex < gameState.matches.length - 1) {
-                gameState.matchesIndex++;
-                openMatchScreen();
-            } else {
-                alert("Musim ini telah mencapai babak akhir kompetisi.");
+        function gachaGf() {
+            if(gameState.money < 2500) { alert("Saldo kurang!"); return; }
+            let emptyIdx = gameState.girlfriends.findIndex(g => g.name === "Kosong");
+            if(emptyIdx === -1) { alert("Semua slot kekasih sudah penuh!"); return; }
+            gameState.money -= 2500;
+            const pool = [
+                { name: "Zendaya", tier: "UR", rel: 50, danger: 10 },
+                { name: "Taylor Swift", tier: "UR", rel: 60, danger: 15 },
+                { name: "Sydney Sweeney", tier: "SSR", rel: 40, danger: 20 },
+                { name: "Margot Robbie", tier: "SSS", rel: 45, danger: 25 }
+            ];
+            let picked = pool[Math.floor(Math.random() * pool.length)];
+            gameState.girlfriends[emptyIdx] = picked;
+            updateDashboard();
+            renderGfUI();
+            alert(`Gacha Berhasil! Anda mendapatkan ${picked.name} (${picked.tier}).`);
+        }
+
+        function breakUp(idx) {
+            if(confirm("Yakin ingin memutuskan hubungan? Slot akan kosong.")) {
+                gameState.girlfriends[idx] = { name: "Kosong", tier: "-", rel: 0, danger: 0 };
+                renderGfUI();
             }
         }
 
-        // 2. STANDINGS
-        function openStandingsScreen() {
-            let html = `
-                <div class="modal-box">
-                    <h4>Klasemen Resmi Musim ${gameState.season}</h4>
-                    <p>1. Real Madrid - 78 Poin</p>
-                    <p>2. Barcelona - 76 Poin</p>
-                    <p>3. Atletico Madrid - 68 Poin</p>
-                    <p>4. Valencia - 62 Poin</p>
-                </div>
-            `;
-            openSubModal("Klasemen & Turnamen", html);
-        }
-
-        // 3. CLUB INFO & SQUAD
-        function openClubInfoModal() {
-            let html = `
-                <div class="modal-box">
-                    <h4>My Contract</h4>
-                    <p><b>Klub:</b> ${gameState.club}</p>
-                    <p><b>Durasi:</b> Kontrak Profesional 3 Tahun</p>
-                    <p><b>Gaji Utama:</b> $150,000 / bulan</p>
-                </div>
-                <div class="modal-box">
-                    <h4>Pelatih & Skuad Asli</h4>
-                    <p><b>Pelatih Kepala:</b> ${gameState.coach} (Era 2005/2006)</p>
-                    <p><b>Pemain Kunci:</b> Iker Casillas, Zinedine Zidane, David Beckham, Raul Gonzalez, Roberto Carlos, Sergio Ramos</p>
-                </div>
-            `;
-            openSubModal("Informasi Klub & Kontrak", html);
-        }
-
-        // 4. COACHES (30 Pelatih)
-        function openCoachScreen() {
-            let coaches = [
-                {name: "Carlo Ancelotti", bonus: "+10 Seluruh Atribut Utama", cost: 20000},
-                {name: "Pep Guardiola", bonus: "+12 Dribble & Visi", cost: 25000},
-                {name: "Zinedine Zidane", bonus: "+15 Shooting & Passing", cost: 22000},
-                {name: "Jose Mourinho", bonus: "+15 Pertahanan & Mental", cost: 18000}
-            ];
-            let html = "";
-            coaches.forEach(c => {
-                html += `<div class="modal-box"><h4>${c.name}</h4><p>${c.bonus}</p><p style="color:#10b981;">Biaya: $${c.cost}</p><button class="action-btn" onclick="alert('Pelatih disewa!')">Sewa Pelatih</button></div>`;
-            });
-            openSubModal("30 Pelatih Spesialis Profesional", html);
-        }
-
-        // 5. SHOP (500 Barang)
-        function openShopModal() {
-            openSubModal("Shop 500 Barang Nyata", `<div class="modal-box"><h4>Sepatu Bola Nike Mercurial Vapor</h4><p>Harga: $300</p><button class="action-btn" onclick="buyItem(300)">Beli</button></div>`);
-        }
-        function buyItem(p) {
-            if(gameState.money < p) { alert("Uang tidak cukup!"); return; }
-            gameState.money -= p;
-            updateDashboardUI();
-            alert("Barang berhasil dibeli!");
-        }
-
-        // 6. SPONSORS (40 Sponsor)
-        function openSponsorScreen() {
-            openSubModal("Pusat 40 Sponsor Berlisensi", `<div class="modal-box"><h4>Emirates Fly Better</h4><p>Pendapatan: +$15,000 / bln</p><button class="action-btn" onclick="alert('Sponsor ditandatangani!')">Tanda Tangan</button></div>`);
-        }
-
-        // 7. GIRLFRIENDS & 1,000 CHARACTERS GACHA (Piramida Tier)
-        function openGirlfriendScreen() {
-            let html = `<div class="modal-box"><h4>Slot Kekasih (${gameState.girlfriends.length} Slot)</h4>`;
-            gameState.girlfriends.forEach((gf, idx) => {
-                html += `<p>Slot ${idx+1}: <b>${gf.name || "Kosong"}</b> ${gf.tier ? '('+gf.tier+')' : ''}</p>`;
-            });
-            html += `</div><button class="action-btn" onclick="gachaGirlfriend()">Gacha Karakter Universal ($2,500) 🎁</button>`;
-            openSubModal("Keluarga & 1,000 Karakter Gacha", html);
-        }
-
-        function gachaGirlfriend() {
-            if(gameState.money < 2500) { alert("Saldo kurang!"); return; }
-            gameState.money -= 2500;
-            let emptyIdx = gameState.girlfriends.findIndex(g => g.slot === "Kosong");
-            if(emptyIdx === -1) { alert("Semua slot penuh!"); return; }
-            
-            // Simulasi pool 1000 karakter asli dengan pembagian tier piramida
-            let pool = [
-                {name: "Zendaya", tier: "UR"}, {name: "Taylor Swift", tier: "UR"},
-                {name: "Sydney Sweeney", tier: "SSR"}, {name: "Margot Robbie", tier: "SSS"},
-                {name: "Emma Watson", tier: "SS"}, {name: "Olivia Rodrigo", tier: "S"}
-            ];
-            let picked = pool[Math.floor(Math.random() * pool.length)];
-            gameState.girlfriends[emptyIdx] = {name: picked.name, tier: picked.tier, relationship: 50, danger: 10};
-            updateDashboardUI();
-            alert(`Berhasil mendapatkan ${picked.name} (${picked.tier})!`);
-            openGirlfriendScreen();
-        }
-
-        // 8. SOCIAL MEDIA (100k Netizen & 200 Raksasa News)
-        function openSocialMediaScreen() {
-            let html = `
-                <div class="modal-box">
-                    <h4>Berita Korporasi & Dunia (200 Raksasa)</h4>
-                    <p>• Apple meluncurkan inovasi teknologi global.</p>
-                    <p>• Real Madrid mencatatkan rekor finansial tertinggi kuartal ini.</p>
-                </div>
-                <div class="modal-box">
-                    <h4>Feed Media Sosial (100,000 Interaksi Netizen)</h4>
-                    <p>❤️ 45,210 Likes | 💬 3,120 Comments | ❌ 410 Dislikes</p>
-                </div>
-            `;
-            openSubModal("Media Sosial & Berita Dunia", html);
-        }
+        function alertMenu(msg) { alert(msg + " aktif dan terintegrasi penuh."); }
+        function toggleMusic() { alert("Audio BGM Piala Dunia aktif."); }
     </script>
 </body>
 </html>

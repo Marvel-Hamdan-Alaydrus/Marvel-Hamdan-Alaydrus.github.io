@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RV LIFE: Simulator - Master Edition</title>
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --panel-bg: rgba(17, 24, 39, 0.85);
+            --border-color: #1f2937;
+            --accent-cyan: #00ffcc;
+            --accent-pink: #ff00ff;
+            --accent-gold: #f1c40f;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            box-sizing: border-box;
+        }
+
+        #game-container {
+            width: 100%;
+            max-width: 480px;
+            background: var(--panel-bg);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 15px;
+            padding: 20px;
+            box-shadow: 0 10px 30px rgba(0, 255, 204, 0.2);
+            box-sizing: border-box;
+            position: relative;
+        }
+
+        h1, h2, h3 {
+            margin-top: 0;
+            color: var(--accent-cyan);
+            text-align: center;
+            font-style: italic;
+        }
+
+        .screen {
+            display: none;
+        }
+
+        .screen.active {
+            display: block;
+        }
+
+        /* Status & Top Bar */
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            font-size: 12px;
+            background: rgba(0,0,0,0.5);
+            padding: 8px 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* Cards & Avatars */
+        .card-preview {
+            position: relative;
+            width: 220px;
+            height: 320px;
+            background: linear-gradient(135deg, #1a2238 0%, #111827 100%);
+            border-radius: 12px;
+            padding: 12px;
+            margin: 0 auto 15px auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.6);
+            box-sizing: border-box;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 120px;
+            height: 140px;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .avatar-frame {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            pointer-events: none;
+            z-index: 3;
+        }
+
+        .avatar-img {
+            width: 104px;
+            height: 124px;
+            object-fit: cover;
+            border-radius: 6px;
+            z-index: 2;
+            background: #222;
+        }
+
+        /* Buttons & Inputs */
+        button {
+            background: var(--accent-cyan);
+            color: #0b0f19;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+            width: 100%;
+            margin-top: 10px;
+            transition: 0.2s;
+        }
+
+        button:hover {
+            background: var(--accent-pink);
+            color: #fff;
+        }
+
+        input, select {
+            width: 100%;
+            background: #1f2937;
+            color: #fff;
+            border: 1px solid #374151;
+            padding: 10px;
+            border-radius: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        label {
+            font-size: 13px;
+            color: var(--text-muted);
+        }
+
+        /* Navigation Grid */
+        .nav-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .log-box {
+            background: rgba(0,0,0,0.6);
+            border: 1px solid var(--border-color);
+            padding: 10px;
+            border-radius: 8px;
+            height: 100px;
+            overflow-y: auto;
+            font-size: 12px;
+            margin-top: 10px;
+            color: #10b981;
+        }
+
+        /* Dynamic Borders (OVR Tier Effects) */
+        .tier-bronze { border: 4px solid #cd7f32; }
+        .tier-green { border: 4px solid #2ecc71; box-shadow: 0 0 10px #2ecc71; }
+        .tier-silver { border: 4px solid #bdc3c7; background: linear-gradient(135deg, rgba(189,195,199,0.2), transparent); }
+        .tier-gold { border: 4px solid #f1c40f; box-shadow: 0 0 15px #f1c40f; }
+        .tier-tier90 { border: 5px dashed #00ffff; box-shadow: 0 0 20px #00ffff; animation: rotateBorder 4s linear infinite; }
+        .tier-tier93 { border: 5px solid #9b59b6; box-shadow: 0 0 25px #9b59b6; animation: pulseGlow 1.5s ease-in-out infinite alternate; }
+        .tier-tier96 { border: 6px solid #e67e22; box-shadow: 0 0 30px #e74c3c; animation: dragonFire 0.8s ease-in-out infinite alternate; }
+        .tier-tier99 { border: 6px solid #fff; box-shadow: 0 0 40px #ff007f, 0 0 60px #7928ca; animation: goatCosmic 0.5s ease-in-out infinite alternate; }
+
+        @keyframes rotateBorder { 100% { transform: rotate(360deg); } }
+        @keyframes pulseGlow { 0% { box-shadow: 0 0 15px #9b59b6; } 100% { box-shadow: 0 0 35px #00ffff; } }
+        @keyframes dragonFire { 0% { border-color: #e67e22; } 100% { border-color: #f1c40f; } }
+        @keyframes goatCosmic { 0% { border-color: #ff007f; } 100% { border-color: #00ffff; } }
+    </style>
+</head>
+<body>
+
+<div id="game-container">
+
+    <!-- SCREEN 1: SETUP KARAKTER UTAMA -->
+    <div id="screen-setup" class="screen active">
+        <h1>RV LIFE: SIMULATOR</h1>
+        <p style="text-align: center; font-size: 12px; color: var(--text-muted);">Master GDD Edition (Full Single-File)</p>
+        
+        <label>Nama Punggung Pemain:</label>
+        <input type="text" id="input-name" value="SAYYID">
+
+        <label>Umur (16 - 21):</label>
+        <input type="number" id="input-age" value="18" min="16" max="21">
+
+        <label>OVR Awal:</label>
+        <input type="number" id="input-ovr" value="75" min="50" max="99">
+
+        <label>Email Verifikasi (Admin God-Mode):</label>
+        <input type="email" id="input-email" placeholder="Masukkan email untuk hak akses admin...">
+
+        <label>Upload Foto Karakter:</label>
+        <input type="file" id="input-photo" accept="image/*" onchange="previewImage(event, 'preview-avatar')">
+
+        <div class="card-preview">
+            <div class="avatar-container">
+                <div class="avatar-frame tier-silver" id="setup-border"></div>
+                <img id="preview-avatar" class="avatar-img" src="https://via.placeholder.com/104x124?text=Foto" alt="Avatar">
+            </div>
+            <div style="margin-top: 10px; font-weight: bold;" id="card-name-display">SAYYID</div>
+        </div>
+
+        <button onclick="initGame()">Mulai Karier RV LIFE</button>
+    </div>
+
+    <!-- SCREEN 2: MAIN DASHBOARD -->
+    <div id="screen-dashboard" class="screen">
+        <div class="status-bar">
+            <span>Uang: $<span id="stat-money">5000</span></span>
+            <span>OVR: <span id="stat-ovr">75</span></span>
+            <span>Usia: <span id="stat-age">18</span></span>
+        </div>
+
+        <h2 id="dash-title">Karier Utama</h2>
+        
+        <div class="card-preview" style="width: 100%; height: auto; padding: 10px; flex-direction: row; gap: 15px; align-items: center;">
+            <div class="avatar-container" style="width: 80px; height: 95px; margin: 0;">
+                <div class="avatar-frame tier-gold" id="dash-border"></div>
+                <img id="dash-avatar" class="avatar-img" style="width: 72px; height: 87px;" src="" alt="Avatar">
+            </div>
+            <div>
+                <h3 id="dash-name" style="margin: 0; text-align: left;">Pemain</h3>
+                <p style="margin: 5px 0 0 0; font-size: 12px; color: var(--text-muted);" id="dash-club">Klub: Real Madrid Academy</p>
+                <p style="margin: 5px 0 0 0; font-size: 12px; color: var(--accent-pink);" id="dash-admin-badge"></p>
+            </div>
+        </div>
+
+        <div class="nav-grid">
+            <button onclick="doTraining()">🏋️ Latihan Bola</button>
+            <button onclick="openMatch()">⚽ Pertandingan</button>
+            <button onclick="openBusiness()">🏢 Bisnis Tycoon</button>
+            <button onclick="openGacha()">💎 Gacha Pasangan</button>
+            <button onclick="openInventory()">❤️ Inventory Pasangan (<span id="partner-count">0</span>)</button>
+            <button onclick="openRVGram()">📱 RV-Gram</button>
+        </div>
+
+        <div id="admin-panel-btn" style="display: none; margin-top: 10px;">
+            <button onclick="openAdminModal()" style="background: var(--accent-pink); color: #fff;">⚡ GOD-MODE ADMIN PANEL</button>
+        </div>
+
+        <div class="log-box" id="game-log">
+            [System] Selamat datang di RV LIFE Simulator. Bangun warisanmu sekarang!
+        </div>
+        <button onclick="location.reload()" style="background: #374151; font-size: 11px; padding: 5px;">Reset Game</button>
+    </div>
+
+    <!-- SCREEN 3: MATCH / PILIHAN RPG -->
+    <div id="screen-match" class="screen">
+        <h2>Pertandingan Liga</h2>
+        <p id="match-desc" style="font-size: 13px;">Menit 78: Skor imbang 1-1 melawan rival sekota. Kamu mendapat ruang tembak emas di luar kotak penalti!</p>
+        <button onclick="resolveMatch('shoot')">[A] Lepaskan Tendangan Keras Langsung</button>
+        <button onclick="resolveMatch('pass')">[B] Berikan Operan Matang ke Rekan Setim</button>
+        <button onclick="resolveMatch('dribble')">[C] Aksi Dribble Individu Lewati Bek Terakhir</button>
+    </div>
+
+    <!-- SCREEN 4: BUSINESS TYCOON -->
+    <div id="screen-business" class="screen">
+        <h2>Bisnis Tycoon</h2>
+        <p style="font-size: 13px;">Putar uang gaji bolamu untuk passive income.</p>
+        <div style="background: rgba(0,0,0,0.4); padding: 10px; border-radius: 8px; margin-bottom: 10px;">
+            <strong>Kedai Kopi Viral</strong><br>
+            Harga: $2,000 | Profit: $150 / klik<br>
+            <button onclick="buyBusiness(2000, 150)">Beli Bisnis</button>
+        </div>
+        <button onclick="collectBusiness()" style="background: #10b981;">Ambil Hasil Bisnis</button>
+        <button onclick="switchScreen('screen-dashboard')" style="background: #374151;">Kembali</button>
+    </div>
+
+    <!-- SCREEN 5: GACHA PASANGAN -->
+    <div id="screen-gacha" class="screen">
+        <h2>Gacha Pasangan Global</h2>
+        <p style="font-size: 13px; text-align: center;">Pilih Negara (China, Korea, Inggris, Jepang, Rusia, Turki)</p>
+        <select id="gacha-country">
+            <option value="Korea Selatan">Korea Selatan (K-Pop/Actress)</option>
+            <option value="Jepang">Jepang (Idol/Model)</option>
+            <option value="Inggris">Inggris (Influencer/Singer)</option>
+            <option value="China">China (Global Star)</option>
+            <option value="Rusia">Rusia (Supermodel)</option>
+            <option value="Turki">Turki (Actress)</option>
+        </select>
+        <p style="font-size: 12px; text-align: center; color: var(--accent-gold);">Biaya Gacha: $1,000</p>
+        <button onclick="pullGacha()">Gacha Sekarang (1x)</button>
+        <button onclick="switchScreen('screen-dashboard')" style="background: #374151;">Kembali</button>
+    </div>
+
+    <!-- SCREEN 6: INVENTORY PASANGAN -->
+    <div id="screen-inventory" class="screen">
+        <h2>Inventory Pasangan</h2>
+        <div id="partner-list" style="max-height: 250px; overflow-y: auto; margin-bottom: 10px;">
+            <!-- Rendered via JS -->
+        </div>
+        <button onclick="switchScreen('screen-dashboard')" style="background: #374151;">Kembali</button>
+    </div>
+
+    <!-- SCREEN 7: RV-GRAM -->
+    <div id="screen-rvgram" class="screen">
+        <h2>RV-Gram Feed</h2>
+        <div id="rvgram-feed" style="max-height: 250px; overflow-y: auto; font-size: 12px; background: rgba(0,0,0,0.5); padding: 10px; border-radius: 8px;">
+            <p><strong>@FabrizioText:</strong> Wonderkid <span id="feed-name">SAYYID</span> jadi bahan rebutan klub raksasa Eropa! 🔥</p>
+        </div>
+        <button onclick="switchScreen('screen-dashboard')" style="background: #374151; margin-top: 10px;">Kembali</button>
+    </div>
+
+    <!-- SCREEN 8: ADMIN GOD-MODE -->
+    <div id="screen-admin" class="screen">
+        <h2>⚡ ADMIN PANEL ⚡</h2>
+        <p style="font-size: 12px; color: var(--accent-pink);">Akses Terverifikasi Email Pemilik Hak Cipta.</p>
+        <label>Tambah Uang Instan ($):</label>
+        <input type="number" id="admin-add-money" value="100000">
+        <button onclick="adminCheatMoney()">Inject Uang</button>
+
+        <label>Ubah OVR Instan:</label>
+        <input type="number" id="admin-set-ovr" value="99">
+        <button onclick="adminCheatOVR()">Inject OVR & Max Border</button>
+        <button onclick="switchScreen('screen-dashboard')" style="background: #374151; margin-top: 15px;">Keluar Admin</button>
+    </div>
+
+</div>
+
+<script>
+    // Global Game State
+    let player = {
+        name: "SAYYID",
+        age: 18,
+        ovr: 75,
+        money: 5000,
+        email: "",
+        isAdmin: false,
+        avatar: "",
+        businessIncome: 0,
+        partners: []
+    };
+
+    const validAdminEmails = ["sayyidrahmathamdani@gmail.com", "princemarvelerlangga@gmail.com"];
+
+    function previewImage(event, targetId) {
+        const reader = new FileReader();
+        reader.onload = function() {
+            document.getElementById(targetId).src = reader.result;
+            if(targetId === 'preview-avatar') {
+                player.avatar = reader.result;
+                document.getElementById('dash-avatar').src = reader.result;
+            }
+        };
+        reader.readAsDataURL(event.target.files[0]);
+    }
+
+    function updateBorderClass(ovr, elementId) {
+        const el = document.getElementById(elementId);
+        el.className = "avatar-frame";
+        if (ovr < 60) el.classList.add('tier-bronze');
+        else if (ovr < 70) el.classList.add('tier-green');
+        else if (ovr < 80) el.classList.add('tier-silver');
+        else if (ovr < 90) el.classList.add('tier-gold');
+        else if (ovr <= 92) el.classList.add('tier-tier90');
+        else if (ovr <= 95) el.classList.add('tier-tier93');
+        else if (ovr <= 98) el.classList.add('tier-tier96');
+        else el.classList.add('tier-tier99');
+    }
+
+    function initGame() {
+        player.name = document.getElementById('input-name').value || "Wonderkid";
+        player.age = parseInt(document.getElementById('input-age').value) || 18;
+        player.ovr = parseInt(document.getElementById('input-ovr').value) || 75;
+        player.email = document.getElementById('input-email').value.trim().toLowerCase();
+
+        if (validAdminEmails.includes(player.email)) {
+            player.isAdmin = true;
+            document.getElementById('admin-panel-btn').style.display = 'block';
+            document.getElementById('dash-admin-badge').innerText = "⚡ GOD-MODE ADMIN ACTIVE";
+        }
+
+        if(!player.avatar) {
+            player.avatar = "https://via.placeholder.com/104x124?text=Player";
+        }
+
+        document.getElementById('dash-name').innerText = player.name;
+        document.getElementById('dash-avatar').src = player.avatar;
+        document.getElementById('feed-name').innerText = player.name;
+
+        updateDashboardUI();
+        switchScreen('screen-dashboard');
+        logMessage("Karier dimulai! Selamat berjuang di dunia profesional.");
+    }
+
+    function updateDashboardUI() {
+        document.getElementById('stat-money').innerText = player.money;
+        document.getElementById('stat-ovr').innerText = player.ovr;
+        document.getElementById('stat-age').innerText = player.age;
+        document.getElementById('partner-count').innerText = player.partners.length;
+        updateBorderClass(player.ovr, 'dash-border');
+    }
+
+    function switchScreen(screenId) {
+        document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+        document.getElementById(screenId).classList.add('active');
+    }
+
+    function logMessage(msg) {
+        const box = document.getElementById('game-log');
+        box.innerHTML += `<br>[Log] ${msg}`;
+        box.scrollTop = box.scrollHeight;
+    }
+
+    function doTraining() {
+        player.money += 300;
+        if(Math.random() > 0.6 && player.ovr < 99) player.ovr += 1;
+        updateDashboardUI();
+        logMessage("Latihan selesai! Performa meningkat dan bonus gaji diterima.");
+    }
+
+    function openMatch() {
+        switchScreen('screen-match');
+    }
+
+    function resolveMatch(choice) {
+        let success = Math.random() > 0.4;
+        if(success) {
+            player.money += 1200;
+            player.ovr += 1;
+            logMessage("Keputusan brilian! Tim menang dan rating kamu melonjak.");
+        } else {
+            player.money += 400;
+            logMessage("Pilihan kurang tepat di momen krusial. Performa biasa saja.");
+        }
+        updateDashboardUI();
+        switchScreen('screen-dashboard');
+    }
+
+    function openBusiness() {
+        switchScreen('screen-business');
+    }
+
+    function buyBusiness(cost, income) {
+        if(player.money >= cost) {
+            player.money -= cost;
+            player.businessIncome += income;
+            updateDashboardUI();
+            alert("Bisnis berhasil dibeli!");
+            logMessage("Berhasil mengakuisisi aset bisnis baru.");
+        } else {
+            alert("Uang tidak cukup!");
+        }
+    }
+
+    function collectBusiness() {
+        if(player.businessIncome > 0) {
+            player.money += player.businessIncome;
+            updateDashboardUI();
+            logMessage(`Mendapatkan passive income sebesar $${player.businessIncome} dari bisnis.`);
+        } else {
+            alert("Kamu belum punya bisnis aktif!");
+        }
+    }
+
+    function openGacha() {
+        switchScreen('screen-gacha');
+    }
+
+    function pullGacha() {
+        if(player.money < 1000) {
+            alert("Uang tidak cukup untuk Gacha ($1,000)!");
+            return;
+        }
+        player.money -= 1000;
+        
+        const country = document.getElementById('gacha-country').value;
+        const rarities = ["UR", "SSS", "SS", "S", "A", "B"];
+        const chosenRarity = rarities[Math.floor(Math.random() * rarities.length)];
+        
+        const newPartner = {
+            id: Date.now(),
+            name: `Waifu ${country} #${Math.floor(Math.random()*100)}`,
+            age: 20 + Math.floor(Math.random()*5),
+            job: "Model / Influencer",
+            country: country,
+            rarity: chosenRarity,
+            affection: 50,
+            avatar: "https://via.placeholder.com/80x90?text=Partner"
+        };
+
+        player.partners.push(newPartner);
+        updateDashboardUI();
+        alert(`Selamat! Kamu mendapatkan pasangan rarity [${chosenRarity}] dari ${country}!`);
+        logMessage(`Gacha Berhasil: Mendapatkan ${newPartner.name} (${chosenRarity})`);
+        switchScreen('screen-dashboard');
+    }
+
+    function openInventory() {
+        const listEl = document.getElementById('partner-list');
+        listEl.innerHTML = "";
+        if(player.partners.length === 0) {
+            listEl.innerHTML = "<p style='text-align:center; color:var(--text-muted);'>Belum ada pasangan. Lakukan gacha!</p>";
+        } else {
+            player.partners.forEach((p, idx) => {
+                listEl.innerHTML += `
+                    <div style="background:rgba(0,0,0,0.5); padding:10px; border-radius:8px; margin-bottom:8px; display:flex; justify-content:space-between; align-items:center;">
+                        <div>
+                            <strong>${p.name}</strong> [${p.rarity}]<br>
+                            <small>Negara: ${p.country} | Usia: ${p.age}</small><br>
+                            <small>Affection: ${p.affection}%</small>
+                        </div>
+                        <button onclick="interactPartner(${idx})" style="width:auto; padding:5px 10px; font-size:11px;">Kencan</button>
+                    </div>
+                `;
+            });
+        }
+        switchScreen('screen-inventory');
+    }
+
+    function interactPartner(idx) {
+        player.partners[idx].affection += 10;
+        alert(`Kamu berkencan dengan ${player.partners[idx].name}! Affection bertambah.`);
+        openInventory();
+    }
+
+    function openRVGram() {
+        switchScreen('screen-rvgram');
+    }
+
+    function openAdminModal() {
+        switchScreen('screen-admin');
+    }
+
+    function adminCheatMoney() {
+        const add = parseInt(document.getElementById('admin-add-money').value) || 0;
+        player.money += add;
+        updateDashboardUI();
+        alert("God-Mode: Uang berhasil di-inject!");
+    }
+
+    function adminCheatOVR() {
+        const newOvr = parseInt(document.getElementById('admin-set-ovr').value) || 99;
+        player.ovr = newOvr;
+        updateDashboardUI();
+        alert("God-Mode: OVR dan Border Ultimate Berhasil Diaktifkan!");
+    }
+</script>
+
+</body>
+</html>

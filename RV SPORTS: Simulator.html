@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>RV Sports: FC Champions</title>
+<style>
+:root{
+  --bg:#070a12;--panel:#101624;--panel2:#151d2d;--line:#29344a;--text:#f4f7fb;--muted:#8f9ab0;
+  --gold:#ffd76a;--green:#51e39a;--red:#ff647c;--blue:#63a9ff;--purple:#b887ff;
+}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at top,#17223a 0,#070a12 48%,#04050a 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,sans-serif}
+button,input,select{font:inherit}
+button{cursor:pointer;border:0}
+.hidden{display:none!important}
+.screen{min-height:100vh;padding:18px}
+.center{display:flex;align-items:center;justify-content:center}
+.card{background:rgba(16,22,36,.94);border:1px solid var(--line);border-radius:20px;box-shadow:0 16px 50px #0007}
+.logo{font-size:clamp(28px,8vw,52px);font-weight:1000;letter-spacing:-2px}
+.logo span{color:var(--gold)}
+.small{color:var(--muted);font-size:13px}
+.btn{padding:13px 16px;border-radius:13px;background:#202a40;color:white;font-weight:800;border:1px solid #34415d}
+.btn.primary{background:linear-gradient(135deg,#ffd76a,#ff9d3e);color:#15100a;border:0}
+.btn.green{background:linear-gradient(135deg,#55edaa,#28b979);color:#06150e;border:0}
+.btn.danger{background:#361725;color:#ff9daf;border-color:#5c2436}
+.btn:disabled{opacity:.35;cursor:not-allowed}
+#loading{display:flex;flex-direction:column;gap:20px}
+.loaderBall{width:86px;height:86px;border-radius:50%;margin:auto;background:radial-gradient(circle at 35% 30%,#fff,#dfe7f3 24%,#8795ac 25%,#202b40 58%,#0a0e18 60%);animation:spin 1.4s linear infinite;box-shadow:0 0 40px #63a9ff55}
+@keyframes spin{to{transform:rotate(360deg)}}
+.loadbar{width:min(460px,90vw);height:12px;background:#182136;border-radius:99px;overflow:hidden;border:1px solid #2a3752}
+.loadfill{height:100%;width:1%;background:linear-gradient(90deg,#63a9ff,#b887ff,#ffd76a);transition:.08s}
+.login{width:min(440px,100%);padding:22px}
+.login h1{margin:0 0 8px}
+.field{display:flex;flex-direction:column;gap:7px;margin:12px 0}
+.field label{font-size:12px;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.8px}
+input,select{width:100%;padding:13px 14px;border-radius:12px;border:1px solid var(--line);background:#0a0f1b;color:white;outline:none}
+input:focus,select:focus{border-color:#63a9ff}
+.top{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:16px}
+.top .actions{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}
+.create{width:min(980px,100%);margin:auto}
+.createGrid{display:grid;grid-template-columns:330px 1fr;gap:16px}
+.playerCard{padding:16px;position:relative;overflow:hidden}
+.playerCard:before{content:"";position:absolute;inset:0;background:linear-gradient(145deg,#ffffff0b,transparent 40%);pointer-events:none}
+.portrait{height:250px;border:2px dashed #46526a;border-radius:16px;display:flex;align-items:center;justify-content:center;color:#67738a;background:#080d17;font-size:13px}
+.pcName{font-size:22px;font-weight:1000;margin-top:12px}
+.pcMeta{display:flex;justify-content:space-between;color:var(--muted);font-size:12px}
+.ovr{font-size:44px;font-weight:1000;color:var(--gold);line-height:1}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.stat{background:#0b111e;border:1px solid #202b40;border-radius:11px;padding:9px;text-align:center}
+.stat b{display:block;font-size:18px}.stat span{font-size:10px;color:var(--muted)}
+.formCard{padding:18px}
+.posgrid{display:grid;grid-template-columns:repeat(4,1fr);gap:7px}
+.pos{padding:10px 5px;background:#0a0f1b;border:1px solid var(--line);border-radius:9px;color:#b7c1d2;font-weight:800;font-size:12px}
+.pos.active{background:#263754;color:white;border-color:#63a9ff}
+.gachaBox{padding:15px;border-radius:16px;background:linear-gradient(135deg,#171f34,#0d1220);border:1px solid #303d59;margin-top:14px}
+.gachaStats{display:grid;grid-template-columns:repeat(6,1fr);gap:6px}
+.gachaStat{padding:8px 2px;text-align:center;background:#080d17;border-radius:9px}.gachaStat b{display:block;font-size:17px}.gachaStat span{font-size:9px;color:var(--muted)}
+.main{max-width:1100px;margin:auto}
+.nav{display:flex;gap:7px;overflow:auto;padding-bottom:5px;margin-bottom:12px}.nav button{white-space:nowrap}
+.hero{padding:20px;display:grid;grid-template-columns:1.5fr 1fr;gap:15px}
+.balance{font-size:28px;font-weight:1000;color:var(--gold)}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.tile{padding:14px;background:#0d1422;border:1px solid var(--line);border-radius:14px}
+.section{padding:16px;margin-top:12px}
+.partnerControls{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.roster{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:12px}
+.partner{padding:13px;background:#0b101b;border:1px solid var(--line);border-radius:15px;position:relative}
+.partner .tier{font-weight:1000;font-size:12px}.partner .pname{font-size:17px;font-weight:900;margin:4px 0}
+.badge{display:inline-block;padding:4px 7px;border-radius:99px;background:#202a3d;color:#c9d3e6;font-size:10px;font-weight:900}
+.UR{color:#ff7ee8}.SSS{color:#ffd76a}.SS{color:#c89cff}.S{color:#63a9ff}.A{color:#59e6a2}.B{color:#aab3c3}
+.partner button{width:100%;margin-top:8px}
+.tag{font-size:10px;color:var(--muted)}
+.partner img{width:100%;height:150px;object-fit:cover;border-radius:11px;background:#151d2d}
+.adminBox{border:1px solid #8b5cf6;background:#1b1430}
+.adminGrid{display:grid;grid-template-columns:repeat(2,1fr);gap:8px}
+.kpi{font-size:24px;font-weight:1000}.dangerText{color:#ff8296}
+.table{width:100%;border-collapse:collapse;font-size:12px}.table td,.table th{padding:9px;border-bottom:1px solid var(--line);text-align:left}
+.child{padding:13px;border:1px solid #39445b;background:#0b101b;border-radius:13px;margin-top:8px}
+.toast{position:fixed;left:50%;bottom:18px;transform:translateX(-50%);background:#f4f7fb;color:#090c13;padding:11px 15px;border-radius:12px;font-weight:800;z-index:99;box-shadow:0 12px 30px #0008}
+.modal{position:fixed;inset:0;background:#000a;display:flex;align-items:center;justify-content:center;padding:15px;z-index:80}.modal .card{width:min(500px,100%);padding:20px}
+@media(max-width:760px){
+  .screen{padding:12px}.createGrid,.hero{grid-template-columns:1fr}.roster{grid-template-columns:1fr 1fr}.tiles{grid-template-columns:1fr 1fr}
+  .portrait{height:220px}.posgrid{grid-template-columns:repeat(4,1fr)}.gachaStats{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:440px){.roster{grid-template-columns:1fr}.tiles{grid-template-columns:1fr}.adminGrid{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+
+<section id="loading" class="screen center">
+  <div style="text-align:center">
+    <div class="logo">RV SPORTS<span>: FC CHAMPIONS</span></div>
+    <div class="loaderBall"></div>
+    <div style="font-weight:900;margin:8px">Loading <span id="loadPct">1%</span></div>
+    <div class="loadbar"><div id="loadFill" class="loadfill"></div></div>
+    <div id="loadText" class="small" style="margin-top:9px">Booting football universe...</div>
+  </div>
+</section>
+
+<section id="login" class="screen center hidden">
+  <div class="card login">
+    <div class="logo" style="font-size:30px">RV <span>SPORTS</span></div>
+    <h1>Welcome, Manager ⚽</h1>
+    <p class="small">Masuk dulu. Data game tersimpan di browser ini.</p>
+    <div class="field"><label>Email</label><input id="email" type="email" placeholder="you@email.com"></div>
+    <div class="field"><label>Nama</label><input id="loginName" placeholder="Nama kamu"></div>
+    <button class="btn primary" style="width:100%" onclick="enterCreate()">START GAME</button>
+    <p class="small" style="margin-top:12px">Admin email khusus aktif otomatis di mode lokal.</p>
+  </div>
+</section>
+
+<section id="create" class="screen hidden">
+<div class="create">
+  <div class="top"><div><div class="logo" style="font-size:25px">CREATE PLAYER</div><div class="small">Bikin kartu pemainmu dulu.</div></div><button class="btn" onclick="resetAll()">RESET</button></div>
+  <div class="createGrid">
+    <div class="card playerCard" id="playerCard">
+      <div class="portrait">PLAYER PHOTO<br><span class="small">(placeholder)</span></div>
+      <div class="pcName" id="pcName">YOUR PLAYER</div>
+      <div class="pcMeta"><span id="pcCountry">COUNTRY</span><span id="pcPos">ST</span></div>
+      <div style="display:flex;justify-content:space-between;align-items:end;margin-top:12px"><div><div class="small">OVR</div><div class="ovr" id="pcOvr">--</div></div><div style="text-align:right"><div class="small">#</div><b id="pcJersey">9</b></div></div>
+      <div class="stats" id="cardStats"></div>
+    </div>
+    <div class="card formCard">
+      <h2 style="margin-top:0">Player Identity</h2>
+      <div class="field"><label>Full Name</label><input id="fullName" oninput="preview()"></div>
+      <div class="field"><label>Date of Birth</label><input id="dob" type="date" oninput="preview()"></div>
+      <div class="field"><label>Name on Back</label><input id="shirtName" maxlength="14" oninput="preview()"></div>
+      <div class="field"><label>Country</label><select id="country" onchange="preview()">
+        <option>Indonesia</option><option>China</option><option>South Korea</option><option>England</option><option>Japan</option><option>Russia</option><option>Thailand</option><option>Brazil</option><option>Argentina</option>
+      </select></div>
+      <div class="field"><label>Jersey Number</label><input id="jersey" type="number" min="1" max="99" value="9" oninput="preview()"></div>
+      <label class="small">POSITION</label>
+      <div class="posgrid" id="posGrid"></div>
+      <div class="gachaBox">
+        <div style="display:flex;justify-content:space-between;align-items:center"><div><b>STAT GACHA</b><div class="small">Satu roll untuk PAC/SHO/PAS/DRI/DEF/PHY</div></div><div class="ovr" style="font-size:30px" id="gachaOvr">--</div></div>
+        <div class="gachaStats" id="gachaStats"></div>
+        <button class="btn primary" style="width:100%;margin-top:12px" onclick="rollStats()">🎲 GACHA STATS</button>
+      </div>
+      <button id="confirmBtn" class="btn green" style="width:100%;margin-top:12px" disabled onclick="confirmPlayer()">CONFIRM PLAYER</button>
+    </div>
+  </div>
+</div>
+</section>
+
+<section id="game" class="screen hidden">
+<div class="main">
+  <div class="top">
+    <div><div class="logo" style="font-size:25px">RV SPORTS</div><div class="small" id="welcome"></div></div>
+    <div class="actions"><button class="btn" onclick="saveGame()">SAVE</button><button class="btn danger" onclick="resetAll()">RESET</button></div>
+  </div>
+  <div class="nav" id="nav"></div>
+  <div id="view"></div>
+</div>
+</section>
+
+<div id="modal" class="modal hidden" onclick="if(event.target===this)closeModal()"><div class="card" id="modalBody"></div></div>
+<div id="toast" class="toast hidden"></div>
+
+<script>
+/*
+  RV SPORTS: FC CHAMPIONS
+  Single-file build on purpose.
+  Semua state, UI, gacha, partner system, children, save/load, dan admin ada di sini.
+  Kalau nanti game sudah stabil, file ini baru enak dipecah menjadi modules.
+*/
+
+const ADMIN_EMAILS = [
+  "sayyidrahmathamdani@gmail.com",
+  "princemarvelerlangga@gmail.com"
+];
+
+/*
+  IMPORTANT:
+  Karena game ini berjalan 100% di browser, ADMIN_EMAILS bukan security sungguhan.
+  Orang yang paham DevTools dapat memodifikasi JS/localStorage.
+  Untuk admin sungguhan, pindahkan verifikasi ke backend + database.
+*/
+
+const TIERS = ["UR","SSS","SS","S","A","B"];
+const TIER_COUNTS = {UR:4,SSS:6,SS:10,S:15,A:25,B:30};
+
+/*
+  Kamu menyebut 6 negara tetapi baru menulis 5:
+  China, Korea, England, Japan, Russia.
+  Supaya game langsung jalan, slot keenam sementara Thailand.
+  Tinggal ganti array ini kalau negara keenam mau diganti.
+*/
+const PARTNER_COUNTRIES = ["China","South Korea","England","Japan","Russia","Thailand"];
+
+/*
+  Seed celebrity roster.
+  Status pernikahan selebritas dapat berubah kapan saja, jadi roster nyata
+  sengaja dipisahkan dari engine. Jangan menganggap daftar ini sebagai database
+  legal-status yang selalu benar.
+  Nama yang ada di sini adalah public figures yang dipakai sebagai inspirasi game.
+*/
+const REAL_PARTNERS = [
+  {name:"Dilraba Dilmurat",country:"China",job:"Actress / Singer",tier:"UR"},
+  {name:"Bai Lu",country:"China",job:"Actress",tier:"UR"},
+  {name:"Yang Zi",country:"China",job:"Actress / Singer",tier:"UR"},
+  {name:"Zhao Lusi",country:"China",job:"Actress",tier:"UR"},
+
+  {name:"Han So-hee",country:"South Korea",job:"Actress",tier:"SSS"},
+  {name:"Kim Ji-won",country:"South Korea",job:"Actress",tier:"SSS"},
+  {name:"Go Youn-jung",country:"South Korea",job:"Actress / Model",tier:"SSS"},
+  {name:"Karina",country:"South Korea",job:"Singer / Performer",tier:"SSS"},
+  {name:"Sana",country:"South Korea",job:"Singer / Performer",tier:"SSS"},
+  {name:"Jang Wonyoung",country:"South Korea",job:"Singer / Model",tier:"SSS"},
+
+  {name:"Florence Pugh",country:"England",job:"Actress",tier:"SS"},
+  {name:"Emma Watson",country:"England",job:"Actress / Activist",tier:"SS"},
+  {name:"Lily James",country:"England",job:"Actress",tier:"SS"},
+  {name:"Anya Taylor-Joy",country:"England",job:"Actress",tier:"SS"},
+  {name:"Sophie Turner",country:"England",job:"Actress",tier:"SS"},
+
+  {name:"Minami Hamabe",country:"Japan",job:"Actress",tier:"SS"},
+  {name:"Suzu Hirose",country:"Japan",job:"Actress / Model",tier:"SS"},
+  {name:"Kanna Hashimoto",country:"Japan",job:"Actress / Singer",tier:"SS"},
+  {name:"Mio Imada",country:"Japan",job:"Actress",tier:"SS"},
+  {name:"Fumika Baba",country:"Japan",job:"Actress / Model",tier:"SS"},
+
+  {name:"Anna Shurochkina (Nyusha)",country:"Russia",job:"Singer / TV Host",tier:"S"},
+  {name:"Elizaveta Gyrdymova (Monetochka)",country:"Russia",job:"Singer / Songwriter",tier:"S"},
+  {name:"Zivert",country:"Russia",job:"Singer",tier:"S"},
+  {name:"Morgenshtern's era",country:"Russia",job:"Placeholder Artist",tier:"S"},
+
+  {name:"Baifern Pimchanok",country:"Thailand",job:"Actress / Model",tier:"S"},
+  {name:"Urassaya Sperbund",country:"Thailand",job:"Actress / Model",tier:"S"},
+  {name:"Davika Hoorne",country:"Thailand",job:"Actress / Model",tier:"S"}
+];
+
+/* Generate safe placeholder slots so the engine always has the exact 90 tier slots.
+   Replace these with verified real public figures as the roster is curated. */
+function buildRoster(){
+  const roster = [...REAL_PARTNERS];
+  const used = new Set(roster.map(x=>x.name));
+  let n=1;
+  for(const tier of TIERS){
+    const need = TIER_COUNTS[tier] - roster.filter(x=>x.tier===tier).length;
+    for(let i=0;i<need;i++){
+      let country = PARTNER_COUNTRIES[(n-1)%PARTNER_COUNTRIES.length];
+      let name = `${country} Star Candidate ${String(n).padStart(2,"0")}`;
+      while(used.has(name)){n++;name=`${country} Star Candidate ${String(n).padStart(2,"0")}`}
+      roster.push({name,country,job:"Uncurated Candidate",tier,placeholder:true});
+      used.add(name); n++;
+    }
+  }
+  return roster;
+}
+const ROSTER = buildRoster();
+
+const state = {
+  version: 1,
+  user:{email:"",name:""},
+  player:{
+    name:"",dob:"",shirtName:"",country:"Indonesia",jersey:9,position:"ST",
+    stats:{PAC:0,SHO:0,PAS:0,DRI:0,DEF:0,PHY:0},ovr:0
+  },
+  money:500000,
+  xp:0,level:1,
+  partners:[],
+  children:[],
+  tab:"Home",
+  admin:false,
+  lastSave:null
+};
+
+let rolled=false;
+let selectedPos="ST";
+const POSITIONS=["GK","LB","CB","RB","CDM","CM","CAM","LW","RW","CF","ST"];
+
+function $(id){return document.getElementById(id)}
+function money(n){return new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(n)}
+function toast(msg){
+  $("toast").textContent=msg;$("toast").classList.remove("hidden");
+  clearTimeout(window.toastT);window.toastT=setTimeout(()=>$("toast").classList.add("hidden"),2200);
+}
+function esc(s){return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[m]))}
+
+function loadGame(){
+  try{
+    const raw=localStorage.getItem("rv_fc_champions_v1");
+    if(raw) Object.assign(state,JSON.parse(raw));
+  }catch(e){console.warn(e)}
+}
+function saveGame(){
+  state.lastSave=new Date().toISOString();
+  localStorage.setItem("rv_fc_champions_v1",JSON.stringify(state));
+  toast("Game saved 💾");
+}
+function resetAll(){
+  if(!confirm("Reset seluruh progress game di browser ini?")) return;
+  localStorage.removeItem("rv_fc_champions_v1");location.reload();
+}
+function isAdmin(){return ADMIN_EMAILS.includes((state.user.email||"").trim().toLowerCase())}
+
+function show(id){
+  ["loading","login","create","game"].forEach(x=>$(x).classList.add("hidden"));
+  $(id).classList.remove("hidden");
+}
+function enterCreate(){
+  const email=$("email").value.trim().toLowerCase(), name=$("loginName").value.trim();
+  if(!email || !name) return toast("Isi email dan nama dulu.");
+  state.user={email,name};
+  show("create");
+  preview();
+}
+function init(){
+  loadGame();
+  if(state.user.email && state.player.name) {state.admin=isAdmin();show("game");renderGame();return}
+  show("login");
+}
+function loading(){
+  let p=1;
+  const texts=["Booting football universe...","Loading stadiums...","Loading career engine...","Loading partner database...","Loading family system...","Checking save slot...","Almost ready..."];
+  const t=setInterval(()=>{
+    p+=Math.floor(Math.random()*5)+2;if(p>100)p=100;
+    $("loadPct").textContent=p+"%";$("loadFill").style.width=p+"%";
+    $("loadText").textContent=texts[Math.min(texts.length-1,Math.floor(p/15))];
+    if(p>=100){clearInterval(t);setTimeout(init,350)}
+  },65);
+}
+
+function buildPositions(){
+  $("posGrid").innerHTML=POSITIONS.map(p=>`<button class="pos ${p===selectedPos?"active":""}" onclick="selectPos('${p}')">${p}</button>`).join("");
+}
+function selectPos(p){selectedPos=p;$("pcPos").textContent=p;buildPositions()}
+function preview(){
+  const name=$("fullName").value.trim()||"YOUR PLAYER";
+  $("pcName").textContent=name;
+  $("pcCountry").textContent=$("country").value;
+  $("pcJersey").textContent=$("jersey").value||9;
+  $("pcPos").textContent=selectedPos;
+}
+function rollStats(){
+  const vals={};
+  let total=0;
+  for(const k of ["PAC","SHO","PAS","DRI","DEF","PHY"]){
+    vals[k]=Math.floor(Math.random()*31)+55; total+=vals[k];
+  }
+  const ovr=Math.round(total/6);
+  state.player.stats=vals;state.player.ovr=ovr;rolled=true;
+  $("gachaOvr").textContent=ovr;
+  $("gachaStats").innerHTML=Object.entries(vals).map(([k,v])=>`<div class="gachaStat"><b>${v}</b><span>${k}</span></div>`).join("");
+  $("pcOvr").textContent=ovr;
+  $("cardStats").innerHTML=Object.entries(vals).map(([k,v])=>`<div class="stat"><b>${v}</b><span>${k}</span></div>`).join("");
+  $("confirmBtn").disabled=false;
+  const hue=ovr>=85?"#ff7ee8":ovr>=80?"#ffd76a":ovr>=75?"#c89cff":ovr>=70?"#63a9ff":"#59e6a2";
+  $("playerCard").style.borderColor=hue;
+  toast(`Gacha selesai. OVR ${ovr}`);
+}
+function confirmPlayer(){
+  if(!rolled)return;
+  state.player.name=$("fullName").value.trim();
+  state.player.dob=$("dob").value;
+  state.player.shirtName=$("shirtName").value.trim()||state.player.name.split(" ").pop();
+  state.player.country=$("country").value;
+  state.player.jersey=Number($("jersey").value)||9;
+  state.player.position=selectedPos;
+  state.admin=isAdmin();
+  saveGame();show("game");renderGame();
+}
+
+const NAV=["Home","Career","Profile","Market","Partners","Family","World","Awards"];
+function renderNav(){
+  $("nav").innerHTML=NAV.map(x=>`<button class="btn ${state.tab===x?"primary":""}" onclick="state.tab='${x}';renderGame()">${x}</button>`).join("");
+}
+function renderGame(){
+  renderNav();
+  $("welcome").textContent=`${state.player.name} • ${state.player.position} • OVR ${state.player.ovr}`;
+  const views={Home:viewHome,Career:viewCareer,Profile:viewProfile,Market:viewMarket,Partners:viewPartners,Family:viewFamily,World:viewWorld,Awards:viewAwards};
+  $("view").innerHTML=views[state.tab]();
+}
+
+function viewHome(){
+  return `<div class="hero card">
+    <div><div class="small">PLAYER</div><h1 style="margin:4px 0">${esc(state.player.name)}</h1>
+      <div class="small">${esc(state.player.country)} • ${state.player.position} • #${state.player.jersey}</div>
+      <div class="tiles">
+        <div class="tile"><div class="small">OVR</div><div class="kpi">${state.player.ovr}</div></div>
+        <div class="tile"><div class="small">LEVEL</div><div class="kpi">${state.level}</div></div>
+        <div class="tile"><div class="small">XP</div><div class="kpi">${state.xp}</div></div>
+      </div>
+    </div>
+    <div><div class="small">BALANCE</div><div class="balance">${money(state.money)}</div>
+      <div class="small" style="margin-top:12px">Partner roster: ${ROSTER.length} slots • ${state.partners.length} owned</div>
+      <button class="btn primary" style="width:100%;margin-top:12px" onclick="state.tab='Partners';renderGame()">OPEN PARTNER GACHA 💎</button>
+    </div>
+  </div>
+  ${state.admin?adminPanel():""}
+  <div class="card section"><h2 style="margin-top:0">Quick Actions</h2>
+    <div class="tiles">
+      <button class="tile" onclick="earnMoney(250000)">Play Match<br><b>+Rp250K</b></button>
+      <button class="tile" onclick="earnXP(100)">Training<br><b>+100 XP</b></button>
+      <button class="tile" onclick="state.tab='Family';renderGame()">Family<br><b>${state.children.length} children</b></button>
+    </div>
+  </div>`;
+}
+function earnMoney(n){state.money+=n;saveGame();renderGame();toast(`Match reward ${money(n)}`)}
+function earnXP(n){
+  state.xp+=n;
+  while(state.xp>=state.level*500){state.xp-=state.level*500;state.level++;toast(`LEVEL UP! Level ${state.level}`)}
+  saveGame();renderGame();
+}
+
+function viewCareer(){
+  return `<div class="card section"><h2>Career</h2>
+  <p class="small">Core loop versi pertama: match → uang + XP → level up.</p>
+  <div class="tiles">
+    <div class="tile"><div class="small">NEXT MATCH</div><h3>League Match</h3><button class="btn green" onclick="earnMoney(500000);earnXP(150)">PLAY</button></div>
+    <div class="tile"><div class="small">TRAINING</div><h3>Individual Session</h3><button class="btn" onclick="earnXP(100)">TRAIN</button></div>
+    <div class="tile"><div class="small">CONTRACT</div><h3>Current Contract</h3><b>${money(1000000)} / match</b></div>
+  </div></div>`;
+}
+function viewProfile(){
+  const s=state.player.stats;
+  return `<div class="card section"><h2>Profile</h2><div class="hero" style="padding:0;margin-top:10px">
+  <div><h1>${esc(state.player.name)}</h1><p class="small">${esc(state.player.dob||"DOB not set")} • ${esc(state.player.country)} • ${state.player.position}</p>
+  <div class="stats">${Object.entries(s).map(([k,v])=>`<div class="stat"><b>${v}</b><span>${k}</span></div>`).join("")}</div></div>
+  <div><div class="small">OVERALL</div><div class="ovr">${state.player.ovr}</div><div class="small">Potential system can be added later.</div></div>
+  </div></div>`;
+}
+function viewMarket(){
+  return `<div class="card section"><h2>Market</h2><div class="tiles">
+  <div class="tile"><b>Training Boost</b><p class="small">+250 XP</p><button class="btn" onclick="buy(250000,()=>earnXP(250))">BUY ${money(250000)}</button></div>
+  <div class="tile"><b>Match Bonus</b><p class="small">+Rp1.000.000</p><button class="btn" onclick="buy(500000,()=>earnMoney(1000000))">BUY ${money(500000)}</button></div>
+  <div class="tile"><b>Partner Ticket</b><p class="small">10 gacha tickets</p><button class="btn" onclick="buy(1000000,()=>{state.partnerTickets=(state.partnerTickets||0)+10;saveGame();renderGame()})">BUY ${money(1000000)}</button></div>
+  </div></div>`;
+}
+function buy(cost,fn){if(state.money<cost)return toast("Uang kurang 😭");state.money-=cost;fn();saveGame();renderGame()}
+
+function tierPrice(t){
+  return {UR:500000000,SSS:250000000,SS:100000000,S:50000000,A:15000000,B:5000000}[t];
+}
+function tierColor(t){return t}
+function gachaOne(){
+  const pool=ROSTER;
+  const weights={UR:1,SSS:3,SS:8,S:16,A:30,B:42};
+  let r=Math.random()*100, tier="B";
+  for(const t of ["UR","SSS","SS","S","A","B"]){if(r<weights[t]){tier=t;break}r-=weights[t]}
+  const candidates=pool.filter(x=>x.tier===tier);
+  return candidates[Math.floor(Math.random()*candidates.length)];
+}
+function ownKey(p){return p.name+"|"+p.country}
+function owned(p){return state.partners.some(x=>x.key===ownKey(p))}
+function viewPartners(){
+  const filter=state.partnerFilter||"All";
+  const tier=state.partnerTier||"All";
+  const list=ROSTER.filter(p=>(filter==="All"||p.country===filter)&&(tier==="All"||p.tier===tier));
+  return `<div class="card section">
+    <div style="display:flex;justify-content:space-between;gap:10px;align-items:end;flex-wrap:wrap">
+      <div><h2 style="margin:0">Partner Gacha 💎</h2><div class="small">Tidak ada batas jumlah pasangan. Batasnya cuma saldo dan konsekuensi hidup.</div></div>
+      <div style="text-align:right"><b>${money(state.money)}</b><div class="small">Tickets: ${state.partnerTickets||0}</div></div>
+    </div>
+    <div class="partnerControls" style="margin-top:12px">
+      <select onchange="state.partnerFilter=this.value;renderGame()"><option>All</option>${PARTNER_COUNTRIES.map(c=>`<option ${filter===c?"selected":""}>${c}</option>`).join("")}</select>
+      <select onchange="state.partnerTier=this.value;renderGame()"><option>All</option>${TIERS.map(t=>`<option ${tier===t?"selected":""}>${t}</option>`).join("")}</select>
+    </div>
+    <div class="gachaBox">
+      <b>ONE ROLL = ${money(50000000)}</b><div class="small">Harga premium. Roll memilih tier lalu character di tier tersebut.</div>
+      <button class="btn primary" style="width:100%;margin-top:10px" onclick="rollPartner()">🎰 GACHA PARTNER</button>
+    </div>
+    <div class="roster">${list.map(partnerCard).join("")}</div>
+  </div>`;
+}
+function partnerCard(p){
+  const o=state.partners.find(x=>x.key===ownKey(p));
+  return `<div class="partner">
+    <div class="tier ${p.tier}">${p.tier}</div>
+    <div class="pname">${esc(p.name)}</div>
+    <div class="tag">${esc(p.country)} • ${esc(p.job)}</div>
+    ${p.placeholder?'<div class="badge" style="margin-top:7px">UNCURATED SLOT</div>':''}
+    ${o?`<div style="margin-top:8px">❤️ Affection <b>${o.affection}</b>/100</div>
+      <button class="btn" onclick="openPartner('${encodeURIComponent(o.key)}')">OPEN</button>`
+      :`<div class="small" style="margin-top:8px">Gacha price: ${money(tierPrice(p.tier))}</div>`}
+  </div>`;
+}
+function rollPartner(){
+  const cost=50000000;
+  if(state.money<cost)return toast("Saldo tidak cukup buat gacha partner.");
+  state.money-=cost;
+  const p=gachaOne();
+  const key=ownKey(p);
+  if(owned(p)){
+    const o=state.partners.find(x=>x.key===key);o.affection=Math.min(100,o.affection+10);
+    toast(`Duplicate ${p.name}! Affection +10 ❤️`);
+  }else{
+    state.partners.push({key,name:p.name,country:p.country,job:p.job,tier:p.tier,affection:10,married:false});
+    toast(`🎉 ${p.tier} • ${p.name} joined your life!`);
+  }
+  saveGame();renderGame();
+}
+function openPartner(encoded){
+  const key=decodeURIComponent(encoded), p=state.partners.find(x=>x.key===key);
+  if(!p)return;
+  $("modalBody").innerHTML=`<h2>${esc(p.name)}</h2><div class="badge ${p.tier}">${p.tier}</div>
+  <p class="small">${esc(p.job)} • ${esc(p.country)}</p>
+  <div class="tile">Affection <b>${p.affection}/100</b></div>
+  <div class="tiles">
+    <button class="btn" onclick="partnerAction('${encodeURIComponent(key)}','date')">Date ❤️</button>
+    <button class="btn" onclick="partnerAction('${encodeURIComponent(key)}','gift')">Gift 🎁</button>
+    <button class="btn" onclick="partnerAction('${encodeURIComponent(key)}','talk')">Talk 💬</button>
+  </div>
+  <div style="margin-top:12px"><button class="btn green" style="width:100%" ${p.affection<80||p.married?"disabled":""} onclick="partnerAction('${encodeURIComponent(key)}','marry')">${p.married?"MARRIED 💍":"MARRY"}</button>
+  <button class="btn primary" style="width:100%;margin-top:7px" ${p.affection<60?"disabled":""} onclick="partnerAction('${encodeURIComponent(key)}','child')">HAVE CHILD 👶</button></div>
+  <button class="btn" style="width:100%;margin-top:12px" onclick="closeModal()">CLOSE</button>`;
+  $("modal").classList.remove("hidden");
+}
+function partnerAction(encoded,action){
+  const key=decodeURIComponent(encoded),p=state.partners.find(x=>x.key===key);
+  if(!p)return;
+  if(action==="talk"){p.affection=Math.min(100,p.affection+3);toast("Talked. Affection +3")}
+  if(action==="date"){
+    if(state.money<500000){toast("Date costs Rp500K.");return}
+    state.money-=500000;p.affection=Math.min(100,p.affection+8);toast("Nice date. Affection +8 ❤️")
+  }
+  if(action==="gift"){
+    if(state.money<2000000){toast("Gift costs Rp2M.");return}
+    state.money-=2000000;p.affection=Math.min(100,p.affection+15);toast("Gift delivered. Affection +15 🎁")
+  }
+  if(action==="marry"){
+    if(p.affection<80||p.married)return;
+    p.married=true;toast(`You married ${p.name} 💍`);
+  }
+  if(action==="child"){
+    if(p.affection<60)return;
+    const childName=prompt("Nama anak?");
+    if(!childName)return;
+    state.children.push({name:childName,parent:p.name,age:0,affection:50,created:new Date().toISOString()});
+    p.affection=Math.min(100,p.affection+5);toast(`Welcome, ${childName} 👶`);
+  }
+  saveGame();closeModal();renderGame();
+}
+function closeModal(){$("modal").classList.add("hidden")}
+
+function viewFamily(){
+  return `<div class="card section"><h2>Family 👨‍👩‍👧‍👦</h2>
+    <p class="small">Menikah tidak diwajibkan untuk punya anak. Syarat engine saat ini: affection pasangan ≥ 60.</p>
+    ${state.children.length?state.children.map((c,i)=>`<div class="child"><b>${esc(c.name)}</b><div class="small">Parent: ${esc(c.parent)} • Age: ${c.age}</div>
+      <div style="margin-top:8px">Child affection: ${c.affection}/100</div>
+      <button class="btn" style="margin-top:7px" onclick="raiseChild(${i})">RAISE CHILD +10</button>
+      <button class="btn" style="margin-top:7px" onclick="renameChild(${i})">RENAME</button>
+    </div>`).join(""):`<div class="tile">Belum ada anak. Cari pasangan dulu 😌</div>`}
+  </div>`;
+}
+function raiseChild(i){
+  const c=state.children[i];c.affection=Math.min(100,c.affection+10);c.age+=1;state.money+=100000;saveGame();renderGame();
+}
+function renameChild(i){
+  const n=prompt("Nama baru:",state.children[i].name);if(n){state.children[i].name=n;saveGame();renderGame()}
+}
+function viewWorld(){
+  return `<div class="card section"><h2>World</h2><div class="tiles">
+    <div class="tile"><b>Domestic League</b><p class="small">Season simulator</p></div>
+    <div class="tile"><b>National Team</b><p class="small">International fixtures</p></div>
+    <div class="tile"><b>Continental Cup</b><p class="small">Elite competition</p></div>
+  </div></div>`;
+}
+function viewAwards(){
+  return `<div class="card section"><h2>Awards 🏆</h2><div class="tiles">
+    <div class="tile">Ballon d'Or<br><b>Locked</b></div><div class="tile">Golden Boot<br><b>Locked</b></div><div class="tile">Player of Season<br><b>Locked</b></div>
+  </div><p class="small">Award engine sengaja dibuat sebagai sistem terpisah secara logika supaya nanti gampang diperluas.</p></div>`;
+}
+
+function adminPanel(){
+  return `<div class="card section adminBox"><h2 style="margin-top:0">👑 ADMIN MODE</h2>
+    <p class="small">Email terverifikasi sebagai admin lokal. Ini fitur dev/admin, bukan security server-side.</p>
+    <div class="adminGrid">
+      <button class="btn primary" onclick="adminMoney()">+Rp100M</button>
+      <button class="btn" onclick="adminMaxAffection()">MAX ALL AFFECTION</button>
+      <button class="btn" onclick="adminLevel()">LEVEL 99</button>
+      <button class="btn" onclick="adminGiveAll()">UNLOCK ROSTER</button>
+      <button class="btn danger" onclick="adminResetPartners()">RESET PARTNERS</button>
+      <button class="btn danger" onclick="localStorage.removeItem('rv_fc_champions_v1');location.reload()">WIPE SAVE</button>
+    </div>
+  </div>`;
+}
+function adminMoney(){state.money+=100000000;saveGame();renderGame();toast("Admin: +Rp100M")}
+function adminMaxAffection(){state.partners.forEach(p=>p.affection=100);saveGame();renderGame();toast("Admin: all affection max")}
+function adminLevel(){state.level=99;state.xp=0;saveGame();renderGame();toast("Admin: Level 99")}
+function adminGiveAll(){
+  for(const p of ROSTER)if(!owned(p))state.partners.push({key:ownKey(p),name:p.name,country:p.country,job:p.job,tier:p.tier,affection:100,married:false});
+  saveGame();renderGame();toast("Admin: roster unlocked");
+}
+function adminResetPartners(){if(confirm("Reset semua partner?")){state.partners=[];saveGame();renderGame()}}
+
+loading();
+</script>
+</body>
+</html>

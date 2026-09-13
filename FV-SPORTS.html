@@ -3,140 +3,731 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
-<title>RV LIFE: Simulator | Ultra Pro Max</title>
+<meta name="theme-color" content="#070912">
+<title>RV LIFE: Simulator Ultra Pro Max V10</title>
+
 <style>
 :root{
-  --bg:#070912;--panel:#0d1220;--panel2:#12192a;--line:#26324a;
-  --text:#eef4ff;--muted:#8995ad;--accent:#7c5cff;--cyan:#27d7ff;
-  --green:#37e39a;--red:#ff5577;--yellow:#ffd35a;--gold:#ffb52e;
-  --shadow:0 18px 50px rgba(0,0,0,.38);--radius:18px;
+ --bg:#060810;
+ --bg2:#0a0f1b;
+ --panel:#0e1524;
+ --panel2:#121b2d;
+ --line:#283650;
+ --text:#f2f6ff;
+ --muted:#8794ad;
+ --accent:#7658ff;
+ --cyan:#2ad9ff;
+ --green:#38e39b;
+ --red:#ff5577;
+ --yellow:#ffd15a;
+ --orange:#ff9c45;
+ --white:#fff;
+ --shadow:0 20px 60px rgba(0,0,0,.45);
+ --r:18px;
 }
+
 *{box-sizing:border-box}
-html,body{margin:0;background:radial-gradient(circle at 20% 0%,#17123a 0,#070912 38%,#05060b 100%);color:var(--text);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;min-height:100%}
+
+html,body{
+ margin:0;
+ min-height:100%;
+ background:
+ radial-gradient(circle at 15% 0%,rgba(118,88,255,.18),transparent 28%),
+ radial-gradient(circle at 100% 20%,rgba(42,217,255,.08),transparent 25%),
+ var(--bg);
+ color:var(--text);
+ font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif
+}
+
+body{overflow-x:hidden}
+
 button,input,select,textarea{font:inherit}
+
 button{cursor:pointer}
-button:disabled{opacity:.45;cursor:not-allowed}
+
+button:disabled{
+ opacity:.45;
+ cursor:not-allowed;
+ transform:none!important
+}
+
+img{max-width:100%}
+
 .hidden{display:none!important}
+
 .app{min-height:100vh}
+
 .topbar{
- position:sticky;top:0;z-index:50;background:rgba(7,9,18,.86);
- backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07);
- display:flex;align-items:center;justify-content:space-between;padding:12px 18px;gap:12px
+ position:sticky;
+ top:0;
+ z-index:100;
+ height:64px;
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:15px;
+ padding:10px 18px;
+ background:rgba(6,8,16,.88);
+ backdrop-filter:blur(18px);
+ border-bottom:1px solid rgba(255,255,255,.07)
 }
-.brand{font-weight:1000;letter-spacing:-.8px;font-size:19px}
-.brand span{color:var(--cyan)}
-.topstats{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-.pill{background:#101728;border:1px solid var(--line);border-radius:999px;padding:7px 11px;font-size:12px;color:#dbe6ff}
-.layout{display:flex;min-height:calc(100vh - 62px)}
+
+.brand{
+ font-size:19px;
+ font-weight:1000;
+ letter-spacing:-.8px;
+ white-space:nowrap
+}
+
+.brand b{color:var(--cyan)}
+
+.topstats{
+ display:flex;
+ gap:7px;
+ flex-wrap:wrap;
+ justify-content:flex-end
+}
+
+.pill{
+ padding:7px 10px;
+ border:1px solid var(--line);
+ border-radius:999px;
+ background:#101829;
+ color:#dce7fb;
+ font-size:11px;
+ white-space:nowrap
+}
+
+.layout{
+ display:flex;
+ min-height:calc(100vh - 64px)
+}
+
 .sidebar{
- width:245px;position:sticky;top:62px;height:calc(100vh - 62px);
- padding:14px;border-right:1px solid rgba(255,255,255,.06);background:rgba(8,11,20,.75);
- overflow:auto
+ width:250px;
+ flex:none;
+ position:sticky;
+ top:64px;
+ height:calc(100vh - 64px);
+ overflow:auto;
+ padding:13px;
+ background:rgba(8,11,19,.82);
+ border-right:1px solid rgba(255,255,255,.06)
 }
+
+.navgroup{
+ margin:13px 8px 7px;
+ font-size:10px;
+ color:#596781;
+ font-weight:900;
+ letter-spacing:1px;
+ text-transform:uppercase
+}
+
 .navbtn{
- width:100%;border:1px solid transparent;background:transparent;color:#aeb9cf;
- text-align:left;padding:11px 12px;border-radius:12px;margin-bottom:5px
+ width:100%;
+ text-align:left;
+ color:#aab6cd;
+ background:transparent;
+ border:1px solid transparent;
+ border-radius:12px;
+ padding:10px 11px;
+ margin-bottom:4px
 }
-.navbtn:hover,.navbtn.active{background:#141c30;color:#fff;border-color:#293653}
-.main{flex:1;padding:22px;max-width:1600px;margin:auto;width:100%}
-.grid{display:grid;gap:15px}
+
+.navbtn:hover,
+.navbtn.active{
+ color:#fff;
+ background:#151e32;
+ border-color:#2b3955
+}
+
+.main{
+ width:100%;
+ max-width:1600px;
+ margin:auto;
+ padding:22px
+}
+
+.mobilemenu{display:none}
+
+.hero{
+ position:relative;
+ overflow:hidden;
+ padding:28px;
+ border:1px solid #2d3a5d;
+ border-radius:25px;
+ background:
+ radial-gradient(circle at 85% 10%,rgba(118,88,255,.28),transparent 30%),
+ radial-gradient(circle at 15% 100%,rgba(42,217,255,.1),transparent 25%),
+ linear-gradient(145deg,#131d34,#080d17);
+ box-shadow:var(--shadow)
+}
+
+.hero:after{
+ content:"";
+ position:absolute;
+ width:220px;
+ height:220px;
+ right:-100px;
+ bottom:-130px;
+ border-radius:50%;
+ border:35px solid rgba(118,88,255,.08)
+}
+
+h1,h2,h3,h4{
+ margin:0 0 10px;
+ line-height:1.1
+}
+
+h1{
+ font-size:clamp(29px,4vw,52px);
+ letter-spacing:-2px
+}
+
+h2{font-size:22px}
+h3{font-size:16px}
+
+p{line-height:1.55}
+
+.muted{color:var(--muted)}
+
+.small{font-size:11px}
+
+.tiny{font-size:9px}
+
+.big{
+ font-size:29px;
+ font-weight:1000;
+ letter-spacing:-1px
+}
+
+.card{
+ padding:17px;
+ border-radius:var(--r);
+ border:1px solid var(--line);
+ background:
+ linear-gradient(145deg,rgba(17,25,42,.97),rgba(9,13,23,.97));
+ box-shadow:var(--shadow)
+}
+
+.card+.card{margin-top:0}
+
+.grid{
+ display:grid;
+ gap:14px
+}
+
 .g2{grid-template-columns:repeat(2,minmax(0,1fr))}
 .g3{grid-template-columns:repeat(3,minmax(0,1fr))}
 .g4{grid-template-columns:repeat(4,minmax(0,1fr))}
-.card{
- background:linear-gradient(145deg,rgba(18,25,42,.96),rgba(10,14,25,.96));
- border:1px solid var(--line);border-radius:var(--radius);padding:17px;box-shadow:var(--shadow)
+.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+
+.row{
+ display:flex;
+ align-items:center;
+ gap:9px;
+ flex-wrap:wrap
 }
-.hero{
- padding:25px;border:1px solid #29365a;border-radius:24px;
- background:radial-gradient(circle at 90% 10%,rgba(124,92,255,.24),transparent 32%),linear-gradient(145deg,#121a31,#080c16)
+
+.between{
+ display:flex;
+ align-items:center;
+ justify-content:space-between;
+ gap:12px
 }
-h1,h2,h3{margin:0 0 10px}
-h1{font-size:clamp(28px,4vw,48px);letter-spacing:-1.7px}
-h2{font-size:22px}h3{font-size:16px}
-.muted{color:var(--muted)}.small{font-size:12px}.big{font-size:28px;font-weight:900}
-.row{display:flex;align-items:center;gap:9px;flex-wrap:wrap}
-.between{display:flex;align-items:center;justify-content:space-between;gap:12px}
+
 .btn{
- border:1px solid #33405d;background:#171f34;color:#fff;border-radius:12px;padding:10px 14px;
- transition:.15s transform,.15s background
+ padding:10px 13px;
+ border-radius:11px;
+ border:1px solid #34425f;
+ background:#171f33;
+ color:#fff;
+ transition:.15s
 }
-.btn:hover{transform:translateY(-1px);background:#202b46}
-.btn.primary{background:linear-gradient(135deg,#7355ff,#4b37ce);border-color:#8069ff}
-.btn.green{background:#123b30;border-color:#216f56;color:#bfffe7}
-.btn.red{background:#3c1723;border-color:#762b42;color:#ffc2d0}
-.btn.gold{background:#3b2a0d;border-color:#72531a;color:#ffe7a0}
-.btn.cyan{background:#0d3440;border-color:#17677d;color:#c7f7ff}
+
+.btn:hover{
+ transform:translateY(-1px);
+ background:#202b44
+}
+
+.btn.primary{
+ background:linear-gradient(135deg,#7658ff,#4c38c9);
+ border-color:#8069ff
+}
+
+.btn.cyan{
+ background:#0d3441;
+ border-color:#176a81;
+ color:#c9f8ff
+}
+
+.btn.green{
+ background:#103b2e;
+ border-color:#247459;
+ color:#c5ffea
+}
+
+.btn.red{
+ background:#3b1723;
+ border-color:#762b43;
+ color:#ffc4d2
+}
+
+.btn.gold{
+ background:#3b2b0d;
+ border-color:#79591b;
+ color:#ffe7a2
+}
+
+.btn.orange{
+ background:#42230f;
+ border-color:#81431c;
+ color:#ffd4ae
+}
+
 .btn.full{width:100%}
+
+.btn.large{
+ padding:14px 18px;
+ font-weight:900
+}
+
 input,select,textarea{
- width:100%;background:#090e19;color:#fff;border:1px solid #2a3650;border-radius:11px;
- padding:11px 12px;outline:none
+ width:100%;
+ padding:11px 12px;
+ color:#fff;
+ background:#080d18;
+ border:1px solid #2b3853;
+ border-radius:11px;
+ outline:none
 }
-input:focus,select:focus,textarea:focus{border-color:#6e59ed}
-label{display:block;color:#aeb9cf;font-size:12px;margin-bottom:6px}
-.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
-.formgrid .fullrow{grid-column:1/-1}
-.stat{margin:8px 0}
-.statline{display:flex;justify-content:space-between;font-size:12px;margin-bottom:5px}
-.bar{height:7px;background:#080b13;border-radius:999px;overflow:hidden}
-.bar i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--cyan));border-radius:inherit}
+
+input:focus,select:focus,textarea:focus{
+ border-color:#725bff;
+ box-shadow:0 0 0 3px rgba(118,88,255,.1)
+}
+
+label{
+ display:block;
+ margin-bottom:6px;
+ font-size:11px;
+ color:#aab7cf
+}
+
+.formgrid{
+ display:grid;
+ grid-template-columns:repeat(2,minmax(0,1fr));
+ gap:12px
+}
+
+.fullrow{grid-column:1/-1}
+
+.kpicard{
+ min-height:108px
+}
+
+.kpilabel{
+ font-size:10px;
+ color:#77849d;
+ font-weight:900;
+ letter-spacing:.7px
+}
+
+.kpi{
+ font-size:26px;
+ font-weight:1000;
+ margin-top:5px
+}
+
 .avatar{
- width:112px;height:112px;border-radius:50%;overflow:hidden;position:relative;flex:none;
- background:#151c2c;display:grid;place-items:center
+ width:112px;
+ height:112px;
+ flex:none;
+ border-radius:50%;
+ overflow:hidden;
+ display:grid;
+ place-items:center;
+ position:relative;
+ background:#151d2f
 }
-.avatar img{width:100%;height:100%;object-fit:cover}
-.avatar .initial{font-size:38px;font-weight:1000;color:#7583a3}
-.border-brown{border:7px solid #875a35;box-shadow:0 0 0 2px #bd8552}
-.border-green{border:7px solid #28bb7d;box-shadow:0 0 18px #28bb7d88}
-.border-silver{border:8px solid #bfc9d9;box-shadow:0 0 20px #dce7ff77}
-.border-gold{border:9px solid #ffc54d;box-shadow:0 0 24px #ffc54d99}
-.border-cosmic{border:9px solid #9b76ff;box-shadow:0 0 28px #9b76ff,0 0 65px #27d7ff55;animation:pulse 2s infinite}
-.border-dragon{border:10px solid #ff5577;box-shadow:0 0 22px #ff5577,0 0 60px #ff9a4d66;animation:dragon 2.2s linear infinite}
-.border-star{border:10px solid #8ce9ff;box-shadow:0 0 24px #8ce9ff,0 0 55px #7c5cff;animation:spinGlow 3s linear infinite}
-.border-goat{border:11px solid #fff;box-shadow:0 0 18px #fff,0 0 45px #ffd35a,0 0 80px #7c5cff;animation:goat 1.6s infinite}
-@keyframes pulse{50%{transform:scale(1.035);filter:saturate(1.35)}}
-@keyframes dragon{50%{transform:rotate(2deg) scale(1.035)}}
-@keyframes spinGlow{50%{filter:hue-rotate(80deg) brightness(1.35)}}
-@keyframes goat{50%{transform:scale(1.055);filter:brightness(1.3)}}
-.playerhead{display:flex;align-items:center;gap:18px}
-.kpi{font-size:25px;font-weight:1000}.kpilabel{font-size:11px;color:var(--muted)}
-.kpicard{padding:14px}
-.tag{display:inline-flex;padding:5px 8px;border-radius:8px;font-size:11px;font-weight:800;background:#171f33;border:1px solid #2c3955}
-.UR{color:#ff8cf0;border-color:#a03e91;background:#351638}
-.SSS{color:#ffdb68;border-color:#8c691c;background:#352a0e}
-.SS{color:#b58cff;border-color:#5e3bb0;background:#26183e}
-.S{color:#67d8ff;border-color:#216b83;background:#102b38}
-.A{color:#69f2ac;border-color:#287c59;background:#103126}
-.B{color:#c1cadb;border-color:#4c566c;background:#202635}
-.list{display:grid;gap:9px}
-.item{padding:11px;border:1px solid #26324a;border-radius:13px;background:#0b101c}
-.feedpost{padding:15px;border:1px solid #29344b;border-radius:16px;background:#0d1321}
-.feedpost+.feedpost{margin-top:10px}
-.toast{
- position:fixed;right:18px;bottom:18px;z-index:100;background:#121a2c;border:1px solid #39486a;
- padding:13px 16px;border-radius:13px;box-shadow:var(--shadow);max-width:360px
+
+.avatar img{
+ width:100%;
+ height:100%;
+ object-fit:cover
 }
-.modalwrap{position:fixed;inset:0;z-index:80;background:rgba(0,0,0,.72);backdrop-filter:blur(8px);display:grid;place-items:center;padding:16px}
-.modal{width:min(760px,100%);max-height:90vh;overflow:auto;background:#0d1322;border:1px solid #34415e;border-radius:22px;padding:20px;box-shadow:0 30px 100px #000}
-.slotcard{min-height:210px;display:flex;flex-direction:column;justify-content:space-between}
-.slotempty{display:grid;place-items:center;min-height:140px;color:#66738e}
-.savebadge{color:#6cf0af}
-.ranktable{width:100%;border-collapse:collapse}.ranktable td,.ranktable th{text-align:left;padding:9px;border-bottom:1px solid #202b40;font-size:12px}
-.raritybar{height:9px;border-radius:999px;background:#151c2b;overflow:hidden}
-.raritybar i{display:block;height:100%;width:60%;background:linear-gradient(90deg,#7c5cff,#27d7ff)}
-.notice{padding:12px 14px;border-radius:13px;background:#11192a;border:1px solid #293754}
-.danger{border-color:#7b2942;background:#28131c}
-.success{border-color:#287456;background:#0f2921}
+
+.initial{
+ font-size:38px;
+ font-weight:1000;
+ color:#72819e
+}
+
+/* Borders */
+
+.border-brown{
+ border:7px solid #875a35;
+ box-shadow:0 0 0 2px #bd8552
+}
+
+.border-green{
+ border:7px solid #2abb7d;
+ box-shadow:0 0 18px rgba(42,187,125,.55)
+}
+
+.border-silver{
+ border:8px solid #c4cedd;
+ box-shadow:0 0 20px rgba(220,231,255,.45)
+}
+
+.border-gold{
+ border:9px solid #ffc84e;
+ box-shadow:0 0 24px rgba(255,200,78,.65)
+}
+
+.border-cosmic{
+ border:9px solid #9a76ff;
+ box-shadow:0 0 25px #9a76ff,0 0 65px rgba(42,217,255,.3);
+ animation:cosmic 2s infinite
+}
+
+.border-dragon{
+ border:10px solid #ff5577;
+ box-shadow:0 0 25px #ff5577,0 0 70px rgba(255,155,69,.3);
+ animation:dragon 2s infinite
+}
+
+.border-star{
+ border:10px solid #8ceaff;
+ box-shadow:0 0 25px #8ceaff,0 0 60px #7658ff;
+ animation:star 2.5s infinite
+}
+
+.border-goat{
+ border:11px solid #fff;
+ box-shadow:
+  0 0 18px #fff,
+  0 0 45px #ffd15a,
+  0 0 80px #7658ff;
+ animation:goat 1.5s infinite
+}
+
+@keyframes cosmic{
+ 50%{transform:scale(1.035);filter:hue-rotate(45deg)}
+}
+
+@keyframes dragon{
+ 50%{transform:rotate(2deg) scale(1.04);filter:brightness(1.2)}
+}
+
+@keyframes star{
+ 50%{transform:scale(1.045);filter:hue-rotate(75deg)}
+}
+
+@keyframes goat{
+ 50%{transform:scale(1.06);filter:brightness(1.35)}
+}
+
+.playerhead{
+ display:flex;
+ align-items:center;
+ gap:18px
+}
+
+.tag{
+ display:inline-flex;
+ align-items:center;
+ padding:5px 8px;
+ border-radius:8px;
+ border:1px solid #2c3954;
+ background:#161f33;
+ font-size:10px;
+ font-weight:900
+}
+
+.stat{
+ margin:9px 0
+}
+
+.statline{
+ display:flex;
+ justify-content:space-between;
+ gap:8px;
+ font-size:11px;
+ margin-bottom:5px
+}
+
+.bar{
+ height:8px;
+ overflow:hidden;
+ background:#070b13;
+ border-radius:999px
+}
+
+.bar i{
+ display:block;
+ height:100%;
+ border-radius:inherit;
+ background:linear-gradient(90deg,var(--accent),var(--cyan))
+}
+
+.item{
+ padding:11px;
+ border-radius:12px;
+ border:1px solid #27344d;
+ background:#0a101b
+}
+
+.list{
+ display:grid;
+ gap:8px
+}
+
+.notice{
+ padding:13px;
+ border-radius:13px;
+ background:#11192a;
+ border:1px solid #293755
+}
+
+.success{
+ background:#0d2920;
+ border-color:#286e54
+}
+
+.danger{
+ background:#29131c;
+ border-color:#722a43
+}
+
 .center{text-align:center}
-.footer{text-align:center;color:#53617c;font-size:11px;padding:30px}
-.mobilemenu{display:none}
-@media(max-width:900px){
- .sidebar{display:none}.mobilemenu{display:block}.layout{display:block}.main{padding:13px}
- .g2,.g3,.g4,.formgrid{grid-template-columns:1fr}
- .topbar{padding:10px}.topstats{display:none}.hero{padding:18px}
+
+.footer{
+ text-align:center;
+ color:#4e5b74;
+ padding:30px 10px;
+ font-size:10px
+}
+
+/* rarity */
+
+.UR{
+ color:#ff8cf0!important;
+ background:#361638!important;
+ border-color:#a33f93!important
+}
+
+.SSS{
+ color:#ffdc6b!important;
+ background:#372b0e!important;
+ border-color:#8e6b1e!important
+}
+
+.SS{
+ color:#bd92ff!important;
+ background:#291b43!important;
+ border-color:#6140ae!important
+}
+
+.S{
+ color:#70dcff!important;
+ background:#102d3a!important;
+ border-color:#26718a!important
+}
+
+.A{
+ color:#6af1ac!important;
+ background:#103327!important;
+ border-color:#2d805d!important
+}
+
+.B{
+ color:#c7cfdf!important;
+ background:#202736!important;
+ border-color:#4e596f!important
+}
+
+/* Login */
+
+.loginpage{
+ min-height:100vh;
+ display:grid;
+ place-items:center;
+ padding:18px;
+ background:
+ radial-gradient(circle at 50% 0%,rgba(118,88,255,.25),transparent 35%),
+ #060810
+}
+
+.loginbox{
+ width:min(520px,100%);
+ padding:30px;
+ border:1px solid #303e5e;
+ border-radius:26px;
+ background:linear-gradient(145deg,#111a2e,#080d17);
+ box-shadow:0 35px 100px #000
+}
+
+.loginlogo{
+ text-align:center;
+ font-size:31px;
+ font-weight:1000;
+ letter-spacing:-1.5px
+}
+
+.loginlogo span{color:var(--cyan)}
+
+/* Match */
+
+.matchbox{
+ min-height:330px;
+ display:flex;
+ flex-direction:column;
+ justify-content:space-between
+}
+
+.scoreboard{
+ text-align:center;
+ padding:20px;
+ border-radius:16px;
+ background:#080d17;
+ border:1px solid #26334d
+}
+
+.score{
+ font-size:42px;
+ font-weight:1000
+}
+
+.choice{
+ min-height:105px;
+ text-align:left
+}
+
+/* Tables */
+
+.tablewrap{
+ overflow:auto
+}
+
+table{
+ width:100%;
+ border-collapse:collapse
+}
+
+th,td{
+ text-align:left;
+ padding:9px;
+ border-bottom:1px solid #202b41;
+ font-size:11px
+}
+
+th{color:#77859e}
+
+/* Modal */
+
+.modalwrap{
+ position:fixed;
+ inset:0;
+ z-index:200;
+ display:grid;
+ place-items:center;
+ padding:15px;
+ background:rgba(0,0,0,.76);
+ backdrop-filter:blur(8px)
+}
+
+.modal{
+ width:min(800px,100%);
+ max-height:91vh;
+ overflow:auto;
+ padding:20px;
+ border:1px solid #34425f;
+ border-radius:22px;
+ background:#0c1321;
+ box-shadow:0 40px 120px #000
+}
+
+.toast{
+ position:fixed;
+ right:18px;
+ bottom:18px;
+ z-index:300;
+ max-width:390px;
+ padding:13px 16px;
+ border-radius:13px;
+ border:1px solid #3b4a69;
+ background:#121a2b;
+ box-shadow:var(--shadow)
+}
+
+.progress{
+ height:10px;
+ border-radius:999px;
+ background:#080c15;
+ overflow:hidden
+}
+
+.progress i{
+ display:block;
+ height:100%;
+ background:linear-gradient(90deg,#7658ff,#2ad9ff)
+}
+
+.slotcard{
+ min-height:245px;
+ display:flex;
+ flex-direction:column;
+ justify-content:space-between
+}
+
+.slotempty{
+ min-height:150px;
+ display:grid;
+ place-items:center;
+ color:#5e6b83
+}
+
+.partnerphoto{
+ width:72px!important;
+ height:72px!important
+}
+
+.eventcard{
+ position:relative;
+ overflow:hidden
+}
+
+.eventcard:before{
+ content:"EVENT";
+ position:absolute;
+ right:-25px;
+ top:10px;
+ transform:rotate(35deg);
+ font-size:9px;
+ font-weight:1000;
+ color:#ffffff14
+}
+
+@media(max-width:950px){
+ .sidebar{display:none}
+ .mobilemenu{display:block}
+ .layout{display:block}
+ .main{padding:13px}
+ .g2,.g3,.g4,.g5,.formgrid{grid-template-columns:1fr}
+ .topstats{display:none}
+ .hero{padding:19px}
+ .playerhead{align-items:flex-start}
+}
+
+@media(max-width:550px){
+ .playerhead{flex-direction:column}
+ .avatar{width:95px;height:95px}
 }
 </style>
 </head>
+
 <body>
 <div id="app"></div>
 <div id="toast" class="toast hidden"></div>
@@ -145,1365 +736,6304 @@ label{display:block;color:#aeb9cf;font-size:12px;margin-bottom:6px}
 "use strict";
 
 /* ============================================================
-   RV LIFE: SIMULATOR ULTRA PRO MAX
-   Single-file browser game
+   RV LIFE SIMULATOR
+   ULTRA PRO MAX V10
+   SINGLE HTML
    ============================================================ */
 
-const KEY="RV_LIFE_ULTRA_PRO_MAX_V1";
+/* -------------------------
+   CONFIG
+------------------------- */
+
+const STORAGE_KEY="RV_LIFE_ULTRA_PRO_MAX_V10";
+
 const ADMIN_EMAILS=[
-  "sayyidrahmathamdani@gmail.com",
-  "princemarvelerlangga@gmail.com"
+ "sayyidrahmathamdani@gmail.com",
+ "princemarvelerlangga@gmail.com"
 ];
 
 const COUNTRIES=[
-  {id:"china",name:"China",flag:"CN",names:["Lin Yue","Zhao Mei","Chen Xinyi","Wang Lian","Li An","Xu Jia","Luo Xin","Sun Rui","Tang Na","He Qing"]},
-  {id:"korea",name:"Korea",flag:"KR",names:["Han Seo","Kim Ara","Park Mina","Choi Yuna","Jung Sora","Lee Nari","Kang Jina","Yoon Mira","Shin Hye","Bae Rina"]},
-  {id:"england",name:"England",flag:"EN",names:["Amelia Rose","Charlotte May","Olivia Grace","Isla Jane","Sophie Kate","Emily Jade","Ruby Claire","Ella Mae","Lily Anne","Mia Rose"]},
-  {id:"japan",name:"Japan",flag:"JP",names:["Aoi Sato","Mio Tanaka","Yui Nakamura","Hana Ito","Rina Mori","Saki Kato","Mei Suzuki","Nana Aki","Hikari Sato","Rei Yamada"]},
-  {id:"russia",name:"Russia",flag:"RU",names:["Alina Volkova","Anya Petrova","Lena Moroz","Nika Orlova","Mila Ivanova","Sasha Belova","Vera Sokol","Kira Roman","Daria Volk","Polina Ray"]},
-  {id:"turkey",name:"Turkey",flag:"TR",names:["Elif Kaya","Aylin Demir","Derya Yilmaz","Selin Arslan","Ece Aydin","Leyla Can","Nehir Kaya","Merve Deniz","Ada Eren","Ipek Nur"]}
+ {
+  id:"china",
+  name:"China",
+  names:["Lin Yue","Zhao Mei","Chen Xinyi","Wang Lian","Li An","Xu Jia","Luo Xin","Sun Rui","Tang Na","He Qing"]
+ },
+ {
+  id:"korea",
+  name:"Korea",
+  names:["Han Seo","Kim Ara","Park Mina","Choi Yuna","Jung Sora","Lee Nari","Kang Jina","Yoon Mira","Shin Hye","Bae Rina"]
+ },
+ {
+  id:"england",
+  name:"England",
+  names:["Amelia Rose","Charlotte May","Olivia Grace","Isla Jane","Sophie Kate","Emily Jade","Ruby Claire","Ella Mae","Lily Anne","Mia Rose"]
+ },
+ {
+  id:"japan",
+  name:"Japan",
+  names:["Aoi Sato","Mio Tanaka","Yui Nakamura","Hana Ito","Rina Mori","Saki Kato","Mei Suzuki","Nana Aki","Hikari Sato","Rei Yamada"]
+ },
+ {
+  id:"russia",
+  name:"Russia",
+  names:["Alina Volkova","Anya Petrova","Lena Moroz","Nika Orlova","Mila Ivanova","Sasha Belova","Vera Sokol","Kira Roman","Daria Volk","Polina Ray"]
+ },
+ {
+  id:"turkey",
+  name:"Turkey",
+  names:["Elif Kaya","Aylin Demir","Derya Yilmaz","Selin Arslan","Ece Aydin","Leyla Can","Nehir Kaya","Merve Deniz","Ada Eren","Ipek Nur"]
+ }
 ];
 
 const RARITIES=[
-  {id:"UR",count:4,weight:1,price:900},
-  {id:"SSS",count:6,weight:3,price:700},
-  {id:"SS",count:10,weight:7,price:500},
-  {id:"S",count:15,weight:14,price:350},
-  {id:"A",count:25,weight:28,price:220},
-  {id:"B",count:30,weight:47,price:100}
+ {id:"UR",count:4,weight:1},
+ {id:"SSS",count:6,weight:3},
+ {id:"SS",count:10,weight:7},
+ {id:"S",count:15,weight:14},
+ {id:"A",count:25,weight:28},
+ {id:"B",count:30,weight:47}
 ];
 
-const JOBS=[
- "Singer","Artist","Influencer","Actor","Model","Content Creator",
- "Designer","Producer","Entrepreneur","Dancer","Streamer","Photographer"
+const POSITIONS=[
+ "ST","LW","RW","AMF","CMF","DMF","CB","LB","RB","GK"
 ];
 
 const PERSONALITIES=[
- "Warm & loyal","Ambitious","Playful","Calm","Independent",
- "Romantic","Competitive","Elegant","Adventurous","Protective"
+ "Warm & Loyal",
+ "Ambitious",
+ "Playful",
+ "Calm",
+ "Independent",
+ "Romantic",
+ "Competitive",
+ "Elegant",
+ "Adventurous",
+ "Protective"
+];
+
+const JOBS=[
+ "Singer",
+ "Artist",
+ "Influencer",
+ "Actor",
+ "Model",
+ "Content Creator",
+ "Designer",
+ "Producer",
+ "Entrepreneur",
+ "Dancer",
+ "Streamer",
+ "Photographer"
 ];
 
 const CLUBS=[
- {id:"northstar",name:"Northstar FC",country:"England",power:82},
- {id:"royal_madrid",name:"Royal Madrid",country:"Spain",power:90},
- {id:"catalonia",name:"Catalonia United",country:"Spain",power:88},
- {id:"paris_blue",name:"Paris Blue",country:"France",power:86},
- {id:"munich_red",name:"Munich Red",country:"Germany",power:89},
- {id:"tokyo_fc",name:"Tokyo Phoenix",country:"Japan",power:76},
- {id:"seoul_dragons",name:"Seoul Dragons",country:"Korea",power:75},
- {id:"istanbul_star",name:"Istanbul Star",country:"Turkey",power:78},
- {id:"moscow_wolves",name:"Moscow Wolves",country:"Russia",power:77},
- {id:"jakarta_rising",name:"Jakarta Rising",country:"Indonesia",power:70}
+ {name:"Northstar FC",country:"England",power:82},
+ {name:"Royal Madrid",country:"Spain",power:90},
+ {name:"Catalonia United",country:"Spain",power:88},
+ {name:"Paris Blue",country:"France",power:86},
+ {name:"Munich Red",country:"Germany",power:89},
+ {name:"Tokyo Phoenix",country:"Japan",power:76},
+ {name:"Seoul Dragons",country:"Korea",power:75},
+ {name:"Istanbul Star",country:"Turkey",power:78},
+ {name:"Moscow Wolves",country:"Russia",power:77},
+ {name:"Jakarta Rising",country:"Indonesia",power:70}
 ];
 
 const BUSINESSES=[
- {id:"coffee",name:"RV Coffee",cost:15000,income:1800,risk:2,desc:"Kafe kecil yang berkembang lewat fans."},
- {id:"fashion",name:"RV Fashion",cost:50000,income:6200,risk:5,desc:"Brand streetwear dan football culture."},
- {id:"media",name:"RV Media House",cost:120000,income:16000,risk:8,desc:"Konten, podcast, streaming, berita."},
- {id:"esports",name:"RV Esports",cost:250000,income:33000,risk:10,desc:"Tim esports dan gaming entertainment."},
- {id:"academy",name:"RV Football Academy",cost:500000,income:65000,risk:7,desc:"Akademi pemain muda."},
- {id:"holding",name:"RV Global Holdings",cost:1500000,income:210000,risk:12,desc:"Holding company multi-industri."}
+ {
+  id:"coffee",
+  name:"RV Coffee",
+  cost:15000,
+  income:1800,
+  risk:2,
+  desc:"Kafe kecil berbasis fans."
+ },
+ {
+  id:"fashion",
+  name:"RV Fashion",
+  cost:50000,
+  income:6200,
+  risk:5,
+  desc:"Brand football streetwear."
+ },
+ {
+  id:"media",
+  name:"RV Media House",
+  cost:120000,
+  income:16000,
+  risk:8,
+  desc:"Media, podcast, streaming."
+ },
+ {
+  id:"esports",
+  name:"RV Esports",
+  cost:250000,
+  income:33000,
+  risk:10,
+  desc:"Gaming dan competitive entertainment."
+ },
+ {
+  id:"academy",
+  name:"RV Football Academy",
+  cost:500000,
+  income:65000,
+  risk:7,
+  desc:"Akademi pemain muda."
+ },
+ {
+  id:"holding",
+  name:"RV Global Holdings",
+  cost:1500000,
+  income:210000,
+  risk:12,
+  desc:"Holding company global."
+ }
+];
+
+const RESTS=[
+ {
+  id:"basic",
+  name:"Quick Rest",
+  cost:100,
+  energy:20,
+  health:2,
+  happiness:1,
+  desc:"Istirahat singkat."
+ },
+ {
+  id:"hotel",
+  name:"Hotel Rest",
+  cost:750,
+  energy:50,
+  health:6,
+  happiness:4,
+  desc:"Hotel nyaman."
+ },
+ {
+  id:"luxury",
+  name:"Luxury Recovery",
+  cost:3000,
+  energy:85,
+  health:12,
+  happiness:9,
+  desc:"Recovery premium."
+ },
+ {
+  id:"resort",
+  name:"Private Resort",
+  cost:10000,
+  energy:100,
+  health:20,
+  happiness:15,
+  desc:"Full reset untuk tubuh dan pikiran."
+ }
 ];
 
 const BORDERS=[
- {id:"brown",name:"Starter Bronze",need:0,cls:"border-brown",desc:"Border dasar."},
- {id:"green",name:"Rising Star",need:60,cls:"border-green",desc:"Unlocked OVR 60."},
- {id:"silver",name:"Elite Silver",need:70,cls:"border-silver",desc:"Unlocked OVR 70."},
- {id:"gold",name:"Golden Ball",need:80,cls:"border-gold",desc:"Unlocked OVR 80."},
- {id:"cosmic",name:"Cosmic 91",need:91,cls:"border-cosmic",desc:"Animated cosmic border."},
- {id:"dragon",name:"Dragon 94",need:94,cls:"border-dragon",desc:"Animated dragon energy."},
- {id:"star",name:"Constellation 97",need:97,cls:"border-star",desc:"Constellation animation."},
- {id:"goat",name:"GOAT 99",need:99,cls:"border-goat",desc:"Maximum legendary border."},
- {id:"rv",name:"RV Sports",need:0,cls:"border-star",desc:"Special event border."}
+ {id:"brown",name:"Starter Bronze",need:0,cls:"border-brown"},
+ {id:"green",name:"Rising Star",need:60,cls:"border-green"},
+ {id:"silver",name:"Elite Silver",need:70,cls:"border-silver"},
+ {id:"gold",name:"Golden Ball",need:80,cls:"border-gold"},
+ {id:"cosmic",name:"Cosmic 91",need:91,cls:"border-cosmic"},
+ {id:"dragon",name:"Dragon 94",need:94,cls:"border-dragon"},
+ {id:"star",name:"Constellation 97",need:97,cls:"border-star"},
+ {id:"goat",name:"GOAT 99",need:99,cls:"border-goat"},
+ {id:"rv",name:"RV Sports",need:0,cls:"border-star"}
 ];
 
-function uid(prefix="id"){
- return prefix+"_"+Math.random().toString(36).slice(2,8)+"_"+Date.now().toString(36);
-}
-function clamp(n,a,b){return Math.max(a,Math.min(b,n))}
-function money(n){return "$"+Math.floor(n||0).toLocaleString("en-US")}
-function pick(a){return a[Math.floor(Math.random()*a.length)]}
-function chance(p){return Math.random()*100<p}
-function esc(s){
- return String(s??"").replace(/[&<>"']/g,m=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[m]));
-}
-function toast(msg){
- const t=document.getElementById("toast");
- t.textContent=msg;t.classList.remove("hidden");
- clearTimeout(window.__toast);
- window.__toast=setTimeout(()=>t.classList.add("hidden"),2600);
-}
+const ACHIEVEMENTS=[
+ ["first_goal","First Goal","Cetak gol pertama."],
+ ["five_goals","Goal Machine","Cetak 5 gol."],
+ ["ten_goals","Striker","Cetak 10 gol."],
+ ["millionaire","Millionaire","Punya $1,000,000 cash."],
+ ["viral","Viral","Mendapat viral moment."],
+ ["married","Married","Menikah."],
+ ["parent","Parent","Punya anak."],
+ ["collector","Collector","Punya 10 partner."],
+ ["urhunter","UR Hunter","Mendapat partner UR."],
+ ["elite","Elite","OVR 80+."],
+ ["superstar","Superstar","OVR 90+."],
+ ["goat","GOAT","OVR 99."],
+ ["business","Business Tycoon","Memiliki 3 bisnis."],
+ ["empire","Empire","Memiliki seluruh bisnis."],
+ ["followers","Influencer","Mencapai 1 juta followers."],
+ ["trophy","Champion","Memenangkan trophy."]
+];
 
-function makePartnerCatalog(){
- const out=[];
- COUNTRIES.forEach(country=>{
-   RARITIES.forEach(r=>{
-     for(let i=0;i<r.count;i++){
-       const index=out.length;
-       const base=country.names[i%country.names.length];
-       const suffix=i>=country.names.length ? " "+(Math.floor(i/country.names.length)+1):"";
-       const age=19+(index%14);
-       const month=((index*7)%12)+1;
-       const day=((index*11)%27)+1;
-       const birth=`${2000+(index%8)}-${String(month).padStart(2,"0")}-${String(day).padStart(2,"0")}`;
-       out.push({
-         id:`P${String(index+1).padStart(3,"0")}`,
-         country:country.id,
-         countryName:country.name,
-         rarity:r.id,
-         name:base+suffix,
-         age,
-         birthdate:birth,
-         job:JOBS[index%JOBS.length],
-         personality:PERSONALITIES[index%PERSONALITIES.length],
-         affection:0,
-         trust:50,
-         jealousy:10,
-         happiness:60,
-         energy:70,
-         married:false,
-         children:[],
-         photo:"",
-         borderId:r.id==="UR"?"goat":r.id==="SSS"?"star":r.id==="SS"?"cosmic":r.id==="S"?"gold":r.id==="A"?"silver":"green",
-         inventory:["Starter Gift","Personal Journal"],
-         story:[
-           "Kalian pertama kali bertemu lewat RV-Gram.",
-           "Dia mulai membuka cerita tentang ambisinya.",
-           "Hubungan kalian diuji oleh jadwal yang padat.",
-           "Sebuah keputusan besar mengubah hubungan kalian.",
-           "Kalian menentukan apakah hubungan ini akan menjadi serius."
-         ],
-         arc:0,
-         status:"single",
-         notes:""
-       });
-     }
-   });
- });
- return out;
-}
-
-const PARTNERS=makePartnerCatalog();
-
-function defaultSlot(slot){
- return {
-   slot,
-   createdAt:Date.now(),
-   player:{
-     name:"New Player",age:18,country:"Indonesia",background:"Street Football",
-     occupation:"Footballer",position:"AMF",photo:"",
-     borderId:"brown"
-   },
-   football:{
-     club:"Jakarta Rising",season:1,week:1,energy:100,
-     stats:{pace:55,shooting:54,passing:58,dribbling:56,defending:40,physical:52,vision:57,mentality:50},
-     goals:0,assists:0,appearances:0,wins:0,losses:0,draws:0,
-     salary:2500,marketValue:50000,form:60,contractYears:2,
-     trophies:0,transferOffers:[]
-   },
-   economy:{
-     cash:10000,bank:0,weeklyIncome:0,debt:0,
-     businesses:[],investments:[],sponsors:[],luxury:[]
-   },
-   social:{
-     followers:120,following:30,likes:80,comments:10,
-     posts:[],messages:[],viral:0,reputation:20
-   },
-   partners:[],
-   children:[],
-   inventory:{
-     borders:["brown"],items:["Football Boots","Phone"],
-     gifts:[],badges:[]
-   },
-   achievements:[],
-   stats:{
-     fame:0,happiness:60,health:90,discipline:55,lifestyle:40
-   },
-   calendar:{day:1,month:1,year:2026},
-   news:[],
-   logs:["Game dimulai. Selamat datang di RV LIFE."],
-   flags:{tutorial:true},
-   admin:false
- };
-}
+/* -------------------------
+   GLOBAL STATE
+------------------------- */
 
 let DB=loadDB();
 let currentSlot=null;
-let screen="slots";
-let modal=null;
-let pendingCreatePhoto="";
+let screen="landing";
+let modal="";
+let pendingPlayerPhoto="";
+
+function uid(prefix="id"){
+ return prefix+"_"+Math.random().toString(36).slice(2,9)+"_"+Date.now().toString(36)
+}
+
+function pick(arr){
+ return arr[Math.floor(Math.random()*arr.length)]
+}
+
+function chance(percent){
+ return Math.random()*100<percent
+}
+
+function clamp(n,min,max){
+ return Math.max(min,Math.min(max,n))
+}
+
+function money(n){
+ return "$"+Math.floor(n||0).toLocaleString("en-US")
+}
+
+function esc(v){
+ return String(v??"")
+  .replace(/[&<>"']/g,x=>({
+   "&":"&amp;",
+   "<":"&lt;",
+   ">":"&gt;",
+   '"':"&quot;",
+   "'":"&#39;"
+  }[x]))
+}
+
+function avg(obj){
+ const vals=Object.values(obj);
+ return Math.round(vals.reduce((a,b)=>a+b,0)/vals.length)
+}
+
+function showToast(msg){
+ const el=document.getElementById("toast");
+ el.textContent=msg;
+ el.classList.remove("hidden");
+ clearTimeout(window.__toast);
+ window.__toast=setTimeout(()=>{
+  el.classList.add("hidden")
+ },2800)
+}
+
+function save(){
+ localStorage.setItem(STORAGE_KEY,JSON.stringify(DB))
+}
 
 function loadDB(){
  try{
-   const x=JSON.parse(localStorage.getItem(KEY));
-   if(x&&Array.isArray(x.slots)) return x;
+  const data=JSON.parse(localStorage.getItem(STORAGE_KEY));
+  if(data&&Array.isArray(data.slots)){
+   return data
+  }
  }catch(e){}
- return {slots:[null,null,null],settings:{sound:true}};
-}
-function saveDB(){
- localStorage.setItem(KEY,JSON.stringify(DB));
-}
-function S(){
- return DB.slots[currentSlot];
-}
-function currentOvr(){
- const s=S();if(!s)return 0;
- const vals=Object.values(s.football.stats);
- return Math.round(vals.reduce((a,b)=>a+b,0)/vals.length);
-}
-function borderForOvr(ovr){
- if(ovr>=99)return"goat";
- if(ovr>=97)return"star";
- if(ovr>=94)return"dragon";
- if(ovr>=91)return"cosmic";
- if(ovr>=80)return"gold";
- if(ovr>=70)return"silver";
- if(ovr>=60)return"green";
- return"brown";
-}
-function getBorder(id){
- return BORDERS.find(x=>x.id===id)||BORDERS[0];
-}
-function ensureUnlockedBorders(){
- const s=S();if(!s)return;
- BORDERS.forEach(b=>{
-   if(b.need&&currentOvr()>=b.need&&!s.inventory.borders.includes(b.id))
-     s.inventory.borders.push(b.id);
- });
-}
-function addLog(msg){
- const s=S();if(!s)return;
- s.logs.unshift(`[${s.calendar.day}/${s.calendar.month}/${s.calendar.year}] ${msg}`);
- s.logs=s.logs.slice(0,100);
-}
-function advanceDay(days=1){
- const s=S();
- for(let i=0;i<days;i++){
-   s.calendar.day++;
-   if(s.calendar.day>30){
-     s.calendar.day=1;s.calendar.month++;
-     if(s.calendar.month>12){s.calendar.month=1;s.calendar.year++;newSeason();}
-   }
+ return {
+  slots:[null,null,null],
+  email:"",
+  logged:false
  }
 }
-function newSeason(){
- const s=S();
- s.football.season++;
- s.football.week=1;
- s.football.energy=100;
- s.football.form=65;
- s.football.contractYears=Math.max(0,s.football.contractYears-1);
- addLog(`Season baru dimulai. Season ${s.football.season}.`);
- randomNews();
-}
-function randomNews(){
- const s=S();
- const headlines=[
-  "Bursa transfer memanas setelah klub besar mencari wonderkid baru.",
-  "RV-Gram ramai membahas pemain yang sedang naik daun.",
-  "Sponsor baru masuk ke dunia football entertainment.",
-  "Fans menunggu comeback besar dari beberapa bintang.",
-  "Klub-klub mulai menyusun strategi untuk transfer window."
- ];
- s.news.unshift({id:uid("news"),title:pick(headlines),day:s.calendar.day});
- s.news=s.news.slice(0,20);
+
+function S(){
+ return DB.slots[currentSlot]
 }
 
-function navigate(x){
- screen=x;modal=null;render();
- window.scrollTo({top:0,behavior:"smooth"});
+function OVR(){
+ return S()?avg(S().football.stats):0
 }
-function shell(content){
+
+function getBorder(id){
+ return BORDERS.find(x=>x.id===id)||BORDERS[0]
+}
+
+function autoBorders(){
  const s=S();
+ if(!s)return;
+
+ BORDERS.forEach(b=>{
+  if(b.need&&OVR()>=b.need&&!s.inventory.borders.includes(b.id)){
+   s.inventory.borders.push(b.id)
+  }
+ })
+}
+
+function addLog(text){
+ const s=S();
+ if(!s)return;
+
+ s.logs.unshift(
+  `[${s.calendar.day}/${s.calendar.month}/${s.calendar.year}] ${text}`
+ );
+
+ s.logs=s.logs.slice(0,150)
+}
+
+function notify(msg){
+ addLog(msg);
+ save()
+}
+
+/* -------------------------
+   PARTNER DATABASE
+------------------------- */
+
+function buildPartnerDatabase(){
+ const list=[];
+
+ COUNTRIES.forEach(country=>{
+  RARITIES.forEach(rarity=>{
+   for(let i=0;i<rarity.count;i++){
+
+    const index=list.length;
+    const base=country.names[i%country.names.length];
+
+    const suffix=i>=country.names.length
+      ? " "+(Math.floor(i/country.names.length)+1)
+      :"";
+
+    const age=19+(index%14);
+
+    const month=(index*7)%12+1;
+    const day=(index*11)%27+1;
+
+    const partner={
+     id:"P"+String(index+1).padStart(3,"0"),
+     name:base+suffix,
+     age,
+     birthdate:
+      (2000+(index%8))+"-"+
+      String(month).padStart(2,"0")+"-"+
+      String(day).padStart(2,"0"),
+
+     country:country.id,
+     countryName:country.name,
+
+     rarity:rarity.id,
+
+     job:JOBS[index%JOBS.length],
+
+     personality:
+      PERSONALITIES[index%PERSONALITIES.length],
+
+     photo:"",
+
+     borderId:
+      rarity.id==="UR"?"goat":
+      rarity.id==="SSS"?"star":
+      rarity.id==="SS"?"cosmic":
+      rarity.id==="S"?"gold":
+      rarity.id==="A"?"silver":"green",
+
+     affection:0,
+     trust:50,
+     jealousy:10,
+     happiness:65,
+     energy:80,
+
+     married:false,
+     status:"single",
+
+     children:[],
+     inventory:[
+      "Starter Gift",
+      "Personal Journal"
+     ],
+
+     arc:0,
+
+     story:[
+      "Kalian pertama kali bertemu melalui RV-Gram.",
+      "Dia mulai membuka cerita tentang ambisinya.",
+      "Jadwal padat mulai menguji hubungan kalian.",
+      "Sebuah keputusan besar mengubah hubungan kalian.",
+      "Kalian harus menentukan masa depan hubungan ini."
+     ],
+
+     notes:""
+    };
+
+    list.push(partner)
+   }
+  })
+ })
+
+ return list
+}
+
+const PARTNERS=buildPartnerDatabase();
+
+/* -------------------------
+   SLOT
+------------------------- */
+
+function createDefaultSlot(index){
+ return {
+  slot:index,
+
+  email:DB.email||"",
+
+  createdAt:Date.now(),
+
+  player:{
+   name:"New Player",
+   age:18,
+   country:"Indonesia",
+   background:"Street Football",
+   occupation:"Footballer",
+   position:"AMF",
+   photo:"",
+   borderId:"brown"
+  },
+
+  football:{
+   club:"Jakarta Rising",
+   season:1,
+   week:1,
+
+   energy:100,
+   form:60,
+
+   salary:2500,
+   marketValue:50000,
+   contractYears:2,
+
+   stats:{
+    pace:55,
+    shooting:54,
+    passing:58,
+    dribbling:56,
+    defending:40,
+    physical:52,
+    vision:57,
+    mentality:50
+   },
+
+   goals:0,
+   assists:0,
+   appearances:0,
+   wins:0,
+   draws:0,
+   losses:0,
+   trophies:0,
+
+   transferOffers:[]
+  },
+
+  economy:{
+   cash:10000,
+   bank:0,
+   debt:0,
+   weeklyIncome:0,
+
+   businesses:[],
+
+   sponsors:[],
+   investments:[],
+   luxury:[]
+  },
+
+  social:{
+   followers:120,
+   following:30,
+   likes:80,
+   comments:10,
+   viral:0,
+   reputation:20,
+   posts:[],
+   messages:[]
+  },
+
+  partners:[],
+
+  children:[],
+
+  inventory:{
+   borders:["brown"],
+   items:["Football Boots","Phone"],
+   gifts:[],
+   badges:[]
+  },
+
+  stats:{
+   fame:0,
+   happiness:60,
+   health:90,
+   discipline:55,
+   lifestyle:40
+  },
+
+  calendar:{
+   day:1,
+   month:1,
+   year:2026
+  },
+
+  news:[],
+
+  events:[],
+
+  achievements:[],
+
+  logs:[
+   "RV LIFE dimulai."
+  ],
+
+  godMode:false,
+
+  admin:false
+ }
+}
+
+/* -------------------------
+   LOGIN
+------------------------- */
+
+function landing(){
+ return `
+ <div class="loginpage">
+
+  <div class="loginbox">
+
+   <div class="loginlogo">
+    RV <span>LIFE</span>
+   </div>
+
+   <p class="muted center">
+    Simulator · Ultra Pro Max V10
+   </p>
+
+   <br>
+
+   <div class="card">
+
+    <h2>Welcome</h2>
+
+    <p class="muted small">
+     Masukkan email untuk melanjutkan ke dunia RV LIFE.
+    </p>
+
+    <input
+     id="loginEmail"
+     type="email"
+     autocomplete="email"
+     placeholder="Email"
+    >
+
+    <br><br>
+
+    <button
+     class="btn primary large full"
+     onclick="enterGame()"
+    >
+     Continue
+    </button>
+
+   </div>
+
+   <p class="small muted center">
+    Semua progres game tersimpan secara lokal di browser.
+   </p>
+
+  </div>
+
+ </div>
+ `
+}
+
+function enterGame(){
+ const email=document.getElementById("loginEmail").value.trim().toLowerCase();
+
+ if(!email){
+  showToast("Masukkan email dulu.");
+  return
+ }
+
+ DB.email=email;
+ DB.logged=true;
+
+ const isAdmin=ADMIN_EMAILS.includes(email);
+
+ if(DB.slots.some(Boolean)){
+  screen="slots"
+ }else{
+  screen="slots"
+ }
+
+ DB.isAdmin=isAdmin;
+
+ save();
+ render();
+
+ if(isAdmin){
+  showToast("Account loaded with elevated access.");
+ }
+}
+
+/* -------------------------
+   SLOT SCREEN
+------------------------- */
+
+function slotsScreen(){
+
+ return `
+ <div class="main">
+
+  <div class="hero">
+
+   <div class="tag">RV LIFE V10</div>
+
+   <h1>
+    Your life.<br>
+    Your career.<br>
+    Your universe.
+   </h1>
+
+   <p class="muted">
+    Football career, business empire, social media,
+    relationships, family, gacha, events dan kehidupan
+    yang terus bergerak.
+   </p>
+
+  </div>
+
+  <br>
+
+  <div class="grid g3">
+
+   ${[0,1,2].map(slotCard).join("")}
+
+  </div>
+
+  <br>
+
+  <div class="card">
+
+   <div class="between">
+    <div>
+     <h2>V10 Systems</h2>
+     <p class="muted small">
+      Single HTML · Local Save · 3 Slots · No External Library
+     </p>
+    </div>
+
+    <button class="btn" onclick="showGlobalGuide()">
+     Guide
+    </button>
+   </div>
+
+  </div>
+
+  <div class="footer">
+   RV LIFE: Simulator Ultra Pro Max V10
+  </div>
+
+ </div>
+ `
+}
+
+function slotCard(i){
+
+ const s=DB.slots[i];
+
+ if(!s){
+  return `
+   <div class="card slotcard">
+
+    <div>
+     <div class="between">
+      <h2>Save Slot ${i+1}</h2>
+      <span class="tag">EMPTY</span>
+     </div>
+
+     <div class="slotempty">
+      No character
+     </div>
+    </div>
+
+    <button
+     class="btn primary full"
+     onclick="startCreate(${i})"
+    >
+     Create Character
+    </button>
+
+   </div>
+  `
+ }
+
+ const border=getBorder(s.player.borderId);
+
+ return `
+  <div class="card slotcard">
+
+   <div>
+
+    <div class="between">
+     <h2>Save Slot ${i+1}</h2>
+     <span class="tag">SAVED</span>
+    </div>
+
+    <br>
+
+    <div class="row">
+
+     <div class="avatar ${border.cls}">
+      ${
+       s.player.photo
+       ? `<img src="${s.player.photo}">`
+       : `<span class="initial">${esc(s.player.name[0])}</span>`
+      }
+     </div>
+
+     <div>
+      <h3>${esc(s.player.name)}</h3>
+
+      <div class="small muted">
+       ${esc(s.player.position)}
+       ·
+       OVR ${avg(s.football.stats)}
+      </div>
+
+      <div class="small muted">
+       ${esc(s.football.club)}
+      </div>
+
+      <div class="small">
+       ${money(s.economy.cash)}
+      </div>
+     </div>
+
+    </div>
+
+   </div>
+
+   <div class="row">
+
+    <button
+     class="btn primary"
+     onclick="loadSlot(${i})"
+    >
+     Load
+    </button>
+
+    <button
+     class="btn"
+     onclick="duplicateSlot(${i})"
+    >
+     Copy
+    </button>
+
+    <button
+     class="btn red"
+     onclick="deleteSlot(${i})"
+    >
+     Delete
+    </button>
+
+   </div>
+
+  </div>
+ `
+}
+
+/* -------------------------
+   CREATE CHARACTER
+------------------------- */
+
+function startCreate(i){
+ currentSlot=i;
+ pendingPlayerPhoto="";
+ screen="create";
+ render()
+}
+
+function createScreen(){
+
+ return `
+ <div class="main">
+
+  <div class="hero">
+
+   <div class="tag">CHARACTER CREATOR</div>
+
+   <h1>Create your life.</h1>
+
+   <p class="muted">
+    Avatar utama memakai foto pilihanmu.
+   </p>
+
+  </div>
+
+  <br>
+
+  <div class="card">
+
+   <form onsubmit="createCharacter(event)">
+
+    <div class="formgrid">
+
+     <div>
+      <label>Name</label>
+      <input id="createName" required>
+     </div>
+
+     <div>
+      <label>Age</label>
+      <input
+       id="createAge"
+       type="number"
+       min="16"
+       max="50"
+       value="18"
+       required
+      >
+     </div>
+
+     <div>
+      <label>Country</label>
+      <input id="createCountry" value="Indonesia">
+     </div>
+
+     <div>
+      <label>Background</label>
+
+      <select id="createBackground">
+       <option>Street Football</option>
+       <option>Academy Prodigy</option>
+       <option>Underdog</option>
+       <option>Rich Family</option>
+       <option>Content Creator</option>
+       <option>Business Family</option>
+      </select>
+
+     </div>
+
+     <div>
+      <label>Position</label>
+
+      <select id="createPosition">
+       ${POSITIONS.map(x=>`<option>${x}</option>`).join("")}
+      </select>
+
+     </div>
+
+     <div>
+      <label>Avatar Photo</label>
+
+      <input
+       id="createPhoto"
+       type="file"
+       accept="image/*"
+       required
+      >
+
+     </div>
+
+    </div>
+
+    <div
+     id="createPreview"
+     class="center"
+     style="margin:20px"
+    ></div>
+
+    <button class="btn primary large full">
+     Start RV LIFE
+    </button>
+
+   </form>
+
+  </div>
+
+ </div>
+ `
+}
+
+document.addEventListener("change",async e=>{
+
+ if(e.target.id==="createPhoto"){
+
+  const file=e.target.files[0];
+
+  if(!file)return;
+
+  pendingPlayerPhoto=await compressImage(file);
+
+  const preview=document.getElementById("createPreview");
+
+  if(preview){
+
+   preview.innerHTML=`
+    <div class="avatar border-gold" style="margin:auto">
+     <img src="${pendingPlayerPhoto}">
+    </div>
+   `
+  }
+ }
+
+});
+
+function compressImage(file){
+
+ return new Promise(resolve=>{
+
+  const reader=new FileReader();
+
+  reader.onload=e=>{
+
+   const img=new Image();
+
+   img.onload=()=>{
+
+    const max=600;
+
+    const scale=Math.min(
+     1,
+     max/Math.max(img.width,img.height)
+    );
+
+    const canvas=document.createElement("canvas");
+
+    canvas.width=Math.round(img.width*scale);
+    canvas.height=Math.round(img.height*scale);
+
+    canvas
+     .getContext("2d")
+     .drawImage(
+      img,
+      0,
+      0,
+      canvas.width,
+      canvas.height
+     );
+
+    resolve(
+     canvas.toDataURL(
+      "image/jpeg",
+      .76
+     )
+    );
+
+   };
+
+   img.src=e.target.result;
+
+  };
+
+  reader.readAsDataURL(file)
+
+ })
+}
+
+function createCharacter(e){
+
+ e.preventDefault();
+
+ if(!pendingPlayerPhoto){
+  showToast("Avatar belum dipilih.");
+  return
+ }
+
+ const s=createDefaultSlot(currentSlot);
+
+ s.player.name=
+  document.getElementById("createName").value.trim();
+
+ s.player.age=
+  +document.getElementById("createAge").value;
+
+ s.player.country=
+  document.getElementById("createCountry").value.trim();
+
+ s.player.background=
+  document.getElementById("createBackground").value;
+
+ s.player.position=
+  document.getElementById("createPosition").value;
+
+ s.player.photo=pendingPlayerPhoto;
+
+ DB.slots[currentSlot]=s;
+
+ save();
+
+ screen="dashboard";
+
+ render();
+
+ showToast("Character created.");
+}
+
+/* -------------------------
+   LOAD / DELETE
+------------------------- */
+
+function loadSlot(i){
+
+ if(!DB.slots[i])return;
+
+ currentSlot=i;
+
+ screen="dashboard";
+
+ save();
+
+ render();
+
+}
+
+function duplicateSlot(i){
+
+ const empty=DB.slots.findIndex(
+  (x,j)=>!x&&j!==i
+ );
+
+ if(empty===-1){
+  showToast("Semua slot sudah terisi.");
+  return
+ }
+
+ DB.slots[empty]=
+  JSON.parse(JSON.stringify(DB.slots[i]));
+
+ DB.slots[empty].slot=empty;
+
+ save();
+
+ render();
+
+ showToast("Save copied.");
+}
+
+function deleteSlot(i){
+
+ if(!confirm("Hapus save slot ini?"))return;
+
+ DB.slots[i]=null;
+
+ save();
+
+ render();
+
+}
+
+function backToSlots(){
+
+ save();
+
+ currentSlot=null;
+
+ screen="slots";
+
+ render();
+
+}
+
+/* -------------------------
+   NAVIGATION
+------------------------- */
+
+function navigate(target){
+
+ modal="";
+
+ screen=target;
+
+ render();
+
+ window.scrollTo({
+  top:0,
+  behavior:"smooth"
+ });
+
+}
+
+function nav(id,label,icon){
+
+ return `
+ <button
+  class="navbtn ${screen===id?"active":""}"
+  onclick="navigate('${id}')"
+ >
+  ${icon} &nbsp; ${label}
+ </button>
+ `
+}
+
+function shell(content){
+
+ const s=S();
+
  if(!s)return content;
- ensureUnlockedBorders();
- const ovr=currentOvr();
- const b=getBorder(s.player.borderId);
+
+ autoBorders();
+
+ const border=getBorder(s.player.borderId);
+
  return `
  <div class="app">
+
   <header class="topbar">
+
    <div class="row">
-    <button class="btn mobilemenu" onclick="toggleMobileNav()">☰</button>
-    <div class="brand">RV <span>LIFE</span> : SIMULATOR</div>
+
+    <button
+     class="btn mobilemenu"
+     onclick="toggleSidebar()"
+    >
+     ☰
+    </button>
+
+    <div class="brand">
+     RV <b>LIFE</b>
+    </div>
+
    </div>
+
    <div class="topstats">
-    <span class="pill">OVR ${ovr}</span>
-    <span class="pill">${money(s.economy.cash)}</span>
-    <span class="pill">Followers ${s.social.followers.toLocaleString()}</span>
-    <span class="pill">${s.calendar.day}/${s.calendar.month}/${s.calendar.year}</span>
+
+    <span class="pill">
+     OVR ${OVR()}
+    </span>
+
+    <span class="pill">
+     ${money(s.economy.cash)}
+    </span>
+
+    <span class="pill">
+     Followers ${s.social.followers.toLocaleString()}
+    </span>
+
+    <span class="pill">
+     Energy ${s.football.energy}
+    </span>
+
+    ${
+     s.godMode
+     ? `<span class="pill" style="color:#ffda65">
+          GOD MODE
+        </span>`
+     :""
+    }
+
    </div>
+
   </header>
+
   <div class="layout">
+
    <aside class="sidebar" id="sidebar">
+
+    <div class="navgroup">Life</div>
+
     ${nav("dashboard","Dashboard","⌂")}
+    ${nav("profile","Player Profile","✎")}
+    ${nav("inventory","Inventory","◇")}
+
+    <div class="navgroup">Football</div>
+
     ${nav("football","Football Career","⚽")}
     ${nav("training","Training","◈")}
+    ${nav("rest","Rest Center","☾")}
     ${nav("transfer","Transfer Market","⇄")}
+
+    <div class="navgroup">Money</div>
+
     ${nav("business","Business Empire","$")}
+
+    <div class="navgroup">Social</div>
+
     ${nav("social","RV-Gram","◎")}
+    ${nav("news","RV News","▣")}
+
+    <div class="navgroup">Relationship</div>
+
     ${nav("partners","Partner Gacha","♥")}
     ${nav("relationship","Relationships","♡")}
     ${nav("family","Family","♧")}
-    ${nav("inventory","Inventory","◇")}
+
+    <div class="navgroup">Progress</div>
+
     ${nav("achievements","Achievements","★")}
-    ${nav("news","News & Rumors","▣")}
+    ${nav("events","Life Events","!")}
+
+    <div class="navgroup">System</div>
+
     ${nav("gdd","GDD / Guide","?")}
-    ${nav("profile","Edit Player","✎")}
-    ${nav("admin","Admin","⚙")}
-    <button class="navbtn" onclick="backSlots()">▣ Save Slots</button>
+
+    ${
+     DB.isAdmin
+     ? nav("admin","Admin Control","⚙")
+     :""
+    }
+
+    <button
+     class="navbtn"
+     onclick="backToSlots()"
+    >
+     ▣ Save Slots
+    </button>
+
+    <button
+     class="navbtn"
+     onclick="logoutGame()"
+    >
+     ⇥ Exit
+    </button>
+
    </aside>
-   <main class="main">${content}</main>
+
+   <main class="main">
+    ${content}
+   </main>
+
   </div>
-  ${modal?modalHTML(): ""}
- </div>`;
-}
-function nav(id,label,icon){
- return `<button class="navbtn ${screen===id?"active":""}" onclick="navigate('${id}')">${icon} &nbsp; ${label}</button>`;
-}
-function toggleMobileNav(){
- const x=document.getElementById("sidebar");x.style.display=x.style.display==="block"?"none":"block";
+
+  ${modal}
+
+ </div>
+ `
 }
 
-function render(){
- let html="";
- if(screen==="slots") html=slotsScreen();
- else if(screen==="create") html=createScreen();
- else{
-  const pages={
-   dashboard:dashboardScreen,football:footballScreen,training:trainingScreen,
-   transfer:transferScreen,business:businessScreen,social:socialScreen,
-   partners:partnersScreen,relationship:relationshipScreen,family:familyScreen,
-   inventory:inventoryScreen,achievements:achievementsScreen,news:newsScreen,
-   gdd:gddScreen,profile:profileScreen,admin:adminScreen
-  };
-  html=shell(pages[screen]?pages[screen]():"");
- }
- document.getElementById("app").innerHTML=html;
+function toggleSidebar(){
+
+ const sidebar=document.getElementById("sidebar");
+
+ if(!sidebar)return;
+
+ sidebar.style.display=
+  sidebar.style.display==="block"
+  ?"none"
+  :"block"
+
 }
 
-function slotsScreen(){
- return `
- <div class="main">
-  <div class="hero">
-   <div class="tag">SINGLE-FILE EDITION</div>
-   <h1>RV LIFE: Simulator</h1>
-   <p class="muted">Football. Money. Fame. Love. Family. Internet chaos. Satu kehidupan, seribu kemungkinan.</p>
-  </div>
-  <br>
-  <div class="grid g3">
-   ${[0,1,2].map(i=>{
-    const s=DB.slots[i];
-    return `<div class="card slotcard">
-      <div>
-       <div class="between"><h2>Save Slot ${i+1}</h2>${s?'<span class="savebadge">SAVED</span>':'<span class="muted">EMPTY</span>'}</div>
-       ${s?`
-        <div class="row">
-         <div class="avatar ${getBorder(s.player.borderId).cls}">
-          ${s.player.photo?`<img src="${s.player.photo}">`:`<span class="initial">${esc(s.player.name[0])}</span>`}
-         </div>
-         <div>
-          <h3>${esc(s.player.name)}</h3>
-          <div class="muted">${esc(s.player.position)} · OVR ${avgStats(s.football.stats)}</div>
-          <div class="small muted">${esc(s.football.club)}</div>
-          <div class="small">${money(s.economy.cash)}</div>
-         </div>
-        </div>`:`<div class="slotempty">Belum ada karakter</div>`}
-      </div>
-      <div class="row">
-       ${s?`<button class="btn primary" onclick="loadSlot(${i})">Load</button>
-       <button class="btn" onclick="duplicateSlot(${i})">Copy</button>
-       <button class="btn red" onclick="deleteSlot(${i})">Delete</button>`:
-       `<button class="btn primary full" onclick="startCreate(${i})">Create Character</button>`}
-      </div>
-    </div>`;
-   }).join("")}
-  </div>
-  <div class="card" style="margin-top:15px">
-   <h3>Ultra Max Build</h3>
-   <p class="muted small">
-    3 save slot lokal. Tidak membutuhkan server. Semua progres tersimpan di browser ini.
-    Untuk versi publik, jangan menganggap sistem admin frontend sebagai authentication security.
-   </p>
-  </div>
- </div>`;
-}
-function avgStats(obj){
- return Math.round(Object.values(obj).reduce((a,b)=>a+b,0)/Object.keys(obj).length);
+function logoutGame(){
+
+ save();
+
+ currentSlot=null;
+
+ screen="landing";
+
+ render();
+
 }
 
-function startCreate(slot){
- currentSlot=slot;pendingCreatePhoto="";
- screen="create";render();
-}
-function createScreen(){
- return `
- <div class="main">
-  <div class="hero">
-   <span class="tag">CHARACTER CREATOR</span>
-   <h1>Bikin kehidupan baru.</h1>
-   <p class="muted">Avatar utama memakai foto pilihanmu. Foto akan diperkecil otomatis sebelum disimpan lokal.</p>
-  </div>
-  <br>
-  <div class="card">
-   <form onsubmit="createCharacter(event)">
-    <div class="formgrid">
-     <div><label>Nama</label><input id="cname" required placeholder="Nama karakter"></div>
-     <div><label>Umur</label><input id="cage" type="number" min="16" max="50" value="18" required></div>
-     <div><label>Negara</label><input id="ccountry" value="Indonesia"></div>
-     <div><label>Background</label>
-      <select id="cbg">
-       <option>Street Football</option><option>Academy Prodigy</option><option>Rich Family</option>
-       <option>Content Creator</option><option>Business Family</option><option>Underdog</option>
-      </select>
-     </div>
-     <div><label>Position</label>
-      <select id="cpos"><option>ST</option><option>LW</option><option>RW</option><option>AMF</option><option>CMF</option><option>DMF</option><option>CB</option><option>LB</option><option>RB</option><option>GK</option></select>
-     </div>
-     <div><label>Foto Avatar</label><input id="cphoto" type="file" accept="image/*" required></div>
-    </div>
-    <div id="previewCreate" class="center" style="margin:20px"></div>
-    <button class="btn primary full">Start RV LIFE</button>
-   </form>
-  </div>
- </div>`;
-}
-document.addEventListener("change",e=>{
- if(e.target.id==="cphoto"&&e.target.files[0]){
-   compressImage(e.target.files[0]).then(x=>{
-    pendingCreatePhoto=x;
-    document.getElementById("previewCreate").innerHTML=`<div class="avatar border-gold" style="margin:auto"><img src="${x}"></div>`;
-   });
- }
-});
-function compressImage(file){
- return new Promise(resolve=>{
-  const reader=new FileReader();
-  reader.onload=e=>{
-   const img=new Image();
-   img.onload=()=>{
-    const max=600,scale=Math.min(1,max/Math.max(img.width,img.height));
-    const c=document.createElement("canvas");
-    c.width=Math.round(img.width*scale);c.height=Math.round(img.height*scale);
-    c.getContext("2d").drawImage(img,0,0,c.width,c.height);
-    resolve(c.toDataURL("image/jpeg",.78));
-   };
-   img.src=e.target.result;
-  };
-  reader.readAsDataURL(file);
- });
-}
-function createCharacter(e){
- e.preventDefault();
- if(!pendingCreatePhoto){toast("Foto avatar belum diproses.");return}
- const s=defaultSlot(currentSlot);
- s.player.name=document.getElementById("cname").value.trim();
- s.player.age=+document.getElementById("cage").value;
- s.player.country=document.getElementById("ccountry").value.trim()||"Indonesia";
- s.player.background=document.getElementById("cbg").value;
- s.player.position=document.getElementById("cpos").value;
- s.player.photo=pendingCreatePhoto;
- DB.slots[currentSlot]=s;saveDB();
- screen="dashboard";toast("Karakter berhasil dibuat.");render();
-}
-
-function loadSlot(i){
- if(!DB.slots[i])return;
- currentSlot=i;screen="dashboard";render();
-}
-function duplicateSlot(i){
- const target=DB.slots.findIndex((x,j)=>!x&&j!==i);
- if(target<0){toast("Semua slot sudah terisi.");return}
- DB.slots[target]=JSON.parse(JSON.stringify(DB.slots[i]));
- DB.slots[target].slot=target;saveDB();toast(`Slot disalin ke ${target+1}`);render();
-}
-function deleteSlot(i){
- if(!confirm(`Hapus Save Slot ${i+1}?`))return;
- DB.slots[i]=null;saveDB();render();
-}
-function backSlots(){
- saveDB();currentSlot=null;screen="slots";render();
-}
+/* -------------------------
+   DASHBOARD
+------------------------- */
 
 function dashboardScreen(){
- const s=S(),o=currentOvr(),b=getBorder(s.player.borderId);
+
+ const s=S();
+
+ const border=getBorder(s.player.borderId);
+
  return `
+
  <div class="hero">
+
   <div class="playerhead">
-   <div class="avatar ${b.cls}">
-    ${s.player.photo?`<img src="${s.player.photo}">`:`<span class="initial">${esc(s.player.name[0])}</span>`}
+
+   <div class="avatar ${border.cls}">
+
+    ${
+     s.player.photo
+     ? `<img src="${s.player.photo}">`
+     : `<span class="initial">${esc(s.player.name[0])}</span>`
+    }
+
    </div>
+
    <div>
-    <div class="tag">SEASON ${s.football.season}</div>
-    <h1>${esc(s.player.name)}</h1>
-    <div class="muted">${esc(s.player.position)} · ${esc(s.football.club)} · ${esc(s.player.background)}</div>
-    <div class="row" style="margin-top:9px">
-     <span class="tag">OVR ${o}</span>
-     <span class="tag">${money(s.economy.cash)}</span>
-     <span class="tag">${s.social.followers.toLocaleString()} followers</span>
+
+    <div class="tag">
+     SEASON ${s.football.season}
     </div>
+
+    <h1>
+     ${esc(s.player.name)}
+    </h1>
+
+    <p class="muted">
+     ${esc(s.player.position)}
+     ·
+     ${esc(s.football.club)}
+     ·
+     Age ${s.player.age}
+    </p>
+
+    <div class="row">
+
+     <span class="tag">
+      OVR ${OVR()}
+     </span>
+
+     <span class="tag">
+      ${money(s.economy.cash)}
+     </span>
+
+     ${
+      s.godMode
+      ? `<span class="tag" style="color:#ffd35a">
+          GOD MODE
+         </span>`
+      :""
+     }
+
+    </div>
+
    </div>
+
   </div>
+
  </div>
+
  <br>
- <div class="grid g4">
-  ${kpi("OVR",o,"Football rating")}
-  ${kpi("FAME",s.stats.fame,"Public reputation")}
-  ${kpi("HAPPINESS",s.stats.happiness,"Life balance")}
-  ${kpi("MARKET",money(s.football.marketValue),"Player value")}
+
+ <div class="grid g5">
+
+  ${kpi("OVR",OVR(),"Overall")}
+  ${kpi("FAME",s.stats.fame,"Fame")}
+  ${kpi("HAPPY",s.stats.happiness,"Happiness")}
+  ${kpi("HEALTH",s.stats.health,"Health")}
+  ${kpi("VALUE",money(s.football.marketValue),"Market value")}
+
  </div>
+
  <br>
+
  <div class="grid g2">
+
   <div class="card">
-   <div class="between"><h2>Quick Actions</h2><span class="muted small">Next move</span></div>
+
+   <div class="between">
+
+    <h2>Quick Actions</h2>
+
+    <span class="muted small">
+     Choose your next move
+    </span>
+
+   </div>
+
    <div class="grid g2">
-    <button class="btn primary" onclick="navigate('football')">Play Match</button>
-    <button class="btn" onclick="navigate('training')">Train</button>
-    <button class="btn gold" onclick="navigate('business')">Build Empire</button>
-    <button class="btn cyan" onclick="navigate('social')">Open RV-Gram</button>
-    <button class="btn" onclick="navigate('partners')">Partner Gacha</button>
-    <button class="btn" onclick="navigate('family')">Family</button>
+
+    <button
+     class="btn primary"
+     onclick="navigate('football')"
+    >
+     Play Match
+    </button>
+
+    <button
+     class="btn cyan"
+     onclick="navigate('training')"
+    >
+     Training
+    </button>
+
+    <button
+     class="btn green"
+     onclick="navigate('rest')"
+    >
+     Rest
+    </button>
+
+    <button
+     class="btn gold"
+     onclick="navigate('business')"
+    >
+     Business
+    </button>
+
+    <button
+     class="btn"
+     onclick="navigate('partners')"
+    >
+     Partners
+    </button>
+
+    <button
+     class="btn"
+     onclick="navigate('social')"
+    >
+     RV-Gram
+    </button>
+
    </div>
+
   </div>
+
   <div class="card">
-   <h2>Career Stats</h2>
-   ${statBar("Pace",s.football.stats.pace)}
-   ${statBar("Shooting",s.football.stats.shooting)}
-   ${statBar("Passing",s.football.stats.passing)}
-   ${statBar("Dribbling",s.football.stats.dribbling)}
-   ${statBar("Mentality",s.football.stats.mentality)}
+
+   <h2>Player Stats</h2>
+
+   ${Object.entries(s.football.stats)
+    .map(([k,v])=>statBar(k,v))
+    .join("")}
+
   </div>
+
  </div>
+
  <br>
+
  <div class="grid g2">
+
   <div class="card">
-   <div class="between"><h2>Recent Logs</h2><button class="btn" onclick="advanceTime()">Advance Day</button></div>
-   <div class="list">${s.logs.slice(0,8).map(x=>`<div class="item small">${esc(x)}</div>`).join("")}</div>
+
+   <div class="between">
+
+    <h2>Latest Activity</h2>
+
+    <button
+     class="btn"
+     onclick="advanceDay()"
+    >
+     Advance Day
+    </button>
+
+   </div>
+
+   <div class="list">
+
+    ${s.logs.slice(0,8)
+     .map(x=>`
+      <div class="item small">
+       ${esc(x)}
+      </div>
+     `)
+     .join("")}
+
+   </div>
+
   </div>
+
   <div class="card">
-   <h2>Latest News</h2>
-   <div class="list">${(s.news.length?s.news:[{title:"Belum ada berita. Dunia RV sedang menunggu langkahmu."}]).slice(0,5).map(n=>`<div class="item">${esc(n.title)}</div>`).join("")}</div>
+
+   <h2>World News</h2>
+
+   <div class="list">
+
+    ${
+     (s.news.length?s.news:[
+      {title:"RV World sedang menunggu ceritamu."},
+      {title:"Transfer window akan segera panas."},
+      {title:"Sponsor baru mulai mencari superstar."}
+     ])
+     .slice(0,7)
+     .map(n=>`
+      <div class="item">
+       ${esc(n.title)}
+      </div>
+     `)
+     .join("")
+    }
+
+   </div>
+
   </div>
- </div>`;
+
+ </div>
+
+ `
 }
-function kpi(label,value,sub){return `<div class="card kpicard"><div class="kpilabel">${label}</div><div class="kpi">${value}</div><div class="small muted">${sub}</div></div>`}
-function statBar(name,val){return `<div class="stat"><div class="statline"><span>${name}</span><b>${val}</b></div><div class="bar"><i style="width:${val}%"></i></div></div>`}
+
+function kpi(label,value,sub){
+
+ return `
+ <div class="card kpicard">
+
+  <div class="kpilabel">
+   ${label}
+  </div>
+
+  <div class="kpi">
+   ${value}
+  </div>
+
+  <div class="small muted">
+   ${sub}
+  </div>
+
+ </div>
+ `
+}
+
+function statBar(name,value){
+
+ return `
+ <div class="stat">
+
+  <div class="statline">
+   <span>${esc(name)}</span>
+   <b>${value}</b>
+  </div>
+
+  <div class="bar">
+   <i style="width:${clamp(value,0,100)}%"></i>
+  </div>
+
+ </div>
+ `
+}
+
+/* -------------------------
+   FOOTBALL
+------------------------- */
 
 function footballScreen(){
- const s=S(),o=currentOvr();
- return `
- <div class="between"><div><h1>Football Career</h1><p class="muted">Choice-based football engine. Tidak perlu 3D controller.</p></div><span class="tag">OVR ${o}</span></div>
- <div class="grid g3">
-  <div class="card"><div class="kpilabel">CLUB</div><div class="big">${esc(s.football.club)}</div><div class="muted">${esc(clubPower(s.football.club))} team power</div></div>
-  <div class="card"><div class="kpilabel">SEASON</div><div class="big">${s.football.season}</div><div class="muted">Week ${s.football.week}</div></div>
-  <div class="card"><div class="kpilabel">FORM</div><div class="big">${s.football.form}</div><div class="muted">Energy ${s.football.energy}</div></div>
- </div>
- <br>
- <div class="hero">
-  <div class="tag">MATCH DAY</div>
-  <h2>${pick(["Liga Match","Big Rivalry","Cup Match","Derby","European Night"])}</h2>
-  <p class="muted">Lawan ditentukan oleh engine. Pilihanmu menentukan performa, fame, stats, dan hasil.</p>
-  <div class="grid g2">
-   ${matchChoice("safe","Build Up","Passing + Vision","passing")}
-   ${matchChoice("attack","Take On Defender","Dribbling + Pace","dribble")}
-   ${matchChoice("finish","Shoot","Shooting + Mentality","shoot")}
-   ${matchChoice("team","Create Chance","Vision + Passing","assist")}
-  </div>
- </div>
- <br>
- <div class="card">
-  <h2>Career Record</h2>
-  <div class="grid g4">
-   ${kpi("Apps",s.football.appearances,"Appearances")}
-   ${kpi("Goals",s.football.goals,"Goals")}
-   ${kpi("Assists",s.football.assists,"Assists")}
-   ${kpi("Trophies",s.football.trophies,"Trophies")}
-  </div>
- </div>`;
-}
-function clubPower(name){return CLUBS.find(x=>x.name===name)?.power||70}
-function matchChoice(icon,title,desc,type){
- return `<button class="btn ${type==="shoot"?"gold":type==="dribble"?"primary":"cyan"}" onclick="playMatch('${type}')">
-  <b>${icon==="safe"?"PASS":icon==="attack"?"DRIBBLE":icon==="finish"?"SHOOT":"CREATE"}</b><br><span class="small">${title}<br>${desc}</span>
- </button>`;
-}
-function playMatch(type){
+
  const s=S();
- if(s.football.energy<15){toast("Energy terlalu rendah. Training/rest dulu.");return}
- const st=s.football.stats;
- let base=0;
- if(type==="safe")base=st.passing*.45+st.vision*.35+st.mentality*.2;
- if(type==="dribble")base=st.dribbling*.45+st.pace*.3+st.mentality*.25;
- if(type==="shoot")base=st.shooting*.55+st.mentality*.25+st.pace*.2;
- if(type==="assist")base=st.vision*.45+st.passing*.4+st.dribbling*.15;
- const opp=clubPower(pick(CLUBS).name);
- const roll=base+(Math.random()*28-14)-(opp*.12);
- let outcome;
- if(roll>=68)outcome="MOMENT";
- else if(roll>=53)outcome="GOOD";
- else if(roll>=38)outcome="AVERAGE";
- else outcome="BAD";
- s.football.appearances++;
- s.football.energy=clamp(s.football.energy-15,0,100);
- s.football.week++;
- let reward=0;
- if(outcome==="MOMENT"){
-   reward=1000;s.football.form=clamp(s.football.form+8,0,100);
-   s.stats.fame+=3;s.social.followers+=Math.floor(10+Math.random()*80);
-   if(type==="shoot")s.football.goals++;
-   if(type==="assist"||type==="safe")s.football.assists++;
-   addLog(`Match sukses besar. ${type.toUpperCase()} menjadi highlight.`);
- }else if(outcome==="GOOD"){
-   reward=500;s.football.form=clamp(s.football.form+3,0,100);
-   s.stats.fame+=1;
-   if(type==="shoot"&&chance(45))s.football.goals++;
-   if(type==="assist"&&chance(50))s.football.assists++;
-   addLog("Performa bagus di pertandingan.");
- }else if(outcome==="AVERAGE"){
-   reward=200;s.football.form=clamp(s.football.form-1,0,100);addLog("Pertandingan berjalan biasa saja.");
- }else{
-   reward=50;s.football.form=clamp(s.football.form-7,0,100);addLog("Performa mengecewakan. Media mulai bertanya.");
- }
- s.economy.cash+=reward+s.football.salary;
- s.football.marketValue=Math.round(s.football.marketValue*(1+(outcome==="MOMENT"?0.08:outcome==="BAD"?-.03:.015)));
- if(chance(25))randomNews();
- checkAchievements();
- advanceDay(1);saveDB();render();
- toast(`${outcome}: +${money(reward)} + gaji`);
+
+ return `
+
+ <div class="between">
+
+  <div>
+   <h1>Football Career</h1>
+   <p class="muted">
+    Choice-based football RPG engine.
+   </p>
+  </div>
+
+  <span class="tag">
+   OVR ${OVR()}
+  </span>
+
+ </div>
+
+ <div class="grid g4">
+
+  ${kpi("Apps",s.football.appearances,"Appearances")}
+  ${kpi("Goals",s.football.goals,"Goals")}
+  ${kpi("Assists",s.football.assists,"Assists")}
+  ${kpi("Trophies",s.football.trophies,"Trophies")}
+
+ </div>
+
+ <br>
+
+ <div class="card matchbox">
+
+  <div>
+
+   <div class="tag">
+    MATCH DAY
+   </div>
+
+   <h2>
+    ${esc(pick(["League Match","Derby","Cup Match","European Night","Rivalry Match"]))}
+   </h2>
+
+   <p class="muted">
+    Lawan dan situasi ditentukan oleh engine.
+   </p>
+
+  </div>
+
+  <div class="scoreboard">
+
+   <div class="small muted">
+    ${esc(s.football.club)}
+   </div>
+
+   <div class="score">
+    VS
+   </div>
+
+   <div class="small">
+    ${esc(pick(CLUBS).name)}
+   </div>
+
+  </div>
+
+  <div class="grid g2">
+
+   ${matchChoice(
+    "PASS",
+    "Build Up",
+    "Passing + Vision",
+    "pass"
+   )}
+
+   ${matchChoice(
+    "DRIBBLE",
+    "Take On Defender",
+    "Dribbling + Pace",
+    "dribble"
+   )}
+
+   ${matchChoice(
+    "SHOOT",
+    "Finish",
+    "Shooting + Mentality",
+    "shoot"
+   )}
+
+   ${matchChoice(
+    "CREATE",
+    "Create Chance",
+    "Vision + Passing",
+    "assist"
+   )}
+
+  </div>
+
+ </div>
+
+ <br>
+
+ <div class="card">
+
+  <h2>Career Record</h2>
+
+  <div class="grid g4">
+
+   ${kpi("Wins",s.football.wins,"Matches")}
+   ${kpi("Draws",s.football.draws,"Matches")}
+   ${kpi("Losses",s.football.losses,"Matches")}
+   ${kpi("Form",s.football.form,"Current form")}
+
+  </div>
+
+ </div>
+
+ `
 }
+
+function matchChoice(label,title,desc,type){
+
+ return `
+ <button
+  class="btn choice ${
+   type==="shoot"
+   ?"gold"
+   :type==="dribble"
+   ?"primary"
+   :"cyan"
+  }"
+  onclick="playMatch('${type}')"
+ >
+
+  <b>${label}</b>
+
+  <br>
+
+  <span class="small">
+   ${title}
+  </span>
+
+  <br>
+
+  <span class="tiny">
+   ${desc}
+  </span>
+
+ </button>
+ `
+}
+
+function playMatch(type){
+
+ const s=S();
+
+ if(!s.godMode&&s.football.energy<15){
+
+  showToast("Energy kurang. Gunakan Rest Center.");
+
+  return
+ }
+
+ const st=s.football.stats;
+
+ let ability=0;
+
+ if(type==="pass"){
+  ability=
+   st.passing*.45+
+   st.vision*.35+
+   st.mentality*.2
+ }
+
+ if(type==="dribble"){
+  ability=
+   st.dribbling*.45+
+   st.pace*.3+
+   st.mentality*.25
+ }
+
+ if(type==="shoot"){
+  ability=
+   st.shooting*.55+
+   st.mentality*.25+
+   st.pace*.2
+ }
+
+ if(type==="assist"){
+  ability=
+   st.vision*.45+
+   st.passing*.4+
+   st.dribbling*.15
+ }
+
+ const opponent=pick(CLUBS);
+
+ let successChance;
+
+ if(s.godMode){
+  successChance=99
+ }else{
+  successChance=clamp(
+   ability-opponent.power*.22+35,
+   5,
+   92
+  )
+ }
+
+ const success=chance(successChance);
+
+ let result;
+
+ if(success){
+
+  const great=
+   s.godMode
+   ? chance(55)
+   : chance(28);
+
+  result=great?"MOMENT":"GOOD";
+
+ }else{
+
+  result=chance(55)?"AVERAGE":"BAD";
+
+ }
+
+ if(!s.godMode){
+  s.football.energy=
+   clamp(
+    s.football.energy-15,
+    0,
+    100
+   )
+ }
+
+ s.football.appearances++;
+ s.football.week++;
+
+ let reward=0;
+
+ if(result==="MOMENT"){
+
+  reward=1800;
+
+  s.football.wins++;
+
+  s.football.form=
+   clamp(s.football.form+8,0,100);
+
+  s.stats.fame+=5;
+
+  s.social.followers+=
+   Math.floor(50+Math.random()*400);
+
+  if(type==="shoot"){
+   s.football.goals++;
+  }
+
+  if(type==="assist"||type==="pass"){
+   s.football.assists++;
+  }
+
+  addLog(
+   `MATCH MOMENT! ${type.toUpperCase()} berhasil besar.`
+  );
+
+ }else if(result==="GOOD"){
+
+  reward=900;
+
+  s.football.wins++;
+
+  s.football.form=
+   clamp(s.football.form+4,0,100);
+
+  s.stats.fame+=2;
+
+  if(type==="shoot"&&chance(55)){
+   s.football.goals++;
+  }
+
+  if(type==="assist"&&chance(60)){
+   s.football.assists++;
+  }
+
+  addLog("Performa bagus di pertandingan.");
+
+ }else if(result==="AVERAGE"){
+
+  reward=350;
+
+  s.football.draws++;
+
+  s.football.form=
+   clamp(s.football.form-1,0,100);
+
+  addLog("Pertandingan berjalan cukup seimbang.");
+
+ }else{
+
+  reward=100;
+
+  s.football.losses++;
+
+  s.football.form=
+   clamp(s.football.form-7,0,100);
+
+  addLog("Performa buruk. Media mulai bertanya.");
+
+ }
+
+ s.economy.cash+=
+  reward+
+  s.football.salary;
+
+ const multiplier=
+  result==="MOMENT"?1.08:
+  result==="BAD"?.97:
+  1.015;
+
+ s.football.marketValue=
+  Math.max(
+   1000,
+   Math.round(
+    s.football.marketValue*multiplier
+   )
+  );
+
+ advanceDay(1);
+
+ checkAchievements();
+
+ randomEvent();
+
+ save();
+
+ render();
+
+ showToast(
+  `${result} · ${money(reward)} reward`
+ );
+
+}
+
+/* -------------------------
+   TRAINING
+------------------------- */
 
 function trainingScreen(){
+
  const s=S();
+
  return `
- <div><h1>Training Center</h1><p class="muted">Naikkan atribut dengan energy dan uang.</p></div>
- <div class="grid g3">
-  ${["pace","shooting","passing","dribbling","defending","physical","vision","mentality"].map(k=>
-   `<div class="card">
-    <h3>${k.toUpperCase()}</h3>${statBar(k,s.football.stats[k])}
-    <button class="btn primary full" onclick="train('${k}')">Train +1</button>
-   </div>`).join("")}
+
+ <div>
+  <h1>Training Center</h1>
+  <p class="muted">
+   Upgrade stats menggunakan cash dan energy.
+  </p>
  </div>
+
+ <div class="grid g4">
+
+  ${Object.entries(s.football.stats)
+   .map(([key,val])=>`
+
+    <div class="card">
+
+     <h3>
+      ${esc(key.toUpperCase())}
+     </h3>
+
+     ${statBar(key,val)}
+
+     <div class="small muted">
+      Upgrade cost:
+      ${money(250+OVR()*8)}
+     </div>
+
+     <br>
+
+     <button
+      class="btn primary full"
+      onclick="trainStat('${key}')"
+     >
+      Train +1
+     </button>
+
+    </div>
+
+   `)
+   .join("")}
+
+ </div>
+
  <br>
+
  <div class="card">
-  <h2>Recovery</h2><p class="muted">Rest satu hari untuk memulihkan energy dan happiness.</p>
-  <button class="btn green" onclick="restDay()">Rest & Recover</button>
- </div>`;
+
+  <h2>Training Philosophy</h2>
+
+  <p class="muted">
+   Training meningkatkan discipline, tetapi terlalu sering
+   tanpa recovery dapat menurunkan health.
+  </p>
+
+ </div>
+
+ `
 }
-function train(k){
+
+function trainStat(key){
+
  const s=S();
- if(s.football.energy<8){toast("Energy kurang.");return}
- const cost=250+currentOvr()*8;
- if(s.economy.cash<cost){toast("Uang kurang.");return}
- s.economy.cash-=cost;s.football.energy-=8;
- s.football.stats[k]=clamp(s.football.stats[k]+(chance(15)?2:1),1,99);
- s.stats.discipline=clamp(s.stats.discipline+1,0,100);
- s.stats.health=clamp(s.stats.health-1,0,100);
- addLog(`Training ${k} selesai.`);
- checkAchievements();saveDB();render();
+
+ const cost=
+  250+
+  OVR()*8;
+
+ if(!s.godMode&&s.football.energy<8){
+  showToast("Energy kurang.");
+  return
+ }
+
+ if(s.economy.cash<cost){
+  showToast("Cash tidak cukup.");
+  return
+ }
+
+ s.economy.cash-=cost;
+
+ if(!s.godMode){
+  s.football.energy=
+   clamp(s.football.energy-8,0,100)
+ }
+
+ s.football.stats[key]=
+  clamp(
+   s.football.stats[key]+
+   (s.godMode&&chance(50)?2:1),
+   1,
+   99
+  );
+
+ s.stats.discipline=
+  clamp(s.stats.discipline+1,0,100);
+
+ s.stats.health=
+  clamp(s.stats.health-1,0,100);
+
+ addLog(
+  `Training ${key} berhasil.`
+ );
+
+ checkAchievements();
+
+ autoBorders();
+
+ save();
+
+ render();
+
 }
-function restDay(){
- const s=S();advanceDay();s.football.energy=clamp(s.football.energy+35,0,100);
- s.stats.health=clamp(s.stats.health+4,0,100);s.stats.happiness=clamp(s.stats.happiness+2,0,100);
- addLog("Hari istirahat. Energy pulih.");saveDB();render();
+
+/* -------------------------
+   REST CENTER
+------------------------- */
+
+function restScreen(){
+
+ const s=S();
+
+ return `
+
+ <div class="hero">
+
+  <div class="tag">RECOVERY CENTER</div>
+
+  <h1>Rest, but make it expensive.</h1>
+
+  <p class="muted">
+   Di V10, recovery menggunakan uang.
+   Semakin mahal fasilitasnya, semakin besar recovery.
+  </p>
+
+  <div class="row">
+
+   <span class="tag">
+    Energy ${s.football.energy}/100
+   </span>
+
+   <span class="tag">
+    Health ${s.stats.health}/100
+   </span>
+
+   <span class="tag">
+    Cash ${money(s.economy.cash)}
+   </span>
+
+  </div>
+
+ </div>
+
+ <br>
+
+ <div class="grid g4">
+
+  ${RESTS.map(r=>`
+
+   <div class="card">
+
+    <div class="between">
+
+     <h2>${r.name}</h2>
+
+     <span class="tag">
+      ${money(r.cost)}
+     </span>
+
+    </div>
+
+    <p class="muted small">
+     ${r.desc}
+    </p>
+
+    ${statBar("Energy +",r.energy)}
+
+    <div class="small">
+     Health +${r.health}
+    </div>
+
+    <div class="small">
+     Happiness +${r.happiness}
+    </div>
+
+    <br>
+
+    <button
+     class="btn ${
+      r.id==="resort"
+      ?"gold"
+      :"green"
+     } full"
+     onclick="takeRest('${r.id}')"
+    >
+     Pay & Rest
+    </button>
+
+   </div>
+
+  `).join("")}
+
+ </div>
+
+ <br>
+
+ <div class="card">
+
+  <h2>Emergency Recovery</h2>
+
+  <p class="muted">
+   Kalau energy benar-benar habis, kamu tetap bisa memakai
+   Quick Rest selama punya $100.
+  </p>
+
+ </div>
+
+ `
 }
+
+function takeRest(id){
+
+ const s=S();
+
+ const rest=RESTS.find(x=>x.id===id);
+
+ if(!rest)return;
+
+ if(s.economy.cash<rest.cost){
+
+  showToast("Uang tidak cukup untuk recovery ini.");
+
+  return
+ }
+
+ s.economy.cash-=rest.cost;
+
+ if(!s.godMode){
+
+  s.football.energy=
+   clamp(
+    s.football.energy+rest.energy,
+    0,
+    100
+   );
+
+ }else{
+
+  s.football.energy=100;
+
+ }
+
+ s.stats.health=
+  clamp(
+   s.stats.health+rest.health,
+   0,
+   100
+  );
+
+ s.stats.happiness=
+  clamp(
+   s.stats.happiness+rest.happiness,
+   0,
+   100
+  );
+
+ advanceDay(1);
+
+ addLog(
+  `${rest.name} selesai. ${money(rest.cost)} dibayar.`
+ );
+
+ save();
+
+ render();
+
+}
+
+/* -------------------------
+   TRANSFER
+------------------------- */
 
 function transferScreen(){
+
  const s=S();
- if(!s.football.transferOffers.length)generateOffers();
+
+ if(!s.football.transferOffers.length){
+  generateTransferOffers()
+ }
+
  return `
- <div><h1>Transfer Market</h1><p class="muted">Nilai pemain dipengaruhi OVR, form, fame, dan performa.</p></div>
- <div class="card">
-  <div class="between"><h2>Current Contract</h2><span class="tag">${s.football.contractYears} years</span></div>
-  <p>${esc(s.football.club)} · Salary ${money(s.football.salary)}/match · Market Value ${money(s.football.marketValue)}</p>
- </div><br>
- <div class="grid g2">
-  ${s.football.transferOffers.map((o,i)=>`
-   <div class="card">
-    <div class="between"><h2>${esc(o.club)}</h2><span class="tag">${o.power} PWR</span></div>
-    <p class="muted">${o.years} year contract</p>
-    <div class="big">${money(o.salary)} / match</div>
-    <button class="btn primary full" onclick="acceptTransfer(${i})">Accept Transfer</button>
-   </div>`).join("")}
+
+ <div>
+  <h1>Transfer Market</h1>
+  <p class="muted">
+   Club menilai OVR, form, fame dan market value.
+  </p>
  </div>
- <br><button class="btn" onclick="generateOffers();render()">Refresh Offers</button>`;
+
+ <div class="grid g4">
+
+  ${kpi("Club",esc(s.football.club),"Current")}
+  ${kpi("Salary",money(s.football.salary),"Per match")}
+  ${kpi("Value",money(s.football.marketValue),"Market value")}
+  ${kpi("Contract",s.football.contractYears+"y","Remaining")}
+
+ </div>
+
+ <br>
+
+ <div class="grid g2">
+
+  ${s.football.transferOffers.map((offer,i)=>`
+
+   <div class="card">
+
+    <div class="between">
+
+     <h2>
+      ${esc(offer.club)}
+     </h2>
+
+     <span class="tag">
+      PWR ${offer.power}
+     </span>
+
+    </div>
+
+    <p class="muted">
+     Contract ${offer.years} years
+    </p>
+
+    <div class="big">
+     ${money(offer.salary)}
+    </div>
+
+    <div class="small muted">
+     salary per match
+    </div>
+
+    <br>
+
+    <button
+     class="btn primary full"
+     onclick="acceptTransfer(${i})"
+    >
+     Accept Transfer
+    </button>
+
+   </div>
+
+  `).join("")}
+
+ </div>
+
+ <br>
+
+ <button
+  class="btn"
+  onclick="generateTransferOffers();render()"
+ >
+  Refresh Offers
+ </button>
+
+ `
 }
-function generateOffers(){
+
+function generateTransferOffers(){
+
  const s=S();
- s.football.transferOffers=[...CLUBS].sort(()=>Math.random()-.5).slice(0,4).map(c=>({
-  club:c.name,power:c.power,years:1+Math.floor(Math.random()*4),
-  salary:Math.round((1000+currentOvr()*90)*(c.power/75)*(0.8+Math.random()*.4))
- }));
+
+ s.football.transferOffers=
+  [...CLUBS]
+  .sort(()=>Math.random()-.5)
+  .slice(0,4)
+  .map(club=>({
+
+   club:club.name,
+
+   power:club.power,
+
+   years:
+    1+
+    Math.floor(Math.random()*4),
+
+   salary:
+    Math.round(
+     (1000+OVR()*90)*
+     (club.power/75)*
+     (.8+Math.random()*.4)
+    )
+
+  }));
+
+ save()
 }
+
 function acceptTransfer(i){
- const s=S(),o=s.football.transferOffers[i];
- s.football.club=o.club;s.football.salary=o.salary;s.football.contractYears=o.years;
- s.stats.fame+=2;s.economy.cash+=o.salary*3;s.football.energy=100;
- addLog(`Transfer berhasil ke ${o.club}.`);
- s.football.transferOffers=[];saveDB();render();toast("Transfer completed.");
+
+ const s=S();
+
+ const offer=s.football.transferOffers[i];
+
+ if(!offer)return;
+
+ s.football.club=offer.club;
+ s.football.salary=offer.salary;
+ s.football.contractYears=offer.years;
+ s.football.energy=100;
+
+ s.stats.fame+=3;
+
+ addLog(
+  `Transfer sukses ke ${offer.club}.`
+ );
+
+ s.football.transferOffers=[];
+
+ save();
+
+ render();
+
+ showToast("Transfer completed.");
+
 }
+
+/* -------------------------
+   BUSINESS
+------------------------- */
 
 function businessScreen(){
+
  const s=S();
+
  return `
- <div><h1>Business Empire</h1><p class="muted">Bangun cashflow sampai football salary terasa seperti uang receh.</p></div>
+
+ <div>
+  <h1>Business Empire</h1>
+  <p class="muted">
+   Football salary adalah income. Business adalah mesin.
+  </p>
+ </div>
+
  <div class="grid g4">
+
   ${kpi("Cash",money(s.economy.cash),"Liquid")}
   ${kpi("Bank",money(s.economy.bank),"Savings")}
-  ${kpi("Weekly Income",money(s.economy.weeklyIncome),"Passive")}
+  ${kpi("Income",money(s.economy.weeklyIncome),"Weekly")}
   ${kpi("Businesses",s.economy.businesses.length,"Owned")}
- </div><br>
- <div class="grid g3">
-  ${BUSINESSES.map(b=>{
-   const owned=s.economy.businesses.find(x=>x.id===b.id);
-   return `<div class="card">
-    <div class="between"><h2>${b.name}</h2>${owned?'<span class="tag">OWNED</span>':''}</div>
-    <p class="muted small">${b.desc}</p>
-    <div class="row"><span>Cost ${money(b.cost)}</span><span>Income ${money(b.income)}/week</span></div>
-    <div class="small muted">Risk ${b.risk}%</div><br>
-    ${owned?
-      `<button class="btn green full" onclick="collectBusiness('${b.id}')">Collect Income</button>`:
-      `<button class="btn primary full" onclick="buyBusiness('${b.id}')">Buy Business</button>`}
-   </div>`;
-  }).join("")}
+
  </div>
+
  <br>
+
+ <div class="grid g3">
+
+  ${BUSINESSES.map(b=>{
+
+   const owned=
+    s.economy.businesses.find(x=>x.id===b.id);
+
+   return `
+
+    <div class="card">
+
+     <div class="between">
+
+      <h2>${b.name}</h2>
+
+      ${
+       owned
+       ? `<span class="tag">LV.${owned.level}</span>`
+       :""
+      }
+
+     </div>
+
+     <p class="muted small">
+      ${b.desc}
+     </p>
+
+     <div class="row">
+
+      <span>
+       Cost ${money(b.cost)}
+      </span>
+
+      <span>
+       Income ${money(b.income)}/week
+      </span>
+
+     </div>
+
+     <div class="small muted">
+      Risk ${b.risk}%
+     </div>
+
+     <br>
+
+     ${
+      owned
+      ? `
+       <div class="row">
+        <button
+         class="btn green"
+         onclick="collectBusiness('${b.id}')"
+        >
+         Collect
+        </button>
+
+        <button
+         class="btn"
+         onclick="upgradeBusiness('${b.id}')"
+        >
+         Upgrade
+        </button>
+       </div>
+      `
+      :`
+       <button
+        class="btn primary full"
+        onclick="buyBusiness('${b.id}')"
+       >
+        Buy
+       </button>
+      `
+     }
+
+    </div>
+
+   `
+
+  }).join("")}
+
+ </div>
+
+ <br>
+
  <div class="card">
-  <h2>Banking</h2>
+
+  <h2>Bank</h2>
+
   <div class="row">
-   <button class="btn" onclick="bankDeposit(5000)">Deposit $5K</button>
-   <button class="btn" onclick="bankWithdraw(5000)">Withdraw $5K</button>
+
+   <button
+    class="btn"
+    onclick="bankDeposit(5000)"
+   >
+    Deposit $5K
+   </button>
+
+   <button
+    class="btn"
+    onclick="bankWithdraw(5000)"
+   >
+    Withdraw $5K
+   </button>
+
   </div>
- </div>`;
+
+ </div>
+
+ `
 }
+
 function buyBusiness(id){
- const s=S(),b=BUSINESSES.find(x=>x.id===id);
- if(s.economy.cash<b.cost){toast("Cash kurang.");return}
- if(s.economy.businesses.some(x=>x.id===id)){toast("Sudah punya.");return}
- s.economy.cash-=b.cost;s.economy.businesses.push({...b,level:1});
- s.economy.weeklyIncome+=b.income;addLog(`Membeli ${b.name}.`);
- saveDB();render();
-}
-function collectBusiness(id){
- const s=S(),b=s.economy.businesses.find(x=>x.id===id);
+
+ const s=S();
+
+ const b=BUSINESSES.find(x=>x.id===id);
+
  if(!b)return;
- let amount=b.income*b.level;
- if(chance(b.risk)){amount=Math.round(amount*.35);toast("Business kena bad event.");}
- s.economy.cash+=amount;advanceDay(7);addLog(`Business income ${b.name}: ${money(amount)}.`);
- saveDB();render();
+
+ if(s.economy.cash<b.cost){
+
+  showToast("Cash tidak cukup.");
+
+  return
+ }
+
+ if(s.economy.businesses.some(x=>x.id===id)){
+
+  showToast("Business sudah dimiliki.");
+
+  return
+ }
+
+ s.economy.cash-=b.cost;
+
+ s.economy.businesses.push({
+  ...b,
+  level:1
+ });
+
+ s.economy.weeklyIncome+=b.income;
+
+ addLog(
+  `Membeli ${b.name}.`
+ );
+
+ checkAchievements();
+
+ save();
+
+ render();
+
 }
+
+function upgradeBusiness(id){
+
+ const s=S();
+
+ const b=s.economy.businesses.find(
+  x=>x.id===id
+ );
+
+ if(!b)return;
+
+ const cost=
+  Math.round(
+   b.cost*.35*b.level
+  );
+
+ if(s.economy.cash<cost){
+
+  showToast("Cash kurang.");
+
+  return
+ }
+
+ s.economy.cash-=cost;
+
+ s.economy.weeklyIncome-=
+  b.income*b.level;
+
+ b.level++;
+
+ s.economy.weeklyIncome+=
+  b.income*b.level;
+
+ addLog(
+  `${b.name} upgraded ke level ${b.level}.`
+ );
+
+ save();
+
+ render();
+
+}
+
+function collectBusiness(id){
+
+ const s=S();
+
+ const b=s.economy.businesses.find(
+  x=>x.id===id
+ );
+
+ if(!b)return;
+
+ let income=
+  b.income*b.level;
+
+ if(chance(b.risk)){
+
+  income=
+   Math.round(income*.35);
+
+  addLog(
+   `${b.name} terkena market downturn.`
+  );
+
+ }
+
+ s.economy.cash+=income;
+
+ advanceDay(7);
+
+ addLog(
+  `${b.name} menghasilkan ${money(income)}.`
+ );
+
+ save();
+
+ render();
+
+}
+
 function bankDeposit(amount){
- const s=S();if(s.economy.cash<amount){toast("Cash kurang.");return}
- s.economy.cash-=amount;s.economy.bank+=amount;saveDB();render();
+
+ const s=S();
+
+ if(s.economy.cash<amount){
+  showToast("Cash kurang.");
+  return
+ }
+
+ s.economy.cash-=amount;
+ s.economy.bank+=amount;
+
+ save();
+ render();
+
 }
+
 function bankWithdraw(amount){
- const s=S();if(s.economy.bank<amount){toast("Saldo bank kurang.");return}
- s.economy.bank-=amount;s.economy.cash+=amount;saveDB();render();
+
+ const s=S();
+
+ if(s.economy.bank<amount){
+  showToast("Saldo bank kurang.");
+  return
+ }
+
+ s.economy.bank-=amount;
+ s.economy.cash+=amount;
+
+ save();
+ render();
+
 }
+
+/* -------------------------
+   SOCIAL
+------------------------- */
 
 function socialScreen(){
+
  const s=S();
+
  return `
- <div><h1>RV-Gram</h1><p class="muted">Social media simulation: followers, likes, comments, trends, sponsors, fan accounts, hate accounts.</p></div>
- <div class="grid g4">
-  ${kpi("Followers",s.social.followers.toLocaleString(),"Audience")}
-  ${kpi("Likes",s.social.likes.toLocaleString(),"Total likes")}
-  ${kpi("Comments",s.social.comments.toLocaleString(),"Comments")}
-  ${kpi("Viral",s.social.viral,"Viral moments")}
- </div><br>
- <div class="grid g2">
-  <div class="card">
-   <h2>Create Post</h2>
-   <textarea id="postText" rows="4" placeholder="Apa yang sedang terjadi di hidupmu?"></textarea><br><br>
-   <button class="btn primary full" onclick="createPost()">Post to RV-Gram</button>
-  </div>
-  <div class="card">
-   <h2>Trending</h2>
-   <div class="list">
-    ${["#RVSports","#TransferSeason","#RVLife","#FootballTok","#NewStar","#RelationshipDrama"].map((x,i)=>
-      `<div class="item between"><b>${x}</b><span class="muted">${(12+i*17)*1000} posts</span></div>`).join("")}
-   </div>
-  </div>
- </div><br>
+
  <div>
-  <h2>Feed</h2>
-  ${renderFeed()}
- </div>`;
-}
-function renderFeed(){
- const s=S();
- const generated=[
-  ["RV Sports Daily","Rumor: klub top sedang mengincar rising star."],
-  ["Football Insider","Transfer window mulai memanas."],
-  ["Fan Account","Performa pemain muda jadi pembicaraan."],
-  ["Celebrity Watch","Sebuah hubungan baru viral di RV-Gram."]
- ];
- const posts=s.social.posts.map(p=>({user:s.player.name,text:p.text,likes:p.likes,own:true}));
- const all=[...posts,...generated.map(x=>({user:x[0],text:x[1],likes:Math.floor(Math.random()*900)}))];
- return all.slice(0,12).map((p,i)=>`
-  <div class="feedpost">
-   <div class="between"><b>${esc(p.user)}</b><span class="small muted">RV-Gram</span></div>
-   <p>${esc(p.text)}</p>
-   <div class="row">
-    <button class="btn" onclick="likePost(${i})">♥ ${p.likes}</button>
-    <button class="btn" onclick="commentPost()">Comment</button>
-    <button class="btn" onclick="sharePost()">Share</button>
+  <h1>RV-Gram</h1>
+  <p class="muted">
+   Your public life has consequences.
+  </p>
+ </div>
+
+ <div class="grid g4">
+
+  ${kpi("Followers",s.social.followers.toLocaleString(),"Audience")}
+  ${kpi("Likes",s.social.likes.toLocaleString(),"Total")}
+  ${kpi("Comments",s.social.comments.toLocaleString(),"Total")}
+  ${kpi("Viral",s.social.viral,"Moments")}
+
+ </div>
+
+ <br>
+
+ <div class="grid g2">
+
+  <div class="card">
+
+   <h2>Create Post</h2>
+
+   <textarea
+    id="socialPost"
+    rows="5"
+    placeholder="Tulis sesuatu..."
+   ></textarea>
+
+   <br><br>
+
+   <button
+    class="btn primary full"
+    onclick="createPost()"
+   >
+    Publish
+   </button>
+
+  </div>
+
+  <div class="card">
+
+   <h2>Trending</h2>
+
+   <div class="list">
+
+    ${
+     [
+      "#RVSports",
+      "#RVLife",
+      "#TransferSeason",
+      "#FootballTok",
+      "#RelationshipDrama",
+      "#NewStar",
+      "#V10"
+     ]
+     .map((x,i)=>`
+      <div class="item between">
+       <b>${x}</b>
+       <span class="small muted">
+        ${(i+2)*17000} posts
+       </span>
+      </div>
+     `)
+     .join("")
+    }
+
    </div>
-  </div>`).join("");
+
+  </div>
+
+ </div>
+
+ <br>
+
+ <h2>Feed</h2>
+
+ ${renderFeed()}
+
+ `
 }
+
+function renderFeed(){
+
+ const s=S();
+
+ const external=[
+  ["RV Sports Daily","Transfer market kembali panas."],
+  ["RV Insider","Fans menemukan rising star baru."],
+  ["Fan Account","Performa minggu ini menjadi topik utama."],
+  ["RV Celebrity","Relationship rumor sedang trending."]
+ ];
+
+ const own=
+  s.social.posts.map(x=>({
+   user:s.player.name,
+   text:x.text,
+   likes:x.likes
+  }));
+
+ const all=[
+  ...own,
+  ...external.map(x=>({
+   user:x[0],
+   text:x[1],
+   likes:Math.floor(Math.random()*900)
+  }))
+ ];
+
+ return all.slice(0,12).map((p,i)=>`
+
+  <div class="feedpost">
+
+   <div class="between">
+
+    <b>${esc(p.user)}</b>
+
+    <span class="small muted">
+     RV-Gram
+    </span>
+
+   </div>
+
+   <p>
+    ${esc(p.text)}
+   </p>
+
+   <div class="row">
+
+    <button
+     class="btn"
+     onclick="likeSocial()"
+    >
+     ♥ ${p.likes}
+    </button>
+
+    <button
+     class="btn"
+     onclick="commentSocial()"
+    >
+     Comment
+    </button>
+
+    <button
+     class="btn"
+     onclick="shareSocial()"
+    >
+     Share
+    </button>
+
+   </div>
+
+  </div>
+
+ `).join("")
+}
+
 function createPost(){
- const s=S(),text=document.getElementById("postText").value.trim();
- if(!text){toast("Tulis sesuatu.");return}
- const vir=chance(12);
- const likes=Math.floor(10+Math.random()*2500)*(vir?5:1);
- s.social.posts.unshift({id:uid("post"),text,likes});
- s.social.likes+=likes;s.social.comments+=Math.floor(likes*.08);
- s.social.followers+=Math.floor(likes*.15);
- if(vir){s.social.viral++;s.stats.fame+=4;addLog("Post kamu viral di RV-Gram.");}
- else s.stats.fame+=1;
- saveDB();render();
+
+ const s=S();
+
+ const text=
+  document
+   .getElementById("socialPost")
+   .value.trim();
+
+ if(!text){
+
+  showToast("Tulis sesuatu dulu.");
+
+  return
+ }
+
+ const viral=
+  s.godMode
+  ?chance(60)
+  :chance(12);
+
+ const likes=
+  Math.floor(
+   10+
+   Math.random()*2500
+  )*
+  (viral?5:1);
+
+ s.social.posts.unshift({
+  id:uid("post"),
+  text,
+  likes
+ });
+
+ s.social.likes+=likes;
+
+ s.social.comments+=
+  Math.floor(likes*.08);
+
+ s.social.followers+=
+  Math.floor(likes*.15);
+
+ if(viral){
+
+  s.social.viral++;
+
+  s.stats.fame+=5;
+
+  addLog(
+   "Post kamu viral di RV-Gram."
+  );
+
+ }else{
+
+  s.stats.fame+=1;
+
+ }
+
+ checkAchievements();
+
+ save();
+
+ render();
+
 }
-function likePost(){const s=S();s.social.likes+=1;s.social.followers+=chance(15)?1:0;saveDB();toast("Liked.");render()}
-function commentPost(){const s=S();s.social.comments+=1;saveDB();toast("Komentar masuk.");render()}
-function sharePost(){const s=S();s.social.followers+=chance(30)?1:0;saveDB();toast("Post dibagikan.");render()}
+
+function likeSocial(){
+
+ const s=S();
+
+ s.social.likes++;
+
+ if(chance(15)){
+  s.social.followers++;
+ }
+
+ save();
+
+ showToast("Liked.");
+
+}
+
+function commentSocial(){
+
+ S().social.comments++;
+
+ save();
+
+ showToast("Comment added.");
+
+}
+
+function shareSocial(){
+
+ if(chance(30)){
+  S().social.followers++;
+ }
+
+ save();
+
+ showToast("Shared.");
+
+}
+
+/* -------------------------
+   PARTNERS
+------------------------- */
 
 function partnersScreen(){
+
  const s=S();
- const owned=s.partners;
+
  return `
+
  <div class="hero">
-  <div class="tag">540 PARTNER DATABASE</div>
+
+  <div class="tag">
+   540 PARTNER DATABASE
+  </div>
+
   <h1>Partner Gacha</h1>
-  <p class="muted">6 negara · 4 UR · 6 SSS · 10 SS · 15 S · 25 A · 30 B per negara.</p>
+
+  <p class="muted">
+   6 negara · 90 partner per negara.
+   Semua karakter di katalog ini adalah template fiktif
+   yang dapat diedit.
+  </p>
+
   <div class="row">
-   <span class="tag">Collection ${owned.length}/540</span>
-   <span class="tag">Cash ${money(s.economy.cash)}</span>
+
+   <span class="tag">
+    ${s.partners.length}/540
+   </span>
+
+   <span class="tag">
+    ${money(s.economy.cash)}
+   </span>
+
   </div>
- </div><br>
+
+ </div>
+
+ <br>
+
  <div class="grid g2">
+
   <div class="card">
+
    <h2>Gacha</h2>
-   <p class="muted">Gacha tidak menghapus partner lama. Duplicate memberikan affection bonus.</p>
+
+   <p class="muted small">
+    Duplicate memberikan affection dan trust.
+   </p>
+
    <div class="grid g2">
-    <button class="btn primary" onclick="gacha(1)">1 Pull · $1,000</button>
-    <button class="btn gold" onclick="gacha(10)">10 Pull · $9,000</button>
+
+    <button
+     class="btn primary"
+     onclick="gacha(1)"
+    >
+     1 Pull · $1,000
+    </button>
+
+    <button
+     class="btn gold"
+     onclick="gacha(10)"
+    >
+     10 Pull · $9,000
+    </button>
+
    </div>
+
   </div>
+
   <div class="card">
-   <h2>Rarity Rates</h2>
-   ${RARITIES.map(r=>`<div class="statline"><span>${r.id}</span><b>${r.weight}%</b></div>`).join("")}
-  </div>
- </div><br>
- <div class="between"><h2>Your Partners</h2><input style="max-width:260px" placeholder="Search..." oninput="filterPartners(this.value)"></div>
- <div id="partnerGrid" class="grid g3">${partnerCards(owned)}</div>`;
-}
-function partnerCards(arr){
- if(!arr.length)return `<div class="card"><p class="muted">Belum punya partner. Coba gacha.</p></div>`;
- return arr.map((p,i)=>`
-  <div class="card partnercard">
-   <div class="between">
-    <span class="tag ${p.rarity}">${p.rarity}</span>
-    <span class="small">${esc(p.countryName)}</span>
-   </div>
-   <br>
-   <div class="row">
-    <div class="avatar ${getBorder(p.borderId).cls}" style="width:70px;height:70px">
-     ${p.photo?`<img src="${p.photo}">`:`<span class="initial">${esc(p.name[0])}</span>`}
+
+   <h2>Rates</h2>
+
+   ${RARITIES.map(r=>`
+
+    <div class="statline">
+     <span>${r.id}</span>
+     <b>${r.weight}%</b>
     </div>
-    <div><h3>${esc(p.name)}</h3><div class="small muted">${esc(p.job)}</div><div class="small">Age ${p.age}</div></div>
-   </div>
-   <br>
-   <div class="statline"><span>Affection</span><b>${p.affection}</b></div>
-   <div class="bar"><i style="width:${p.affection}%"></i></div><br>
-   <button class="btn primary full" onclick="openPartner('${p.id}')">Open Profile</button>
-  </div>`).join("");
-}
-function filterPartners(q){
- const s=S(),x=q.toLowerCase();
- document.getElementById("partnerGrid").innerHTML=partnerCards(s.partners.filter(p=>
-  p.name.toLowerCase().includes(x)||p.countryName.toLowerCase().includes(x)||p.rarity.toLowerCase()===x));
+
+   `).join("")}
+
+  </div>
+
+ </div>
+
+ <br>
+
+ <div class="between">
+
+  <h2>Your Partners</h2>
+
+  <input
+   id="partnerSearch"
+   style="max-width:270px"
+   placeholder="Search partner..."
+   oninput="filterPartners(this.value)"
+  >
+
+ </div>
+
+ <div
+  id="partnerGrid"
+  class="grid g3"
+ >
+  ${partnerCards(s.partners)}
+ </div>
+
+ `
 }
 
-function gacha(n){
- const s=S(),cost=n===10?9000:1000*n;
- if(s.economy.cash<cost){toast("Cash tidak cukup.");return}
+function partnerCards(arr){
+
+ if(!arr.length){
+
+  return `
+   <div class="card">
+    <p class="muted">
+     Belum punya partner.
+    </p>
+   </div>
+  `
+ }
+
+ return arr.map(p=>`
+
+  <div class="card">
+
+   <div class="between">
+
+    <span class="tag ${p.rarity}">
+     ${p.rarity}
+    </span>
+
+    <span class="small muted">
+     ${esc(p.countryName)}
+    </span>
+
+   </div>
+
+   <br>
+
+   <div class="row">
+
+    <div class="avatar partnerphoto ${getBorder(p.borderId).cls}">
+
+     ${
+      p.photo
+      ? `<img src="${p.photo}">`
+      : `<span class="initial">${esc(p.name[0])}</span>`
+     }
+
+    </div>
+
+    <div>
+
+     <h3>
+      ${esc(p.name)}
+     </h3>
+
+     <div class="small muted">
+      ${esc(p.job)}
+     </div>
+
+     <div class="small">
+      Age ${p.age}
+     </div>
+
+    </div>
+
+   </div>
+
+   <br>
+
+   ${statBar("Affection",p.affection)}
+
+   <button
+    class="btn primary full"
+    onclick="openPartner('${p.id}')"
+   >
+    Open Profile
+   </button>
+
+  </div>
+
+ `).join("")
+}
+
+function filterPartners(query){
+
+ const s=S();
+
+ const q=query.toLowerCase();
+
+ document.getElementById("partnerGrid").innerHTML=
+  partnerCards(
+   s.partners.filter(p=>
+    p.name.toLowerCase().includes(q)||
+    p.countryName.toLowerCase().includes(q)||
+    p.rarity.toLowerCase().includes(q)
+   )
+  )
+
+}
+
+function gacha(count){
+
+ const s=S();
+
+ const cost=
+  count===10
+  ?9000
+  :1000;
+
+ if(s.economy.cash<cost){
+
+  showToast("Cash tidak cukup.");
+
+  return
+ }
+
  s.economy.cash-=cost;
+
  const results=[];
- for(let z=0;z<n;z++){
-  const p=rollPartner();
-  const owned=s.partners.find(x=>x.id===p.id);
+
+ for(let i=0;i<count;i++){
+
+  const rolled=rollPartner();
+
+  const owned=
+   s.partners.find(
+    p=>p.id===rolled.id
+   );
+
   if(owned){
-   owned.affection=clamp(owned.affection+8,0,100);
-   owned.trust=clamp(owned.trust+2,0,100);
-   results.push(`${p.rarity} ${p.name} DUP +affection`);
+
+   owned.affection=
+    clamp(
+     owned.affection+8,
+     0,
+     100
+    );
+
+   owned.trust=
+    clamp(
+     owned.trust+2,
+     0,
+     100
+    );
+
+   results.push(
+    `${rolled.rarity} · ${rolled.name} · DUP`
+   );
+
   }else{
-   const copy=JSON.parse(JSON.stringify(p));
-   copy.affection=10+Math.floor(Math.random()*10);
-   s.partners.push(copy);results.push(`${p.rarity} ${p.name}`);
+
+   const copy=
+    JSON.parse(
+     JSON.stringify(rolled)
+    );
+
+   copy.affection=
+    10+
+    Math.floor(Math.random()*10);
+
+   s.partners.push(copy);
+
+   results.push(
+    `${rolled.rarity} · ${rolled.name}`
+   );
+
+  }
+
+ }
+
+ addLog(
+  `Gacha ${count}x selesai.`
+ );
+
+ checkAchievements();
+
+ save();
+
+ modal=`
+
+ <div class="modalwrap">
+
+  <div class="modal">
+
+   <div class="between">
+
+    <h2>Gacha Results</h2>
+
+    <button
+     class="btn"
+     onclick="closeModal()"
+    >
+     Close
+    </button>
+
+   </div>
+
+   <br>
+
+   ${results.map(x=>`
+    <div class="item">
+     ${esc(x)}
+    </div>
+   `).join("")}
+
+  </div>
+
+ </div>
+
+ `;
+
+ render();
+
+}
+
+function rollPartner(){
+
+ let total=
+  RARITIES.reduce(
+   (a,b)=>a+b.weight,
+   0
+  );
+
+ let roll=Math.random()*total;
+
+ let selected="B";
+
+ for(const rarity of RARITIES){
+
+  roll-=rarity.weight;
+
+  if(roll<=0){
+
+   selected=rarity.id;
+
+   break
   }
  }
- addLog(`Gacha ${n}x: ${results.join(", ")}`);
- saveDB();
- modal=`<div class="modalwrap"><div class="modal">
-  <div class="between"><h2>Gacha Results</h2><button class="btn" onclick="modal=null;render()">Close</button></div>
-  ${results.map(x=>`<div class="item" style="margin-top:8px">${esc(x)}</div>`).join("")}
- </div></div>`;
- render();
+
+ return pick(
+  PARTNERS.filter(
+   p=>p.rarity===selected
+  )
+ )
 }
-function rollPartner(){
- let total=RARITIES.reduce((a,b)=>a+b.weight,0),r=Math.random()*total,rar="B";
- for(const x of RARITIES){r-=x.weight;if(r<=0){rar=x.id;break}}
- return pick(PARTNERS.filter(p=>p.rarity===rar));
-}
+
+/* -------------------------
+   PARTNER PROFILE
+------------------------- */
 
 function openPartner(id){
- const s=S(),p=s.partners.find(x=>x.id===id);if(!p)return;
- modal=`<div class="modalwrap"><div class="modal">
-  <div class="between">
-   <h2>${esc(p.name)}</h2><button class="btn" onclick="modal=null;render()">Close</button>
-  </div>
-  <div class="row">
-   <div class="avatar ${getBorder(p.borderId).cls}">
-    ${p.photo?`<img src="${p.photo}">`:`<span class="initial">${esc(p.name[0])}</span>`}
-   </div>
-   <div>
-    <span class="tag ${p.rarity}">${p.rarity}</span>
-    <p>${esc(p.countryName)} · ${p.age} · ${esc(p.job)}</p>
-    <p class="muted">${esc(p.personality)}</p>
-   </div>
-  </div>
-  <br>
-  ${relBar("Affection",p.affection)}
-  ${relBar("Trust",p.trust)}
-  ${relBar("Jealousy",p.jealousy)}
-  ${relBar("Happiness",p.happiness)}
-  <br>
-  <div class="grid g2">
-   <button class="btn cyan" onclick="partnerAction('${p.id}','chat')">Chat</button>
-   <button class="btn primary" onclick="partnerAction('${p.id}','date')">Date</button>
-   <button class="btn green" onclick="partnerAction('${p.id}','support')">Support Career</button>
-   <button class="btn red" onclick="partnerAction('${p.id}','argue')">Argue</button>
-   <button class="btn gold" onclick="marry('${p.id}')">Marriage</button>
-   <button class="btn" onclick="child('${p.id}')">Have Child</button>
-   <button class="btn" onclick="editPartner('${p.id}')">Edit Profile</button>
-   <button class="btn red" onclick="breakup('${p.id}')">Break Up</button>
-  </div>
-  <br><div class="notice">${esc(p.story[p.arc%p.story.length])}</div>
- </div></div>`;
- render();
-}
-function relBar(name,v){return `<div class="stat"><div class="statline"><span>${name}</span><b>${v}</b></div><div class="bar"><i style="width:${v}%"></i></div></div>`}
 
-function partnerAction(id,type){
- const s=S(),p=s.partners.find(x=>x.id===id);if(!p)return;
- if(type==="chat"){
-  p.affection=clamp(p.affection+(chance(75)?3:-1),0,100);p.trust=clamp(p.trust+1,0,100);
-  p.arc++;addLog(`Chat dengan ${p.name}.`);
- }else if(type==="date"){
-  if(s.economy.cash<500){toast("Date butuh $500.");return}
-  s.economy.cash-=500;p.affection=clamp(p.affection+8,0,100);p.happiness=clamp(p.happiness+7,0,100);
-  p.jealousy=clamp(p.jealousy-2,0,100);p.arc++;addLog(`Date bersama ${p.name}.`);
- }else if(type==="support"){
-  p.trust=clamp(p.trust+7,0,100);p.affection=clamp(p.affection+5,0,100);
-  s.stats.fame+=1;addLog(`Mendukung karier ${p.name}.`);
- }else if(type==="argue"){
-  p.affection=clamp(p.affection-8,0,100);p.trust=clamp(p.trust-5,0,100);p.jealousy=clamp(p.jealousy+10,0,100);
-  addLog(`Kamu bertengkar dengan ${p.name}.`);
+ const s=S();
+
+ const p=
+  s.partners.find(
+   x=>x.id===id
+  );
+
+ if(!p)return;
+
+ modal=`
+
+ <div class="modalwrap">
+
+  <div class="modal">
+
+   <div class="between">
+
+    <h2>
+     ${esc(p.name)}
+    </h2>
+
+    <button
+     class="btn"
+     onclick="closeModal()"
+    >
+     Close
+    </button>
+
+   </div>
+
+   <div class="row">
+
+    <div class="avatar ${getBorder(p.borderId).cls}">
+
+     ${
+      p.photo
+      ? `<img src="${p.photo}">`
+      : `<span class="initial">${esc(p.name[0])}</span>`
+     }
+
+    </div>
+
+    <div>
+
+     <span class="tag ${p.rarity}">
+      ${p.rarity}
+     </span>
+
+     <p>
+      ${esc(p.countryName)}
+      ·
+      Age ${p.age}
+      ·
+      ${esc(p.job)}
+     </p>
+
+     <p class="muted">
+      ${esc(p.personality)}
+     </p>
+
+     <span class="tag">
+      ${p.status}
+     </span>
+
+     ${
+      p.married
+      ? `<span class="tag">MARRIED</span>`
+      :""
+     }
+
+    </div>
+
+   </div>
+
+   <br>
+
+   ${statBar("Affection",p.affection)}
+   ${statBar("Trust",p.trust)}
+   ${statBar("Jealousy",p.jealousy)}
+   ${statBar("Happiness",p.happiness)}
+
+   <br>
+
+   <div class="notice">
+    ${esc(p.story[p.arc%p.story.length])}
+   </div>
+
+   <br>
+
+   <div class="grid g2">
+
+    <button
+     class="btn cyan"
+     onclick="partnerAction('${p.id}','chat')"
+    >
+     Chat
+    </button>
+
+    <button
+     class="btn primary"
+     onclick="partnerAction('${p.id}','date')"
+    >
+     Date · $500
+    </button>
+
+    <button
+     class="btn green"
+     onclick="partnerAction('${p.id}','support')"
+    >
+     Support
+    </button>
+
+    <button
+     class="btn red"
+     onclick="partnerAction('${p.id}','argue')"
+    >
+     Argue
+    </button>
+
+    <button
+     class="btn gold"
+     onclick="marryPartner('${p.id}')"
+    >
+     Marriage · $10K
+    </button>
+
+    <button
+     class="btn"
+     onclick="haveChild('${p.id}')"
+    >
+     Have Child · $5K
+    </button>
+
+    <button
+     class="btn"
+     onclick="editPartner('${p.id}')"
+    >
+     Edit Profile
+    </button>
+
+    <button
+     class="btn red"
+     onclick="breakupPartner('${p.id}')"
+    >
+     Break Up
+    </button>
+
+   </div>
+
+  </div>
+
+ </div>
+
+ `;
+
+ render();
+
+}
+
+function closeModal(){
+
+ modal="";
+
+ render();
+
+}
+
+/* -------------------------
+   RELATIONSHIP
+------------------------- */
+
+function partnerAction(id,action){
+
+ const s=S();
+
+ const p=
+  s.partners.find(
+   x=>x.id===id
+  );
+
+ if(!p)return;
+
+ if(action==="chat"){
+
+  p.affection=
+   clamp(
+    p.affection+
+    (chance(78)?3:-1),
+    0,
+    100
+   );
+
+  p.trust=
+   clamp(
+    p.trust+1,
+    0,
+    100
+   );
+
+  p.arc++;
+
+  addLog(
+   `Chat dengan ${p.name}.`
+  );
+
  }
- p.status=p.married?"married":p.affection>=50?"dating":"single";
- saveDB();openPartner(id);
+
+ if(action==="date"){
+
+  if(s.economy.cash<500){
+
+   showToast("Date membutuhkan $500.");
+
+   return
+  }
+
+  s.economy.cash-=500;
+
+  p.affection=
+   clamp(
+    p.affection+8,
+    0,
+    100
+   );
+
+  p.trust=
+   clamp(
+    p.trust+4,
+    0,
+    100
+   );
+
+  p.happiness=
+   clamp(
+    p.happiness+7,
+    0,
+    100
+   );
+
+  p.jealousy=
+   clamp(
+    p.jealousy-2,
+    0,
+    100
+   );
+
+  p.arc++;
+
+  addLog(
+   `Date bersama ${p.name}.`
+  );
+
+ }
+
+ if(action==="support"){
+
+  p.affection=
+   clamp(
+    p.affection+5,
+    0,
+    100
+   );
+
+  p.trust=
+   clamp(
+    p.trust+7,
+    0,
+    100
+   );
+
+  s.stats.fame++;
+
+  addLog(
+   `Kamu mendukung karier ${p.name}.`
+  );
+
+ }
+
+ if(action==="argue"){
+
+  p.affection=
+   clamp(
+    p.affection-8,
+    0,
+    100
+   );
+
+  p.trust=
+   clamp(
+    p.trust-5,
+    0,
+    100
+   );
+
+  p.jealousy=
+   clamp(
+    p.jealousy+10,
+    0,
+    100
+   );
+
+  addLog(
+   `Kamu bertengkar dengan ${p.name}.`
+  );
+
+ }
+
+ p.status=
+  p.married
+  ?"married"
+  :p.affection>=50
+  ?"dating"
+  :"single";
+
+ save();
+
+ openPartner(id);
+
 }
-function marry(id){
- const s=S(),p=s.partners.find(x=>x.id===id);
+
+function marryPartner(id){
+
+ const s=S();
+
+ const p=
+  s.partners.find(
+   x=>x.id===id
+  );
+
  if(!p)return;
- if(p.married){toast("Sudah menikah.");return}
- if(p.affection<80||p.trust<65){toast("Butuh Affection 80 dan Trust 65.");return}
- if(s.economy.cash<10000){toast("Wedding budget minimal $10K.");return}
- s.economy.cash-=10000;p.married=true;p.status="married";p.affection=100;p.happiness=100;
- s.stats.happiness=clamp(s.stats.happiness+12,0,100);s.stats.fame+=5;
- addLog(`Menikah dengan ${p.name}.`);checkAchievements();saveDB();openPartner(id);
+
+ if(p.married){
+
+  showToast("Partner sudah menikah denganmu.");
+
+  return
+ }
+
+ if(
+  p.affection<80||
+  p.trust<65
+ ){
+
+  showToast(
+   "Butuh Affection 80 dan Trust 65."
+  );
+
+  return
+ }
+
+ if(s.economy.cash<10000){
+
+  showToast(
+   "Wedding membutuhkan $10K."
+  );
+
+  return
+ }
+
+ s.economy.cash-=10000;
+
+ p.married=true;
+ p.status="married";
+ p.affection=100;
+ p.trust=100;
+ p.happiness=100;
+
+ s.stats.happiness=
+  clamp(
+   s.stats.happiness+12,
+   0,
+   100
+  );
+
+ s.stats.fame+=5;
+
+ addLog(
+  `Menikah dengan ${p.name}.`
+ );
+
+ checkAchievements();
+
+ save();
+
+ openPartner(id);
+
 }
-function child(id){
- const s=S(),p=s.partners.find(x=>x.id===id);
+
+function haveChild(id){
+
+ const s=S();
+
+ const p=
+  s.partners.find(
+   x=>x.id===id
+  );
+
  if(!p)return;
- if(p.affection<75){toast("Affection minimal 75.");return}
- if(s.economy.cash<5000){toast("Persiapan keluarga butuh $5K.");return}
+
+ if(p.affection<75){
+
+  showToast(
+   "Affection minimal 75."
+  );
+
+  return
+ }
+
+ if(s.economy.cash<5000){
+
+  showToast(
+   "Family event membutuhkan $5K."
+  );
+
+  return
+ }
+
  s.economy.cash-=5000;
- const child={id:uid("child"),name:"Baby "+pick(["Ray","Mia","Kai","Ari","Noa","Leo"]),age:0,parent:p.id,parentName:p.name,health:80,happiness:75,education:0,talent:Math.floor(40+Math.random()*40)};
- s.children.push(child);p.children.push(child.id);p.affection=clamp(p.affection+5,0,100);
- addLog(`Anak baru lahir bersama ${p.name}.`);checkAchievements();saveDB();openPartner(id);
+
+ const child={
+  id:uid("child"),
+  name:
+   "Baby "+
+   pick([
+    "Ray","Mia","Kai",
+    "Ari","Noa","Leo",
+    "Rin","Sky"
+   ]),
+  age:0,
+  parent:p.id,
+  parentName:p.name,
+  health:80,
+  happiness:75,
+  education:0,
+  talent:
+   40+
+   Math.floor(Math.random()*40)
+ };
+
+ s.children.push(child);
+
+ p.children.push(child.id);
+
+ p.affection=
+  clamp(
+   p.affection+5,
+   0,
+   100
+  );
+
+ addLog(
+  `Anak baru lahir bersama ${p.name}.`
+ );
+
+ checkAchievements();
+
+ save();
+
+ openPartner(id);
+
 }
-function breakup(id){
- const s=S(),p=s.partners.find(x=>x.id===id);if(!p)return;
- if(p.married){toast("Marriage tidak bisa diputus lewat tombol ini.");return}
- p.status="ex";p.affection=clamp(p.affection-20,0,100);p.trust=clamp(p.trust-20,0,100);
- addLog(`Hubungan dengan ${p.name} berakhir.`);
- saveDB();openPartner(id);
+
+function breakupPartner(id){
+
+ const s=S();
+
+ const p=
+  s.partners.find(
+   x=>x.id===id
+  );
+
+ if(!p)return;
+
+ if(p.married){
+
+  showToast(
+   "Marriage tidak bisa di-breakup."
+  );
+
+  return
+ }
+
+ p.status="ex";
+
+ p.affection=
+  clamp(
+   p.affection-20,
+   0,
+   100
+  );
+
+ p.trust=
+  clamp(
+   p.trust-20,
+   0,
+   100
+  );
+
+ addLog(
+  `Hubungan dengan ${p.name} berakhir.`
+ );
+
+ save();
+
+ openPartner(id);
+
 }
+
+/* -------------------------
+   EDIT PARTNER
+------------------------- */
 
 function editPartner(id){
- const p=S().partners.find(x=>x.id===id);if(!p)return;
- modal=`<div class="modalwrap"><div class="modal">
- <div class="between"><h2>Edit Partner</h2><button class="btn" onclick="modal=null;render()">Close</button></div>
- <div class="formgrid">
-  <div><label>Name</label><input id="epname" value="${esc(p.name)}"></div>
-  <div><label>Age</label><input id="epage" type="number" value="${p.age}"></div>
-  <div><label>Country</label><select id="epcountry">${COUNTRIES.map(c=>`<option ${p.country===c.id?"selected":""} value="${c.id}">${c.name}</option>`).join("")}</select></div>
-  <div><label>Occupation</label><select id="epjob">${JOBS.map(j=>`<option ${p.job===j?"selected":""}>${j}</option>`).join("")}</select></div>
-  <div><label>Birthdate</label><input id="epbirth" type="date" value="${p.birthdate}"></div>
-  <div><label>Personality</label><select id="eppers">${PERSONALITIES.map(x=>`<option ${p.personality===x?"selected":""}>${x}</option>`).join("")}</select></div>
-  <div class="fullrow"><label>Notes</label><textarea id="epnotes">${esc(p.notes||"")}</textarea></div>
-  <div class="fullrow"><label>Partner Photo</label><input id="epphoto" type="file" accept="image/*"></div>
- </div><br>
- <button class="btn primary full" onclick="savePartnerEdit('${id}')">Save Partner</button>
- </div></div>`;
+
+ const p=
+  S().partners.find(
+   x=>x.id===id
+  );
+
+ if(!p)return;
+
+ modal=`
+
+ <div class="modalwrap">
+
+  <div class="modal">
+
+   <div class="between">
+
+    <h2>Edit Partner</h2>
+
+    <button
+     class="btn"
+     onclick="closeModal()"
+    >
+     Close
+    </button>
+
+   </div>
+
+   <div class="formgrid">
+
+    <div>
+     <label>Name</label>
+     <input
+      id="editPName"
+      value="${esc(p.name)}"
+     >
+    </div>
+
+    <div>
+     <label>Age</label>
+     <input
+      id="editPAge"
+      type="number"
+      value="${p.age}"
+     >
+    </div>
+
+    <div>
+     <label>Country</label>
+
+     <select id="editPCountry">
+
+      ${COUNTRIES.map(c=>`
+       <option
+        value="${c.id}"
+        ${c.id===p.country?"selected":""}
+       >
+        ${c.name}
+       </option>
+      `).join("")}
+
+     </select>
+
+    </div>
+
+    <div>
+     <label>Occupation</label>
+
+     <select id="editPJob">
+
+      ${JOBS.map(j=>`
+       <option
+        ${j===p.job?"selected":""}
+       >
+        ${j}
+       </option>
+      `).join("")}
+
+     </select>
+
+    </div>
+
+    <div>
+     <label>Birthdate</label>
+     <input
+      id="editPBirth"
+      type="date"
+      value="${p.birthdate}"
+     >
+    </div>
+
+    <div>
+     <label>Personality</label>
+
+     <select id="editPPersonality">
+
+      ${PERSONALITIES.map(x=>`
+       <option
+        ${x===p.personality?"selected":""}
+       >
+        ${x}
+       </option>
+      `).join("")}
+
+     </select>
+
+    </div>
+
+    <div>
+     <label>Affection</label>
+     <input
+      id="editPAffection"
+      type="number"
+      min="0"
+      max="100"
+      value="${p.affection}"
+     >
+    </div>
+
+    <div>
+     <label>Trust</label>
+     <input
+      id="editPTrust"
+      type="number"
+      min="0"
+      max="100"
+      value="${p.trust}"
+     >
+    </div>
+
+    <div>
+     <label>Jealousy</label>
+     <input
+      id="editPJealousy"
+      type="number"
+      min="0"
+      max="100"
+      value="${p.jealousy}"
+     >
+    </div>
+
+    <div>
+     <label>Happiness</label>
+     <input
+      id="editPHappiness"
+      type="number"
+      min="0"
+      max="100"
+      value="${p.happiness}"
+     >
+    </div>
+
+    <div class="fullrow">
+     <label>Notes</label>
+     <textarea id="editPNotes">${esc(p.notes||"")}</textarea>
+    </div>
+
+    <div class="fullrow">
+     <label>Photo</label>
+     <input
+      id="editPPhoto"
+      type="file"
+      accept="image/*"
+     >
+    </div>
+
+   </div>
+
+   <br>
+
+   <button
+    class="btn primary full"
+    onclick="savePartnerEdit('${id}')"
+   >
+    Save Partner
+   </button>
+
+  </div>
+
+ </div>
+
+ `;
+
  render();
+
 }
+
 async function savePartnerEdit(id){
- const s=S(),p=s.partners.find(x=>x.id===id);if(!p)return;
- p.name=document.getElementById("epname").value.trim()||p.name;
- p.age=+document.getElementById("epage").value||p.age;
- p.country=document.getElementById("epcountry").value;
- p.countryName=COUNTRIES.find(c=>c.id===p.country)?.name||p.country;
- p.job=document.getElementById("epjob").value;p.birthdate=document.getElementById("epbirth").value;
- p.personality=document.getElementById("eppers").value;p.notes=document.getElementById("epnotes").value;
- const file=document.getElementById("epphoto").files[0];
- if(file)p.photo=await compressImage(file);
- saveDB();toast("Partner profile updated.");openPartner(id);
+
+ const s=S();
+
+ const p=
+  s.partners.find(
+   x=>x.id===id
+  );
+
+ if(!p)return;
+
+ p.name=
+  document.getElementById("editPName").value.trim()||
+  p.name;
+
+ p.age=
+  +document.getElementById("editPAge").value||
+  p.age;
+
+ p.country=
+  document.getElementById("editPCountry").value;
+
+ p.countryName=
+  COUNTRIES.find(
+   x=>x.id===p.country
+  )?.name||
+  p.country;
+
+ p.job=
+  document.getElementById("editPJob").value;
+
+ p.birthdate=
+  document.getElementById("editPBirth").value;
+
+ p.personality=
+  document.getElementById("editPPersonality").value;
+
+ p.affection=
+  clamp(
+   +document.getElementById("editPAffection").value,
+   0,
+   100
+  );
+
+ p.trust=
+  clamp(
+   +document.getElementById("editPTrust").value,
+   0,
+   100
+  );
+
+ p.jealousy=
+  clamp(
+   +document.getElementById("editPJealousy").value,
+   0,
+   100
+  );
+
+ p.happiness=
+  clamp(
+   +document.getElementById("editPHappiness").value,
+   0,
+   100
+  );
+
+ p.notes=
+  document.getElementById("editPNotes").value;
+
+ const file=
+  document.getElementById("editPPhoto").files[0];
+
+ if(file){
+  p.photo=
+   await compressImage(file);
+ }
+
+ save();
+
+ showToast("Partner updated.");
+
+ openPartner(id);
+
 }
+
+/* -------------------------
+   RELATIONSHIP PAGE
+------------------------- */
 
 function relationshipScreen(){
+
  const s=S();
+
  return `
- <div><h1>Relationship HQ</h1><p class="muted">Setiap partner punya relationship state sendiri.</p></div>
+
+ <div>
+  <h1>Relationship HQ</h1>
+  <p class="muted">
+   Affection, trust, jealousy, happiness dan status.
+  </p>
+ </div>
+
  <div class="grid g3">
-  ${s.partners.map(p=>`
-   <div class="card">
-    <div class="between"><b>${esc(p.name)}</b><span class="tag ${p.rarity}">${p.rarity}</span></div>
-    <div class="small muted">${p.status} · ${p.married?"Married":"Not married"}</div>
-    <br>${relBar("Affection",p.affection)}
-    <button class="btn primary full" onclick="openPartner('${p.id}')">Relationship</button>
-   </div>`).join("")||`<div class="card"><p>Belum punya partner.</p></div>`}
- </div>`;
+
+  ${
+   s.partners.length
+   ? s.partners.map(p=>`
+
+    <div class="card">
+
+     <div class="between">
+
+      <b>${esc(p.name)}</b>
+
+      <span class="tag ${p.rarity}">
+       ${p.rarity}
+      </span>
+
+     </div>
+
+     <div class="small muted">
+      ${p.status}
+      ·
+      ${p.married?"Married":"Not married"}
+     </div>
+
+     <br>
+
+     ${statBar("Affection",p.affection)}
+     ${statBar("Trust",p.trust)}
+
+     <button
+      class="btn primary full"
+      onclick="openPartner('${p.id}')"
+     >
+      Open Relationship
+     </button>
+
+    </div>
+
+   `).join("")
+   :
+   `
+    <div class="card">
+     <h2>No relationship yet.</h2>
+     <p class="muted">
+      Pergi ke Partner Gacha.
+     </p>
+    </div>
+   `
+  }
+
+ </div>
+
+ `
+
 }
+
+/* -------------------------
+   FAMILY
+------------------------- */
 
 function familyScreen(){
+
  const s=S();
+
  return `
- <div><h1>Family</h1><p class="muted">Anak bisa ada dengan atau tanpa pernikahan selama affection memenuhi syarat.</p></div>
+
+ <div>
+  <h1>Family</h1>
+  <p class="muted">
+   Keluarga berkembang mengikuti pilihanmu.
+  </p>
+ </div>
+
  <div class="grid g4">
-  ${kpi("Children",s.children.length,"Family members")}
-  ${kpi("Married Partners",s.partners.filter(x=>x.married).length,"Spouses")}
-  ${kpi("Family Happiness",Math.round(s.children.reduce((a,x)=>a+x.happiness,0)/(s.children.length||1)),"Average")}
-  ${kpi("Family Wealth",money(s.economy.cash+s.economy.bank),"Available")}
- </div><br>
+
+  ${kpi("Children",s.children.length,"Members")}
+  ${kpi("Spouses",s.partners.filter(x=>x.married).length,"Married")}
+  ${kpi("Family Health",
+   Math.round(
+    s.children.reduce((a,c)=>a+c.health,0)/
+    (s.children.length||1)
+   ),
+   "Average"
+  )}
+
+  ${kpi("Family Cash",money(s.economy.cash+s.economy.bank),"Wealth")}
+
+ </div>
+
+ <br>
+
  <div class="grid g3">
- ${s.children.map((c,i)=>`
-  <div class="card">
-   <div class="between"><h2>${esc(c.name)}</h2><span class="tag">Age ${c.age}</span></div>
-   <p class="muted">Parent: ${esc(c.parentName)}</p>
-   ${statBar("Health",c.health)}${statBar("Happiness",c.happiness)}${statBar("Education",c.education)}${statBar("Talent",c.talent)}
-   <div class="grid g2">
-    <button class="btn" onclick="raiseChild('${c.id}','study')">Study</button>
-    <button class="btn green" onclick="raiseChild('${c.id}','play')">Play</button>
-    <button class="btn cyan" onclick="raiseChild('${c.id}','sport')">Sport</button>
-    <button class="btn gold" onclick="raiseChild('${c.id}','gift')">Gift</button>
-   </div>
-  </div>`).join("")||`<div class="card"><h2>Family belum terbentuk</h2><p class="muted">Build a relationship first.</p></div>`}
- </div>`;
+
+  ${
+   s.children.length
+   ?
+   s.children.map(c=>`
+
+    <div class="card">
+
+     <div class="between">
+
+      <h2>
+       ${esc(c.name)}
+      </h2>
+
+      <span class="tag">
+       Age ${c.age}
+      </span>
+
+     </div>
+
+     <p class="muted small">
+      Parent:
+      ${esc(c.parentName)}
+     </p>
+
+     ${statBar("Health",c.health)}
+     ${statBar("Happiness",c.happiness)}
+     ${statBar("Education",c.education)}
+     ${statBar("Talent",c.talent)}
+
+     <div class="grid g2">
+
+      <button
+       class="btn"
+       onclick="raiseChild('${c.id}','study')"
+      >
+       Study
+      </button>
+
+      <button
+       class="btn green"
+       onclick="raiseChild('${c.id}','play')"
+      >
+       Play
+      </button>
+
+      <button
+       class="btn cyan"
+       onclick="raiseChild('${c.id}','sport')"
+      >
+       Sport
+      </button>
+
+      <button
+       class="btn gold"
+       onclick="raiseChild('${c.id}','gift')"
+      >
+       Gift
+      </button>
+
+     </div>
+
+    </div>
+
+   `).join("")
+   :
+   `
+    <div class="card">
+     <h2>No children yet.</h2>
+     <p class="muted">
+      Bangun relationship dan family.
+     </p>
+    </div>
+   `
+  }
+
+ </div>
+
+ `
+
 }
-function raiseChild(id,type){
- const s=S(),c=s.children.find(x=>x.id===id);if(!c)return;
- if(type==="study")c.education=clamp(c.education+5,0,100);
- if(type==="play")c.happiness=clamp(c.happiness+7,0,100);
- if(type==="sport")c.health=clamp(c.health+5,0,100);c.talent=clamp(c.talent+(chance(35)?2:0),0,100);
- if(type==="gift"){
-  if(s.economy.cash<500){toast("Gift membutuhkan $500.");return}
-  s.economy.cash-=500;c.happiness=clamp(c.happiness+10,0,100);
+
+function raiseChild(id,action){
+
+ const s=S();
+
+ const c=
+  s.children.find(
+   x=>x.id===id
+  );
+
+ if(!c)return;
+
+ if(action==="study"){
+
+  c.education=
+   clamp(
+    c.education+5,
+    0,
+    100
+   );
+
  }
- addLog(`Mengurus ${c.name}.`);saveDB();render();
+
+ if(action==="play"){
+
+  c.happiness=
+   clamp(
+    c.happiness+7,
+    0,
+    100
+   );
+
+ }
+
+ if(action==="sport"){
+
+  c.health=
+   clamp(
+    c.health+5,
+    0,
+    100
+   );
+
+  c.talent=
+   clamp(
+    c.talent+(chance(35)?2:0),
+    0,
+    100
+   );
+
+ }
+
+ if(action==="gift"){
+
+  if(s.economy.cash<500){
+
+   showToast("Gift membutuhkan $500.");
+
+   return
+  }
+
+  s.economy.cash-=500;
+
+  c.happiness=
+   clamp(
+    c.happiness+10,
+    0,
+    100
+   );
+
+ }
+
+ addLog(
+  `Mengurus ${c.name}.`
+ );
+
+ save();
+
+ render();
+
 }
+
+/* -------------------------
+   INVENTORY
+------------------------- */
 
 function inventoryScreen(){
+
  const s=S();
+
  return `
- <div><h1>Inventory</h1><p class="muted">Border, items, gifts, badges, dan collectible.</p></div>
+
+ <div>
+  <h1>Inventory</h1>
+  <p class="muted">
+   Border, items, gifts dan badges.
+  </p>
+ </div>
+
  <div class="grid g3">
+
   <div class="card">
-   <h2>Avatar Border</h2>
+
+   <h2>Avatar Borders</h2>
+
    <div class="list">
+
     ${BORDERS.map(b=>{
-      const own=s.inventory.borders.includes(b.id);
-      return `<div class="item">
-       <div class="between"><b>${b.name}</b>${own?"<span class='savebadge'>OWNED</span>":"<span class='muted'>LOCKED</span>"}</div>
-       <div class="small muted">${b.desc}</div><br>
-       ${own?`<button class="btn ${s.player.borderId===b.id?"green":"primary"}" onclick="equipBorder('${b.id}')">${s.player.borderId===b.id?"Equipped":"Equip"}</button>`:""}
-      </div>`;
+
+     const owned=
+      s.inventory.borders.includes(b.id);
+
+     return `
+
+      <div class="item">
+
+       <div class="between">
+
+        <b>${b.name}</b>
+
+        ${
+         owned
+         ? `<span class="tag">OWNED</span>`
+         : `<span class="muted tiny">LOCKED</span>`
+        }
+
+       </div>
+
+       <div class="small muted">
+        ${
+         b.need
+         ? `OVR ${b.need}+`
+         : "Special"
+        }
+       </div>
+
+       ${
+        owned
+        ?
+        `<br>
+         <button
+          class="btn ${
+           s.player.borderId===b.id
+           ?"green"
+           :"primary"
+          }"
+          onclick="equipBorder('${b.id}')"
+         >
+          ${
+           s.player.borderId===b.id
+           ?"Equipped"
+           :"Equip"
+          }
+         </button>`
+        :""
+       }
+
+      </div>
+
+     `
+
     }).join("")}
+
    </div>
+
   </div>
-  <div class="card"><h2>Items</h2><div class="list">${s.inventory.items.map(x=>`<div class="item">${esc(x)}</div>`).join("")}</div></div>
-  <div class="card"><h2>Gifts</h2><div class="list">${s.inventory.gifts.map(x=>`<div class="item">${esc(x)}</div>`).join("")||'<div class="muted">No gifts yet.</div>'}</div></div>
- </div>`;
-}
-function equipBorder(id){
- const s=S();if(!s.inventory.borders.includes(id)){toast("Border belum unlocked.");return}
- s.player.borderId=id;saveDB();render();toast("Border equipped.");
+
+  <div class="card">
+
+   <h2>Items</h2>
+
+   <div class="list">
+
+    ${
+     s.inventory.items
+     .map(x=>`
+      <div class="item">
+       ${esc(x)}
+      </div>
+     `)
+     .join("")
+    }
+
+   </div>
+
+  </div>
+
+  <div class="card">
+
+   <h2>Gifts</h2>
+
+   <div class="list">
+
+    ${
+     s.inventory.gifts.length
+     ?
+     s.inventory.gifts.map(x=>`
+      <div class="item">
+       ${esc(x)}
+      </div>
+     `).join("")
+     :
+     `<div class="muted">
+       No gifts.
+      </div>`
+    }
+
+   </div>
+
+  </div>
+
+ </div>
+
+ `
+
 }
 
-const ACH=[
- ["first_goal","First Goal","Cetak gol pertama"],
- ["millionaire","Millionaire","Punya $1,000,000 cash"],
- ["viral","Viral","Dapat viral moment"],
- ["married","Married","Menikah"],
- ["parent","Parent","Punya anak"],
- ["ovr80","Elite","OVR 80+"],
- ["ovr90","Superstar","OVR 90+"],
- ["collector","Collector","Punya 10 partner"],
- ["ur","UR Hunter","Punya partner UR"],
- ["empire","Business Tycoon","Punya 3 business"],
- ["goat","GOAT","OVR 99"]
-];
-function checkAchievements(){
- const s=S(),o=currentOvr();
- const conditions={
-  first_goal:s.football.goals>=1,millionaire:s.economy.cash>=1000000,viral:s.social.viral>=1,
-  married:s.partners.some(p=>p.married),parent:s.children.length>=1,ovr80:o>=80,ovr90:o>=90,
-  collector:s.partners.length>=10,ur:s.partners.some(p=>p.rarity==="UR"),
-  empire:s.economy.businesses.length>=3,goat:o>=99
- };
- for(const [id,name,desc] of ACH){
-  if(conditions[id]&&!s.achievements.includes(id)){
-   s.achievements.push(id);s.economy.cash+=5000;s.stats.fame+=2;
-   addLog(`Achievement unlocked: ${name}. Reward $5K.`);
-  }
- }
-}
-function achievementsScreen(){
+function equipBorder(id){
+
  const s=S();
- return `
- <div><h1>Achievements</h1><p class="muted">${s.achievements.length}/${ACH.length} unlocked.</p></div>
- <div class="grid g3">${ACH.map(a=>{
-  const yes=s.achievements.includes(a[0]);
-  return `<div class="card ${yes?"success":""}">
-   <div class="between"><h3>${a[1]}</h3><span>${yes?"UNLOCKED":"LOCKED"}</span></div>
-   <p class="muted">${a[2]}</p>
-  </div>`;
- }).join("")}</div>`;
+
+ if(!s.inventory.borders.includes(id)){
+
+  showToast("Border belum unlocked.");
+
+  return
+ }
+
+ s.player.borderId=id;
+
+ save();
+
+ render();
+
 }
+
+/* -------------------------
+   ACHIEVEMENTS
+------------------------- */
+
+function checkAchievements(){
+
+ const s=S();
+
+ const conditions={
+
+  first_goal:s.football.goals>=1,
+
+  five_goals:s.football.goals>=5,
+
+  ten_goals:s.football.goals>=10,
+
+  millionaire:s.economy.cash>=1000000,
+
+  viral:s.social.viral>=1,
+
+  married:s.partners.some(x=>x.married),
+
+  parent:s.children.length>=1,
+
+  collector:s.partners.length>=10,
+
+  urhunter:s.partners.some(x=>x.rarity==="UR"),
+
+  elite:OVR()>=80,
+
+  superstar:OVR()>=90,
+
+  goat:OVR()>=99,
+
+  business:s.economy.businesses.length>=3,
+
+  empire:s.economy.businesses.length>=BUSINESSES.length,
+
+  followers:s.social.followers>=1000000,
+
+  trophy:s.football.trophies>=1
+
+ };
+
+ for(const a of ACHIEVEMENTS){
+
+  const id=a[0];
+
+  if(
+   conditions[id]&&
+   !s.achievements.includes(id)
+  ){
+
+   s.achievements.push(id);
+
+   s.economy.cash+=5000;
+
+   s.stats.fame+=2;
+
+   addLog(
+    `Achievement unlocked: ${a[1]}`
+   );
+
+  }
+
+ }
+
+ autoBorders();
+
+}
+
+function achievementsScreen(){
+
+ const s=S();
+
+ return `
+
+ <div>
+  <h1>Achievements</h1>
+  <p class="muted">
+   ${s.achievements.length}/${ACHIEVEMENTS.length}
+  </p>
+ </div>
+
+ <div class="grid g3">
+
+  ${ACHIEVEMENTS.map(a=>{
+
+   const unlocked=
+    s.achievements.includes(a[0]);
+
+   return `
+
+    <div class="card ${
+     unlocked
+     ?"success"
+     :""
+    }">
+
+     <div class="between">
+
+      <h3>${a[1]}</h3>
+
+      <span class="tiny">
+       ${unlocked?"UNLOCKED":"LOCKED"}
+      </span>
+
+     </div>
+
+     <p class="muted small">
+      ${a[2]}
+     </p>
+
+    </div>
+
+   `
+
+  }).join("")}
+
+ </div>
+
+ `
+
+}
+
+/* -------------------------
+   NEWS
+------------------------- */
 
 function newsScreen(){
+
  const s=S();
+
  return `
- <div><h1>RV News Network</h1><p class="muted">News, rumors, fan accounts, hate accounts, sponsor buzz, transfer gossip.</p></div>
+
+ <div>
+  <h1>RV News Network</h1>
+  <p class="muted">
+   Transfer rumors, celebrity buzz, fan accounts,
+   sponsor stories dan world events.
+  </p>
+ </div>
+
  <div class="grid g2">
-  <div class="card"><h2>Latest</h2><div class="list">${s.news.concat([
-   {title:"RV News: Dunia football sedang bergerak."},
-   {title:"Insider: beberapa sponsor menyiapkan campaign besar."}
-  ]).slice(0,12).map(n=>`<div class="item"><b>${esc(n.title)}</b><div class="small muted">RV Network</div></div>`).join("")}</div></div>
+
   <div class="card">
-   <h2>Rumor Generator</h2>
-   <button class="btn primary full" onclick="generateRumor()">Generate Rumor</button><br><br>
-   <div id="rumorBox" class="notice">Klik tombol untuk membuat rumor dunia RV.</div>
+
+   <h2>Latest</h2>
+
+   <div class="list">
+
+    ${
+     s.news.concat([
+      {title:"RV News: dunia football terus bergerak."},
+      {title:"Sponsor global mulai mencari wajah baru."},
+      {title:"Fans menunggu kejutan dari transfer window."}
+     ])
+     .slice(0,15)
+     .map(n=>`
+      <div class="item">
+       <b>${esc(n.title)}</b>
+       <div class="tiny muted">
+        RV Network
+       </div>
+      </div>
+     `)
+     .join("")
+    }
+
+   </div>
+
   </div>
- </div>`;
+
+  <div class="card">
+
+   <h2>Rumor Generator</h2>
+
+   <button
+    class="btn primary full"
+    onclick="generateRumor()"
+   >
+    Generate Rumor
+   </button>
+
+   <br><br>
+
+   <div
+    id="rumorBox"
+    class="notice"
+   >
+    Dunia RV sedang menunggu rumor berikutnya.
+   </div>
+
+  </div>
+
+ </div>
+
+ `
+
 }
+
 function generateRumor(){
+
  const s=S();
- const target=pick(s.partners.length?s.partners.map(x=>x.name):["seorang superstar"]);
+
+ const target=
+  s.partners.length
+  ?pick(s.partners).name
+  :"a rising superstar";
+
  const rumors=[
   `${target} terlihat dekat dengan proyek baru.`,
-  `Fans berspekulasi tentang kolaborasi besar yang melibatkan ${target}.`,
+  `Fans berspekulasi tentang kolaborasi besar ${target}.`,
   `Rumor transfer kembali menyeret nama ${target}.`,
-  `Netizen memperdebatkan keputusan terbaru ${target}.`
+  `Netizen memperdebatkan keputusan terbaru ${target}.`,
+  `Sebuah sponsor dikabarkan tertarik dengan ${target}.`
  ];
- const r=pick(rumors);s.news.unshift({title:r});addLog("Sebuah rumor masuk ke RV News.");
- saveDB();
- document.getElementById("rumorBox").textContent=r;
+
+ const rumor=pick(rumors);
+
+ s.news.unshift({
+  title:rumor
+ });
+
+ addLog(
+  "Sebuah rumor baru muncul."
+ );
+
+ save();
+
+ render();
+
+ const box=document.getElementById("rumorBox");
+
+ if(box){
+  box.textContent=rumor;
+ }
+
 }
+
+/* -------------------------
+   EVENTS
+------------------------- */
+
+function randomEvent(){
+
+ const s=S();
+
+ if(!chance(18))return;
+
+ const events=[
+  {
+   title:"Sponsor Surprise",
+   text:"Sebuah brand kecil tertarik dengan image kamu.",
+   action:()=>{
+    s.economy.cash+=1500;
+    s.stats.fame+=2;
+   }
+  },
+  {
+   title:"Fan Celebration",
+   text:"Fans membuat campaign dukungan.",
+   action:()=>{
+    s.social.followers+=300;
+    s.social.likes+=500;
+   }
+  },
+  {
+   title:"Training Inspiration",
+   text:"Kamu menemukan metode latihan baru.",
+   action:()=>{
+    const stat=pick(Object.keys(s.football.stats));
+    s.football.stats[stat]=
+     clamp(
+      s.football.stats[stat]+1,
+      0,
+      99
+     );
+   }
+  },
+  {
+   title:"Luxury Temptation",
+   text:"Kamu menemukan barang mewah.",
+   action:()=>{
+    if(s.economy.cash>=2000){
+     s.economy.cash-=2000;
+     s.inventory.luxury=
+      s.inventory.luxury||[];
+     s.inventory.luxury.push(
+      "Limited Luxury Item"
+     );
+    }
+   }
+  }
+ ];
+
+ const e=pick(events);
+
+ s.events.unshift({
+  title:e.title,
+  text:e.text,
+  day:s.calendar.day
+ });
+
+ e.action();
+
+ addLog(
+  `Life Event: ${e.title}`
+ );
+
+ save();
+
+}
+
+function eventsScreen(){
+
+ const s=S();
+
+ return `
+
+ <div>
+  <h1>Life Events</h1>
+  <p class="muted">
+   Dunia RV tidak selalu menunggu kamu menekan tombol.
+  </p>
+ </div>
+
+ <div class="list">
+
+  ${
+   s.events.length
+   ?
+   s.events.map(e=>`
+    <div class="card eventcard">
+
+     <h2>${esc(e.title)}</h2>
+
+     <p>
+      ${esc(e.text)}
+     </p>
+
+     <span class="tiny muted">
+      Day ${e.day}
+     </span>
+
+    </div>
+   `).join("")
+   :
+   `<div class="card">
+     <p class="muted">
+      Belum ada life event.
+     </p>
+    </div>`
+  }
+
+ </div>
+
+ `
+
+}
+
+/* -------------------------
+   PLAYER PROFILE
+------------------------- */
 
 function profileScreen(){
+
  const s=S();
+
  return `
- <div><h1>Edit Player</h1><p class="muted">Identity, occupation, position, dan avatar.</p></div>
+
+ <div>
+  <h1>Player Profile</h1>
+  <p class="muted">
+   Edit identitas dan avatar.
+  </p>
+ </div>
+
  <div class="card">
+
   <div class="formgrid">
-   <div><label>Name</label><input id="pname" value="${esc(s.player.name)}"></div>
-   <div><label>Age</label><input id="page" type="number" min="16" value="${s.player.age}"></div>
-   <div><label>Country</label><input id="pcountry" value="${esc(s.player.country)}"></div>
-   <div><label>Occupation</label><input id="poccupation" value="${esc(s.player.occupation)}"></div>
-   <div><label>Position</label><select id="pposition">${["ST","LW","RW","AMF","CMF","DMF","CB","LB","RB","GK"].map(x=>`<option ${s.player.position===x?"selected":""}>${x}</option>`).join("")}</select></div>
-   <div><label>Background</label><input id="pbackground" value="${esc(s.player.background)}"></div>
-   <div class="fullrow"><label>Replace Avatar Photo</label><input id="pphoto" type="file" accept="image/*"></div>
-  </div><br>
-  <button class="btn primary" onclick="saveProfile()">Save Player</button>
- </div>`;
+
+   <div>
+    <label>Name</label>
+    <input
+     id="profileName"
+     value="${esc(s.player.name)}"
+    >
+   </div>
+
+   <div>
+    <label>Age</label>
+    <input
+     id="profileAge"
+     type="number"
+     value="${s.player.age}"
+    >
+   </div>
+
+   <div>
+    <label>Country</label>
+    <input
+     id="profileCountry"
+     value="${esc(s.player.country)}"
+    >
+   </div>
+
+   <div>
+    <label>Occupation</label>
+    <input
+     id="profileOccupation"
+     value="${esc(s.player.occupation)}"
+    >
+   </div>
+
+   <div>
+    <label>Position</label>
+
+    <select id="profilePosition">
+
+     ${POSITIONS.map(x=>`
+      <option
+       ${x===s.player.position?"selected":""}
+      >
+       ${x}
+      </option>
+     `).join("")}
+
+    </select>
+
+   </div>
+
+   <div>
+    <label>Background</label>
+    <input
+     id="profileBackground"
+     value="${esc(s.player.background)}"
+    >
+   </div>
+
+   <div class="fullrow">
+    <label>Replace Avatar</label>
+
+    <input
+     id="profilePhoto"
+     type="file"
+     accept="image/*"
+    >
+
+   </div>
+
+  </div>
+
+  <br>
+
+  <button
+   class="btn primary"
+   onclick="saveProfile()"
+  >
+   Save Profile
+  </button>
+
+ </div>
+
+ `
+
 }
+
 async function saveProfile(){
+
  const s=S();
- s.player.name=document.getElementById("pname").value.trim()||s.player.name;
- s.player.age=+document.getElementById("page").value||s.player.age;
- s.player.country=document.getElementById("pcountry").value;
- s.player.occupation=document.getElementById("poccupation").value;
- s.player.position=document.getElementById("pposition").value;
- s.player.background=document.getElementById("pbackground").value;
- const f=document.getElementById("pphoto").files[0];if(f)s.player.photo=await compressImage(f);
- saveDB();toast("Player profile saved.");render();
+
+ s.player.name=
+  document.getElementById("profileName").value.trim()||
+  s.player.name;
+
+ s.player.age=
+  +document.getElementById("profileAge").value||
+  s.player.age;
+
+ s.player.country=
+  document.getElementById("profileCountry").value;
+
+ s.player.occupation=
+  document.getElementById("profileOccupation").value;
+
+ s.player.position=
+  document.getElementById("profilePosition").value;
+
+ s.player.background=
+  document.getElementById("profileBackground").value;
+
+ const file=
+  document.getElementById("profilePhoto").files[0];
+
+ if(file){
+  s.player.photo=
+   await compressImage(file);
+ }
+
+ save();
+
+ render();
+
+ showToast("Profile saved.");
+
 }
+
+/* -------------------------
+   GOD MODE / ADMIN
+------------------------- */
 
 function adminScreen(){
- return `
- <div><h1>Admin Control</h1><p class="muted">Frontend-only admin convenience. Tidak aman untuk production.</p></div>
- <div class="card">
-  <h2>Admin Login</h2>
-  <input id="adminEmail" placeholder="Masukkan email admin">
-  <br><br><button class="btn primary" onclick="adminLogin()">Verify Email</button>
-  <p class="small muted">Authorized emails are hard-coded in this file.</p>
- </div>
- ${S().admin?adminTools():""}`;
-}
-function adminLogin(){
- const s=S(),email=document.getElementById("adminEmail").value.trim().toLowerCase();
- if(ADMIN_EMAILS.includes(email)){s.admin=true;saveDB();toast("Admin mode enabled.");render()}
- else toast("Email tidak terdaftar.");
-}
-function adminTools(){
+
  const s=S();
- return `<br><div class="grid g2">
-  <div class="card">
-   <h2>Economy</h2>
-   <button class="btn gold" onclick="adminMoney(1000000)">+ $1M</button>
-   <button class="btn gold" onclick="adminMoney(100000000)">+ $100M</button>
-   <button class="btn" onclick="adminMax()">MAX STATS</button>
-   <button class="btn" onclick="adminBorders()">UNLOCK ALL BORDERS</button>
+
+ if(!DB.isAdmin){
+
+  return `
+   <div class="card danger">
+    <h2>Access unavailable</h2>
+    <p class="muted">
+     This area is not available for this account.
+    </p>
+   </div>
+  `
+ }
+
+ return `
+
+ <div class="hero">
+
+  <div class="tag">
+   ELEVATED CONTROL
   </div>
+
+  <h1>Admin Control</h1>
+
+  <p class="muted">
+   Full local control atas save yang sedang aktif.
+  </p>
+
+  <div class="row">
+
+   <span class="tag">
+    ${esc(DB.email)}
+   </span>
+
+   ${
+    s.godMode
+    ? `<span
+        class="tag"
+        style="color:#ffd35a"
+       >
+       GOD MODE ON
+       </span>`
+    :`<span class="tag">
+       GOD MODE OFF
+      </span>`
+   }
+
+  </div>
+
+ </div>
+
+ <br>
+
+ <div class="grid g2">
+
   <div class="card">
+
+   <h2>God Mode</h2>
+
+   <p class="muted small">
+    Success chance menjadi 99%.
+    Energy tidak berkurang saat match/training.
+   </p>
+
+   <button
+    class="btn ${
+     s.godMode
+     ?"red"
+     :"gold"
+    } full"
+    onclick="toggleGodMode()"
+   >
+    ${
+     s.godMode
+     ?"Disable God Mode"
+     :"Enable God Mode"
+    }
+   </button>
+
+  </div>
+
+  <div class="card">
+
+   <h2>Instant Max</h2>
+
+   <button
+    class="btn primary full"
+    onclick="adminMaxEverything()"
+   >
+    MAX EVERYTHING
+   </button>
+
+  </div>
+
+ </div>
+
+ <br>
+
+ <div class="card">
+
+  <h2>Player Core</h2>
+
+  <div class="formgrid">
+
+   <div>
+    <label>OVR Target</label>
+    <input
+     id="adminOVR"
+     type="number"
+     min="1"
+     max="99"
+     value="${OVR()}"
+    >
+   </div>
+
+   <div>
+    <label>Cash</label>
+    <input
+     id="adminCash"
+     type="number"
+     value="${Math.floor(s.economy.cash)}"
+    >
+   </div>
+
+   <div>
+    <label>Bank</label>
+    <input
+     id="adminBank"
+     type="number"
+     value="${Math.floor(s.economy.bank)}"
+    >
+   </div>
+
+   <div>
+    <label>Fame</label>
+    <input
+     id="adminFameValue"
+     type="number"
+     value="${s.stats.fame}"
+    >
+   </div>
+
+   <div>
+    <label>Followers</label>
+    <input
+     id="adminFollowersValue"
+     type="number"
+     value="${s.social.followers}"
+    >
+   </div>
+
+   <div>
+    <label>Energy</label>
+    <input
+     id="adminEnergy"
+     type="number"
+     min="0"
+     max="100"
+     value="${s.football.energy}"
+    >
+   </div>
+
+   <div>
+    <label>Health</label>
+    <input
+     id="adminHealth"
+     type="number"
+     min="0"
+     max="100"
+     value="${s.stats.health}"
+    >
+   </div>
+
+   <div>
+    <label>Happiness</label>
+    <input
+     id="adminHappy"
+     type="number"
+     min="0"
+     max="100"
+     value="${s.stats.happiness}"
+    >
+   </div>
+
+   <div>
+    <label>Market Value</label>
+    <input
+     id="adminMarket"
+     type="number"
+     value="${s.football.marketValue}"
+    >
+   </div>
+
+   <div>
+    <label>Salary</label>
+    <input
+     id="adminSalary"
+     type="number"
+     value="${s.football.salary}"
+    >
+   </div>
+
+  </div>
+
+  <br>
+
+  <button
+   class="btn primary"
+   onclick="applyAdminCore()"
+  >
+   Apply Core Changes
+  </button>
+
+ </div>
+
+ <br>
+
+ <div class="card">
+
+  <h2>Individual Football Stats</h2>
+
+  <div class="formgrid">
+
+   ${Object.entries(s.football.stats)
+    .map(([key,val])=>`
+
+     <div>
+
+      <label>
+       ${esc(key)}
+      </label>
+
+      <input
+       id="adminStat_${key}"
+       type="number"
+       min="1"
+       max="99"
+       value="${val}"
+      >
+
+     </div>
+
+    `)
+    .join("")}
+
+  </div>
+
+  <br>
+
+  <button
+   class="btn cyan"
+   onclick="applyAdminStats()"
+  >
+   Apply Stats
+  </button>
+
+ </div>
+
+ <br>
+
+ <div class="grid g3">
+
+  <div class="card">
+
    <h2>Partners</h2>
-   <button class="btn primary" onclick="adminAllPartners()">UNLOCK ALL 540</button>
-   <button class="btn" onclick="adminAddUR()">ADD RANDOM UR</button>
+
+   <button
+    class="btn primary full"
+    onclick="adminUnlockPartners()"
+   >
+    Unlock All 540
+   </button>
+
+   <br><br>
+
+   <button
+    class="btn gold full"
+    onclick="adminAddRandomUR()"
+   >
+    Add Random UR
+   </button>
+
   </div>
+
   <div class="card">
-   <h2>World</h2>
-   <button class="btn cyan" onclick="adminFame()">+1000 FAME</button>
-   <button class="btn cyan" onclick="adminFollowers()">+1M FOLLOWERS</button>
-   <button class="btn green" onclick="adminAchievements()">UNLOCK ACHIEVEMENTS</button>
+
+   <h2>Borders</h2>
+
+   <button
+    class="btn primary full"
+    onclick="adminUnlockBorders()"
+   >
+    Unlock All Borders
+   </button>
+
   </div>
-  <div class="card danger">
-   <h2>Danger Zone</h2>
-   <button class="btn red" onclick="resetCurrent()">RESET CURRENT SAVE</button>
+
+  <div class="card">
+
+   <h2>Achievements</h2>
+
+   <button
+    class="btn green full"
+    onclick="adminUnlockAchievements()"
+   >
+    Unlock All
+   </button>
+
   </div>
- </div>`;
+
+ </div>
+
+ <br>
+
+ <div class="card">
+
+  <h2>World Controls</h2>
+
+  <div class="row">
+
+   <button
+    class="btn"
+    onclick="adminAddMoney(1000000)"
+   >
+    +$1M
+   </button>
+
+   <button
+    class="btn"
+    onclick="adminAddMoney(100000000)"
+   >
+    +$100M
+   </button>
+
+   <button
+    class="btn"
+    onclick="adminFollowersAdd(1000000)"
+   >
+    +1M Followers
+   </button>
+
+   <button
+    class="btn"
+    onclick="adminFameAdd(1000)"
+   >
+    +1000 Fame
+   </button>
+
+  </div>
+
+ </div>
+
+ <br>
+
+ <div class="card danger">
+
+  <h2>Danger Zone</h2>
+
+  <button
+   class="btn red"
+   onclick="resetCurrentSave()"
+  >
+   Reset Current Save
+  </button>
+
+ </div>
+
+ `
+
 }
-function adminMoney(n){S().economy.cash+=n;saveDB();render()}
-function adminMax(){Object.keys(S().football.stats).forEach(k=>S().football.stats[k]=99);S().football.energy=100;saveDB();render()}
-function adminBorders(){S().inventory.borders=BORDERS.map(x=>x.id);saveDB();render()}
-function adminAllPartners(){S().partners=PARTNERS.map(p=>JSON.parse(JSON.stringify(p)));saveDB();render();toast("540 partners unlocked.")}
-function adminAddUR(){const p=pick(PARTNERS.filter(x=>x.rarity==="UR"));if(!S().partners.some(x=>x.id===p.id))S().partners.push(JSON.parse(JSON.stringify(p)));saveDB();render()}
-function adminFame(){S().stats.fame+=1000;saveDB();render()}
-function adminFollowers(){S().social.followers+=1000000;saveDB();render()}
-function adminAchievements(){S().achievements=ACH.map(x=>x[0]);saveDB();render()}
-function resetCurrent(){
- if(!confirm("Reset current save?"))return;
- const i=currentSlot;DB.slots[i]=defaultSlot(i);saveDB();render();toast("Save reset.");
+
+function toggleGodMode(){
+
+ if(!DB.isAdmin)return;
+
+ const s=S();
+
+ s.godMode=!s.godMode;
+
+ addLog(
+  s.godMode
+  ?"God Mode activated."
+  :"God Mode disabled."
+ );
+
+ save();
+
+ render();
+
 }
+
+function applyAdminCore(){
+
+ if(!DB.isAdmin)return;
+
+ const s=S();
+
+ s.economy.cash=
+  Math.max(
+   0,
+   +document.getElementById("adminCash").value
+  );
+
+ s.economy.bank=
+  Math.max(
+   0,
+   +document.getElementById("adminBank").value
+  );
+
+ s.stats.fame=
+  Math.max(
+   0,
+   +document.getElementById("adminFameValue").value
+  );
+
+ s.social.followers=
+  Math.max(
+   0,
+   +document.getElementById("adminFollowersValue").value
+  );
+
+ s.football.energy=
+  clamp(
+   +document.getElementById("adminEnergy").value,
+   0,
+   100
+  );
+
+ s.stats.health=
+  clamp(
+   +document.getElementById("adminHealth").value,
+   0,
+   100
+  );
+
+ s.stats.happiness=
+  clamp(
+   +document.getElementById("adminHappy").value,
+   0,
+   100
+  );
+
+ s.football.marketValue=
+  Math.max(
+   0,
+   +document.getElementById("adminMarket").value
+  );
+
+ s.football.salary=
+  Math.max(
+   0,
+   +document.getElementById("adminSalary").value
+  );
+
+ const target=
+  clamp(
+   +document.getElementById("adminOVR").value,
+   1,
+   99
+  );
+
+ setOVRDirect(target);
+
+ addLog(
+  `Admin updated core values.`
+ );
+
+ save();
+
+ render();
+
+ showToast("Admin core updated.");
+
+}
+
+function setOVRDirect(target){
+
+ const s=S();
+
+ const keys=
+  Object.keys(s.football.stats);
+
+ const current=
+  avg(s.football.stats);
+
+ const delta=
+  target-current;
+
+ keys.forEach(key=>{
+
+  s.football.stats[key]=
+   clamp(
+    Math.round(
+     s.football.stats[key]+delta
+    ),
+    1,
+    99
+   );
+
+ });
+
+ /* Final correction so displayed OVR follows target as closely
+    as mathematically possible with integer stats. */
+
+ let safety=0;
+
+ while(
+  avg(s.football.stats)!==target&&
+  safety<500
+ ){
+
+  safety++;
+
+  const currentOVR=
+   avg(s.football.stats);
+
+  const direction=
+   target>currentOVR
+   ?1
+   :-1;
+
+  const key=
+   pick(keys);
+
+  s.football.stats[key]=
+   clamp(
+    s.football.stats[key]+direction,
+    1,
+    99
+   );
+
+ }
+
+}
+
+function applyAdminStats(){
+
+ if(!DB.isAdmin)return;
+
+ const s=S();
+
+ Object.keys(s.football.stats)
+  .forEach(key=>{
+
+   const el=
+    document.getElementById(
+     "adminStat_"+key
+    );
+
+   s.football.stats[key]=
+    clamp(
+     +el.value,
+     1,
+     99
+    );
+
+  });
+
+ autoBorders();
+
+ addLog(
+  "Admin manually edited football stats."
+ );
+
+ save();
+
+ render();
+
+}
+
+function adminMaxEverything(){
+
+ if(!DB.isAdmin)return;
+
+ const s=S();
+
+ Object.keys(s.football.stats)
+  .forEach(k=>{
+   s.football.stats[k]=99
+  });
+
+ s.economy.cash=999999999;
+ s.economy.bank=999999999;
+
+ s.social.followers=999999999;
+ s.social.likes=999999999;
+ s.social.comments=999999999;
+
+ s.stats.fame=999999;
+ s.stats.happiness=100;
+ s.stats.health=100;
+ s.stats.discipline=100;
+ s.stats.lifestyle=100;
+
+ s.football.energy=100;
+ s.football.form=100;
+ s.football.marketValue=999999999;
+ s.football.salary=9999999;
+
+ s.football.godMode=true;
+ s.godMode=true;
+
+ s.inventory.borders=
+  BORDERS.map(x=>x.id);
+
+ s.achievements=
+  ACHIEVEMENTS.map(x=>x[0]);
+
+ s.partners=
+  PARTNERS.map(p=>
+   JSON.parse(JSON.stringify(p))
+  );
+
+ s.economy.businesses=
+  BUSINESSES.map(b=>({
+   ...b,
+   level:10
+  }));
+
+ s.economy.weeklyIncome=
+  BUSINESSES.reduce(
+   (total,b)=>
+    total+b.income*10,
+   0
+  );
+
+ addLog(
+  "ADMIN: MAX EVERYTHING activated."
+ );
+
+ save();
+
+ render();
+
+ showToast("Everything maxed.");
+
+}
+
+function adminUnlockPartners(){
+
+ if(!DB.isAdmin)return;
+
+ const s=S();
+
+ s.partners=
+  PARTNERS.map(p=>
+   JSON.parse(JSON.stringify(p))
+  );
+
+ save();
+
+ render();
+
+ showToast("540 partners unlocked.");
+
+}
+
+function adminAddRandomUR(){
+
+ if(!DB.isAdmin)return;
+
+ const s=S();
+
+ const available=
+  PARTNERS.filter(
+   p=>p.rarity==="UR"
+  );
+
+ const p=pick(available);
+
+ if(!s.partners.some(x=>x.id===p.id)){
+
+  s.partners.push(
+   JSON.parse(JSON.stringify(p))
+  );
+
+ }
+
+ save();
+
+ render();
+
+ showToast("Random UR added.");
+
+}
+
+function adminUnlockBorders(){
+
+ if(!DB.isAdmin)return;
+
+ S().inventory.borders=
+  BORDERS.map(x=>x.id);
+
+ save();
+
+ render();
+
+}
+
+function adminUnlockAchievements(){
+
+ if(!DB.isAdmin)return;
+
+ S().achievements=
+  ACHIEVEMENTS.map(x=>x[0]);
+
+ save();
+
+ render();
+
+}
+
+function adminAddMoney(amount){
+
+ if(!DB.isAdmin)return;
+
+ S().economy.cash+=amount;
+
+ save();
+
+ render();
+
+}
+
+function adminFollowersAdd(amount){
+
+ if(!DB.isAdmin)return;
+
+ S().social.followers+=amount;
+
+ save();
+
+ render();
+
+}
+
+function adminFameAdd(amount){
+
+ if(!DB.isAdmin)return;
+
+ S().stats.fame+=amount;
+
+ save();
+
+ render();
+
+}
+
+function resetCurrentSave(){
+
+ if(!DB.isAdmin)return;
+
+ if(
+  !confirm(
+   "Reset current save?"
+  )
+ )return;
+
+ const index=currentSlot;
+
+ DB.slots[index]=
+  createDefaultSlot(index);
+
+ save();
+
+ render();
+
+}
+
+/* -------------------------
+   GDD
+------------------------- */
 
 function gddScreen(){
+
  return `
+
  <div class="hero">
-  <div class="tag">GAME DESIGN DOCUMENT</div>
-  <h1>RV LIFE: Simulator</h1>
-  <p class="muted">Ultra Pro Max single-file architecture.</p>
- </div><br>
- <div class="grid g2">
-  <div class="card"><h2>Core Loop</h2><p class="muted">Train → Match → Earn → Build Business → Grow Fame → Social → Relationship → Family → Repeat.</p></div>
-  <div class="card"><h2>Save System</h2><p class="muted">3 independent localStorage save slots. Avatar/photo dikompres client-side.</p></div>
-  <div class="card"><h2>Football</h2><p class="muted">Choice/RPG football. Attributes: Pace, Shooting, Passing, Dribbling, Defending, Physical, Vision, Mentality. OVR dihitung dari rata-rata.</p></div>
-  <div class="card"><h2>Business</h2><p class="muted">6 bisnis dari coffee shop sampai global holding. Setiap bisnis punya cost, income, dan risk.</p></div>
-  <div class="card"><h2>RV-Gram</h2><p class="muted">Post, likes, comments, followers, viral moments, trending, fan/media/hate-account simulation.</p></div>
-  <div class="card"><h2>Partner System</h2><p class="muted">540 fictional partner templates: 6 countries × 90. Rarity UR/SSS/SS/S/A/B. Gacha, collection, editing, photos, inventory.</p></div>
-  <div class="card"><h2>Relationship</h2><p class="muted">Affection, trust, jealousy, happiness, story arc, chat, date, support, argument, breakup, marriage.</p></div>
-  <div class="card"><h2>Family</h2><p class="muted">Children can exist without marriage when affection is high enough. Child name, health, happiness, education, talent, activities.</p></div>
-  <div class="card"><h2>Border System</h2><p class="muted">Animated CSS borders berdasarkan OVR. 60 green, 70 silver, 80 gold, 91 cosmic, 94 dragon, 97 constellation, 99 GOAT.</p></div>
-  <div class="card"><h2>Progression</h2><p class="muted">Season, calendar, form, energy, market value, salary, fame, reputation, achievements.</p></div>
-  <div class="card"><h2>Admin</h2><p class="muted">Local email gate dengan dua email admin yang telah ditentukan. Untuk production perlu backend authentication.</p></div>
-  <div class="card"><h2>Publishing</h2><p class="muted">File ini tidak membutuhkan server atau library eksternal. Bisa dijalankan lokal maupun sebagai static GitHub Pages site.</p></div>
- </div>
- <br>
- <div class="card">
-  <h2>Important IP Note</h2>
+
+  <div class="tag">
+   GAME DESIGN DOCUMENT
+  </div>
+
+  <h1>
+   RV LIFE V10
+  </h1>
+
   <p class="muted">
-   Build ini memakai klub dan partner fiktif agar single-file demo aman untuk dikembangkan.
-   Kalau nanti kamu membuat versi publik dengan nama, foto, likeness, atau database orang/brand nyata,
-   pastikan hak penggunaan dan lisensinya sudah beres.
+   The giant single-file life simulator.
   </p>
- </div>`;
+
+ </div>
+
+ <br>
+
+ <div class="grid g2">
+
+  <div class="card">
+   <h2>Core Loop</h2>
+   <p class="muted">
+    Train → Match → Earn → Rest → Transfer →
+    Build Business → Grow Fame → Social →
+    Relationship → Family → Events → Repeat.
+   </p>
+  </div>
+
+  <div class="card">
+   <h2>Save</h2>
+   <p class="muted">
+    3 independent browser save slots.
+   </p>
+  </div>
+
+  <div class="card">
+   <h2>Football</h2>
+   <p class="muted">
+    Choice/RPG football engine with 8 attributes,
+    OVR, form, energy, salary, market value,
+    matches, goals, assists, wins, losses,
+    trophies dan transfer.
+   </p>
+  </div>
+
+  <div class="card">
+   <h2>Rest</h2>
+   <p class="muted">
+    Recovery menggunakan uang.
+    Quick Rest, Hotel Rest, Luxury Recovery,
+    dan Private Resort.
+   </p>
+  </div>
+
+  <div class="card">
+   <h2>God Mode</h2>
+   <p class="muted">
+    Admin-only mode. Success chance menjadi 99%
+    dan energy tidak berkurang saat gameplay.
+   </p>
+  </div>
+
+  <div class="card">
+   <h2>Business</h2>
+   <p class="muted">
+    6 business tiers dengan income, risk,
+    collection dan upgrade.
+   </p>
+  </div>
+
+  <div class="card">
+   <h2>RV-Gram</h2>
+   <p class="muted">
+    Followers, likes, comments, posts,
+    viral moments dan trending.
+   </p>
+  </div>
+
+  <div class="card">
+   <h2>Partners</h2>
+   <p class="muted">
+    540 fictional partner templates.
+    6 negara × 90 karakter.
+   </p>
+  </div>
+
+  <div class="card">
+   <h2>Relationship</h2>
+   <p class="muted">
+    Affection, Trust, Jealousy, Happiness,
+    dating, argument, support, breakup,
+    marriage dan children.
+   </p>
+  </div>
+
+  <div class="card">
+   <h2>Family</h2>
+   <p class="muted">
+    Anak memiliki health, happiness,
+    education dan talent.
+   </p>
+  </div>
+
+  <div class="card">
+   <h2>Border</h2>
+   <p class="muted">
+    OVR-based animated CSS borders:
+    60 Green, 70 Silver, 80 Gold,
+    91 Cosmic, 94 Dragon, 97 Constellation,
+    99 GOAT.
+   </p>
+  </div>
+
+  <div class="card">
+   <h2>Admin</h2>
+   <p class="muted">
+    Admin account dapat mengubah OVR,
+    stats, economy, fame, followers,
+    market value, God Mode, partner collection,
+    borders dan achievements.
+   </p>
+  </div>
+
+ </div>
+
+ <br>
+
+ <div class="card danger">
+
+  <h2>Important Technical Note</h2>
+
+  <p class="muted">
+   Karena seluruh game berada di satu file HTML,
+   admin gate berbasis JavaScript bukan authentication
+   server-side. Source dapat diperiksa oleh siapa pun
+   yang mendapatkan file.
+  </p>
+
+  <p class="muted">
+   Untuk game personal atau private build, mekanisme ini
+   cukup sebagai convenience system. Jika suatu hari
+   game dibuat publik dengan akun sungguhan, gunakan
+   backend authentication.
+  </p>
+
+ </div>
+
+ `
+
 }
 
-function advanceTime(){
+/* -------------------------
+   GLOBAL GUIDE
+------------------------- */
+
+function showGlobalGuide(){
+
+ modal=`
+
+ <div class="modalwrap">
+
+  <div class="modal">
+
+   <div class="between">
+
+    <h2>RV LIFE V10 Guide</h2>
+
+    <button
+     class="btn"
+     onclick="closeModal()"
+    >
+     Close
+    </button>
+
+   </div>
+
+   <div class="list">
+
+    <div class="item">
+     <b>Football</b>
+     <br>
+     <span class="muted small">
+      Main match menggunakan pilihan RPG.
+     </span>
+    </div>
+
+    <div class="item">
+     <b>Rest</b>
+     <br>
+     <span class="muted small">
+      Rest membutuhkan uang.
+     </span>
+    </div>
+
+    <div class="item">
+     <b>Partner</b>
+     <br>
+     <span class="muted small">
+      Gacha untuk mengumpulkan partner.
+     </span>
+    </div>
+
+    <div class="item">
+     <b>Family</b>
+     <br>
+     <span class="muted small">
+      Affection tinggi dapat membuka child event.
+     </span>
+    </div>
+
+    <div class="item">
+     <b>Business</b>
+     <br>
+     <span class="muted small">
+      Business menghasilkan passive income.
+     </span>
+    </div>
+
+    <div class="item">
+     <b>Admin</b>
+     <br>
+     <span class="muted small">
+      Account tertentu otomatis mendapatkan
+      elevated controls.
+     </span>
+    </div>
+
+   </div>
+
+  </div>
+
+ </div>
+
+ `;
+
+ render();
+
+}
+
+/* -------------------------
+   TIME
+------------------------- */
+
+function advanceDay(days=1){
+
  const s=S();
- advanceDay(1);
- s.football.energy=clamp(s.football.energy+12,0,100);
- const income=s.economy.businesses.reduce((a,b)=>a+b.income*b.level,0);
- if(chance(40)&&income>0)s.economy.cash+=Math.round(income/7);
- if(chance(18))randomNews();
- if(chance(10)&&s.partners.length){
-  const p=pick(s.partners);
-  if(p.jealousy>60){p.affection=clamp(p.affection-2,0,100);addLog(`${p.name} merasa sedikit cemburu.`)}
+
+ for(let i=0;i<days;i++){
+
+  s.calendar.day++;
+
+  if(s.calendar.day>30){
+
+   s.calendar.day=1;
+   s.calendar.month++;
+
+   /* business passive income */
+
+   const income=
+    s.economy.businesses.reduce(
+     (total,b)=>
+      total+
+      b.income*b.level,
+     0
+    );
+
+   if(income){
+
+    s.economy.cash+=income;
+
+    addLog(
+     `Passive business income: ${money(income)}.`
+    );
+
+   }
+
+   if(s.calendar.month>12){
+
+    s.calendar.month=1;
+    s.calendar.year++;
+
+    startNewSeason();
+
+   }
+
+  }
+
+  /* Relationship background simulation */
+
+  if(s.partners.length){
+
+   const p=pick(s.partners);
+
+   if(p.jealousy>65&&chance(15)){
+
+    p.affection=
+     clamp(
+      p.affection-2,
+      0,
+      100
+     );
+
+    addLog(
+     `${p.name} merasa cemburu.`
+    );
+
+   }
+
+  }
+
+  /* Children aging */
+
+  s.children.forEach(c=>{
+
+   if(c.age>0&&chance(3)){
+    c.education=
+     clamp(c.education+1,0,100)
+   }
+
+  });
+
  }
- checkAchievements();saveDB();render();
+
+ randomNews();
+
+ checkAchievements();
+
+ save();
+
 }
 
-/* Generic modal */
-function modalHTML(){
- return modal||"";
+function startNewSeason(){
+
+ const s=S();
+
+ s.football.season++;
+
+ s.football.week=1;
+
+ s.football.energy=100;
+
+ s.football.form=
+  clamp(
+   s.football.form+3,
+   0,
+   100
+  );
+
+ if(
+  s.football.wins>
+  s.football.losses
+ ){
+
+  s.football.trophies++;
+
+  s.stats.fame+=10;
+
+  addLog(
+   `Season ${s.football.season-1} berakhir dengan trophy.`
+  );
+
+ }
+
+ s.football.contractYears=
+  Math.max(
+   0,
+   s.football.contractYears-1
+  );
+
+ addLog(
+  `Season ${s.football.season} dimulai.`
+ );
+
 }
 
-/* Fix navigation functions exposed globally */
-window.navigate=navigate;
-window.toggleMobileNav=toggleMobileNav;
+function randomNews(){
+
+ const s=S();
+
+ const headlines=[
+
+  "Transfer window mulai memanas.",
+
+  "Sponsor global mencari superstar baru.",
+
+  "RV-Gram ramai membahas pemain rising star.",
+
+  "Fans menunggu kejutan besar musim ini.",
+
+  "Media mulai menyusun power ranking terbaru.",
+
+  "Rumor hubungan selebriti kembali viral.",
+
+  "Klub-klub mulai berburu wonderkid."
+
+ ];
+
+ s.news.unshift({
+  id:uid("news"),
+  title:pick(headlines),
+  day:s.calendar.day
+ });
+
+ s.news=s.news.slice(0,30);
+
+}
+
+/* -------------------------
+   RENDER
+------------------------- */
+
+function render(){
+
+ let output="";
+
+ if(screen==="landing"){
+  output=landing();
+ }else if(screen==="slots"){
+  output=slotsScreen();
+ }else{
+
+  const pages={
+
+   dashboard:dashboardScreen,
+
+   football:footballScreen,
+
+   training:trainingScreen,
+
+   rest:restScreen,
+
+   transfer:transferScreen,
+
+   business:businessScreen,
+
+   social:socialScreen,
+
+   partners:partnersScreen,
+
+   relationship:relationshipScreen,
+
+   family:familyScreen,
+
+   inventory:inventoryScreen,
+
+   achievements:achievementsScreen,
+
+   news:newsScreen,
+
+   events:eventsScreen,
+
+   profile:profileScreen,
+
+   admin:adminScreen,
+
+   gdd:gddScreen
+
+  };
+
+  output=
+   shell(
+    pages[screen]
+    ?pages[screen]()
+    :""
+   );
+
+ }
+
+ document.getElementById("app").innerHTML=
+  output;
+
+}
+
+render();
+
+/* -------------------------
+   GLOBAL FUNCTIONS
+------------------------- */
+
+window.enterGame=enterGame;
 window.startCreate=startCreate;
 window.createCharacter=createCharacter;
 window.loadSlot=loadSlot;
 window.duplicateSlot=duplicateSlot;
 window.deleteSlot=deleteSlot;
-window.backSlots=backSlots;
+window.backToSlots=backToSlots;
+window.navigate=navigate;
+window.toggleSidebar=toggleSidebar;
+window.logoutGame=logoutGame;
+
 window.playMatch=playMatch;
-window.train=train;
-window.restDay=restDay;
-window.generateOffers=generateOffers;
+window.trainStat=trainStat;
+window.takeRest=takeRest;
+
+window.generateTransferOffers=generateTransferOffers;
 window.acceptTransfer=acceptTransfer;
+
 window.buyBusiness=buyBusiness;
+window.upgradeBusiness=upgradeBusiness;
 window.collectBusiness=collectBusiness;
 window.bankDeposit=bankDeposit;
 window.bankWithdraw=bankWithdraw;
+
 window.createPost=createPost;
-window.likePost=likePost;
-window.commentPost=commentPost;
-window.sharePost=sharePost;
-window.filterPartners=filterPartners;
+window.likeSocial=likeSocial;
+window.commentSocial=commentSocial;
+window.shareSocial=shareSocial;
+
 window.gacha=gacha;
+window.filterPartners=filterPartners;
 window.openPartner=openPartner;
+window.closeModal=closeModal;
+
 window.partnerAction=partnerAction;
-window.marry=marry;
-window.child=child;
-window.breakup=breakup;
+window.marryPartner=marryPartner;
+window.haveChild=haveChild;
+window.breakupPartner=breakupPartner;
+
 window.editPartner=editPartner;
 window.savePartnerEdit=savePartnerEdit;
-window.raiseChild=raiseChild;
-window.equipBorder=equipBorder;
-window.generateRumor=generateRumor;
-window.saveProfile=saveProfile;
-window.adminLogin=adminLogin;
-window.adminMoney=adminMoney;
-window.adminMax=adminMax;
-window.adminBorders=adminBorders;
-window.adminAllPartners=adminAllPartners;
-window.adminAddUR=adminAddUR;
-window.adminFame=adminFame;
-window.adminFollowers=adminFollowers;
-window.adminAchievements=adminAchievements;
-window.resetCurrent=resetCurrent;
-window.advanceTime=advanceTime;
 
-render();
+window.raiseChild=raiseChild;
+
+window.equipBorder=equipBorder;
+
+window.generateRumor=generateRumor;
+
+window.saveProfile=saveProfile;
+
+window.toggleGodMode=toggleGodMode;
+window.applyAdminCore=applyAdminCore;
+window.applyAdminStats=applyAdminStats;
+window.adminMaxEverything=adminMaxEverything;
+window.adminUnlockPartners=adminUnlockPartners;
+window.adminAddRandomUR=adminAddRandomUR;
+window.adminUnlockBorders=adminUnlockBorders;
+window.adminUnlockAchievements=adminUnlockAchievements;
+window.adminAddMoney=adminAddMoney;
+window.adminFollowersAdd=adminFollowersAdd;
+window.adminFameAdd=adminFameAdd;
+window.resetCurrentSave=resetCurrentSave;
+
+window.showGlobalGuide=showGlobalGuide;
+window.advanceDay=advanceDay;
+
 </script>
 </body>
 </html>

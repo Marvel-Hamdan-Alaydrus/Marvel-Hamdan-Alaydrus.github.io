@@ -1,2470 +1,382 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0,viewport-fit=cover">
-<meta name="theme-color" content="#07101d">
-<title>RV LIFE: Simulator Ultra Pro Max</title>
-
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#060914">
+<title>RV LIFE 2026 • Football Universe</title>
 <style>
-:root{
-  --bg:#060b13;
-  --bg2:#0b1320;
-  --panel:#101b2b;
-  --panel2:#142237;
-  --line:#263954;
-  --text:#eef5ff;
-  --muted:#8fa4be;
-  --accent:#5ee7ff;
-  --accent2:#7c5cff;
-  --good:#35e38b;
-  --warn:#ffc857;
-  --bad:#ff5c7a;
-  --gold:#ffd86b;
-  --shadow:0 20px 60px rgba(0,0,0,.35);
-  --radius:18px;
-}
-*{box-sizing:border-box}
-html,body{margin:0;min-height:100%;background:
-radial-gradient(circle at 15% 10%,rgba(94,231,255,.09),transparent 28%),
-radial-gradient(circle at 85% 20%,rgba(124,92,255,.11),transparent 28%),
-var(--bg);color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
-body{overflow-x:hidden}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-button:disabled{opacity:.45;cursor:not-allowed}
-a{color:inherit}
-#app{min-height:100vh}
-.shell{display:flex;min-height:100vh}
-.sidebar{
-  width:245px;position:fixed;left:0;top:0;bottom:0;z-index:20;
-  background:rgba(7,14,24,.95);border-right:1px solid var(--line);
-  padding:18px;overflow:auto;backdrop-filter:blur(20px)
-}
-.logo{font-size:22px;font-weight:900;letter-spacing:-.8px;margin-bottom:4px}
-.logo span{color:var(--accent)}
-.version{font-size:11px;color:var(--muted);margin-bottom:22px}
-.nav{display:grid;gap:7px}
-.nav button{
-  width:100%;text-align:left;background:transparent;border:1px solid transparent;
-  color:#b9c8db;padding:11px 12px;border-radius:12px
-}
-.nav button:hover,.nav button.active{background:#142238;border-color:#29415f;color:white}
-.main{margin-left:245px;width:calc(100% - 245px);min-width:0}
-.topbar{
-  position:sticky;top:0;z-index:15;display:flex;align-items:center;justify-content:space-between;
-  gap:12px;padding:12px 20px;background:rgba(6,11,19,.84);
-  border-bottom:1px solid var(--line);backdrop-filter:blur(18px)
-}
-.datebox{font-weight:800}.datebox small{display:block;color:var(--muted);font-weight:500}
-.resource-row{display:flex;gap:8px;flex-wrap:wrap;justify-content:flex-end}
-.chip{padding:7px 10px;border:1px solid var(--line);background:#0d1827;border-radius:999px;font-size:12px}
-.page{padding:20px;max-width:1600px;margin:auto}
-.hero{
-  background:linear-gradient(135deg,rgba(94,231,255,.12),rgba(124,92,255,.10));
-  border:1px solid #28415e;border-radius:24px;padding:24px;box-shadow:var(--shadow);margin-bottom:18px
-}
-.hero h1{margin:0 0 7px;font-size:clamp(24px,4vw,42px);letter-spacing:-1.5px}
-.hero p{color:var(--muted);max-width:850px;margin:0;line-height:1.6}
-.grid{display:grid;gap:14px}
-.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
-.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
-.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
-.card{
-  background:linear-gradient(180deg,rgba(20,34,55,.96),rgba(13,24,39,.96));
-  border:1px solid var(--line);border-radius:var(--radius);padding:16px;box-shadow:0 12px 40px rgba(0,0,0,.18)
-}
-.card h2,.card h3{margin:0 0 10px}
-.muted{color:var(--muted)}
-.small{font-size:12px}
-.big{font-size:28px;font-weight:900}
-.btn{
-  border:1px solid #31506f;background:#172942;color:white;border-radius:11px;
-  padding:10px 13px;font-weight:800;transition:.15s
-}
-.btn:hover{transform:translateY(-1px);filter:brightness(1.1)}
-.btn.primary{background:linear-gradient(135deg,#19b9d8,#6c5cff);border-color:transparent}
-.btn.good{background:#123f31;border-color:#216c51}
-.btn.warn{background:#443719;border-color:#765d1e}
-.btn.bad{background:#461b29;border-color:#713046}
-.btn.ghost{background:transparent}
-.btn.block{width:100%}
-.actions{display:flex;flex-wrap:wrap;gap:8px}
-.field{display:grid;gap:6px;margin-bottom:12px}
-.field label{font-size:12px;color:#9eb2c9;font-weight:700}
-.field input,.field select,.field textarea{
-  width:100%;border:1px solid #2b415e;background:#091523;color:white;
-  border-radius:10px;padding:11px;outline:none
-}
-.field input:focus,.field select:focus,.field textarea:focus{border-color:var(--accent)}
-textarea{min-height:100px;resize:vertical}
-.form-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-.form-grid .full{grid-column:1/-1}
-.progress{height:8px;border-radius:99px;background:#07101b;overflow:hidden;border:1px solid #1e3148}
-.progress i{display:block;height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2))}
-.statline{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:8px 0}
-.avatar{
-  width:72px;height:72px;border-radius:50%;overflow:hidden;display:grid;place-items:center;
-  background:#17273d;border:4px solid #8b6945;font-size:30px;flex:none
-}
-.avatar img{width:100%;height:100%;object-fit:cover}
-.avatar.ovr-green{border-color:#39db8b}
-.avatar.ovr-silver{border-color:#c8d0dc}
-.avatar.ovr-gold{border-color:#ffd75d}
-.avatar.ovr-elite{border-color:#8b5cff;box-shadow:0 0 0 3px #00eaff,0 0 28px rgba(124,92,255,.7);animation:pulse 2s infinite}
-.avatar.ovr-goat{border-color:#ff5ee7;box-shadow:0 0 0 3px #ffd45c,0 0 35px rgba(255,94,231,.8);animation:orbit 2.8s linear infinite}
-@keyframes pulse{50%{filter:brightness(1.3);box-shadow:0 0 0 6px rgba(0,234,255,.15),0 0 35px rgba(124,92,255,.9)}}
-@keyframes orbit{50%{transform:rotate(2deg) scale(1.04)}}
-.profile-head{display:flex;gap:14px;align-items:center}
-.rarity{font-size:11px;font-weight:900;padding:4px 7px;border-radius:6px;background:#202b3d}
-.rarity.UR{background:#5d1f61;color:#ff8cff}.rarity.SSS{background:#273f8d;color:#a9d8ff}
-.rarity.SS{background:#6a4a15;color:#ffe18c}.rarity.S{background:#324f35;color:#8cffad}
-.rarity.A{background:#294255;color:#8fd8ff}.rarity.B{background:#29313b;color:#b7c1cb}
-.list{display:grid;gap:8px}
-.list-item{
-  display:flex;justify-content:space-between;align-items:center;gap:10px;
-  padding:11px;border:1px solid #253a54;border-radius:12px;background:#0b1726
-}
-.table-wrap{overflow:auto;border:1px solid var(--line);border-radius:14px}
-table{width:100%;border-collapse:collapse;min-width:650px}
-th,td{padding:10px;border-bottom:1px solid #21344c;text-align:left;font-size:13px}
-th{color:#9eb2c9;background:#0c1827;position:sticky;top:0}
-.trophy{
-  width:68px;height:78px;position:relative;margin:auto;
-}
-.trophy:before{
-  content:"";position:absolute;left:20px;top:8px;width:28px;height:40px;
-  border:6px solid var(--gold);border-top-left-radius:4px;border-top-right-radius:4px;
-  background:linear-gradient(90deg,#b9821d,#ffe994,#c28c1c)
-}
-.trophy:after{
-  content:"";position:absolute;left:28px;bottom:9px;width:12px;height:23px;
-  background:var(--gold);box-shadow:0 19px 0 5px #b47d18
-}
-.trophy .handle1,.trophy .handle2{
-  position:absolute;top:11px;width:20px;height:28px;border:5px solid var(--gold);border-radius:50%
-}
-.trophy .handle1{left:2px}.trophy .handle2{right:2px}
-.modal-root{position:fixed;inset:0;z-index:100;pointer-events:none}
-.modal-root.open{pointer-events:auto}
-.modal-bg{position:absolute;inset:0;background:rgba(0,0,0,.75);backdrop-filter:blur(7px)}
-.modal{
-  position:relative;z-index:1;width:min(900px,calc(100% - 24px));max-height:calc(100vh - 24px);
-  overflow:auto;margin:12px auto;background:#0c1726;border:1px solid #304967;border-radius:20px;
-  box-shadow:0 30px 100px rgba(0,0,0,.55);padding:20px
-}
-.toast{
-  position:fixed;right:18px;bottom:18px;z-index:200;background:#13243a;border:1px solid #365271;
-  border-radius:12px;padding:12px 15px;box-shadow:var(--shadow);max-width:360px
-}
-.login{
-  min-height:100vh;display:grid;place-items:center;padding:20px;
-  background:radial-gradient(circle at center,rgba(94,231,255,.09),transparent 35%),var(--bg)
-}
-.login-card{width:min(560px,100%);padding:30px;border:1px solid #29415e;border-radius:25px;background:#0c1726;box-shadow:var(--shadow)}
-.login-card h1{font-size:42px;letter-spacing:-2px;margin:0 0 8px}
-.slot-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}
-.slot{
-  min-height:190px;border:1px dashed #38506d;background:#0c1828;border-radius:18px;padding:18px;
-  display:flex;flex-direction:column;justify-content:space-between
-}
-.kpi{font-size:11px;color:#8fa4be;text-transform:uppercase;letter-spacing:.8px}
-.badge-admin{color:#07101b;background:linear-gradient(90deg,#ffe269,#ff9f43);padding:4px 8px;border-radius:999px;font-size:10px;font-weight:900}
-.comment{
-  border-left:3px solid #365271;padding:8px 10px;background:#0a1421;border-radius:0 10px 10px 0
-}
-.feed-post{display:grid;gap:10px}
-.tag{display:inline-block;padding:4px 7px;border-radius:6px;background:#1a2c44;color:#9fd8ff;font-size:11px}
-.calendar{
-  display:grid;grid-template-columns:repeat(7,minmax(90px,1fr));gap:5px;overflow:auto
-}
-.day{
-  min-height:120px;background:#0b1726;border:1px solid #223750;border-radius:10px;padding:7px
-}
-.day.today{border-color:var(--accent);box-shadow:inset 0 0 0 1px rgba(94,231,255,.2)}
-.event{
-  font-size:10px;padding:4px;margin-top:4px;border-radius:5px;background:#192d47;white-space:nowrap;overflow:hidden;text-overflow:ellipsis
-}
-.event.match{background:#3a2130}.event.social{background:#18382e}.event.date{background:#3c2844}.event.business{background:#34321d}
-.empty{padding:30px;text-align:center;color:var(--muted)}
-.notice{padding:11px 13px;border:1px solid #29415e;background:#0c1929;border-radius:12px;color:#b9c8db;margin-bottom:12px}
-hr{border:0;border-top:1px solid var(--line);margin:18px 0}
-@media(max-width:1000px){
- .sidebar{width:74px;padding:10px}.sidebar .logo,.sidebar .version,.nav button span{display:none}
- .nav button{text-align:center;font-size:18px;padding:12px 5px}.main{margin-left:74px;width:calc(100% - 74px)}
- .g4{grid-template-columns:repeat(2,minmax(0,1fr))}
-}
-@media(max-width:700px){
- .topbar{align-items:flex-start;flex-direction:column}.resource-row{justify-content:flex-start}
- .page{padding:12px}.g2,.g3,.g4,.form-grid,.slot-grid{grid-template-columns:1fr}
- .hero{padding:18px}.hero h1{font-size:28px}.calendar{grid-template-columns:repeat(7,110px)}
-}
+:root{--bg:#050711;--panel:#0c1120;--panel2:#11182a;--line:#27334d;--text:#f4f7ff;--muted:#8996ae;--p:#7658ff;--c:#27dcff;--g:#35df99;--r:#ff5479;--y:#ffd35a;--o:#ff9948;--shadow:0 24px 80px #0008;--radius:18px}
+*{box-sizing:border-box}html,body{margin:0;background:radial-gradient(circle at 10% 0,#7658ff22,transparent 28%),radial-gradient(circle at 100% 10%,#27dcff12,transparent 25%),var(--bg);color:var(--text);font:14px Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer}button:disabled{opacity:.45;cursor:not-allowed}.hidden{display:none!important}
+.top{position:sticky;top:0;z-index:50;min-height:64px;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;background:#050711eF;backdrop-filter:blur(18px);border-bottom:1px solid #ffffff0d}.brand{font-size:19px;font-weight:1000}.brand b{color:var(--c)}.pills{display:flex;gap:7px;flex-wrap:wrap;justify-content:flex-end}.pill,.tag{display:inline-flex;align-items:center;gap:5px;padding:6px 9px;border:1px solid var(--line);border-radius:999px;background:#10182a;color:#dce7fb;font-size:10px;font-weight:800}
+.layout{display:flex;min-height:calc(100vh - 64px)}.side{width:245px;flex:none;position:sticky;top:64px;height:calc(100vh - 64px);overflow:auto;padding:12px;background:#070a11e8;border-right:1px solid #ffffff0b}.group{margin:15px 8px 7px;color:#596780;font-size:9px;font-weight:1000;letter-spacing:1px;text-transform:uppercase}.nav{width:100%;margin-bottom:4px;padding:10px 11px;text-align:left;color:#aeb9ce;background:transparent;border:1px solid transparent;border-radius:11px}.nav:hover,.nav.on{color:#fff;background:#151f33;border-color:#2c3a57}.main{width:100%;max-width:1650px;margin:auto;padding:20px}.mobile{display:none}
+.hero{position:relative;overflow:hidden;padding:28px;border:1px solid #2d3b5e;border-radius:25px;background:radial-gradient(circle at 85% 5%,#7658ff4d,transparent 30%),radial-gradient(circle at 5% 100%,#27dcff18,transparent 28%),linear-gradient(145deg,#142039,#080d17);box-shadow:var(--shadow)}h1,h2,h3{margin:0 0 10px;line-height:1.1}h1{font-size:clamp(29px,4vw,52px);letter-spacing:-2px}h2{font-size:22px}h3{font-size:16px}p{line-height:1.5}.muted{color:var(--muted)}.small{font-size:11px}.tiny{font-size:9px}.big{font-size:29px;font-weight:1000}.card{padding:17px;border:1px solid var(--line);border-radius:var(--radius);background:linear-gradient(145deg,#11192af7,#080d17f7);box-shadow:var(--shadow)}.grid{display:grid;gap:14px}.g2{grid-template-columns:repeat(2,minmax(0,1fr))}.g3{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(4,minmax(0,1fr))}.g5{grid-template-columns:repeat(5,minmax(0,1fr))}.row{display:flex;align-items:center;flex-wrap:wrap;gap:9px}.between{display:flex;align-items:center;justify-content:space-between;gap:12px}.btn{padding:10px 13px;color:#fff;background:#171f33;border:1px solid #34435f;border-radius:11px;transition:.15s}.btn:hover{transform:translateY(-1px);background:#202b44}.primary{background:linear-gradient(135deg,#7658ff,#4937c8)!important;border-color:#806bff!important}.cyan{background:#0d3542!important;border-color:#1a7187!important}.green{background:#103b2d!important;border-color:#267458!important}.red{background:#3a1722!important;border-color:#742b43!important}.gold{background:#3d2d0d!important;border-color:#7e5e1e!important}.orange{background:#41230f!important;border-color:#80431c!important}.full{width:100%}.large{padding:14px 18px;font-weight:900}input,select,textarea{width:100%;padding:11px 12px;color:#fff;background:#080d17;border:1px solid #2c3954;border-radius:11px;outline:none}textarea{resize:vertical}label{display:block;margin-bottom:6px;color:#aeb9ce;font-size:11px}.formgrid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}.fullrow{grid-column:1/-1}.item{padding:11px;border:1px solid #27344d;border-radius:12px;background:#0a101b}.list{display:grid;gap:8px}.notice{padding:13px;border:1px solid #293755;border-radius:13px;background:#11192a}.success{background:#0d2920;border-color:#286e54}.danger{background:#29131c;border-color:#722a43}.center{text-align:center}.kpi{min-height:105px}.kpilabel{color:#78869f;font-size:9px;font-weight:900;letter-spacing:.7px}.kpin{margin-top:5px;font-size:25px;font-weight:1000}.progress{height:9px;overflow:hidden;border-radius:999px;background:#080c15}.progress i{display:block;height:100%;background:linear-gradient(90deg,#7658ff,#27dcff)}.table{overflow:auto}table{width:100%;border-collapse:collapse}th,td{padding:9px;border-bottom:1px solid #202b41;text-align:left;font-size:11px}th{color:#77859e}.modalbg{position:fixed;inset:0;z-index:100;display:grid;place-items:center;padding:15px;background:#000c;backdrop-filter:blur(8px)}.modal{width:min(1000px,100%);max-height:92vh;overflow:auto;padding:20px;border:1px solid #34425f;border-radius:22px;background:#0c1321;box-shadow:0 40px 120px #000}.toast{position:fixed;right:18px;bottom:18px;z-index:200;max-width:400px;padding:13px 16px;border:1px solid #3b4a69;border-radius:13px;background:#121a2b;box-shadow:var(--shadow)}.logoBall{font-size:54px}.match{font-size:42px;font-weight:1000}.comment{padding:10px;border-left:2px solid #34435f;background:#0a101b;border-radius:8px}.chat{height:390px;overflow:auto;padding:12px;background:#070b14;border:1px solid #26334d;border-radius:14px}.bubble{max-width:78%;padding:10px 12px;border-radius:14px;margin:7px 0}.me{margin-left:auto;background:#3c2b93}.them{background:#172137}.calendar{display:grid;grid-template-columns:repeat(7,1fr);gap:5px}.day{min-height:62px;padding:7px;border:1px solid #25314a;border-radius:9px;background:#0a101b}.day.matchday{border-color:#27dcff}.day.today{box-shadow:0 0 0 2px #7658ff66 inset}.trophy{width:56px;height:72px;margin:auto;position:relative}.trophy:before{content:"";position:absolute;left:13px;top:8px;width:30px;height:40px;border:6px solid #ffd35a;border-radius:5px 5px 14px 14px;box-shadow:0 0 18px #ffd35a55}.trophy:after{content:"";position:absolute;left:22px;bottom:7px;width:12px;height:15px;background:#ffd35a;box-shadow:-12px 7px 0 2px #ffd35a,12px 7px 0 2px #ffd35a}.sponsor{min-height:130px}.clubcrest{width:54px;height:54px;display:grid;place-items:center;border-radius:14px;background:linear-gradient(145deg,#2a3857,#0a0f19);font-weight:1000;font-size:18px;border:1px solid #425272}.rating{font-size:22px;font-weight:1000}.chip{display:inline-block;padding:4px 7px;border-radius:7px;background:#18233a;color:#b8c7e0;font-size:10px;margin:2px}.dangerText{color:#ff6b89}.goodText{color:#59e5aa}
+@media(max-width:950px){.side{display:none}.side.open{display:block;position:fixed;inset:64px auto 0 0;z-index:80;width:270px}.mobile{display:block}.layout{display:block}.main{padding:13px}.g2,.g3,.g4,.g5,.formgrid{grid-template-columns:1fr}.pills{display:none}}
 </style>
 </head>
-
 <body>
-<div id="app"></div>
-<div id="modalRoot" class="modal-root"></div>
-<div id="toastRoot"></div>
-
+<div id="app"></div><div id="modal" class="modalbg hidden"></div><div id="toast" class="toast hidden"></div>
 <script>
 "use strict";
 
-/* =========================================================
-   RV LIFE: SIMULATOR
-   ULTRA PRO MAX REBUILD
-   Single-file / no external library / localStorage
-   ========================================================= */
+/* RV LIFE 2026 - SINGLE FILE EDITION
+   No external libraries. Save data in localStorage.
+   Real-world football snapshot is intentionally compact and editable.
+   A browser-only file cannot safely contain a private LLM API key, so
+   Partner AI Chat uses a contextual local dialogue engine.
+*/
 
-const VERSION = "V11 WORLD REBUILD";
-const SAVE_KEY = "RV_LIFE_V11_WORLD_REBUILD";
-const ADMIN_EMAILS = [
-  "sayyidrahmathamdani@gmail.com",
-  "princemarvelerlangga@gmail.com"
+const KEY="RV_LIFE_2026_ULTRA_PRO_MAX";
+const VERSION="2026.1.0";
+const SPONSORS=[
+ ["Adidas","Sportswear"],["Nike","Sportswear"],["Puma","Sportswear"],["Emirates","Airline"],
+ ["Qatar Airways","Airline"],["Etihad Airways","Airline"],["Spotify","Technology"],
+ ["Standard Chartered","Banking"],["Rakuten","Technology"],["Fly Emirates","Airline"],
+ ["Pepsi","Beverage"],["Coca-Cola","Beverage"],["Heineken","Beverage"],["EA SPORTS","Gaming"],
+ ["Mastercard","Payments"],["Santander","Banking"],["HP","Technology"],["Samsung","Technology"]
 ];
-
-const COUNTRIES = [
-  "Indonesia","England","Spain","Italy","Germany","France","Portugal",
-  "Netherlands","Brazil","Argentina","Japan","South Korea","China",
-  "Turkey","United States","Mexico","Morocco","Egypt","Nigeria",
-  "Australia","Saudi Arabia","Canada","Belgium","Croatia","Uruguay"
-];
-
-const CONTINENTS = {
-  Europe:["England","Spain","Italy","Germany","France","Portugal","Netherlands","Belgium","Croatia","Turkey"],
-  Asia:["Indonesia","Japan","South Korea","China","Saudi Arabia"],
-  Africa:["Morocco","Egypt","Nigeria"],
-  SouthAmerica:["Brazil","Argentina","Uruguay"],
-  NorthAmerica:["United States","Mexico","Canada"],
-  Oceania:["Australia"]
+const CONTINENTS={
+ Europe:["England","Spain","Italy","Germany","France","Netherlands","Portugal","Belgium","Türkiye"],
+ Asia:["Indonesia","Japan","Korea Republic","Saudi Arabia","Qatar"],
+ SouthAmerica:["Brazil","Argentina","Colombia","Uruguay","Chile"],
+ NorthAmerica:["United States","Mexico","Canada"],
+ Africa:["Morocco","Egypt","Nigeria","Senegal","Ghana","South Africa"],
+ Oceania:["Australia","New Zealand"]
 };
-
-/* 2026/27 real-world club seed.
-   The UEFA Champions League 2026/27 league-phase list is based on
-   UEFA's published September 2026 data. */
-const CLUBS = [
-  ["Arsenal","England","Premier League",89],
-  ["Aston Villa","England","Premier League",84],
-  ["Liverpool","England","Premier League",91],
-  ["Manchester City","England","Premier League",92],
-  ["Manchester United","England","Premier League",84],
-  ["Chelsea","England","Premier League",84],
-  ["Tottenham Hotspur","England","Premier League",81],
-  ["Newcastle United","England","Premier League",82],
-  ["Brighton","England","Premier League",79],
-  ["Crystal Palace","England","Premier League",77],
-  ["Everton","England","Premier League",76],
-  ["Fulham","England","Premier League",76],
-  ["Leeds United","England","Premier League",75],
-  ["Sunderland","England","Premier League",74],
-  ["Nottingham Forest","England","Premier League",78],
-  ["West Ham United","England","Premier League",78],
-  ["Wolverhampton Wanderers","England","Premier League",76],
-  ["Coventry City","England","Premier League",73],
-  ["Ipswich Town","England","Premier League",72],
-  ["Hull City","England","Premier League",71],
-
-  ["Real Madrid","Spain","La Liga",94],
-  ["Barcelona","Spain","La Liga",92],
-  ["Atlético de Madrid","Spain","La Liga",87],
-  ["Villarreal","Spain","La Liga",82],
-  ["Real Betis","Spain","La Liga",81],
-  ["Athletic Club","Spain","La Liga",81],
-  ["Real Sociedad","Spain","La Liga",80],
-  ["Sevilla","Spain","La Liga",79],
-  ["Valencia","Spain","La Liga",77],
-  ["Girona","Spain","La Liga",78],
-
-  ["Inter","Italy","Serie A",90],
-  ["Napoli","Italy","Serie A",87],
-  ["Roma","Italy","Serie A",83],
-  ["Juventus","Italy","Serie A",85],
-  ["AC Milan","Italy","Serie A",85],
-  ["Atalanta","Italy","Serie A",83],
-  ["Lazio","Italy","Serie A",80],
-  ["Fiorentina","Italy","Serie A",79],
-  ["Como","Italy","Serie A",76],
-
-  ["Bayern München","Germany","Bundesliga",93],
-  ["Borussia Dortmund","Germany","Bundesliga",86],
-  ["Leipzig","Germany","Bundesliga",83],
-  ["Stuttgart","Germany","Bundesliga",81],
-  ["Bayer Leverkusen","Germany","Bundesliga",87],
-  ["Eintracht Frankfurt","Germany","Bundesliga",79],
-  ["Freiburg","Germany","Bundesliga",77],
-  ["Mainz","Germany","Bundesliga",75],
-
-  ["Paris Saint-Germain","France","Ligue 1",92],
-  ["Lille","France","Ligue 1",80],
-  ["Lens","France","Ligue 1",78],
-  ["Monaco","France","Ligue 1",83],
-  ["Marseille","France","Ligue 1",81],
-  ["Lyon","France","Ligue 1",78],
-  ["Nice","France","Ligue 1",77],
-
-  ["Porto","Portugal","Primeira Liga",85],
-  ["Sporting CP","Portugal","Primeira Liga",86],
-  ["Benfica","Portugal","Primeira Liga",85],
-  ["Braga","Portugal","Primeira Liga",79],
-
-  ["PSV Eindhoven","Netherlands","Eredivisie",83],
-  ["Ajax","Netherlands","Eredivisie",80],
-  ["Feyenoord","Netherlands","Eredivisie",82],
-  ["Twente","Netherlands","Eredivisie",76],
-
-  ["Fenerbahçe","Turkey","Süper Lig",81],
-  ["Galatasaray","Turkey","Süper Lig",83],
-  ["Beşiktaş","Turkey","Süper Lig",78],
-  ["Trabzonspor","Turkey","Süper Lig",76],
-
-  ["Club Brugge","Belgium","Belgian Pro League",79],
-  ["Anderlecht","Belgium","Belgian Pro League",76],
-
-  ["Bodø/Glimt","Norway","Eliteserien",75],
-  ["Viking","Norway","Eliteserien",72],
-  ["Slavia Praha","Czechia","Czech First League",76],
-  ["Shakhtar Donetsk","Ukraine","Ukrainian Premier League",78],
-  ["Slovan Bratislava","Slovakia","Slovak Super Liga",70],
-  ["AEK Athens","Greece","Super League Greece",75],
-  ["LASK","Austria","Austrian Bundesliga",70],
-  ["Sabah","Azerbaijan","Azerbaijan Premier League",68],
-
-  ["Flamengo","Brazil","Brasileirão",86],
-  ["Palmeiras","Brazil","Brasileirão",85],
-  ["Botafogo","Brazil","Brasileirão",82],
-  ["Fluminense","Brazil","Brasileirão",81],
-  ["Corinthians","Brazil","Brasileirão",79],
-  ["São Paulo","Brazil","Brasileirão",80],
-  ["River Plate","Argentina","Liga Profesional",84],
-  ["Boca Juniors","Argentina","Liga Profesional",83],
-  ["Racing Club","Argentina","Liga Profesional",78],
-
-  ["Al Hilal","Saudi Arabia","Saudi Pro League",84],
-  ["Al Nassr","Saudi Arabia","Saudi Pro League",82],
-  ["Al Ahli","Saudi Arabia","Saudi Pro League",79],
-  ["Al Ittihad","Saudi Arabia","Saudi Pro League",80],
-
-  ["Urawa Red Diamonds","Japan","J1 League",76],
-  ["Kashima Antlers","Japan","J1 League",75],
-  ["Vissel Kobe","Japan","J1 League",78],
-  ["Gamba Osaka","Japan","J1 League",73],
-  ["Jeonbuk Hyundai Motors","South Korea","K League 1",75],
-  ["Ulsan HD","South Korea","K League 1",76],
-
-  ["Persib Bandung","Indonesia","Liga 1",76],
-  ["Persija Jakarta","Indonesia","Liga 1",73],
-  ["Bali United","Indonesia","Liga 1",72],
-  ["Persebaya","Indonesia","Liga 1",71],
-  ["Arema","Indonesia","Liga 1",69],
-
-  ["Inter Miami","United States","MLS",76],
-  ["LAFC","United States","MLS",78],
-  ["Seattle Sounders","United States","MLS",75],
-  ["Club América","Mexico","Liga MX",80],
-  ["Monterrey","Mexico","Liga MX",79],
-  ["Toronto FC","Canada","MLS",70],
-  ["Al Ahly","Egypt","Egyptian Premier League",82],
-  ["Wydad AC","Morocco","Botola",77],
-  ["Mamelodi Sundowns","South Africa","South African Premiership",78],
-  ["Sydney FC","Australia","A-League",73]
-].map((x,i)=>({
-  id:"club_"+i,name:x[0],country:x[1],league:x[2],rating:x[3],
-  stadium: x[0]+" Stadium", founded:1900+(i%80), value:x[3]*18_000_000,
-  squad:[], history:[], trophies:[]
-}));
-
-const REAL_PLAYERS = [
-  ["Kylian Mbappé","France","Real Madrid","ST",91],
-  ["Vinícius Júnior","Brazil","Real Madrid","LW",90],
-  ["Jude Bellingham","England","Real Madrid","CM",91],
-  ["Erling Haaland","Norway","Manchester City","ST",92],
-  ["Kevin De Bruyne","Belgium","Manchester City","CM",87],
-  ["Mohamed Salah","Egypt","Liverpool","RW",89],
-  ["Harry Kane","England","Bayern München","ST",90],
-  ["Lamine Yamal","Spain","Barcelona","RW",89],
-  ["Robert Lewandowski","Poland","Barcelona","ST",88],
-  ["Pedri","Spain","Barcelona","CM",88],
-  ["Lautaro Martínez","Argentina","Inter","ST",88],
-  ["Victor Osimhen","Nigeria","Galatasaray","ST",87],
-  ["Jamal Musiala","Germany","Bayern München","AM",88],
-  ["Florian Wirtz","Germany","Liverpool","AM",88],
-  ["Bukayo Saka","England","Arsenal","RW",88],
-  ["Martin Ødegaard","Norway","Arsenal","AM",87],
-  ["Declan Rice","England","Arsenal","DM",86],
-  ["William Saliba","France","Arsenal","CB",87],
-  ["Rodri","Spain","Manchester City","DM",90],
-  ["Phil Foden","England","Manchester City","AM",87],
-  ["Rafael Leão","Portugal","AC Milan","LW",86],
-  ["Khvicha Kvaratskhelia","Georgia","Paris Saint-Germain","LW",86],
-  ["Ousmane Dembélé","France","Paris Saint-Germain","RW",88],
-  ["Achraf Hakimi","Morocco","Paris Saint-Germain","RB",87],
-  ["Virgil van Dijk","Netherlands","Liverpool","CB",88],
-  ["Alisson","Brazil","Liverpool","GK",89],
-  ["Thibaut Courtois","Belgium","Real Madrid","GK",89],
-  ["Rúben Dias","Portugal","Manchester City","CB",87],
-  ["Bruno Fernandes","Portugal","Manchester United","AM",87],
-  ["Cole Palmer","England","Chelsea","AM",86]
-].map((p,i)=>({
-  id:"player_"+i,name:p[0],country:p[1],club:p[2],position:p[3],
-  ovr:p[4],potential:Math.min(99,p[4]+(i%7)),
-  value:p[4]*2_000_000,salary:p[4]*5000,age:22+(i%11),
-  stats:makeStats(p[4]),form:75,morale:80,injury:0
-}));
-
-const NATIONAL_TEAMS = [
-  ["Indonesia","Asia",72],
-  ["Japan","Asia",82],
-  ["South Korea","Asia",80],
-  ["China","Asia",71],
-  ["Saudi Arabia","Asia",76],
-  ["Australia","Oceania",77],
-  ["England","Europe",89],
-  ["Spain","Europe",91],
-  ["France","Europe",92],
-  ["Germany","Europe",87],
-  ["Italy","Europe",84],
-  ["Portugal","Europe",88],
-  ["Netherlands","Europe",86],
-  ["Belgium","Europe",84],
-  ["Croatia","Europe",81],
-  ["Turkey","Europe",79],
-  ["Brazil","South America",92],
-  ["Argentina","South America",91],
-  ["Uruguay","South America",85],
-  ["Morocco","Africa",82],
-  ["Egypt","Africa",77],
-  ["Nigeria","Africa",79],
-  ["United States","North America",78],
-  ["Mexico","North America",79],
-  ["Canada","North America",76]
-].map((x,i)=>({
-  id:"nt_"+i,name:x[0],continent:x[1],rating:x[2],ranking:i+1,
-  squad:[],caps:0,trophies:[]
-}));
-
-const COMPETITIONS = [
-  {id:"pl",name:"Premier League",type:"domestic_league",region:"England",tier:1},
-  {id:"laliga",name:"La Liga",type:"domestic_league",region:"Spain",tier:1},
-  {id:"seriea",name:"Serie A",type:"domestic_league",region:"Italy",tier:1},
-  {id:"bundesliga",name:"Bundesliga",type:"domestic_league",region:"Germany",tier:1},
-  {id:"ligue1",name:"Ligue 1",type:"domestic_league",region:"France",tier:1},
-  {id:"primeira",name:"Primeira Liga",type:"domestic_league",region:"Portugal",tier:1},
-  {id:"eredivisie",name:"Eredivisie",type:"domestic_league",region:"Netherlands",tier:1},
-  {id:"superlig",name:"Süper Lig",type:"domestic_league",region:"Turkey",tier:1},
-  {id:"brazil",name:"Brasileirão",type:"domestic_league",region:"Brazil",tier:1},
-  {id:"liga1id",name:"Liga 1",type:"domestic_league",region:"Indonesia",tier:1},
-  {id:"j1",name:"J1 League",type:"domestic_league",region:"Japan",tier:1},
-  {id:"kleague",name:"K League 1",type:"domestic_league",region:"South Korea",tier:1},
-
-  {id:"fa",name:"FA Cup",type:"domestic_cup",region:"England"},
-  {id:"copa",name:"Copa del Rey",type:"domestic_cup",region:"Spain"},
-  {id:"coppa",name:"Coppa Italia",type:"domestic_cup",region:"Italy"},
-  {id:"dfb",name:"DFB-Pokal",type:"domestic_cup",region:"Germany"},
-  {id:"cdf",name:"Coupe de France",type:"domestic_cup",region:"France"},
-  {id:"taca",name:"Taça de Portugal",type:"domestic_cup",region:"Portugal"},
-  {id:"knvb",name:"KNVB Cup",type:"domestic_cup",region:"Netherlands"},
-  {id:"turkishcup",name:"Turkish Cup",type:"domestic_cup",region:"Turkey"},
-  {id:"copa_brasil",name:"Copa do Brasil",type:"domestic_cup",region:"Brazil"},
-  {id:"indonesia_cup",name:"Piala Indonesia",type:"domestic_cup",region:"Indonesia"},
-
-  {id:"super_eng",name:"FA Community Shield",type:"super_cup",region:"England"},
-  {id:"super_spain",name:"Supercopa de España",type:"super_cup",region:"Spain"},
-  {id:"super_italy",name:"Supercoppa Italiana",type:"super_cup",region:"Italy"},
-  {id:"super_germany",name:"DFL-Supercup",type:"super_cup",region:"Germany"},
-  {id:"super_france",name:"Trophée des Champions",type:"super_cup",region:"France"},
-  {id:"super_turkey",name:"Turkish Super Cup",type:"super_cup",region:"Turkey"},
-
-  {id:"ucl",name:"UEFA Champions League",type:"continental_club",region:"Europe"},
-  {id:"uel",name:"UEFA Europa League",type:"continental_club",region:"Europe"},
-  {id:"uecl",name:"UEFA Conference League",type:"continental_club",region:"Europe"},
-  {id:"libertadores",name:"CONMEBOL Libertadores",type:"continental_club",region:"South America"},
-  {id:"sudamericana",name:"CONMEBOL Sudamericana",type:"continental_club",region:"South America"},
-  {id:"afc",name:"AFC Champions League Elite",type:"continental_club",region:"Asia"},
-  {id:"african",name:"CAF Champions League",type:"continental_club",region:"Africa"},
-  {id:"concacaf",name:"Concacaf Champions Cup",type:"continental_club",region:"North America"},
-
-  {id:"cwc",name:"FIFA Club World Cup",type:"world_club",region:"World"},
-
-  {id:"asean",name:"ASEAN Championship",type:"regional_nt",region:"Asia"},
-  {id:"afcon",name:"Africa Cup of Nations",type:"continental_nt",region:"Africa"},
-  {id:"euro",name:"UEFA European Championship",type:"continental_nt",region:"Europe"},
-  {id:"copaamerica",name:"Copa América",type:"continental_nt",region:"South America"},
-  {id:"goldcup",name:"CONCACAF Gold Cup",type:"continental_nt",region:"North America"},
-  {id:"asiancup",name:"AFC Asian Cup",type:"continental_nt",region:"Asia"},
-  {id:"oceaniacup",name:"OFC Nations Cup",type:"continental_nt",region:"Oceania"},
-  {id:"worldcup",name:"FIFA World Cup",type:"world_nt",region:"World"}
-];
-
-const SPONSORS = [
-  "Nike","Adidas","Puma","Coca-Cola","Pepsi","Samsung","Apple",
-  "Microsoft","Sony","EA Sports","Emirates","Qatar Airways","Etihad Airways",
-  "Mastercard","Visa","Toyota","Hyundai","Honda","Red Bull","Heineken",
-  "Uber","Spotify","Google","Amazon","TikTok","YouTube","PlayStation",
-  "Xbox","McDonald's","Shell","IKEA","Booking.com","Crypto.com"
-];
-
-const BUSINESS_CATEGORIES = [
-  "Football Club","Football Academy","Football Agency","Sportswear","Sports Equipment",
-  "Restaurant","Cafe","Hotel","Property","Technology","Software","Gaming","Esports",
-  "Media","Entertainment","Music","Film","Fitness","Health","Automotive","Travel",
-  "Logistics","Education","Fashion","Beauty","Retail","Food & Beverage","Manufacturing",
-  "Construction","Finance","Investment","Digital Creator","Streaming","Marketing Agency",
-  "Event Organizer","Real Estate","Security","Agriculture","Energy","Transportation"
-];
-
-const RARITIES = ["UR","SSS","SS","S","A","B"];
-const PARTNER_COUNTRIES = ["China","Korea","England","Japan","Russia","Turkey"];
-const PARTNER_COUNTS = {UR:4,SSS:6,SS:10,S:15,A:25,B:30};
-
-const NAME_POOL = {
-  China:["Lumei","Qiaora","Xinyue","Meilin","Ruoxi","Yuehan","Lanqi","Mingya"],
-  Korea:["Arae","Seorin","Yunae","Harin","Minae","Sorae","Jiwon","Nari"],
-  England:["Elowen","Rosalie","Aveline","Evelyn","Harriet","Amelie","Celia","Florence"],
-  Japan:["Mikae","Hoshina","Akarin","Yumeka","Rinako","Misora","Kaede","Nozomi"],
-  Russia:["Anvara","Milena","Vera","Alina","Nadeya","Kira","Zoya","Elvira"],
-  Turkey:["Elif","Aylin","Serena","Derya","Selin","Leyla","Nehir","Defne"]
+const LEAGUES={
+ "Premier League":["Arsenal","Aston Villa","Bournemouth","Brentford","Brighton","Burnley","Chelsea","Crystal Palace","Everton","Fulham","Leeds United","Liverpool","Manchester City","Manchester United","Newcastle United","Nottingham Forest","Sunderland","Tottenham Hotspur","West Ham United","Wolverhampton Wanderers"],
+ "LaLiga":["Athletic Club","Atlético de Madrid","Osasuna","Celta","Deportivo Alavés","Elche","Barcelona","Getafe","Levante","Málaga","Racing Santander","Rayo Vallecano","Deportivo La Coruña","Espanyol","Real Betis","Real Madrid","Real Sociedad","Sevilla","Valencia","Villarreal"],
+ "Serie A":["Inter","Juventus","Milan","Napoli","Roma","Lazio","Atalanta","Fiorentina","Bologna","Torino","Genoa","Udinese","Sassuolo","Parma","Como","Lecce","Cagliari","Verona","Pisa","Cremonese"],
+ "Bundesliga":["Bayern München","Borussia Dortmund","Bayer Leverkusen","RB Leipzig","Eintracht Frankfurt","Stuttgart","Union Berlin","Freiburg","Mainz","Werder Bremen","Borussia Mönchengladbach","Wolfsburg","Hoffenheim","Augsburg","Heidenheim","St Pauli","Hamburg","Köln"],
+ "Ligue 1":["Paris Saint-Germain","Marseille","Monaco","Lille","Lyon","Lens","Nice","Rennes","Nantes","Strasbourg","Montpellier","Toulouse","Brest","Reims","Auxerre","Le Havre","Angers","Metz"],
+ "Eredivisie":["Ajax","PSV","Feyenoord","Utrecht","AZ","Twente","Groningen","Heerenveen","NEC","Sparta Rotterdam","Go Ahead Eagles","Fortuna Sittard","PEC Zwolle","NAC Breda","Heracles","RKC Waalwijk"],
+ "Liga Portugal":["Benfica","Sporting CP","Porto","Braga","Vitória SC","Boavista","Rio Ave","Famalicão","Gil Vicente","Estoril","Arouca","Casa Pia","Moreirense","Nacional","Santa Clara"],
+ "Liga 1 Indonesia":["Persib Bandung","Persija Jakarta","Bali United","Arema","Persebaya Surabaya","PSM Makassar","Borneo FC","Madura United","Dewa United","Semen Padang","PSIS Semarang","Persita","Barito Putera","Malut United","Persis Solo","PSS Sleman","Bhayangkara Presisi","Persik Kediri"]
 };
-
-const JOBS = [
-  "Singer","Actor","Influencer","Model","Content Creator","Designer",
-  "Entrepreneur","Athlete","Presenter","Photographer","Producer","Streamer",
-  "Fashion Creative","Chef","Writer","Musician","TV Personality","Founder"
-];
-
-const PERSONALITIES = [
-  "warm","ambitious","playful","calm","protective","romantic","independent","competitive"
-];
-
-function makeStats(ovr){
-  return {
-    pace:clamp(ovr-3+rand(-4,4),35,99),
-    shooting:clamp(ovr+rand(-5,4),35,99),
-    passing:clamp(ovr+rand(-4,5),35,99),
-    dribbling:clamp(ovr+rand(-4,5),35,99),
-    defending:clamp(ovr-7+rand(-5,5),25,99),
-    physical:clamp(ovr-2+rand(-5,5),30,99),
-    stamina:clamp(ovr+rand(-5,4),30,99),
-    mentality:clamp(ovr+rand(-5,5),30,99)
-  };
-}
-
-function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a}
-function clamp(v,a,b){return Math.max(a,Math.min(b,v))}
-function uid(prefix="id"){return prefix+"_"+Date.now().toString(36)+"_"+Math.random().toString(36).slice(2,8)}
-function money(n){return new Intl.NumberFormat("id-ID",{style:"currency",currency:"IDR",maximumFractionDigits:0}).format(Math.max(0,n))}
-function num(n){return new Intl.NumberFormat("id-ID").format(Math.round(n||0))}
-function esc(s){
-  return String(s??"").replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#039;"}[c]));
-}
-function clone(o){return JSON.parse(JSON.stringify(o))}
-function nowDate(){return new Date(game.world.year,game.world.month-1,game.world.day)}
-function dateKey(y,m,d){return `${y}-${String(m).padStart(2,"0")}-${String(d).padStart(2,"0")}`}
-function monthName(m){return new Date(2000,m-1,1).toLocaleString("id-ID",{month:"long"})}
-function formatDate(){
-  return nowDate().toLocaleDateString("id-ID",{weekday:"long",day:"numeric",month:"long",year:"numeric"})
-}
-function chance(p){
-  if(currentPlayer()?.godMode)return Math.random()<.99;
-  return Math.random()<p;
-}
-
-function calcOvr(p){
-  if(p?.manualOvr!=null)return clamp(Number(p.manualOvr)||1,1,99);
-  const s=p.stats||{};
-  const vals=Object.values(s);
-  return clamp(Math.round(vals.reduce((a,b)=>a+b,0)/Math.max(vals.length,1)),1,99);
-}
-function ovrClass(ovr){
-  if(ovr<60)return "ovr-brown";
-  if(ovr<70)return "ovr-green";
-  if(ovr<80)return "ovr-silver";
-  if(ovr<90)return "ovr-gold";
-  if(ovr<96)return "ovr-elite";
-  return "ovr-goat";
-}
-
-function createDefaultPlayer(){
-  return {
-    id:uid("player"),
-    name:"New Player",age:18,gender:"Other",country:"Indonesia",
-    background:"Academy Prospect",position:"AM",photo:"",
-    money:10000000,fame:0,followers:250,likes:0,energy:100,health:100,
-    stats:{pace:58,shooting:55,passing:60,dribbling:59,defending:42,physical:53,stamina:60,mentality:55},
-    manualOvr:null,godMode:false,
-    career:{
-      club:"Persib Bandung",season:2026,week:1,matches:0,goals:0,assists:0,
-      value:1500000,salary:5000000,contractYears:3,form:70,
-      nationalTeam:"Indonesia",caps:0,goalsNT:0,assistsNT:0
-    },
-    business:{
-      cash:50000000,companies:[],club:null,transactions:[]
-    },
-    partners:[],
-    children:[],
-    social:{posts:[],notifications:[],dms:[]},
-    inventory:{
-      borders:["Starter","OVR Green","OVR Silver","OVR Gold"],
-      items:[],trophies:[]
-    },
-    achievements:[],
-    logs:["Karier baru dimulai."],
-    createdAt:Date.now()
-  };
-}
-
-function generatePartners(){
-  const out=[];
-  let id=1;
-  for(const country of PARTNER_COUNTRIES){
-    for(const rarity of RARITIES){
-      for(let i=0;i<PARTNER_COUNTS[rarity];i++){
-        const pool=NAME_POOL[country];
-        const first=pool[(i+id)%pool.length];
-        const last=["Lunara","Velin","Arden","Kaya","Mirel","Aster","Nova","Rena"][(i*3+id)%8];
-        const rarityOvr={UR:95,SSS:90,SS:84,S:78,A:70,B:62}[rarity];
-        out.push({
-          id:"partner_"+id,
-          name:first+" "+last,
-          age:20+((i+id)%14),
-          country,
-          occupation:JOBS[(i+id)%JOBS.length],
-          rarity,
-          personality:PERSONALITIES[(i+id)%PERSONALITIES.length],
-          photo:"",
-          border:"Starter",
-          affection:15+rand(0,12),
-          trust:10+rand(0,15),
-          jealousy:10+rand(0,20),
-          mood:70,
-          ovr:rarityOvr+rand(-2,3),
-          money:1000000+rarityOvr*250000,
-          inventory:["Phone","Signature Outfit"],
-          memories:[],
-          married:false,
-          relationshipStatus:"single",
-          children:[],
-          arc:0,
-          unlocked:false
-        });
-        id++;
-      }
-    }
-  }
-  return out;
-}
-
-const PARTNER_CATALOG = generatePartners();
-
-function buildClubSquads(){
-  CLUBS.forEach(c=>{
-    const matching=REAL_PLAYERS.filter(p=>p.club===c.name).map(clone);
-    c.squad=matching;
-    if(!c.squad.length){
-      const count=18;
-      for(let i=0;i<count;i++){
-        const base=clamp(c.rating+rand(-9,7),55,91);
-        c.squad.push({
-          id:uid("squad"),name:fakePlayerName(c.country,i),country:c.country,
-          club:c.name,position:["GK","CB","RB","LB","DM","CM","AM","RW","LW","ST"][i%10],
-          ovr:base,potential:clamp(base+rand(0,12),base,96),age:18+rand(0,17),
-          value:base*1000000,salary:base*3000,stats:makeStats(base),form:70,morale:75,injury:0
-        });
-      }
-    }
-  });
-  NATIONAL_TEAMS.forEach(nt=>{
-    nt.squad=REAL_PLAYERS.filter(p=>p.country===nt.name).map(clone);
-    for(let i=nt.squad.length;i<23;i++){
-      const base=clamp(nt.rating+rand(-9,6),55,91);
-      nt.squad.push({
-        id:uid("ntsquad"),name:fakePlayerName(nt.name,i),country:nt.name,
-        club:"National Team",position:["GK","CB","RB","LB","DM","CM","AM","RW","LW","ST"][i%10],
-        ovr:base,potential:clamp(base+rand(1,10),base,96),age:18+rand(0,16),
-        value:base*1000000,salary:0,stats:makeStats(base),form:70,morale:75,injury:0
-      });
-    }
-  });
-}
-function fakePlayerName(country,i){
-  const a=["Arden","Raka","Nico","Mika","Leo","Rian","Kai","Evan","Dimas","Ari","Noah","Luca"];
-  const b=["Hart","Mora","Vale","Kane","Rossi","Pran","Sato","Loren","Vega","Adler"];
-  return a[(i+country.length)%a.length]+" "+b[(i*2+country.length)%b.length];
-}
-buildClubSquads();
-
-const TROPHIES = {
-  pl:{name:"Premier League Trophy",shape:"league"},
-  fa:{name:"FA Cup",shape:"cup"},
-  laliga:{name:"La Liga Trophy",shape:"league"},
-  copa:{name:"Copa del Rey",shape:"cup"},
-  seriea:{name:"Serie A Trophy",shape:"league"},
-  coppa:{name:"Coppa Italia",shape:"cup"},
-  bundesliga:{name:"Meisterschale",shape:"plate"},
-  dfb:{name:"DFB-Pokal",shape:"cup"},
-  ligue1:{name:"Ligue 1 Trophy",shape:"league"},
-  ucl:{name:"UEFA Champions League Trophy",shape:"europe"},
-  uel:{name:"UEFA Europa League Trophy",shape:"europe"},
-  uecl:{name:"UEFA Conference League Trophy",shape:"europe"},
-  libertadores:{name:"Copa Libertadores Trophy",shape:"continental"},
-  afc:{name:"AFC Champions League Elite Trophy",shape:"continental"},
-  cwc:{name:"FIFA Club World Cup Trophy",shape:"world"},
-  euro:{name:"UEFA European Championship Trophy",shape:"continental"},
-  copaamerica:{name:"Copa América Trophy",shape:"continental"},
-  afcon:{name:"Africa Cup of Nations Trophy",shape:"continental"},
-  asiancup:{name:"AFC Asian Cup Trophy",shape:"continental"},
-  worldcup:{name:"FIFA World Cup Trophy",shape:"world"}
+const LEAGUE_META={
+ "Premier League":{country:"England",continent:"Europe",tier:1},
+ "LaLiga":{country:"Spain",continent:"Europe",tier:1},
+ "Serie A":{country:"Italy",continent:"Europe",tier:1},
+ "Bundesliga":{country:"Germany",continent:"Europe",tier:1},
+ "Ligue 1":{country:"France",continent:"Europe",tier:1},
+ "Eredivisie":{country:"Netherlands",continent:"Europe",tier:1},
+ "Liga Portugal":{country:"Portugal",continent:"Europe",tier:1},
+ "Liga 1 Indonesia":{country:"Indonesia",continent:"Asia",tier:1}
 };
+const NATIONALS=["Indonesia","England","Spain","France","Germany","Italy","Portugal","Netherlands","Belgium","Türkiye","Brazil","Argentina","Colombia","Uruguay","Chile","United States","Mexico","Canada","Japan","Korea Republic","Saudi Arabia","Qatar","Australia","Morocco","Egypt","Nigeria","Senegal","Ghana","South Africa"];
+const WORLD_CUP_2026=["Canada","Mexico","United States","Argentina","Brazil","Uruguay","Colombia","Ecuador","Paraguay","Chile","Australia","Japan","Korea Republic","Iran","Saudi Arabia","Qatar","Uzbekistan","Jordan","Morocco","Egypt","Algeria","Ghana","Senegal","Tunisia","South Africa","New Zealand","France","Spain","England","Germany","Italy","Portugal","Netherlands","Belgium","Croatia","Switzerland","Austria","Türkiye","Norway","Poland","Serbia","Scotland","Czechia","Sweden","Ukraine","Panama","Costa Rica","Haiti"];
+const CLUB_COMP=[
+ ["Premier League","Domestic League","🏆"],
+ ["FA Cup","Domestic Cup","🏆"],
+ ["FA Community Shield","Domestic Super Cup","🏆"],
+ ["LaLiga","Domestic League","🏆"],
+ ["Copa del Rey","Domestic Cup","🏆"],
+ ["Supercopa de España","Domestic Super Cup","🏆"],
+ ["Serie A","Domestic League","🏆"],
+ ["Coppa Italia","Domestic Cup","🏆"],
+ ["Supercoppa Italiana","Domestic Super Cup","🏆"],
+ ["Bundesliga","Domestic League","🏆"],
+ ["DFB-Pokal","Domestic Cup","🏆"],
+ ["DFL-Supercup","Domestic Super Cup","🏆"],
+ ["Ligue 1","Domestic League","🏆"],
+ ["Coupe de France","Domestic Cup","🏆"],
+ ["Trophée des Champions","Domestic Super Cup","🏆"],
+ ["UEFA Champions League","Continental Club","🏆"],
+ ["UEFA Europa League","Continental Club","🏆"],
+ ["UEFA Conference League","Continental Club","🏆"],
+ ["UEFA Super Cup","Continental Super Cup","🏆"],
+ ["FIFA Club World Cup","World Club","🏆"]
+];
+const NATIONAL_COMP=[
+ ["AFC Asian Cup","Continental National","🏆"],["UEFA European Championship","Continental National","🏆"],
+ ["Copa América","Continental National","🏆"],["CAF Africa Cup of Nations","Continental National","🏆"],
+ ["CONCACAF Gold Cup","Continental National","🏆"],["OFC Nations Cup","Continental National","🏆"],
+ ["FIFA World Cup","World National","🏆"]
+];
+const AWARDS=["Ballon d'Or","The Best FIFA Men's Player","Golden Boot","Golden Glove","Young Player of the Tournament","Player of the Tournament","Team of the Season","MVP","Golden Boy"];
 
-function freshWorld(){
-  return {
-    year:2026,month:9,day:13,
-    season:"2026/27",
-    weather:"Clear",
-    events:[],
-    matchday:1,
-    lastAdvance:Date.now(),
-    history:[]
-  };
+function uid(p="id"){return p+"_"+Math.random().toString(36).slice(2,8)+Date.now().toString(36)}
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function clamp(n,a,b){return Math.max(a,Math.min(b,Number(n)||0))}
+function esc(v){return String(v??"").replace(/[&<>"']/g,x=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[x]))}
+function money(n){return "$"+Math.floor(Number(n)||0).toLocaleString("en-US")}
+function dateObj(s){return new Date(s.cal.y,s.cal.m-1,s.cal.d)}
+function dateStr(s){return dateObj(s).toLocaleDateString("id-ID",{day:"2-digit",month:"short",year:"numeric"})}
+function daysInMonth(y,m){return new Date(y,m,0).getDate()}
+function ovr(p){return Math.round(Object.values(p.stats).reduce((a,b)=>a+b,0)/Object.values(p.stats).length)}
+function save(){localStorage.setItem(KEY,JSON.stringify(DB))}
+function toast(x){let e=document.getElementById("toast");e.textContent=x;e.classList.remove("hidden");clearTimeout(window.__t);window.__t=setTimeout(()=>e.classList.add("hidden"),2600)}
+function log(x){let s=S();s.logs.unshift("["+dateStr(s)+"] "+x);s.logs=s.logs.slice(0,180)}
+function S(){return DB.slots[DB.active]}
+
+function makeClub(name,league){
+ let meta=LEAGUE_META[league]||{country:"International",continent:"Europe"};
+ return {id:uid("club"),name,league,country:meta.country,continent:meta.continent,rating:68+Math.floor(Math.random()*24),budget:15000000+Math.floor(Math.random()*300000000),stadium:name+" Stadium",manager:"Manager",squad:[],trophies:[],sponsor:pick(SPONSORS)[0]};
+}
+const CLUBS=Object.entries(LEAGUES).flatMap(([league,names])=>names.map(n=>makeClub(n,league)));
+function clubByName(n){return CLUBS.find(c=>c.name===n)}
+function leagueClubs(l){return CLUBS.filter(c=>c.league===l)}
+
+function genSquad(club){
+ const first=["Alex","Mateo","Luca","Noah","Leo","Milan","Kai","Adam","Rafael","Daniel","Omar","Ethan","Jude","Hugo","Yuki","Kenji","Arda","Nico","Thiago","Mason"];
+ const last=["Silva","Martinez","Rossi","Khan","Santos","Kim","Tanaka","Garcia","Brown","Wilson","Costa","Müller","Sato","Ibrahim","Andersen","Pereira","Young","Moretti","Lee","Bennett"];
+ const pos=["GK","CB","CB","LB","RB","DM","CM","CM","AM","LW","RW","ST","ST","CB","CM","LB","RB","GK","AM","ST","LW","RW"];
+ return Array.from({length:23},(_,i)=>({id:uid("pl"),name:first[i%first.length]+" "+last[(i*3)%last.length],age:18+(i%17),pos:pos[i],ovr:62+((club.rating+i*3)%30),value:500000+(i*700000)+(club.rating*25000),salary:3000+i*900,club:club.name,custom:false}));
+}
+CLUBS.forEach(c=>c.squad=genSquad(c));
+
+function fresh(){
+ return {
+  player:{name:"New Player",age:18,country:"Indonesia",position:"AMF",club:"Persib Bandung",stats:{pace:60,shooting:58,passing:62,dribbling:61,defending:42,physical:56,vision:60,mentality:55},form:60,energy:100,health:90},
+  finance:{cash:25000,bank:0,businesses:[],sponsors:[],weekly:0},
+  social:{followers:120,likes:80,posts:[],messages:[]},
+  relationship:{partners:[],children:[]},
+  football:{season:"2026/27",matchday:1,appearances:0,goals:0,assists:0,wins:0,draws:0,losses:0,trophies:[],awards:[],offers:[],ownedClub:null},
+  cal:{d:1,m:7,y:2026},
+  world:{news:[],lastSim:0},
+  logs:["RV LIFE 2026 dimulai."],
+  achievements:[],
+  settings:{sound:false},
+  chat:{}
+ };
+}
+let DB=JSON.parse(localStorage.getItem(KEY)||"null")||{active:0,slots:[fresh(),null,null]};
+if(!DB.slots)DB={active:0,slots:[fresh(),null,null]};
+let screen="dashboard", mobile=false, modalState=null, match=null;
+
+function nav(id,label){return `<button class="nav ${screen===id?"on":""}" data-a="nav" data-screen="${id}">${label}</button>`}
+function shell(content){
+ const s=S();
+ return `<header class="top"><div class="row"><button class="btn mobile" data-a="mobile">☰</button><div class="brand">RV <b>LIFE</b> <span class="tag">2026</span></div></div>
+ <div class="pills"><span class="pill">OVR ${ovr(s.player)}</span><span class="pill">${money(s.finance.cash)}</span><span class="pill">⚡ ${s.player.energy}</span><span class="pill">👥 ${s.social.followers.toLocaleString()}</span><span class="pill">📅 ${dateStr(s)}</span></div></header>
+ <div class="layout"><aside class="side ${mobile?"open":""}">
+ <div class="group">Life</div>${nav("dashboard","⌂ Dashboard")}${nav("calendar","◷ Calendar & Schedule")}${nav("profile","✎ Player Profile")}
+ <div class="group">Football</div>${nav("football","⚽ Matchday")}${nav("world","🌍 World Football")}${nav("clubs","🏟 Clubs")}${nav("national","🌐 National Teams")}${nav("competitions","🏆 Competitions")}${nav("transfer","⇄ Transfer Market")}${nav("training","◈ Training")}
+ <div class="group">Club Owner</div>${nav("myclub","👑 My Football Club")}${nav("players","👥 Squad & Players")}${nav("clubmarket","💰 Player Market")}
+ <div class="group">Money</div>${nav("business","$ Business Empire")}${nav("sponsors","🤝 Sponsors")}
+ <div class="group">Social & Family</div>${nav("social","◎ RV-Gram")}${nav("partners","♥ Partners")}${nav("family","♧ Children & Family")}
+ <div class="group">System</div>${nav("awards","★ Awards & Trophies")}${nav("news","▣ World News")}${nav("guide","? Guide")}${nav("saves","▣ Save Slots")}
+ </aside><main class="main">${content}</main></div>`;
 }
 
-function defaultGame(){
-  return {
-    version:VERSION,email:"",isAdmin:false,screen:"login",slot:0,
-    world:freshWorld(),
-    player:null,
-    catalogUnlocked:false
-  };
+function kpi(a,b,c){return `<div class="card kpi"><div class="kpilabel">${a}</div><div class="kpin">${b}</div><div class="small muted">${c}</div></div>`}
+function bar(label,v){return `<div class="item"><div class="between"><b>${esc(label)}</b><b>${v}</b></div><div class="progress"><i style="width:${clamp(v,0,100)}%"></i></div></div>`}
+
+function dashboard(){
+ const s=S(), c=clubByName(s.player.club)||CLUBS[0];
+ return `<div class="hero"><div class="tag">ULTRA PRO MAX • SINGLE HTML</div><h1>${esc(s.player.name)}'s Universe</h1><p class="muted">Football career + club ownership + real-world competition structure + family + sponsors + social + living world.</p><div class="row"><span class="tag">⚽ ${esc(c.name)}</span><span class="tag">${esc(c.league)}</span><span class="tag">OVR ${ovr(s.player)}</span><button class="btn primary" data-a="nav" data-screen="calendar">Open Schedule</button></div></div><br>
+ <div class="grid g5">${kpi("OVR",ovr(s.player),"Overall rating")}${kpi("VALUE",money(500000+ovr(s.player)*250000),"Market value")}${kpi("GOALS",s.football.goals,"Career goals")}${kpi("CASH",money(s.finance.cash),"Liquid cash")}${kpi("FAME",Math.min(99,Math.floor(s.social.followers/10000)+s.football.goals),"Global fame")}</div><br>
+ <div class="grid g2"><div class="card"><div class="between"><h2>Next Match</h2><span class="tag">${dateStr(s)}</span></div><br>${nextMatchCard()}<br><button class="btn primary full" data-a="start-match">Start Match</button></div>
+ <div class="card"><h2>Player Development</h2><div class="grid g2">${Object.entries(s.player.stats).map(([k,v])=>bar(k,v)).join("")}</div></div></div><br>
+ <div class="grid g3"><div class="card"><h3>🌍 World Simulation</h3><p class="small muted">Klub lain, transfer, hasil pertandingan, sponsor dan news bergerak saat waktu maju.</p><button class="btn cyan full" data-a="advance">Advance 1 Day</button></div><div class="card"><h3>🏆 Trophy Room</h3><p class="small muted">${s.football.trophies.length?esc(s.football.trophies.join(", ")):"Belum ada trofi."}</p><button class="btn full" data-a="nav" data-screen="awards">Open Trophy Room</button></div><div class="card"><h3>💬 Partner AI</h3><p class="small muted">Chat berbasis personality, affection, trust, jealousy, status dan konteks hidup.</p><button class="btn full" data-a="nav" data-screen="partners">Open AI Chat</button></div></div>`;
+}
+function nextMatchCard(){
+ const s=S(), c=clubByName(s.player.club)||CLUBS[0], rivals=leagueClubs(c.league).filter(x=>x.name!==c.name), opp=rivals[(s.football.matchday-1)%Math.max(1,rivals.length)];
+ return `<div class="scoreboard"><div class="small muted">${esc(c.league)} • Matchday ${s.football.matchday}</div><div class="match">${esc(c.name)} <span class="muted">vs</span> ${esc(opp.name)}</div><div class="small muted">${dateStr(s)} • ${["15:00","17:30","19:45","20:00"][s.football.matchday%4]}</div></div>`;
 }
 
-let game=loadGame()||defaultGame();
-let modal=null;
-
-function loadGame(){
-  try{
-    const raw=localStorage.getItem(SAVE_KEY);
-    return raw?JSON.parse(raw):null;
-  }catch(e){return null}
+function calendarScreen(){
+ const s=S(), d=dateObj(s), first=new Date(s.cal.y,s.cal.m-1,1).getDay(), n=daysInMonth(s.cal.y,s.cal.m), cells=[];
+ for(let i=0;i<first;i++)cells.push(`<div></div>`);
+ for(let day=1;day<=n;day++){let isToday=day===s.cal.d;let isMatch=(day%7===((s.football.matchday+2)%7));cells.push(`<div class="day ${isMatch?"matchday":""} ${isToday?"today":""}"><b>${day}</b><div class="tiny muted">${isMatch?"⚽ Matchday":day===1?"💰 Month":"Training / Life"}</div></div>`)}
+ return `<div class="hero"><div class="tag">WORLD CALENDAR ENGINE</div><h1>${d.toLocaleDateString("en-US",{month:"long"})} ${s.cal.y}</h1><p class="muted">Tanggal benar mengikuti jumlah hari tiap bulan. Season tidak lagi terikat pada counter week palsu.</p></div><br>
+ <div class="grid g3">${kpi("DATE",dateStr(s),"Current date")}${kpi("SEASON",s.football.season,"Football season")}${kpi("MATCHDAY",s.football.matchday,"League matchday")}</div><br>
+ <div class="card"><div class="between"><h2>Calendar</h2><div class="row"><button class="btn" data-a="month" data-d="-1">‹</button><button class="btn" data-a="month" data-d="1">›</button></div></div><br><div class="calendar">${["Sun","Mon","Tue","Wed","Thu","Fri","Sat"].map(x=>`<div class="tag">${x}</div>`).join("")}${cells.join("")}</div></div><br>
+ <div class="grid g2"><div class="card"><h2>Schedule</h2><div class="list">${scheduleRows()}</div></div><div class="card"><h2>Time Actions</h2><div class="grid g2"><button class="btn cyan" data-a="advance">+1 Day</button><button class="btn cyan" data-a="advance" data-days="7">+1 Week</button><button class="btn green" data-a="nav" data-screen="training">Train</button><button class="btn gold" data-a="nav" data-screen="business">Manage Business</button></div></div></div>`;
 }
-function saveGame(){
-  try{
-    localStorage.setItem(SAVE_KEY,JSON.stringify(game));
-  }catch(e){
-    toast("Save gagal. Storage browser mungkin penuh.");
-  }
-}
-function currentPlayer(){return game.player}
+function scheduleRows(){let s=S();return Array.from({length:8},(_,i)=>{let dd=new Date(s.cal.y,s.cal.m-1,s.cal.d+i*3);return `<div class="item"><div class="between"><b>${dd.toLocaleDateString("id-ID",{weekday:"short",day:"numeric",month:"short"})}</b><span class="tag">${i%2?"Training":"⚽ Match"}</span></div><div class="small muted">${i%2?"Recovery + tactical session":nextMatchText(i)}</div></div>`}).join("")}
+function nextMatchText(i){let s=S(),c=clubByName(s.player.club)||CLUBS[0],r=leagueClubs(c.league).filter(x=>x.name!==c.name);return c.name+" vs "+r[(s.football.matchday+i)%r.length].name}
 
-function toast(msg){
-  const root=document.getElementById("toastRoot");
-  const el=document.createElement("div");
-  el.className="toast";el.textContent=msg;
-  root.appendChild(el);
-  setTimeout(()=>el.remove(),2800);
+function worldScreen(){
+ return `<div class="hero"><div class="tag">WORLD FOOTBALL DATABASE • 2026</div><h1>One football universe.</h1><p class="muted">Benua → negara → liga → klub → squad → kompetisi. Data klub memakai nama dunia nyata, bukan Northstar/Royal Madrid fiktif.</p></div><br>
+ <div class="grid g4">${Object.entries(CONTINENTS).map(([k,v])=>kpi(k,v.length+" countries","World region")).join("")}</div><br>
+ <div class="card"><h2>Countries & Leagues</h2><div class="grid g3">${Object.entries(LEAGUES).map(([l,cs])=>`<button class="item" data-a="league" data-league="${esc(l)}"><div class="between"><b>${esc(l)}</b><span class="tag">${cs.length} clubs</span></div><div class="small muted">${esc(LEAGUE_META[l].country)} • ${esc(LEAGUE_META[l].continent)}</div></button>`).join("")}</div></div>`;
 }
 
-function openModal(html){
-  modal=html;
-  renderModal();
+function clubsScreen(filter=""){
+ let list=CLUBS.filter(c=>(!filter||c.league===filter||c.country===filter||c.name.toLowerCase().includes(filter.toLowerCase())));
+ return `<div class="hero"><div class="tag">REAL CLUBS</div><h1>Clubs.</h1><p class="muted">Klik klub untuk membuka profil, stadion, rating, budget, sponsor, squad dan sejarah.</p><input id="clubSearch" placeholder="Search club, country, league..." value="${esc(filter)}"></div><br>
+ <div class="grid g4">${list.slice(0,120).map(c=>`<button class="card" data-a="club" data-club="${esc(c.name)}"><div class="row"><div class="clubcrest">${esc(c.name.split(/\s+/).map(x=>x[0]).join("").slice(0,3))}</div><div><h3>${esc(c.name)}</h3><div class="small muted">${esc(c.league)} • ${esc(c.country)}</div></div></div><br><div class="between"><span class="rating">${c.rating}</span><span class="tag">${money(c.budget)}</span></div></button>`).join("")}</div>`;
 }
-function closeModal(){
-  modal=null;renderModal();
-}
-function renderModal(){
-  const root=document.getElementById("modalRoot");
-  if(!modal){root.className="modal-root";root.innerHTML="";return}
-  root.className="modal-root open";
-  root.innerHTML=`<div class="modal-bg" data-action="closeModal"></div><div class="modal">${modal}</div>`;
+function clubModal(name){
+ let c=clubByName(name);if(!c)return;
+ modal(`<div class="between"><div><span class="tag">${esc(c.league)}</span><h2>${esc(c.name)}</h2><div class="muted">${esc(c.country)} • ${esc(c.continent)}</div></div><button class="btn" data-a="close">×</button></div><br>
+ <div class="grid g4">${kpi("RATING",c.rating,"Club power")}${kpi("BUDGET",money(c.budget),"Club budget")}${kpi("STADIUM",esc(c.stadium),"Home ground")}${kpi("SPONSOR",esc(c.sponsor),"Primary sponsor")}</div><br>
+ <div class="grid g2"><div class="card"><h3>Squad</h3><div class="table"><table><tr><th>Player</th><th>Pos</th><th>OVR</th><th>Value</th></tr>${c.squad.map(p=>`<tr><td>${esc(p.name)}</td><td>${p.pos}</td><td>${p.ovr}</td><td>${money(p.value)}</td></tr>`).join("")}</table></div></div><div class="card"><h3>Club Competitions</h3><div class="list">${CLUB_COMP.map(x=>`<div class="item"><span class="chip">${x[2]}</span> ${esc(x[0])}<div class="tiny muted">${esc(x[1])}</div></div>`).join("")}</div></div></div>`);
 }
 
-function avatarHTML(p,size=""){
-  if(!p)return "";
-  const ovr=calcOvr(p);
-  return `<div class="avatar ${ovrClass(ovr)} ${size}">
-    ${p.photo?`<img src="${p.photo}" alt="">`:"⚽"}
-  </div>`;
+function nationalScreen(){
+ return `<div class="hero"><div class="tag">NATIONAL TEAMS</div><h1>International football.</h1><p class="muted">Regional → continental → World Cup. 2026 World Cup memakai 48 negara.</p></div><br>
+ <div class="grid g4">${kpi("WORLD CUP",48,"Teams in 2026")}${kpi("PLAYERS",1248,"Final squads published by FIFA")}${kpi("MATCHES",104,"World Cup 2026")}${kpi("REGIONS",6,"Confederation-style regions")}</div><br>
+ <div class="card"><h2>National Team Directory</h2><div class="grid g4">${WORLD_CUP_2026.map(n=>`<button class="item" data-a="national" data-national="${esc(n)}"><b>${esc(n)}</b><div class="small muted">National Team • 2026</div></button>`).join("")}</div></div><br>
+ <div class="card"><h2>National Competitions</h2><div class="grid g3">${NATIONAL_COMP.map(x=>`<div class="item"><div class="trophy">🏆</div><h3 class="center">${esc(x[0])}</h3><div class="small muted center">${esc(x[1])}</div></div>`).join("")}</div></div>`;
+}
+function nationalModal(name){
+ let seed=name.split("").reduce((a,c)=>a+c.charCodeAt(0),0), names=["Alex","Daniel","Mateo","Leo","Adam","Kai","Nico","Rafael","Milan","Omar","Ethan","Jude","Hugo","Thiago","Mason","Luca","Noah","Yuki","Kenji","Arda","Sam","Theo","Luis","Marco"];
+ let squad=Array.from({length:26},(_,i)=>({name:names[(seed+i)%names.length]+" "+["Silva","Garcia","Kim","Sato","Costa","Müller","Young","Rossi"][((seed+i)*3)%8],pos:["GK","CB","CB","LB","RB","DM","CM","AM","LW","RW","ST"][i%11],ovr:70+((seed+i*5)%22)}));
+ modal(`<div class="between"><div><span class="tag">2026 NATIONAL TEAM</span><h2>${esc(name)}</h2></div><button class="btn" data-a="close">×</button></div><p class="muted">Squad game database. Nama nasional mengikuti daftar 2026, sementara roster di mode single-file dibuat sebagai data simulasi agar game dapat berjalan tanpa external API.</p><div class="table"><table><tr><th>Player</th><th>Pos</th><th>OVR</th></tr>${squad.map(p=>`<tr><td>${esc(p.name)}</td><td>${p.pos}</td><td>${p.ovr}</td></tr>`).join("")}</table></div>`);
 }
 
-function partnerAvatarHTML(p){
-  return `<div class="avatar ${p.border==="Legendary"?"ovr-goat":""}">
-    ${p.photo?`<img src="${p.photo}" alt="">`:"💫"}
-  </div>`;
+function competitionsScreen(){
+ return `<div class="hero"><div class="tag">COMPETITION ENGINE</div><h1>Every trophy matters.</h1><p class="muted">Domestic league, domestic cup, super cup, continental club, world club, regional/continental national dan World Cup.</p></div><br>
+ <div class="grid g2"><div class="card"><h2>Club Competitions</h2><div class="grid g2">${CLUB_COMP.map(x=>`<div class="item"><div class="trophy">🏆</div><b>${esc(x[0])}</b><div class="small muted">${esc(x[1])}</div></div>`).join("")}</div></div>
+ <div class="card"><h2>Player Awards</h2><div class="list">${AWARDS.map((x,i)=>`<div class="item"><span class="tag">★</span> ${esc(x)}<div class="tiny muted">Real-world style award name • tier ${i%3+1}</div></div>`).join("")}</div><br><h2>National Competitions</h2><div class="list">${NATIONAL_COMP.map(x=>`<div class="item">🏆 ${esc(x[0])}</div>`).join("")}</div></div></div>`;
 }
 
-function layout(content){
-  if(!game.player)return content;
-  const p=game.player;
-  const ovr=calcOvr(p);
-  const nav=[
-    ["dashboard","⌂","Dashboard"],
-    ["calendar","▦","Calendar"],
-    ["career","⚽","Career"],
-    ["world","🌐","Football World"],
-    ["club","🏟","Club"],
-    ["business","◈","Business"],
-    ["partners","♥","Partners"],
-    ["family","♟","Family"],
-    ["social","◎","RV-Gram"],
-    ["trophies","🏆","Trophies"],
-    ["inventory","▣","Inventory"],
-    ["gdd","☰","GDD / Systems"]
-  ];
-  if(game.isAdmin)nav.push(["admin","⚙","Admin"]);
-
-  return `<div class="shell">
-    <aside class="sidebar">
-      <div class="logo">RV <span>LIFE</span></div>
-      <div class="version">${VERSION}</div>
-      <nav class="nav">
-        ${nav.map(n=>`<button class="${game.screen===n[0]?"active":""}" data-action="nav" data-screen="${n[0]}">${n[1]} <span>${n[2]}</span></button>`).join("")}
-      </nav>
-      <hr>
-      <button class="btn ghost block" data-action="save">Save</button>
-      <button class="btn ghost block" style="margin-top:7px" data-action="logout">Logout</button>
-    </aside>
-
-    <main class="main">
-      <header class="topbar">
-        <div class="datebox">
-          ${formatDate()}
-          <small>Musim ${game.world.season} · Hari ${game.world.day} · ${p.career.club}</small>
-        </div>
-        <div class="resource-row">
-          <span class="chip">OVR <b>${ovr}</b></span>
-          <span class="chip">⚡ ${p.godMode?"∞":p.energy}</span>
-          <span class="chip">💰 ${money(p.money)}</span>
-          <span class="chip">👥 ${num(p.followers)}</span>
-          ${game.isAdmin?`<span class="badge-admin">ADMIN</span>`:""}
-        </div>
-      </header>
-      <section class="page">${content}</section>
-    </main>
-  </div>`;
+function footballScreen(){
+ if(match)return matchScreen();
+ return `<div class="hero"><div class="tag">MATCHDAY ENGINE</div><h1>Play the match.</h1><p class="muted">Match actions affect form, goals, assists, rating and calendar. Fixture opponent is generated from the player's actual league.</p></div><br><div class="card">${nextMatchCard()}<br><button class="btn primary large full" data-a="start-match">Start Match</button></div><br><div class="grid g3">${kpi("WINS",S().football.wins,"Career")}${kpi("DRAWS",S().football.draws,"Career")}${kpi("LOSSES",S().football.losses,"Career")}</div>`;
 }
-
-function render(){
-  if(game.screen==="login"){
-    document.getElementById("app").innerHTML=renderLogin();
-    renderModal();
-    return;
-  }
-  if(game.screen==="slots"){
-    document.getElementById("app").innerHTML=renderSlots();
-    renderModal();
-    return;
-  }
-  if(game.screen==="create"){
-    document.getElementById("app").innerHTML=renderCreate();
-    renderModal();
-    return;
-  }
-  if(!game.player){
-    game.screen="slots";
-    return render();
-  }
-  let body="";
-  switch(game.screen){
-    case"dashboard":body=renderDashboard();break;
-    case"calendar":body=renderCalendar();break;
-    case"career":body=renderCareer();break;
-    case"world":body=renderWorld();break;
-    case"club":body=renderClub();break;
-    case"business":body=renderBusiness();break;
-    case"partners":body=renderPartners();break;
-    case"family":body=renderFamily();break;
-    case"social":body=renderSocial();break;
-    case"trophies":body=renderTrophies();break;
-    case"inventory":body=renderInventory();break;
-    case"gdd":body=renderGDD();break;
-    case"admin":body=renderAdmin();break;
-    default:body=renderDashboard();
-  }
-  document.getElementById("app").innerHTML=layout(body);
-  renderModal();
+function startMatch(){
+ let s=S(),c=clubByName(s.player.club)||CLUBS[0],r=leagueClubs(c.league).filter(x=>x.name!==c.name),opp=r[(s.football.matchday-1)%r.length];
+ if(s.player.energy<18){toast("Energy tidak cukup.");return}
+ s.player.energy-=18;match={opp,minute:1,home:0,away:0,actions:0,goals:0,assists:0};log("Match dimulai vs "+opp.name);render();
 }
-
-function renderLogin(){
-  return `<div class="login">
-    <div class="login-card">
-      <div class="tag">RV LIFE · ULTRA PRO MAX</div>
-      <h1>RV <span style="color:var(--accent)">LIFE</span></h1>
-      <p class="muted">Football. Business. Love. Family. Social. One living world.</p>
-      <div style="height:18px"></div>
-      <form id="loginForm">
-        <div class="field">
-          <label>Email</label>
-          <input id="loginEmail" type="email" required autocomplete="email" placeholder="Masukkan email untuk melanjutkan">
-        </div>
-        <button class="btn primary block" type="submit">Masuk ke Dunia RV LIFE</button>
-      </form>
-      <div class="notice" style="margin-top:15px">
-        Save game tersimpan lokal di browser ini. Versi single-file ini tidak membutuhkan server.
-      </div>
-    </div>
-  </div>`;
+function matchScreen(){
+ let s=S(),m=match,choices=[["Quick Pass","passing","assist"],["Dribble","dribbling","goal"],["Power Shot","shooting","goal"],["Hold Position","mentality","safe"]];
+ return `<div class="card"><div class="between"><span class="tag">LIVE MATCH</span><span class="tag">${m.minute}'</span></div><br><div class="scoreboard"><div>${esc(s.player.club)} vs ${esc(m.opp.name)}</div><div class="match">${m.home} : ${m.away}</div><div class="small muted">Action ${m.actions+1}/6</div></div><br><div class="grid g2">${choices.map((c,i)=>`<button class="btn choice" data-a="match-choice" data-i="${i}"><b>${c[0]}</b><br><span class="small muted">${c[1].toUpperCase()} • risk/reward</span></button>`).join("")}</div></div>`;
 }
-
-function renderSlots(){
-  return `<div class="page" style="max-width:1100px">
-    <div class="hero">
-      <div class="tag">SAVE SYSTEM</div>
-      <h1>Pilih dunia kamu.</h1>
-      <p>Tiga karakter dapat hidup bersamaan. Masing-masing punya kalender, karier, bisnis, pasangan, keluarga, klub, dan inventory sendiri.</p>
-    </div>
-    <div class="slot-grid">
-      ${[0,1,2].map(i=>{
-        const s=game.saves?.[i];
-        return `<div class="slot">
-          <div>
-            <div class="kpi">SAVE SLOT ${i+1}</div>
-            ${s?`<h2>${esc(s.player?.name||"Unnamed")}</h2>
-              <div class="muted">${esc(s.player?.country||"")} · OVR ${calcOvr(s.player)}</div>
-              <div class="small muted" style="margin-top:6px">${esc(s.player?.career?.club||"")} · ${s.world?.season||""}</div>`
-              :`<h2>Empty World</h2><div class="muted">Belum ada karakter.</div>`}
-          </div>
-          <div class="actions">
-            ${s?`<button class="btn primary" data-action="loadSlot" data-slot="${i}">Load</button>
-                <button class="btn bad" data-action="deleteSlot" data-slot="${i}">Delete</button>`
-              :`<button class="btn primary" data-action="newSlot" data-slot="${i}">Create Character</button>`}
-          </div>
-        </div>`
-      }).join("")}
-    </div>
-  </div>`;
+function matchChoice(i){
+ let s=S(),m=match,choices=[["passing","assist"],["dribbling","goal"],["shooting","goal"],["mentality","safe"]],c=choices[i],chanceP=48+(s.player.stats[c[0]]-50)*1.15-(m.opp.rating-(clubByName(s.player.club)?.rating||70))*.25;
+ if(Math.random()*100<chanceP){if(c[1]==="goal"){m.home++;s.football.goals++;m.goals++;s.player.form=clamp(s.player.form+3,0,100);log("GOAL! "+s.player.name+" mencetak gol.")}else if(c[1]==="assist"){s.football.assists++;m.assists++;log("Assist untuk "+s.player.name)}else{log("Positioning sangat rapi.")}}else{if(Math.random()<.28)m.away++;s.player.form=clamp(s.player.form-1,0,100);log("Aksi gagal.")}m.actions++;m.minute+=12+Math.floor(Math.random()*12);if(m.actions>=6||m.minute>=90)finishMatch();else render();
 }
-
-function renderCreate(){
-  return `<div class="page" style="max-width:1000px">
-    <div class="hero">
-      <div class="tag">CHARACTER CREATION</div>
-      <h1>Bangun karakter utama.</h1>
-      <p>Semua data disimpan di save slot yang dipilih. Foto diproses lokal di browser.</p>
-    </div>
-    <form id="createForm" class="card">
-      <div class="form-grid">
-        <div class="field"><label>Nama</label><input name="name" required placeholder="Nama karakter"></div>
-        <div class="field"><label>Umur</label><input name="age" type="number" min="14" max="60" value="18" required></div>
-        <div class="field"><label>Gender</label><select name="gender"><option>Male</option><option>Female</option><option>Other</option></select></div>
-        <div class="field"><label>Negara</label><select name="country">${COUNTRIES.map(c=>`<option>${c}</option>`).join("")}</select></div>
-        <div class="field"><label>Posisi</label><select name="position">${["GK","CB","RB","LB","DM","CM","AM","RW","LW","ST"].map(x=>`<option>${x}</option>`).join("")}</select></div>
-        <div class="field"><label>Background</label><select name="background">${["Academy Prospect","Street Footballer","Youth Star","College Athlete","Late Bloomer","Business Family","Unknown Talent"].map(x=>`<option>${x}</option>`).join("")}</select></div>
-        <div class="field full">
-          <label>Foto avatar</label>
-          <input id="characterPhoto" name="photo" type="file" accept="image/*">
-        </div>
-      </div>
-      <button class="btn primary" type="submit">Create Character</button>
-      <button class="btn ghost" type="button" data-action="backSlots">Cancel</button>
-    </form>
-  </div>`;
-}
-
-function renderDashboard(){
-  const p=game.player;
-  const ovr=calcOvr(p);
-  const events=getUpcomingEvents(7);
-  return `<div class="hero">
-    <div class="profile-head">
-      ${avatarHTML(p)}
-      <div>
-        <div class="tag">SEASON ${p.career.season}</div>
-        <h1 style="margin:5px 0">${esc(p.name)}</h1>
-        <div class="muted">${esc(p.position)} · ${esc(p.country)} · ${esc(p.career.club)} · OVR ${ovr}</div>
-      </div>
-    </div>
-    <div style="height:15px"></div>
-    <div class="actions">
-      <button class="btn primary" data-action="quickTraining">Quick Training</button>
-      <button class="btn" data-action="rest">Rest Berbayar</button>
-      <button class="btn" data-action="advanceDay">End Day →</button>
-      <button class="btn ghost" data-action="editPlayer">Edit Profile</button>
-    </div>
-  </div>
-
-  <div class="grid g4">
-    ${kpi("OVR",ovr)}
-    ${kpi("Energy",p.godMode?"∞":p.energy)}
-    ${kpi("Money",money(p.money))}
-    ${kpi("Fame",num(p.fame))}
-    ${kpi("Followers",num(p.followers))}
-    ${kpi("Goals",p.career.goals)}
-    ${kpi("Assists",p.career.assists)}
-    ${kpi("Market Value",money(p.career.value))}
-  </div>
-
-  <div style="height:14px"></div>
-  <div class="grid g2">
-    <div class="card">
-      <h2>Today's World</h2>
-      <p class="muted">${formatDate()}</p>
-      ${events.length?`<div class="list">${events.map(eventHTML).join("")}</div>`:`<div class="empty">Belum ada event hari ini.</div>`}
-    </div>
-    <div class="card">
-      <h2>Career Pulse</h2>
-      ${statProgress("Form",p.career.form)}
-      ${statProgress("Health",p.health)}
-      ${statProgress("Energy",p.energy)}
-      <hr>
-      <div class="actions">
-        <button class="btn" data-action="playMatch">Play Match</button>
-        <button class="btn" data-action="openTransfer">Transfer Market</button>
-        <button class="btn" data-action="nav" data-screen="world">Explore Football World</button>
-      </div>
-    </div>
-  </div>`;
-}
-function kpi(label,value){
-  return `<div class="card"><div class="kpi">${label}</div><div class="big">${value}</div></div>`;
-}
-function statProgress(label,v){
-  return `<div class="statline"><span>${label}</span><b>${v}</b></div><div class="progress"><i style="width:${clamp(v,0,100)}%"></i></div>`;
-}
-
-function renderCalendar(){
-  const start=new Date(game.world.year,game.world.month-1,1);
-  const days=new Date(game.world.year,game.world.month,0).getDate();
-  const first=(start.getDay()+6)%7;
-  const cells=[];
-  for(let i=0;i<first;i++)cells.push(`<div></div>`);
-  for(let d=1;d<=days;d++){
-    const key=dateKey(game.world.year,game.world.month,d);
-    const ev=game.world.events.filter(x=>x.date===key);
-    cells.push(`<div class="day ${d===game.world.day?"today":""}">
-      <b>${d}</b>
-      ${ev.map(eventHTML).join("")}
-    </div>`);
-  }
-  return `<div class="hero">
-    <div class="tag">TIME ENGINE</div>
-    <h1>${monthName(game.world.month)} ${game.world.year}</h1>
-    <p>Hari sekarang bergerak berdasarkan aktivitas. Match, training, dating, bisnis, family event, dan international window masuk ke kalender.</p>
-  </div>
-  <div class="card">
-    <div class="actions" style="margin-bottom:12px">
-      <button class="btn" data-action="prevMonth">← Bulan</button>
-      <button class="btn primary" data-action="today">Today</button>
-      <button class="btn" data-action="nextMonth">Bulan →</button>
-    </div>
-    <div class="calendar">${["Sen","Sel","Rab","Kam","Jum","Sab","Min"].map(x=>`<div class="muted small">${x}</div>`).join("")}${cells.join("")}</div>
-  </div>`;
-}
-function eventHTML(ev){
-  return `<div class="event ${ev.kind||""}" title="${esc(ev.title)}">${esc(ev.title)}</div>`;
-}
-
-function renderCareer(){
-  const p=game.player;
-  const s=p.stats;
-  return `<div class="hero">
-    <div class="tag">FOOTBALL CAREER</div>
-    <h1>${esc(p.career.club)}</h1>
-    <p>${esc(p.name)} · ${esc(p.position)} · OVR ${calcOvr(p)} · Form ${p.career.form}</p>
-    <div class="actions" style="margin-top:14px">
-      <button class="btn primary" data-action="playMatch">Play Match</button>
-      <button class="btn" data-action="quickTraining">Training</button>
-      <button class="btn" data-action="rest">Rest</button>
-      <button class="btn" data-action="openTransfer">Transfer Market</button>
-    </div>
-  </div>
-  <div class="grid g2">
-    <div class="card">
-      <h2>Player Stats</h2>
-      ${Object.entries(s).map(([k,v])=>statProgress(k.toUpperCase(),v)).join("")}
-    </div>
-    <div class="card">
-      <h2>Career Record</h2>
-      <div class="list">
-        ${info("Matches",p.career.matches)}
-        ${info("Goals",p.career.goals)}
-        ${info("Assists",p.career.assists)}
-        ${info("National Team",p.career.nationalTeam)}
-        ${info("International Caps",p.career.caps)}
-        ${info("NT Goals",p.career.goalsNT)}
-        ${info("Salary",money(p.career.salary))}
-        ${info("Market Value",money(p.career.value))}
-        ${info("Contract",p.career.contractYears+" years")}
-      </div>
-    </div>
-  </div>`;
-}
-function info(a,b){return `<div class="list-item"><span class="muted">${esc(a)}</span><b>${esc(b)}</b></div>`}
-
-function renderWorld(){
-  return `<div class="hero">
-    <div class="tag">WORLD FOOTBALL DATABASE</div>
-    <h1>Football World</h1>
-    <p>Explore clubs, national teams, continents, competitions, squads, transfer market, and real-world 2026/27 club structure seeded into the simulator.</p>
-  </div>
-  <div class="grid g3">
-    <button class="card btn ghost" data-action="worldTab" data-tab="clubs"><h2>🏟 Clubs</h2><div class="muted">${CLUBS.length} seeded clubs</div></button>
-    <button class="card btn ghost" data-action="worldTab" data-tab="national"><h2>🌐 National Teams</h2><div class="muted">${NATIONAL_TEAMS.length} teams</div></button>
-    <button class="card btn ghost" data-action="worldTab" data-tab="competitions"><h2>🏆 Competitions</h2><div class="muted">${COMPETITIONS.length} competitions</div></button>
-  </div>
-  <div style="height:14px"></div>
-  ${renderWorldTab(game.worldTab||"clubs")}`;
-}
-
-function renderWorldTab(tab){
-  if(tab==="clubs"){
-    return `<div class="card">
-      <h2>Clubs</h2>
-      <div class="field"><input id="clubSearch" placeholder="Cari klub..."></div>
-      <div id="clubList" class="list">
-        ${CLUBS.map(c=>`<div class="list-item club-row" data-name="${esc(c.name.toLowerCase())}">
-          <div><b>${esc(c.name)}</b><div class="small muted">${esc(c.country)} · ${esc(c.league)} · Rating ${c.rating}</div></div>
-          <button class="btn" data-action="clubInfo" data-id="${c.id}">Open</button>
-        </div>`).join("")}
-      </div>
-    </div>`;
-  }
-  if(tab==="national"){
-    return `<div class="card">
-      <h2>National Teams</h2>
-      <div class="list">${NATIONAL_TEAMS.map(n=>`<div class="list-item">
-        <div><b>${esc(n.name)}</b><div class="small muted">${esc(n.continent)} · Rating ${n.rating}</div></div>
-        <button class="btn" data-action="nationalInfo" data-id="${n.id}">Squad</button>
-      </div>`).join("")}</div>
-    </div>`;
-  }
-  return `<div class="card">
-    <h2>Competitions</h2>
-    <div class="list">${COMPETITIONS.map(c=>`<div class="list-item">
-      <div><b>${esc(c.name)}</b><div class="small muted">${esc(c.type)} · ${esc(c.region)}</div></div>
-      <button class="btn" data-action="competitionInfo" data-id="${c.id}">Open</button>
-    </div>`).join("")}</div>
-  </div>`;
-}
-
-function renderClub(){
-  const p=game.player;
-  const club=CLUBS.find(c=>c.name===p.career.club)||CLUBS[0];
-  return `<div class="hero">
-    <div class="tag">CLUB MANAGEMENT</div>
-    <h1>${esc(club.name)}</h1>
-    <p>${esc(club.country)} · ${esc(club.league)} · Club rating ${club.rating}</p>
-  </div>
-  <div class="grid g3">
-    ${kpi("Squad",club.squad.length)}
-    ${kpi("Club Value",money(club.value))}
-    ${kpi("Stadium",club.stadium)}
-  </div>
-  <div style="height:14px"></div>
-  <div class="grid g2">
-    <div class="card">
-      <h2>Squad</h2>
-      <div class="table-wrap"><table><thead><tr><th>Player</th><th>Pos</th><th>OVR</th><th>Value</th></tr></thead><tbody>
-      ${club.squad.map(x=>`<tr><td>${esc(x.name)}</td><td>${x.position}</td><td>${x.ovr}</td><td>${money(x.value)}</td></tr>`).join("")}
-      </tbody></table></div>
-    </div>
-    <div class="card">
-      <h2>Club Actions</h2>
-      <div class="actions">
-        <button class="btn primary" data-action="createOwnedClub">Create My Own Club</button>
-        <button class="btn" data-action="clubTransfer">Buy Player</button>
-        <button class="btn" data-action="customPlayer">Create / Custom Player</button>
-      </div>
-      ${p.business.club?`<hr><h3>${esc(p.business.club.name)}</h3><div class="muted">Your owned club business.</div>`:""}
-    </div>
-  </div>`;
-}
-
-function renderBusiness(){
-  const p=game.player;
-  return `<div class="hero">
-    <div class="tag">BUSINESS EMPIRE</div>
-    <h1>Bangun sesuatu milikmu sendiri.</h1>
-    <p>Nama, kategori, modal, cabang, pegawai, marketing, profit, valuation, sponsor, sampai klub sepak bola bisa kamu kelola.</p>
-    <div class="actions" style="margin-top:14px">
-      <button class="btn primary" data-action="createBusiness">+ Create Business</button>
-      <button class="btn" data-action="sponsorDeals">Sponsor Deals</button>
-    </div>
-  </div>
-  <div class="grid g3">
-    ${kpi("Business Cash",money(p.business.cash))}
-    ${kpi("Companies",p.business.companies.length)}
-    ${kpi("Owned Club",p.business.club?"YES":"NO")}
-  </div>
-  <div style="height:14px"></div>
-  <div class="grid g2">
-    ${p.business.companies.length?p.business.companies.map(c=>`<div class="card">
-      <div class="tag">${esc(c.category)}</div>
-      <h2>${esc(c.name)}</h2>
-      <div class="list">
-        ${info("Cash",money(c.cash))}
-        ${info("Revenue / day",money(c.revenue))}
-        ${info("Profit / day",money(c.profit))}
-        ${info("Level",c.level)}
-        ${info("Employees",c.employees)}
-        ${info("Valuation",money(c.valuation))}
-      </div>
-      <div class="actions" style="margin-top:10px">
-        <button class="btn" data-action="businessUpgrade" data-id="${c.id}">Upgrade</button>
-        <button class="btn" data-action="businessBranch" data-id="${c.id}">Open Branch</button>
-      </div>
-    </div>`).join(""):`<div class="card"><div class="empty">Belum ada bisnis. Bikin brand pertama kamu.</div></div>`}
-  </div>`;
-}
-
-function renderPartners(){
-  const p=game.player;
-  const owned=p.partners||[];
-  return `<div class="hero">
-    <div class="tag">RELATIONSHIP WORLD</div>
-    <h1>Partners</h1>
-    <p>540 fictional partner templates, 6 countries, 6 rarity tiers. Mereka punya personality, mood, jealousy, trust, memory, career, inventory, photo, border, dan story arc sendiri.</p>
-    <div class="actions" style="margin-top:14px">
-      <button class="btn primary" data-action="gachaPartner">Gacha Partner · Rp2.500.000</button>
-      <button class="btn" data-action="partnerCatalog">Open 540 Catalog</button>
-    </div>
-  </div>
-  <div class="grid g3">
-    ${owned.length?owned.map(partnerCard).join(""):`<div class="card"><div class="empty">Belum punya pasangan. Gacha atau buka catalog.</div></div>`}
-  </div>`;
-}
-
-function partnerCard(p){
-  return `<div class="card">
-    <div class="profile-head">${partnerAvatarHTML(p)}<div>
-      <span class="rarity ${p.rarity}">${p.rarity}</span>
-      <h3 style="margin:5px 0">${esc(p.name)}</h3>
-      <div class="small muted">${esc(p.country)} · ${esc(p.occupation)}</div>
-    </div></div>
-    <div style="height:10px"></div>
-    ${statProgress("Affection",p.affection)}
-    ${statProgress("Trust",p.trust)}
-    ${statProgress("Mood",p.mood)}
-    <div class="actions">
-      <button class="btn primary" data-action="chatPartner" data-id="${p.id}">Chat</button>
-      <button class="btn" data-action="partnerDate" data-id="${p.id}">Date</button>
-      <button class="btn" data-action="partnerProfile" data-id="${p.id}">Profile</button>
-    </div>
-  </div>`;
-}
-
-function renderFamily(){
-  const p=game.player;
-  return `<div class="hero">
-    <div class="tag">FAMILY SIMULATION</div>
-    <h1>Family</h1>
-    <p>Anak berkembang berdasarkan umur, health, education, bond, hobby, parenting choices, dan event hidup.</p>
-  </div>
-  <div class="actions" style="margin-bottom:14px">
-    <button class="btn primary" data-action="haveChild">Have / Adopt Child</button>
-  </div>
-  <div class="grid g3">
-    ${p.children.length?p.children.map(childCard).join(""):`<div class="card"><div class="empty">Belum ada anak.</div></div>`}
-  </div>`;
-}
-
-function childCard(c){
-  return `<div class="card">
-    <div class="tag">AGE ${c.age}</div>
-    <h2>${esc(c.name)}</h2>
-    <div class="list">
-      ${info("Health",c.health)}
-      ${info("Education",c.education)}
-      ${info("Bond",c.bond)}
-      ${info("Hobby",c.hobby)}
-      ${info("Talent",c.talent)}
-    </div>
-    <div class="actions">
-      <button class="btn" data-action="childAction" data-id="${c.id}" data-kind="play">Play</button>
-      <button class="btn" data-action="childAction" data-id="${c.id}" data-kind="study">Study</button>
-      <button class="btn" data-action="childAction" data-id="${c.id}" data-kind="gift">Gift</button>
-      <button class="btn" data-action="childAction" data-id="${c.id}" data-kind="sport">Sport</button>
-    </div>
-  </div>`;
-}
-
-function renderSocial(){
-  const p=game.player;
-  return `<div class="hero">
-    <div class="tag">RV-GRAM</div>
-    <h1>Social life never sleeps.</h1>
-    <p>Posting, comments, replies, likes, followers, viral moments, fans, haters, news, transfer rumors, dan sponsor campaigns.</p>
-    <button class="btn primary" data-action="createPost">+ New Post</button>
-  </div>
-  <div class="grid g2">
-    <div class="card">
-      <h2>Your Feed</h2>
-      ${p.social.posts.length?p.social.posts.slice().reverse().map(postCard).join(""):`<div class="empty">Belum ada postingan.</div>`}
-    </div>
-    <div class="card">
-      <h2>Trending / News</h2>
-      <div class="list">
-        ${newsFeed().map(x=>`<div class="list-item"><div><b>${esc(x.title)}</b><div class="small muted">${esc(x.text)}</div></div></div>`).join("")}
-      </div>
-    </div>
-  </div>`;
-}
-
-function postCard(post){
-  return `<div class="card feed-post" style="margin-bottom:10px">
-    <div><span class="tag">${esc(post.tag||"POST")}</span> <span class="small muted">${esc(post.date)}</span></div>
-    <div style="font-size:18px">${esc(post.text)}</div>
-    <div class="small muted">♥ ${num(post.likes)} · 💬 ${post.comments.length} · ${num(post.views)} views</div>
-    <div class="actions">
-      <button class="btn" data-action="likePost" data-id="${post.id}">Like</button>
-      <button class="btn primary" data-action="openComments" data-id="${post.id}">Open Comments</button>
-    </div>
-  </div>`;
-}
-
-function renderTrophies(){
-  const trophies=game.player.inventory.trophies||[];
-  return `<div class="hero">
-    <div class="tag">TROPHY CABINET</div>
-    <h1>Every win leaves a trophy.</h1>
-    <p>Klub, timnas, regional, continental, world club, dan World Cup punya trophy object sendiri.</p>
-  </div>
-  ${trophies.length?`<div class="grid g4">${trophies.map(t=>`<div class="card" style="text-align:center">
-    <div class="trophy"><span class="handle1"></span><span class="handle2"></span></div>
-    <h3>${esc(t.name)}</h3><div class="small muted">${esc(t.season||"")}</div>
-  </div>`).join("")}</div>`:`<div class="card"><div class="empty">Belum ada trophy. Waktunya mulai menang.</div></div>`}`;
-}
-
-function renderInventory(){
-  const p=game.player;
-  return `<div class="hero">
-    <div class="tag">INVENTORY</div>
-    <h1>Collection</h1>
-    <p>Border, items, trophy, dan cosmetic progression.</p>
-  </div>
-  <div class="card">
-    <h2>Borders</h2>
-    <div class="actions">
-      ${p.inventory.borders.map(b=>`<button class="btn ${b===borderForPlayer(p)?"primary":""}" data-action="equipBorder" data-border="${esc(b)}">${esc(b)}</button>`).join("")}
-    </div>
-  </div>`;
-}
-function borderForPlayer(p){
-  const o=calcOvr(p);
-  if(o>=96)return"GOAT";
-  if(o>=90)return"Elite";
-  if(o>=80)return"OVR Gold";
-  if(o>=70)return"OVR Silver";
-  if(o>=60)return"OVR Green";
-  return"Starter";
-}
-
-function renderGDD(){
-  return `<div class="hero">
-    <div class="tag">GAME DESIGN DOCUMENT</div>
-    <h1>RV LIFE System Map</h1>
-    <p>Versi rebuild ini menjadikan waktu sebagai backbone. Semua sistem membaca tanggal dan state yang sama.</p>
-  </div>
-  <div class="grid g2">
-    ${gddCard("1. Time Engine","Calendar bergerak setiap hari. Event, match, training, date, business, family, international break dan season membaca world clock.")}
-    ${gddCard("2. Football World","Real-world club seed, national team, continents, leagues, domestic cups, super cups, continental competitions dan world competitions.")}
-    ${gddCard("3. Player Career","Stats, OVR, form, health, energy, contract, salary, market value, transfer, match choices dan national team.")}
-    ${gddCard("4. Club Creator","Bikin klub sendiri, nama, negara, stadion, squad, transfer, custom player dan academy.")}
-    ${gddCard("5. Business","Bikin brand sendiri dengan nama dan 40+ kategori, upgrade, branch, employees, revenue dan valuation.")}
-    ${gddCard("6. Relationship AI","Local context-aware dialogue engine, memory, personality, mood, affection, trust, jealousy dan story arc.")}
-    ${gddCard("7. Family","Children dapat nama, umur, health, education, hobby, talent, bond dan banyak interaksi.")}
-    ${gddCard("8. RV-Gram","Posts, comments, replies, likes, followers, trends, news, fans, haters dan sponsors.")}
-    ${gddCard("9. Trophy","Competition-specific trophy object dan cabinet.")}
-    ${gddCard("10. Admin","Direct stat editing, OVR, money, fame, followers, energy, health, God Mode dan unlock systems.")}
-  </div>`;
-}
-function gddCard(a,b){return `<div class="card"><h2>${a}</h2><p class="muted" style="line-height:1.6">${b}</p></div>`}
-
-function renderAdmin(){
-  if(!game.isAdmin)return `<div class="card"><h2>Access denied</h2></div>`;
-  const p=game.player;
-  return `<div class="hero">
-    <div class="tag">ADMIN CONTROL CENTER</div>
-    <h1>World Editor</h1>
-    <p>Frontend-only convenience gate. Ini bukan sistem authentication server-side yang aman untuk production.</p>
-  </div>
-  <div class="grid g2">
-    <div class="card">
-      <h2>Core Values</h2>
-      <form id="adminForm">
-        ${adminField("Money","money",p.money)}
-        ${adminField("Fame","fame",p.fame)}
-        ${adminField("Followers","followers",p.followers)}
-        ${adminField("Energy","energy",p.energy)}
-        ${adminField("Health","health",p.health)}
-        ${adminField("OVR","manualOvr",p.manualOvr??calcOvr(p))}
-        <div class="actions">
-          <button class="btn primary" type="submit">Apply</button>
-          <button class="btn warn" type="button" data-action="toggleGod">God Mode: ${p.godMode?"ON":"OFF"}</button>
-        </div>
-      </form>
-    </div>
-    <div class="card">
-      <h2>World Tools</h2>
-      <div class="actions">
-        <button class="btn" data-action="adminMax">Max Resources</button>
-        <button class="btn" data-action="unlockAll">Unlock All Borders</button>
-        <button class="btn" data-action="giveTrophy">Give Trophy</button>
-        <button class="btn" data-action="adminPartner">Give Random Partner</button>
-        <button class="btn bad" data-action="resetCurrent">Reset Character</button>
-      </div>
-      <hr>
-      <div class="small muted">God Mode: 99% success chance + energy tidak berkurang.</div>
-    </div>
-  </div>`;
-}
-function adminField(label,name,value){
-  return `<div class="field"><label>${label}</label><input name="${name}" type="number" value="${Number(value)||0}"></div>`;
-}
-
-/* =========================
-   WORLD / MODAL DETAILS
-   ========================= */
-
-function showClub(id){
-  const c=CLUBS.find(x=>x.id===id);if(!c)return;
-  openModal(`<div class="actions" style="justify-content:space-between">
-    <h1>${esc(c.name)}</h1><button class="btn" data-action="closeModal">Close</button></div>
-    <div class="grid g3">
-      ${kpi("Rating",c.rating)}${kpi("Country",c.country)}${kpi("League",c.league)}
-    </div>
-    <hr>
-    <div class="grid g2">
-      <div class="card"><h2>Club Information</h2>
-        ${info("Founded",c.founded)}
-        ${info("Stadium",c.stadium)}
-        ${info("Estimated Value",money(c.value))}
-        ${info("Squad",c.squad.length)}
-      </div>
-      <div class="card"><h2>Squad</h2>
-        <div class="list">${c.squad.slice(0,25).map(x=>`<div class="list-item">
-          <span>${esc(x.name)}<small class="muted"> · ${x.position}</small></span><b>${x.ovr}</b>
-        </div>`).join("")}</div>
-      </div>
-    </div>`);
-}
-
-function showNational(id){
-  const n=NATIONAL_TEAMS.find(x=>x.id===id);if(!n)return;
-  openModal(`<div class="actions" style="justify-content:space-between"><h1>${esc(n.name)}</h1><button class="btn" data-action="closeModal">Close</button></div>
-  <div class="grid g3">${kpi("Continent",n.continent)}${kpi("Rating",n.rating)}${kpi("Squad",n.squad.length)}</div>
-  <hr><div class="table-wrap"><table><thead><tr><th>Player</th><th>Position</th><th>OVR</th><th>Age</th><th>Club</th></tr></thead><tbody>
-  ${n.squad.map(x=>`<tr><td>${esc(x.name)}</td><td>${x.position}</td><td>${x.ovr}</td><td>${x.age}</td><td>${esc(x.club)}</td></tr>`).join("")}
-  </tbody></table></div>`);
-}
-
-function showCompetition(id){
-  const c=COMPETITIONS.find(x=>x.id===id);if(!c)return;
-  const trophy=TROPHIES[id];
-  openModal(`<div class="actions" style="justify-content:space-between"><h1>${esc(c.name)}</h1><button class="btn" data-action="closeModal">Close</button></div>
-  <div class="grid g2">
-    <div class="card"><h2>Competition</h2>
-      ${info("Type",c.type)}${info("Region",c.region)}${info("Season","2026/27")}
-    </div>
-    <div class="card" style="text-align:center">
-      ${trophy?`<div class="trophy"><span class="handle1"></span><span class="handle2"></span></div><h3>${esc(trophy.name)}</h3>`:"<div class='empty'>Trophy data belum dibuat.</div>"}
-    </div>
-  </div>
-  <hr>
-  <div class="notice">Fixture engine akan mengisi jadwal sesuai season dan calendar dunia. Domestic, continental, national dan world competitions memakai event queue yang sama.</div>
-  <button class="btn primary" data-action="scheduleCompetition" data-id="${id}">Generate Season Schedule</button>`);
-}
-
-/* =========================
-   CALENDAR ENGINE
-   ========================= */
-
-function getUpcomingEvents(days){
-  const result=[];
-  let d=new Date(game.world.year,game.world.month-1,game.world.day);
-  for(let i=0;i<days;i++){
-    const key=dateKey(d.getFullYear(),d.getMonth()+1,d.getDate());
-    result.push(...game.world.events.filter(x=>x.date===key));
-    d.setDate(d.getDate()+1);
-  }
-  return result;
-}
-
-function scheduleEvent(offset,title,kind,meta={}){
-  const d=new Date(game.world.year,game.world.month-1,game.world.day);
-  d.setDate(d.getDate()+offset);
-  const event={id:uid("event"),date:dateKey(d.getFullYear(),d.getMonth()+1,d.getDate()),title,kind,...meta};
-  game.world.events.push(event);
-  return event;
-}
-
-function seedSeasonEvents(){
-  const existing=new Set(game.world.events.map(x=>x.title+"|"+x.date));
-  for(let i=3;i<=120;i+=7){
-    const club=CLUBS[rand(0,CLUBS.length-1)];
-    const opponent=CLUBS[rand(0,CLUBS.length-1)];
-    if(opponent.name===club.name)continue;
-    const d=new Date(game.world.year,game.world.month-1,game.world.day);
-    d.setDate(d.getDate()+i);
-    const date=dateKey(d.getFullYear(),d.getMonth()+1,d.getDate());
-    const title=`${club.name} vs ${opponent.name}`;
-    if(!existing.has(title+"|"+date)){
-      game.world.events.push({id:uid("event"),date,title,kind:"match",club:club.name,opponent:opponent.name});
-    }
-  }
-  ["Sponsor Meeting","Business Strategy","Family Day","Recovery Session","Media Day"].forEach((x,i)=>{
-    scheduleEvent(2+i*10,x,["business","business","date","social","social"][i]);
-  });
-}
-
-/* =========================
-   PLAYER ACTIONS
-   ========================= */
-
-function consumeEnergy(n){
-  if(game.player.godMode)return true;
-  if(game.player.energy<n){
-    toast("Energy tidak cukup.");
-    return false;
-  }
-  game.player.energy-=n;
-  return true;
-}
-
-function rest(){
-  const costs=[
-    {name:"Quick Rest",cost:250000,energy:25},
-    {name:"Premium Recovery",cost:750000,energy:60},
-    {name:"Luxury Recovery",cost:1500000,energy:100}
-  ];
-  openModal(`<h2>Rest Berbayar</h2><p class="muted">Rest memajukan waktu 1 hari dan mengembalikan energy. God Mode tetap membuat energy tidak berkurang saat aktivitas.</p>
-  <div class="list">${costs.map(x=>`<div class="list-item"><div><b>${x.name}</b><div class="small muted">+${x.energy} Energy</div></div><button class="btn primary" data-action="buyRest" data-cost="${x.cost}" data-energy="${x.energy}">${money(x.cost)}</button></div>`).join("")}</div>`);
-}
-
-function buyRest(cost,energy){
-  const p=game.player;
-  if(p.money<cost)return toast("Uang tidak cukup.");
-  p.money-=cost;
-  p.energy=clamp(p.energy+energy,0,100);
-  p.health=clamp(p.health+8,0,100);
-  advanceDayCore(1,false);
-  closeModal();toast(`Rest selesai. Energy ${p.godMode?"∞":p.energy}.`);
-}
+function finishMatch(){let s=S(),m=match;if(m.home>m.away){s.football.wins++;s.finance.cash+=5000;log("Menang "+m.home+"-"+m.away+".")}else if(m.home===m.away){s.football.draws++;s.finance.cash+=2200;log("Imbang "+m.home+"-"+m.away+".")}else{s.football.losses++;log("Kalah "+m.home+"-"+m.away+".")}s.football.appearances++;s.football.matchday++;if(s.football.matchday>38){s.football.matchday=1;advanceDaysInternal(18);log("Musim liga selesai. Kompetisi berikutnya dimulai.")}match=null;save();render();toast("Match selesai.");}
 
 function training(){
-  const p=game.player;
-  if(!consumeEnergy(18))return;
-  const keys=Object.keys(p.stats);
-  const a=keys[rand(0,keys.length-1)],b=keys[rand(0,keys.length-1)];
-  p.stats[a]=clamp(p.stats[a]+rand(1,3),1,99);
-  p.stats[b]=clamp(p.stats[b]+1,1,99);
-  p.career.form=clamp(p.career.form+rand(1,4),0,100);
-  p.money-=Math.min(p.money,100000);
-  scheduleEvent(1,"Training Session","social");
-  advanceDayCore(1,false);
-  saveGame();render();toast(`Training selesai. ${a} meningkat.`);
+ let s=S();return `<div class="hero"><div class="tag">TRAINING CENTER</div><h1>Develop your player.</h1><p class="muted">Training menghabiskan uang, energy dan satu hari.</p></div><br><div class="grid g2"><div class="card">${Object.entries(s.player.stats).map(([k,v])=>`<div class="item"><div class="between"><b>${k}</b><b>${v}</b></div><div class="progress"><i style="width:${v}%"></i></div><br><button class="btn cyan full" data-a="train" data-stat="${k}">Train ${k} • $750</button></div>`).join("")}</div><div class="card"><h2>Development</h2><div class="big">${ovr(s.player)}</div><p class="muted">Form ${s.player.form}/100 • Health ${s.player.health}/100 • Energy ${s.player.energy}/100</p></div></div>`;
 }
+function train(stat){let s=S();if(s.finance.cash<750||s.player.energy<10){toast("Cash atau energy kurang.");return}s.finance.cash-=750;s.player.energy-=10;s.player.stats[stat]=clamp(s.player.stats[stat]+1+Math.floor(Math.random()*3),1,99);advanceDaysInternal(1);log("Training "+stat+" selesai.");save();render()}
 
-function playMatch(){
-  const p=game.player;
-  if(!consumeEnergy(25))return;
-  const success=chance(.68);
-  const o=calcOvr(p);
-  const opponent=CLUBS[rand(0,CLUBS.length-1)];
-  const attackScore=clamp((p.stats.shooting+p.stats.dribbling+p.stats.passing)/3+rand(-15,15),30,99);
-  const performance=clamp(Math.round(attackScore+(success?rand(2,12):rand(-12,2))),1,99);
-  let goals=0,assists=0;
-  if(performance>=80)goals=rand(0,3);
-  else if(performance>=65)goals=rand(0,1);
-  if(performance>=72&&chance(.55))assists=1;
-
-  const reward=500000+performance*35000+goals*700000;
-  p.money+=reward;
-  p.fame+=Math.max(1,Math.round(performance/15));
-  p.followers+=Math.max(5,performance*rand(2,5));
-  p.career.matches++;
-  p.career.goals+=goals;
-  p.career.assists+=assists;
-  p.career.form=clamp(Math.round((p.career.form+performance)/2),0,100);
-  p.career.value=Math.round(p.career.value*(1+performance/10000+goals/1000));
-  advanceDayCore(1,false);
-
-  openModal(`<div class="tag">MATCH RESULT</div>
-  <h1>${esc(p.career.club)} vs ${esc(opponent.name)}</h1>
-  <div class="grid g3">${kpi("Performance",performance)}${kpi("Goals",goals)}${kpi("Assists",assists)}</div>
-  <hr>
-  <div class="notice">${success?"Match momentum berpihak kepadamu.":"Pertandingan berat, tapi pengalaman bertambah."}</div>
-  <div class="list">${info("Match Reward",money(reward))}${info("Fame", "+"+Math.max(1,Math.round(performance/15)))}${info("Followers","+"+Math.max(5,performance*rand(2,5)))}</div>
-  <button class="btn primary" data-action="closeModal">Continue</button>`);
-  saveGame();
-  render();
+function transferScreen(){
+ let s=S();return `<div class="hero"><div class="tag">TRANSFER MARKET</div><h1>Move your career.</h1><p class="muted">Offer berasal dari klub nyata di database.</p><button class="btn primary" data-a="offers">Generate Offers</button></div><br><div class="grid g3">${s.football.offers.map((o,i)=>`<div class="card"><span class="tag">OFFER</span><h2>${esc(o.club)}</h2><p class="small muted">Salary ${money(o.salary)}<br>Bonus ${money(o.bonus)}<br>Contract ${o.years} years</p><button class="btn green full" data-a="accept" data-i="${i}">Accept Transfer</button></div>`).join("")||`<div class="card fullrow notice">Belum ada offer. Generate dulu.</div>`}</div>`;
 }
+function offers(){let s=S(),pool=CLUBS.filter(c=>c.name!==s.player.club).sort(()=>Math.random()-.5).slice(0,6);s.football.offers=pool.map(c=>({club:c.name,salary:Math.floor(5000+ovr(s.player)*120),bonus:Math.floor(10000+Math.random()*80000),years:2+Math.floor(Math.random()*3)}));save();render()}
+function acceptTransfer(i){let s=S(),o=s.football.offers[i];if(!o)return;s.player.club=o.club;s.finance.cash+=o.bonus;s.football.offers=[];log("Transfer berhasil ke "+o.club);save();render()}
 
-function advanceDayCore(days=1,doRender=true){
-  for(let i=0;i<days;i++){
-    const d=new Date(game.world.year,game.world.month-1,game.world.day);
-    d.setDate(d.getDate()+1);
-    game.world.year=d.getFullYear();
-    game.world.month=d.getMonth()+1;
-    game.world.day=d.getDate();
-
-    if(game.world.day===1&&game.world.month===7){
-      game.world.season=`${game.world.year}/${String(game.world.year+1).slice(-2)}`;
-      game.player.career.season=game.world.year;
-      game.player.energy=clamp(game.player.energy+30,0,100);
-    }
-
-    game.player.health=clamp(game.player.health+1,0,100);
-    game.player.career.form=clamp(game.player.career.form+rand(-1,2),0,100);
-
-    game.player.business.companies.forEach(c=>{
-      c.cash+=c.revenue;
-      c.revenue=Math.round(c.revenue*(.995+Math.random()*.015));
-      c.profit=Math.round(c.revenue*.38);
-      c.valuation=Math.round(c.valuation+c.profit*.15);
-      game.player.business.cash+=c.profit;
-    });
-
-    game.player.children.forEach(c=>{
-      if(game.world.day===c.birthDay&&game.world.month===c.birthMonth)c.age++;
-      c.health=clamp(c.health+rand(-1,2),0,100);
-      c.education=clamp(c.education+((c.age>5)?rand(0,1):0),0,100);
-    });
-
-    game.player.partners.forEach(x=>{
-      x.mood=clamp(x.mood+rand(-3,3),0,100);
-      if(x.mood<35)x.affection=clamp(x.affection-1,0,100);
-    });
-
-    const today=game.world.events.find(e=>e.date===dateKey(game.world.year,game.world.month,game.world.day));
-    if(today&&today.kind==="match")game.player.career.form=clamp(game.player.career.form+2,0,100);
-  }
-  game.world.lastAdvance=Date.now();
-  if(doRender){saveGame();render();}
+function businessScreen(){
+ let s=S();return `<div class="hero"><div class="tag">SANDBOX BUSINESS</div><h1>Build any business.</h1><p class="muted">Tidak lagi terbatas pada enam preset. Kamu bisa menentukan nama, kategori, kota, modal, harga, marketing dan ekspansi.</p><button class="btn primary" data-a="new-business">Create Business</button></div><br><div class="grid g3">${s.finance.businesses.map((b,i)=>`<div class="card"><span class="tag">${esc(b.category)}</span><h2>${esc(b.name)}</h2><p class="small muted">${esc(b.city)} • Level ${b.level}<br>Revenue ${money(b.revenue)}/month</p><button class="btn gold full" data-a="upgrade-biz" data-i="${i}">Upgrade</button></div>`).join("")||`<div class="card fullrow notice">Belum ada bisnis.</div>`}</div>`;
 }
-
-/* =========================
-   TRANSFER / CLUB CREATOR
-   ========================= */
-
-function transferModal(){
-  openModal(`<h2>Transfer Market</h2><p class="muted">Cari pemain dunia nyata yang tersedia di seed database.</p>
-  <div class="list">${REAL_PLAYERS.map(x=>`<div class="list-item">
-    <div><b>${esc(x.name)}</b><div class="small muted">${x.position} · ${esc(x.club)} · OVR ${x.ovr}</div></div>
-    <button class="btn" data-action="buyPlayer" data-player="${x.id}">${money(x.value)}</button>
-  </div>`).join("")}</div>`);
+function newBusiness(){
+ modal(`<h2>Create Your Business</h2><div class="formgrid"><div><label>Business name</label><input id="bn" placeholder="Nama perusahaan"></div><div><label>Category</label><select id="bc">${["Football Club","Sportswear","Restaurant","Cafe","Technology","Media","Gaming","Agency","Construction","Real Estate","Education","Healthcare","Finance","Retail","Travel","Entertainment","Logistics","Automotive","Food & Beverage","Other"].map(x=>`<option>${x}</option>`).join("")}</select></div><div><label>Country</label><input id="bco" value="Indonesia"></div><div><label>City</label><input id="bci" value="Jakarta"></div><div><label>Starting capital</label><input id="bcap" type="number" value="10000"></div><div><label>Monthly revenue target</label><input id="brev" type="number" value="1500"></div></div><br><button class="btn primary full" data-a="create-biz">Create</button>`);
 }
+function createBiz(){let s=S(),name=document.getElementById("bn").value.trim()||"RV New Company",cat=document.getElementById("bc").value,city=document.getElementById("bci").value.trim()||"Jakarta",cap=+document.getElementById("bcap").value||10000,rev=+document.getElementById("brev").value||1000;if(s.finance.cash<cap){toast("Modal tidak cukup.");return} s.finance.cash-=cap;let b={id:uid("biz"),name,category:cat,country:document.getElementById("bco").value,city,level:1,revenue:rev};s.finance.businesses.push(b);if(cat==="Football Club")createOwnedClub(name,city,cap);log("Bisnis dibuat: "+name);save();closeModal();render()}
+function createOwnedClub(name,city,cap){let s=S();s.football.ownedClub={id:uid("ownerclub"),name,city,country:"Indonesia",stadium:name+" Arena",colors:"Custom",budget:cap*5,players:[],manager:"You",rating:55,sponsor:"Independent"};for(let i=0;i<18;i++)s.football.ownedClub.players.push({id:uid("cp"),name:"Academy Player "+(i+1),age:17+i%10,pos:["GK","CB","LB","RB","CM","AM","LW","RW","ST"][i%9],ovr:50+i%16,value:100000+i*50000});}
 
-function createOwnedClub(){
-  openModal(`<h2>Buat Klub Sendiri</h2>
-  <form id="ownedClubForm">
-    <div class="form-grid">
-      <div class="field"><label>Nama klub</label><input name="name" required placeholder="RV United"></div>
-      <div class="field"><label>Negara</label><select name="country">${COUNTRIES.map(x=>`<option>${x}</option>`).join("")}</select></div>
-      <div class="field"><label>Kota</label><input name="city" required placeholder="Jakarta"></div>
-      <div class="field"><label>Stadion</label><input name="stadium" required placeholder="RV Arena"></div>
-      <div class="field"><label>Warna utama</label><input name="color" value="Cyan"></div>
-      <div class="field"><label>Budget</label><input name="budget" type="number" value="100000000000"></div>
-    </div>
-    <button class="btn primary">Found Club</button>
-  </form></div>`);
+function myClubScreen(){
+ let c=S().football.ownedClub;if(!c)return `<div class="hero"><div class="tag">CLUB OWNER MODE</div><h1>Own a football club.</h1><p class="muted">Create a business dengan kategori Football Club untuk membuka management mode.</p><button class="btn primary" data-a="business">Create Football Club</button></div>`;
+ return `<div class="hero"><div class="tag">OWNER MODE</div><h1>${esc(c.name)}</h1><p class="muted">${esc(c.city)}, ${esc(c.country)} • ${esc(c.stadium)} • Rating ${c.rating}</p><div class="row"><span class="tag">Budget ${money(c.budget)}</span><span class="tag">Sponsor ${esc(c.sponsor)}</span></div></div><br><div class="grid g4">${kpi("RATING",c.rating,"Club")}${kpi("BUDGET",money(c.budget),"Transfer budget")}${kpi("SQUAD",c.players.length,"Players")}${kpi("SPONSOR",c.sponsor,"Partner")}</div><br><div class="grid g2"><div class="card"><h2>Club Operations</h2><div class="grid g2"><button class="btn cyan" data-a="club-buy">Buy Player</button><button class="btn gold" data-a="club-create-player">Create Player</button><button class="btn green" data-a="club-train">Train Squad</button><button class="btn" data-a="club-sponsor">Find Sponsor</button></div></div><div class="card"><h2>Squad</h2><div class="table"><table><tr><th>Player</th><th>Pos</th><th>OVR</th><th>Value</th></tr>${c.players.map(p=>`<tr><td>${esc(p.name)}</td><td>${p.pos}</td><td>${p.ovr}</td><td>${money(p.value)}</td></tr>`).join("")}</table></div></div></div>`;
 }
-
-function customPlayer(){
-  openModal(`<h2>Create / Custom Player</h2>
-  <form id="customPlayerForm">
-    <div class="form-grid">
-      <div class="field"><label>Name</label><input name="name" required></div>
-      <div class="field"><label>Age</label><input name="age" type="number" value="18"></div>
-      <div class="field"><label>Country</label><select name="country">${COUNTRIES.map(x=>`<option>${x}</option>`).join("")}</select></div>
-      <div class="field"><label>Position</label><select name="position">${["GK","CB","RB","LB","DM","CM","AM","RW","LW","ST"].map(x=>`<option>${x}</option>`).join("")}</select></div>
-      <div class="field"><label>OVR</label><input name="ovr" type="number" min="40" max="99" value="70"></div>
-      <div class="field"><label>Potential</label><input name="potential" type="number" min="40" max="99" value="85"></div>
-      <div class="field"><label>Value</label><input name="value" type="number" value="5000000"></div>
-      <div class="field"><label>Salary</label><input name="salary" type="number" value="100000"></div>
-    </div>
-    <button class="btn primary">Create Player</button>
-  </form>`);
+function playersScreen(){
+ let c=S().football.ownedClub;if(!c)return `<div class="card notice">Create a Football Club first.</div>`;
+ return `<div class="hero"><div class="tag">SQUAD BUILDER</div><h1>Build your squad.</h1><p class="muted">Create/customize players or buy players from the global market.</p></div><br><div class="grid g3">${c.players.map((p,i)=>`<div class="card"><h3>${esc(p.name)}</h3><div class="small muted">${p.pos} • Age ${p.age}</div><div class="big">${p.ovr}</div><button class="btn full" data-a="edit-player" data-i="${i}">Customize</button></div>`).join("")}</div>`;
 }
-
-/* =========================
-   BUSINESS
-   ========================= */
-
-function createBusiness(){
-  openModal(`<h2>Create Business</h2>
-  <form id="businessForm">
-    <div class="form-grid">
-      <div class="field"><label>Business Name</label><input name="name" required placeholder="RV Empire"></div>
-      <div class="field"><label>Category</label><select name="category">${BUSINESS_CATEGORIES.map(x=>`<option>${x}</option>`).join("")}</select></div>
-      <div class="field"><label>Initial Capital</label><input name="capital" type="number" value="10000000"></div>
-      <div class="field"><label>City</label><input name="city" value="Jakarta"></div>
-    </div>
-    <button class="btn primary">Launch Business</button>
-  </form>`);
+function clubMarket(){
+ let c=S().football.ownedClub;if(!c)return `<div class="card notice">Create a Football Club first.</div>`;
+ let pool=CLUBS.flatMap(x=>x.squad).sort(()=>Math.random()-.5).slice(0,24);
+ return `<div class="hero"><div class="tag">GLOBAL PLAYER MARKET</div><h1>Buy real-club players.</h1><p class="muted">Transfer values are game-economy estimates, not live market valuations.</p></div><br><div class="grid g4">${pool.map(p=>`<div class="card"><h3>${esc(p.name)}</h3><div class="small muted">${esc(p.club)} • ${p.pos}</div><div class="rating">${p.ovr}</div><div class="small">${money(p.value)}</div><button class="btn green full" data-a="buy-player" data-player="${p.id}">Buy</button></div>`).join("")}</div>`;
 }
-
-function upgradeBusiness(id){
-  const c=game.player.business.companies.find(x=>x.id===id);
-  if(!c)return;
-  const cost=c.level*5000000;
-  if(game.player.business.cash<cost)return toast("Business cash tidak cukup.");
-  game.player.business.cash-=cost;
-  c.level++;
-  c.revenue=Math.round(c.revenue*1.35);
-  c.profit=Math.round(c.revenue*.38);
-  c.valuation=Math.round(c.valuation*1.3);
-  saveGame();render();toast(`${c.name} naik ke level ${c.level}.`);
+function buyPlayer(id){let c=S().football.ownedClub;if(!c)return;let p=CLUBS.flatMap(x=>x.squad).find(x=>x.id===id);if(!p||c.budget<p.value){toast("Budget tidak cukup.");return}c.budget-=p.value;c.players.push({...p,id:uid("owned"),club:c.name});log("Membeli "+p.name);save();render()}
+function createPlayerModal(index=null){
+ modal(`<h2>${index===null?"Create Player":"Customize Player"}</h2><div class="formgrid"><div><label>Name</label><input id="pn" value="${index===null?"Academy Star":esc(S().football.ownedClub.players[index].name)}"></div><div><label>Age</label><input id="pa" type="number" value="${index===null?17:S().football.ownedClub.players[index].age}"></div><div><label>Position</label><select id="pp">${["GK","CB","LB","RB","DM","CM","AM","LW","RW","ST"].map(x=>`<option ${index!==null&&x===S().football.ownedClub.players[index].pos?"selected":""}>${x}</option>`).join("")}</select></div><div><label>OVR</label><input id="po" type="number" min="40" max="99" value="${index===null?60:S().football.ownedClub.players[index].ovr}"></div></div><br><button class="btn primary full" data-a="save-created-player" data-i="${index===null?"":index}">Save Player</button>`);
 }
+function saveCreatedPlayer(index){let c=S().football.ownedClub,p={id:uid("cp"),name:document.getElementById("pn").value.trim()||"Custom Player",age:+document.getElementById("pa").value||18,pos:document.getElementById("pp").value,ovr:clamp(+document.getElementById("po").value||60,40,99),value:Math.max(50000,(+document.getElementById("po").value||60)*50000)};if(index===""){c.players.push(p);log("Created custom player "+p.name)}else{p.id=c.players[index].id;c.players[index]={...c.players[index],...p};log("Customized "+p.name)}save();closeModal();render()}
 
-function branchBusiness(id){
-  const c=game.player.business.companies.find(x=>x.id===id);
-  if(!c)return;
-  const cost=20000000*c.level;
-  if(game.player.business.cash<cost)return toast("Cash tidak cukup.");
-  game.player.business.cash-=cost;
-  c.branches=(c.branches||0)+1;
-  c.revenue+=Math.round(c.revenue*.5);
-  c.profit=Math.round(c.revenue*.38);
-  c.valuation+=cost*2;
-  saveGame();render();toast("Cabang baru dibuka.");
+function sponsorsScreen(){
+ let s=S();return `<div class="hero"><div class="tag">REAL-WORLD SPONSORS</div><h1>Build your commercial empire.</h1><p class="muted">Sponsor names are real-world brands. Contracts are fictional game values.</p></div><br><div class="grid g4">${SPONSORS.map(x=>`<div class="card sponsor"><span class="tag">${esc(x[1])}</span><h2>${esc(x[0])}</h2><p class="small muted">Potential deal for player, business or club.</p><button class="btn gold full" data-a="sponsor" data-name="${esc(x[0])}">Negotiate</button></div>`).join("")}</div><br><div class="card"><h2>Active Deals</h2><div class="list">${s.finance.sponsors.map(x=>`<div class="item"><div class="between"><b>${esc(x.name)}</b><span class="tag">${money(x.weekly)}/week</span></div><div class="small muted">${x.type}</div></div>`).join("")||"No active sponsor deals."}</div></div>`;
 }
+function sponsor(name){let s=S();if(s.finance.sponsors.some(x=>x.name===name)){toast("Sponsor sudah aktif.");return}let weekly=500+Math.floor(ovr(s.player)*30)+Math.floor(Math.random()*2500);s.finance.sponsors.push({name,weekly,type:"Player Endorsement"});s.finance.weekly+=weekly;log("Sponsor deal signed: "+name);save();render()}
 
-/* =========================
-   PARTNER / AI CHAT
-   ========================= */
-
-function gachaPartner(){
-  const p=game.player;
-  const cost=2500000;
-  if(p.money<cost)return toast("Uang tidak cukup untuk gacha.");
-  p.money-=cost;
-
-  const weights={UR:1,SSS:3,SS:8,S:18,A:30,B:40};
-  const roll=Math.random()*100;
-  let rarity="B",acc=0;
-  for(const r of RARITIES){
-    acc+=weights[r];
-    if(roll<=acc){rarity=r;break}
-  }
-  const pool=PARTNER_CATALOG.filter(x=>x.rarity===rarity);
-  const template=clone(pool[rand(0,pool.length-1)]);
-  template.id=uid("partner");
-  template.unlocked=true;
-  template.memories=["Pertemuan pertama di RV LIFE."];
-  p.partners.push(template);
-  saveGame();render();
-  openPartner(template);
+function socialScreen(){
+ let s=S();return `<div class="hero"><div class="tag">RV-GRAM</div><h1>Your feed, your rules.</h1><p class="muted">Own posts now have real comment threads, replies, reactions and share counts.</p></div><br><div class="grid g4">${kpi("FOLLOWERS",s.social.followers.toLocaleString(),"Followers")}${kpi("LIKES",s.social.likes.toLocaleString(),"Likes")}${kpi("POSTS",s.social.posts.length,"Your posts")}${kpi("COMMENTS",s.social.posts.reduce((a,p)=>a+(p.comments||[]).length,0),"Thread comments")}</div><br><div class="card"><h2>Create Post</h2><form id="postForm"><textarea id="postText" rows="3" maxlength="500" placeholder="What's happening?"></textarea><br><button class="btn primary">Publish</button></form></div><br><div class="list">${s.social.posts.map(p=>`<div class="card"><div class="between"><b>${esc(s.player.name)}</b><span class="tiny muted">${esc(p.date)}</span></div><p>${esc(p.text)}</p><div class="row"><button class="btn" data-a="like-post" data-id="${p.id}">♥ ${p.likes}</button><button class="btn" data-a="comments" data-id="${p.id}">💬 ${(p.comments||[]).length}</button><button class="btn" data-a="share" data-id="${p.id}">↗ ${p.shares||0}</button></div></div>`).join("")||`<div class="card notice">Belum ada post.</div>`}</div>`;
 }
+function createPost(e){e.preventDefault();let s=S(),t=document.getElementById("postText").value.trim();if(!t)return;s.social.posts.unshift({id:uid("post"),text:t,date:dateStr(s),likes:Math.floor(5+Math.random()*30),shares:0,comments:[]});s.social.followers+=Math.floor(5+Math.random()*50);log("New RV-Gram post published.");save();render()}
+function commentsModal(id){let s=S(),p=s.social.posts.find(x=>x.id===id);if(!p)return;modal(`<div class="between"><h2>Comments</h2><button class="btn" data-a="close">×</button></div><p>${esc(p.text)}</p><div class="list">${(p.comments||[]).map((c,i)=>`<div class="comment"><b>${esc(c.user)}</b><div>${esc(c.text)}</div><div class="tiny muted">♥ ${c.likes||0}</div></div>`).join("")||`<div class="notice">Belum ada komentar.</div>`}</div><br><textarea id="commentText" placeholder="Write a comment or reply..."></textarea><br><button class="btn primary full" data-a="comment-add" data-id="${id}">Comment</button>`)}
+function addComment(id){let s=S(),p=s.social.posts.find(x=>x.id===id),t=document.getElementById("commentText").value.trim();if(!p||!t)return;p.comments.push({id:uid("com"),user:pick(["Fan United","Football Daily","Rising Star","Anonymous Fan","Club Insider"]),text:t,likes:Math.floor(Math.random()*10)});s.social.likes+=2;save();commentsModal(id)}
 
-function partnerCatalog(){
-  openModal(`<h2>Partner Catalog · 540</h2>
-  <p class="muted">Template karakter fictional yang dapat dikoleksi dan diedit.</p>
-  <div class="field"><input id="partnerSearch" placeholder="Cari nama / negara / pekerjaan"></div>
-  <div id="partnerCatalogList" class="list">${PARTNER_CATALOG.slice(0,100).map(catalogPartner).join("")}</div>`);
+function partnerData(){let s=S();if(!s.relationship.partners.length)s.relationship.partners.push({id:uid("par"),name:"Alya",age:22,job:"Content Creator",personality:"Warm & Loyal",affection:35,trust:50,jealousy:10,happiness:70,energy:80,status:"dating",married:false,children:[],chat:[]});return s.relationship.partners}
+function partnersScreen(){
+ let ps=partnerData();return `<div class="hero"><div class="tag">PARTNER AI</div><h1>Talk. Don't just press a stat button.</h1><p class="muted">Setiap partner punya personality, affection, trust, jealousy, happiness, status dan conversation memory. Chat engine ini berjalan lokal tanpa API key.</p></div><br><div class="grid g2">${ps.map((p,i)=>`<div class="card"><div class="between"><div><span class="tag">${esc(p.personality)}</span><h2>${esc(p.name)}</h2><div class="small muted">${esc(p.job)} • ${p.status}</div></div><div class="big">${p.affection}</div></div><br>${bar("Affection",p.affection)}${bar("Trust",p.trust)}${bar("Happiness",p.happiness)}<br><button class="btn cyan full" data-a="chat-partner" data-i="${i}">Open AI Chat</button></div>`).join("")}</div>`;
 }
-
-function catalogPartner(x){
-  const owned=game.player.partners.some(p=>p.name===x.name&&p.country===x.country);
-  return `<div class="list-item">
-    <div><span class="rarity ${x.rarity}">${x.rarity}</span> <b>${esc(x.name)}</b>
-    <div class="small muted">${esc(x.country)} · ${esc(x.occupation)} · ${esc(x.personality)}</div></div>
-    <button class="btn" data-action="recruitCatalog" data-id="${x.id}" ${owned?"disabled":""}>Recruit</button>
-  </div>`;
+function chatModal(i){let s=S(),p=s.relationship.partners[i];if(!p)return;if(!s.chat[i])s.chat[i]=[];let msgs=s.chat[i];modal(`<div class="between"><div><span class="tag">${esc(p.personality)}</span><h2>${esc(p.name)}</h2><div class="small muted">Affection ${p.affection} • Trust ${p.trust} • Jealousy ${p.jealousy}</div></div><button class="btn" data-a="close">×</button></div><div id="chatbox" class="chat">${msgs.map(m=>`<div class="bubble ${m.me?"me":"them"}">${esc(m.text)}</div>`).join("")||`<div class="notice">Conversation baru dimulai.</div>`}</div><br><div class="row"><input id="chatInput" placeholder="Type a message..."><button class="btn primary" data-a="chat-send" data-i="${i}">Send</button></div>`)}
+function localAI(p,t){
+ let x=t.toLowerCase(),base=p.personality.includes("Warm")?["Aku suka kalau kamu cerita langsung begini.","Aku dengerin. Jangan dipendam sendiri."]:p.personality.includes("Ambitious")?["Kalau kamu serius, aku mau lihat kamu konsisten.","Kariermu penting, tapi jangan lupa hubungan ini juga butuh waktu."]:["Hmm, menarik. Ceritain lebih jauh.","Aku punya pendapat sendiri, tapi aku mau dengar versi kamu dulu."];
+ if(x.includes("love")||x.includes("sayang")||x.includes("cinta"))return p.affection>60?"Aku juga sayang kamu. Jangan cuma bilang, tunjukkan lewat tindakan.":"Aku senang dengarnya. Kita jalan pelan-pelan, ya.";
+ if(x.includes("transfer")||x.includes("club"))return "Kalau kamu pindah klub, aku cuma minta satu hal: jangan hilang kabar.";
+ if(x.includes("marry")||x.includes("nikah"))return p.affection>=70?"Aku bisa membayangkan masa depan itu.":"Kita belum sampai sana. Bangun trust kita dulu.";
+ if(x.includes("jealous"))return p.jealousy>45?"Sedikit. Aku nggak mau bohong soal itu.":"Aku percaya kamu, jadi nggak perlu drama.";
+ return pick(base);
 }
+function chatSend(i){let s=S(),p=s.relationship.partners[i],inp=document.getElementById("chatInput"),t=inp.value.trim();if(!t)return;if(!s.chat[i])s.chat[i]=[];s.chat[i].push({me:true,text:t});let reply=localAI(p,t);s.chat[i].push({me:false,text:reply});p.affection=clamp(p.affection+(t.length>20?2:1),0,100);p.trust=clamp(p.trust+1,0,100);save();chatModal(i)}
 
-function recruitCatalog(id){
-  const t=PARTNER_CATALOG.find(x=>x.id===id);if(!t)return;
-  if(game.player.money<5000000)return toast("Butuh Rp5.000.000.");
-  game.player.money-=5000000;
-  const p=clone(t);p.id=uid("partner");p.unlocked=true;p.memories=["Pertemuan pertama."];
-  game.player.partners.push(p);
-  saveGame();closeModal();render();toast(`${p.name} masuk ke relationship roster.`);
+function familyScreen(){
+ let s=S();return `<div class="hero"><div class="tag">FAMILY SIMULATION</div><h1>Raise the next generation.</h1><p class="muted">Lebih banyak interaksi anak: school, play, train, gift, talk dan family day.</p></div><br><div class="card"><button class="btn primary" data-a="new-child">Have a Child</button></div><br><div class="grid g3">${s.relationship.children.map((c,i)=>`<div class="card"><h2>${esc(c.name)}</h2><div class="small muted">Age ${c.age}</div><br>${bar("Development",c.development)}${bar("Education",c.education)}${bar("Health",c.health)}${bar("Bond",c.bond)}<br><div class="grid g2"><button class="btn green" data-a="child-action" data-i="${i}" data-type="play">Play</button><button class="btn cyan" data-a="child-action" data-i="${i}" data-type="study">Study</button><button class="btn orange" data-a="child-action" data-i="${i}" data-type="gift">Gift</button><button class="btn" data-a="child-action" data-i="${i}" data-type="talk">Talk</button></div></div>`).join("")||`<div class="card notice fullrow">Belum ada anak.</div>`}</div>`;
 }
+function newChild(){let s=S(),name=prompt("Nama anak:","Baby "+(s.relationship.children.length+1));if(name===null)return;s.relationship.children.push({id:uid("child"),name:name.trim()||"Baby",age:0,development:10,education:5,health:90,bond:70});log("Anak "+name+" masuk ke keluarga.");save();render()}
+function childAction(i,type){let s=S(),c=s.relationship.children[i];if(!c)return;let effects={play:[5,0,1,5],study:[2,7,0,3],gift:[1,0,3,4],talk:[2,2,0,6]}[type];c.development=clamp(c.development+effects[0],0,100);c.education=clamp(c.education+effects[1],0,100);c.health=clamp(c.health+effects[2],0,100);c.bond=clamp(c.bond+effects[3],0,100);advanceDaysInternal(1);log("Family activity: "+type+" bersama "+c.name);save();render()}
 
-function openPartner(p){
-  openModal(`<div class="profile-head">${partnerAvatarHTML(p)}<div>
-    <span class="rarity ${p.rarity}">${p.rarity}</span>
-    <h2>${esc(p.name)}</h2><div class="muted">${esc(p.country)} · ${esc(p.occupation)}</div>
-  </div></div>
-  <hr>
-  <div class="grid g2">
-    <div class="card">${info("Personality",p.personality)}${info("Affection",p.affection)}${info("Trust",p.trust)}${info("Jealousy",p.jealousy)}${info("Mood",p.mood)}${info("Status",p.relationshipStatus)}</div>
-    <div class="card"><h3>Inventory</h3><div class="list">${p.inventory.map(x=>`<div class="list-item">${esc(x)}</div>`).join("")}</div></div>
-  </div>
-  <div class="actions">
-    <button class="btn primary" data-action="chatPartner" data-id="${p.id}">Chat</button>
-    <button class="btn" data-action="partnerDate" data-id="${p.id}">Date</button>
-    <button class="btn" data-action="partnerPhoto" data-id="${p.id}">Change Photo</button>
-    <button class="btn" data-action="editPartner" data-id="${p.id}">Edit Profile</button>
-    <button class="btn warn" data-action="marryPartner" data-id="${p.id}">Marriage</button>
-    <button class="btn good" data-action="haveChildWith" data-id="${p.id}">Have Child</button>
-  </div>`);
+function awardsScreen(){let s=S();return `<div class="hero"><div class="tag">TROPHY ROOM</div><h1>Names that mean something.</h1><p class="muted">Trophy names use real competition/award names. Visual trophy shapes are rendered with CSS so this remains one HTML file.</p></div><br><div class="grid g4">${(s.football.trophies.length?s.football.trophies:["FIFA World Cup","UEFA Champions League","Premier League","Ballon d'Or","Golden Boot"]).map((x,i)=>`<div class="card center"><div class="trophy">🏆</div><h3>${esc(x)}</h3><div class="small muted">${i%2?"Player Award":"Competition Trophy"}</div></div>`).join("")}</div><br><div class="card"><h2>Available Awards</h2><div class="grid g3">${AWARDS.map(x=>`<div class="item">★ ${esc(x)}</div>`).join("")}</div></div>`}
+
+function newsScreen(){let s=S();return `<div class="hero"><div class="tag">RV WORLD NEWS</div><h1>The world keeps moving.</h1><p class="muted">News muncul dari simulasi tanggal, transfer, sponsor, hasil pertandingan dan perkembangan dunia.</p></div><br><div class="list">${s.world.news.map(n=>`<div class="card"><h3>${esc(n.title)}</h3><div class="small muted">${esc(n.date)}</div></div>`).join("")||`<div class="card notice">Belum ada berita. Advance time untuk membuat dunia bergerak.</div>`}</div>`}
+function guideScreen(){return `<div class="hero"><div class="tag">ARCHITECTURE</div><h1>Single-file professional sandbox.</h1><p class="muted">Semua UI, CSS, data, game logic dan save system berada di file ini. Tidak ada npm, build step atau framework.</p></div><br><div class="grid g2"><div class="card"><h2>What is inside?</h2><div class="list">${["Real-world club directory snapshot","Continents & countries","National teams + 2026 World Cup directory","Domestic / continental / world competitions","Calendar with real month lengths","Transfer market","Club ownership & custom players","Real-world sponsor names","Post comments & threads","Partner contextual chat","Children interactions","Local autosave"].map(x=>`<div class="item">✓ ${x}</div>`).join("")}</div></div><div class="card"><h2>Important technical note</h2><p class="muted">Satu HTML bisa jadi game client-side yang besar dan playable. Untuk AI LLM sungguhan, multiplayer, live football APIs, cloud save dan secure authentication, kamu butuh backend. Jangan taruh API key rahasia di HTML publik GitHub.</p><p class="small muted">Versi ini sengaja tetap playable offline dan aman untuk GitHub Pages.</p></div></div>`}
+function profileScreen(){let s=S();return `<div class="hero"><div class="tag">PLAYER PROFILE</div><h1>Edit your identity.</h1></div><br><div class="card"><form id="profileForm"><div class="formgrid"><div><label>Name</label><input id="pname" value="${esc(s.player.name)}"></div><div><label>Age</label><input id="page" type="number" value="${s.player.age}"></div><div><label>Country</label><input id="pcountry" value="${esc(s.player.country)}"></div><div><label>Position</label><select id="ppos">${["GK","CB","LB","RB","DMF","CMF","AMF","LW","RW","ST"].map(x=>`<option ${x===s.player.position?"selected":""}>${x}</option>`).join("")}</select></div></div><br><button class="btn primary">Save</button></form></div>`}
+function savesScreen(){return `<div class="hero"><div class="tag">SAVE SLOTS</div><h1>Three careers.</h1></div><br><div class="grid g3">${DB.slots.map((s,i)=>`<div class="card"><h2>Slot ${i+1}</h2><p class="small muted">${s?esc(s.player.name)+" • "+esc(s.player.club):"Empty"}</p>${s?`<button class="btn primary full" data-a="load-slot" data-i="${i}">Load</button><br><br><button class="btn red full" data-a="delete-slot" data-i="${i}">Delete</button>`:`<button class="btn primary full" data-a="new-slot" data-i="${i}">Create</button>`}</div>`).join("")}</div>`}
+
+function render(){
+ let content={dashboard:dashboard,calendar:calendarScreen,world:worldScreen,clubs:()=>clubsScreen(""),national:nationalScreen,competitions:competitionsScreen,football:footballScreen,training,transfer:transferScreen,business:businessScreen,myclub:myClubScreen,players:playersScreen,clubmarket:clubMarket,sponsors:sponsorsScreen,social:socialScreen,partners:partnersScreen,family:familyScreen,awards:awardsScreen,news:newsScreen,guide:guideScreen,profile:profileScreen,saves:savesScreen}[screen]();
+ document.getElementById("app").innerHTML=shell(content);mobile=false;
 }
+function modal(x){let e=document.getElementById("modal");e.innerHTML='<div class="modal">'+x+'</div>';e.classList.remove("hidden")}
+function closeModal(){document.getElementById("modal").classList.add("hidden");document.getElementById("modal").innerHTML=""}
 
-function chatPartner(id){
-  const p=game.player.partners.find(x=>x.id===id);if(!p)return;
-  openModal(`<h2>Chat · ${esc(p.name)}</h2>
-    <div id="chatLog" class="list" style="max-height:360px;overflow:auto">
-      ${(p.memories||[]).slice(-12).map(m=>`<div class="comment">${esc(m)}</div>`).join("")}
-    </div>
-    <form id="chatForm" style="margin-top:12px">
-      <input type="hidden" name="partnerId" value="${p.id}">
-      <div class="field"><textarea name="message" required placeholder="Tulis pesan ke ${esc(p.name)}..."></textarea></div>
-      <button class="btn primary">Send</button>
-    </form>`);
-}
+function advanceDaysInternal(days){
+ let s=S();for(let z=0;z<days;z++){s.cal.d++;s.player.energy=clamp(s.player.energy+2,0,100);if(s.cal.d>daysInMonth(s.cal.y,s.cal.m)){s.cal.d=1;s.cal.m++;s.finance.cash+=s.finance.weekly*4;if(s.cal.m>12){s.cal.m=1;s.cal.y++;s.football.season=(s.cal.y)+"/"+String((s.cal.y+1)).slice(2)}s.relationship.children.forEach(c=>{if(Math.random()<.12){c.age++;c.education=clamp(c.education+1,0,100)}})}if(s.finance.businesses.length)s.finance.cash+=s.finance.businesses.reduce((a,b)=>a+b.revenue*b.level,0)/30;if(Math.random()<.16)worldNews()}}
+function advanceDays(n=1){advanceDaysInternal(n);save();render();toast("Waktu maju "+n+" hari.")}
+function worldNews(){let s=S(),c=pick(CLUBS);let templates=[`${c.name} mengumumkan perkembangan besar menjelang pertandingan berikutnya.`,`Sponsor global mulai mencari wajah baru untuk kampanye berikutnya.`,`Transfer window memanas setelah rumor pemain bintang.`,`Kompetisi ${pick(CLUB_COMP)[0]} memasuki fase penting.`,`Pelatih ${c.name} menyiapkan perubahan taktik.`];s.world.news.unshift({title:pick(templates),date:dateStr(s)});s.world.news=s.world.news.slice(0,30)}
 
-function aiReply(p,msg){
-  const lower=msg.toLowerCase();
-  let reply="";
-  if(/capek|lelah|tired|exhaust/.test(lower)){
-    reply=p.personality==="protective"
-      ?"Istirahat dulu. Jangan maksain diri cuma karena kamu pengin selalu kuat."
-      :"Kamu habis latihan lagi ya? Cerita dong, hari ini bagian paling berat apa?";
-  }else if(/menang|gol|match|pertandingan/.test(lower)){
-    reply="Aku ikut seneng. Tapi jangan cuma cerita hasilnya, aku pengin tahu kamu tadi mainnya gimana.";
-  }else if(/sayang|cinta|love|kangen|rindu/.test(lower)){
-    reply=p.personality==="romantic"
-      ?"Aku juga kepikiran kamu. Jangan bikin aku senyum sendirian begini."
-      :"Hehe, kamu tiba-tiba manis banget. Ada maunya nih?";
-  }else if(/uang|bisnis|sponsor/.test(lower)){
-    reply="Kamu memang lagi sibuk banget sama karier dan bisnis. Aku dukung, asal jangan sampai aku cuma dapat sisa waktu.";
-  }else if(/anak|family|keluarga/.test(lower)){
-    reply="Kalau soal keluarga, aku pengin kita benar-benar hadir, bukan cuma punya status keluarga.";
-  }else if(/maaf|sorry/.test(lower)){
-    reply=p.trust>65
-      ?"Aku terima permintaan maafmu. Tapi aku perlu lihat tindakanmu juga."
-      :"Aku dengar. Kasih aku waktu sedikit untuk tenang.";
-  }else{
-    const pool=[
-      `Aku dengerin. Menurut kamu sendiri, ${p.personality==="ambitious"?"apa langkah berikutnya?":"apa yang paling kamu rasain sekarang?"}`,
-      "Ceritain lebih banyak. Aku nggak mau cuma jawab satu kalimat.",
-      "Oke, aku simpan ini. Ada bagian lain yang belum kamu ceritain?",
-      "Kalau aku jadi kamu, aku mungkin bakal mikir dua kali. Tapi aku pengin dengar alasanmu dulu.",
-      "Hmm. Aku punya pendapat, tapi aku pengin tahu kamu sebenarnya berharap aku jawab apa."
-    ];
-    reply=pool[rand(0,pool.length-1)];
-  }
-  if(p.jealousy>70&&/pasangan|partner|date|cewek|cowok/.test(lower)){
-    reply+=" Dan jangan bikin aku cemburu ya.";
-  }
-  return reply;
-}
-
-function partnerMessage(id,msg){
-  const p=game.player.partners.find(x=>x.id===id);if(!p)return;
-  p.memories=p.memories||[];
-  p.memories.push(`Kamu: ${msg}`);
-  const reply=aiReply(p,msg);
-  p.memories.push(`${p.name}: ${reply}`);
-  p.mood=clamp(p.mood+rand(-2,4),0,100);
-  p.affection=clamp(p.affection+(msg.length>30?2:1),0,100);
-  p.trust=clamp(p.trust+(msg.includes("bohong")?-3:1),0,100);
-  if(/orang lain|cewek|cowok|date/.test(msg.toLowerCase()))p.jealousy=clamp(p.jealousy+5,0,100);
-  saveGame();chatPartner(id);
-}
-
-function partnerDate(id){
-  const p=game.player.partners.find(x=>x.id===id);if(!p)return;
-  if(game.player.money<750000)return toast("Date butuh Rp750.000.");
-  game.player.money-=750000;
-  p.affection=clamp(p.affection+rand(5,10),0,100);
-  p.trust=clamp(p.trust+rand(2,7),0,100);
-  p.mood=clamp(p.mood+10,0,100);
-  p.memories.push(`Date bersama pada ${formatDate()}.`);
-  advanceDayCore(1,false);
-  saveGame();render();toast(`${p.name} senang dengan date kalian.`);
-}
-
-function marryPartner(id){
-  const p=game.player.partners.find(x=>x.id===id);if(!p)return;
-  if(p.affection<85||p.trust<70)return toast("Affection minimal 85 dan trust 70.");
-  p.married=true;p.relationshipStatus="married";
-  p.memories.push("Pernikahan.");
-  saveGame();closeModal();render();toast(`${p.name} sekarang menjadi pasangan resmi.`);
-}
-
-function haveChildWith(id){
-  const partner=game.player.partners.find(x=>x.id===id);if(!partner)return;
-  if(partner.affection<75)return toast("Affection minimal 75.");
-  if(game.player.money<5000000)return toast("Butuh Rp5.000.000 untuk family event.");
-  game.player.money-=5000000;
-  const name=prompt("Nama anak:");
-  if(!name)return;
-  const child={
-    id:uid("child"),name,age:0,health:100,education:0,bond:60,
-    hobby:["Football","Music","Art","Gaming","Science"][rand(0,4)],
-    talent:["Sport","Creative","Leadership","Academic","Social"][rand(0,4)],
-    birthDay:game.world.day,birthMonth:game.world.month
-  };
-  game.player.children.push(child);
-  partner.children.push(child.id);
-  partner.affection=clamp(partner.affection+8,0,100);
-  saveGame();render();toast(`${name} bergabung dalam keluarga.`);
-}
-
-/* =========================
-   CHILD ACTIONS
-   ========================= */
-
-function childAction(id,kind){
-  const c=game.player.children.find(x=>x.id===id);if(!c)return;
-  const cost={play:100000,study:150000,gift:300000,sport:200000}[kind]||100000;
-  if(game.player.money<cost)return toast("Uang tidak cukup.");
-  game.player.money-=cost;
-  if(kind==="play")c.bond=clamp(c.bond+7,0,100);
-  if(kind==="study")c.education=clamp(c.education+7,0,100);
-  if(kind==="gift"){c.bond=clamp(c.bond+5,0,100);c.hobby=["Music","Art","Gaming","Football"][rand(0,3)]}
-  if(kind==="sport"){c.health=clamp(c.health+5,0,100);if(c.hobby==="Football")c.talent="Sport"}
-  advanceDayCore(1,false);saveGame();render();toast(`${kind} selesai bersama ${c.name}.`);
-}
-
-/* =========================
-   SOCIAL
-   ========================= */
-
-function createPost(){
-  openModal(`<h2>New RV-Gram Post</h2>
-  <form id="postForm">
-    <div class="field"><label>Caption</label><textarea name="text" required placeholder="Apa yang mau kamu posting?"></textarea></div>
-    <div class="field"><label>Tag</label><select name="tag"><option>Career</option><option>Life</option><option>Family</option><option>Business</option><option>Football</option><option>Relationship</option></select></div>
-    <button class="btn primary">Post</button>
-  </form>`);
-}
-
-function postNow(text,tag){
-  const p=game.player;
-  const viral=chance(.12);
-  const likes=rand(10,200)+(viral?rand(500,5000):0);
-  const followers=rand(1,30)+(viral?rand(100,800):0);
-  p.social.posts.push({
-    id:uid("post"),text,tag,date:formatDate(),likes,views:likes*rand(3,12),
-    comments:generateComments(likes,viral)
-  });
-  p.likes+=likes;
-  p.followers+=followers;
-  if(viral){p.fame+=5;p.social.notifications.unshift("Postinganmu viral.");}
-  saveGame();closeModal();render();
-  toast(viral?"POSTINGAN VIRAL!":"Posting berhasil.");
-}
-
-function generateComments(likes,viral){
-  const arr=[
-    "Legend.",
-    "Gila sih.",
-    "Semoga next match menang.",
-    "Proud of you.",
-    "Konten berikutnya kapan?",
-    "Ini keren banget.",
-    "Bro is cooking.",
-    "Semangat terus."
-  ];
-  const n=clamp(Math.round(likes/120),1,viral?8:4);
-  return Array.from({length:n},()=>({
-    id:uid("comment"),
-    user:["rvfan_"+rand(100,999),"footballtalk","fanpage_rv","anonymous"][rand(0,3)],
-    text:arr[rand(0,arr.length-1)],
-    likes:rand(0,100),
-    replies:[]
-  }));
-}
-
-function openComments(id){
-  const post=game.player.social.posts.find(x=>x.id===id);if(!post)return;
-  openModal(`<h2>Comments</h2><div class="list">
-    ${post.comments.length?post.comments.map(c=>`<div class="comment">
-      <b>@${esc(c.user)}</b><div>${esc(c.text)}</div><div class="small muted">♥ ${c.likes}</div>
-      <button class="btn" data-action="replyComment" data-post="${post.id}" data-comment="${c.id}">Reply</button>
-      ${c.replies?.map(r=>`<div class="comment" style="margin-top:6px"><b>@${esc(r.user)}</b> ${esc(r.text)}</div>`).join("")||""}
-    </div>`).join(""):`<div class="empty">No comments.</div>`}
-  </div>`);
-}
-
-function replyComment(postId,commentId){
-  const post=game.player.social.posts.find(x=>x.id===postId);
-  const c=post?.comments.find(x=>x.id===commentId);
-  if(!c)return;
-  const text=prompt("Balas komentar:");
-  if(!text)return;
-  c.replies=c.replies||[];
-  c.replies.push({user:game.player.name,text});
-  saveGame();openComments(postId);
-}
-
-/* =========================
-   SPONSORS
-   ========================= */
-
-function sponsorDeals(){
-  openModal(`<h2>Sponsor Marketplace</h2>
-  <p class="muted">Brand nyata sebagai seed sponsor. Untuk publikasi komersial, penggunaan trademark/logo membutuhkan izin yang sesuai.</p>
-  <div class="list">${SPONSORS.map(s=>`<div class="list-item">
-    <div><b>${s}</b><div class="small muted">Potential endorsement partner</div></div>
-    <button class="btn" data-action="signSponsor" data-sponsor="${esc(s)}">Negotiate</button>
-  </div>`).join("")}</div>`);
-}
-
-function signSponsor(name){
-  const p=game.player;
-  const fee=rand(3000000,25000000)+p.fame*100000;
-  p.money+=fee;p.fame+=2;
-  p.social.notifications.unshift(`Sponsor deal: ${name}`);
-  saveGame();closeModal();render();toast(`${name} menawarkan deal senilai ${money(fee)}.`);
-}
-
-/* =========================
-   ADMIN
-   ========================= */
-
-function adminMax(){
-  const p=game.player;
-  p.money=999999999999;p.fame=99999;p.followers=9999999;p.energy=100;p.health=100;
-  Object.keys(p.stats).forEach(k=>p.stats[k]=99);
-  p.manualOvr=99;p.career.value=999999999999;
-  saveGame();render();toast("Resources dimaksimalkan.");
-}
-function unlockAll(){
-  game.player.inventory.borders=[
-    "Starter","OVR Green","OVR Silver","OVR Gold","Elite","GOAT","Dragon","Constellation","RV Sports"
-  ];
-  saveGame();render();toast("Semua border dibuka.");
-}
-function giveTrophy(){
-  const ids=Object.keys(TROPHIES);
-  const id=ids[rand(0,ids.length-1)];
-  game.player.inventory.trophies.push({
-    id:uid("trophy"),name:TROPHIES[id].name,season:game.world.season
-  });
-  saveGame();render();toast("Trophy diberikan.");
-}
-function adminPartner(){
-  const t=clone(PARTNER_CATALOG[rand(0,PARTNER_CATALOG.length-1)]);
-  t.id=uid("partner");t.unlocked=true;t.memories=[];
-  game.player.partners.push(t);
-  saveGame();render();toast("Partner ditambahkan.");
-}
-
-/* =========================
-   EVENT DELEGATION
-   ========================= */
-
-document.addEventListener("click",async e=>{
-  const b=e.target.closest("[data-action]");
-  if(!b)return;
-  const a=b.dataset.action;
-
-  if(a==="closeModal"){closeModal();return}
-  if(a==="nav"){game.screen=b.dataset.screen;saveGame();render();return}
-  if(a==="save"){saveGame();toast("Game saved.");return}
-  if(a==="logout"){game.player=null;game.screen="login";saveGame();render();return}
-  if(a==="newSlot"){game.slot=Number(b.dataset.slot);game.screen="create";render();return}
-  if(a==="backSlots"){game.screen="slots";render();return}
-  if(a==="loadSlot"){
-    const slot=Number(b.dataset.slot);
-    const save=game.saves?.[slot];
-    if(!save)return;
-    game=clone(save);
-    game.screen="dashboard";
-    saveGame();render();return;
-  }
-  if(a==="deleteSlot"){
-    const slot=Number(b.dataset.slot);
-    if(!confirm("Delete save slot ini?"))return;
-    if(game.saves)game.saves[slot]=null;
-    localStorage.setItem(SAVE_KEY,JSON.stringify(game));
-    render();return;
-  }
-
-  if(a==="advanceDay"){advanceDayCore(1,true);return}
-  if(a==="quickTraining"){training();return}
-  if(a==="rest"){rest();return}
-  if(a==="buyRest"){buyRest(Number(b.dataset.cost),Number(b.dataset.energy));return}
-  if(a==="playMatch"){playMatch();return}
-  if(a==="openTransfer"){transferModal();return}
-  if(a==="worldTab"){game.worldTab=b.dataset.tab;render();return}
-  if(a==="clubInfo"){showClub(b.dataset.id);return}
-  if(a==="nationalInfo"){showNational(b.dataset.id);return}
-  if(a==="competitionInfo"){showCompetition(b.dataset.id);return}
-  if(a==="scheduleCompetition"){
-    for(let i=1;i<=8;i++)scheduleEvent(i*7,`${b.dataset.id.toUpperCase()} Matchday ${i}`,"match");
-    saveGame();closeModal();render();toast("Season schedule generated.");return;
-  }
-  if(a==="prevMonth"){
-    game.world.month--;if(game.world.month<1){game.world.month=12;game.world.year--}
-    game.world.day=1;saveGame();render();return;
-  }
-  if(a==="nextMonth"){
-    game.world.month++;if(game.world.month>12){game.world.month=1;game.world.year++}
-    game.world.day=1;saveGame();render();return;
-  }
-  if(a==="today"){render();return}
-
-  if(a==="createBusiness"){createBusiness();return}
-  if(a==="businessUpgrade"){upgradeBusiness(b.dataset.id);return}
-  if(a==="businessBranch"){branchBusiness(b.dataset.id);return}
-  if(a==="sponsorDeals"){sponsorDeals();return}
-  if(a==="signSponsor"){signSponsor(b.dataset.sponsor);return}
-
-  if(a==="gachaPartner"){gachaPartner();return}
-  if(a==="partnerCatalog"){partnerCatalog();return}
-  if(a==="recruitCatalog"){recruitCatalog(b.dataset.id);return}
-  if(a==="chatPartner"){chatPartner(b.dataset.id);return}
-  if(a==="partnerDate"){partnerDate(b.dataset.id);return}
-  if(a==="partnerProfile"){
-    const p=game.player.partners.find(x=>x.id===b.dataset.id);if(p)openPartner(p);return;
-  }
-  if(a==="marryPartner"){marryPartner(b.dataset.id);return}
-  if(a==="haveChildWith"){haveChildWith(b.dataset.id);return}
-  if(a==="partnerPhoto"){partnerPhoto(b.dataset.id);return}
-  if(a==="editPartner"){editPartner(b.dataset.id);return}
-
-  if(a==="haveChild"){
-    const name=prompt("Nama anak:");
-    if(!name)return;
-    if(game.player.money<5000000)return toast("Butuh Rp5.000.000.");
-    game.player.money-=5000000;
-    game.player.children.push({
-      id:uid("child"),name,age:0,health:100,education:0,bond:60,
-      hobby:"Exploring",talent:"Unknown",birthDay:game.world.day,birthMonth:game.world.month
-    });
-    saveGame();render();return;
-  }
-  if(a==="childAction"){childAction(b.dataset.id,b.dataset.kind);return}
-
-  if(a==="createPost"){createPost();return}
-  if(a==="likePost"){
-    const post=game.player.social.posts.find(x=>x.id===b.dataset.id);
-    if(post){post.likes++;game.player.likes++;saveGame();render();}
-    return;
-  }
-  if(a==="openComments"){openComments(b.dataset.id);return}
-  if(a==="replyComment"){replyComment(b.dataset.post,b.dataset.comment);return}
-
-  if(a==="equipBorder"){
-    if(game.player.inventory.borders.includes(b.dataset.border)){
-      game.player.activeBorder=b.dataset.border;
-      saveGame();render();toast("Border equipped.");
-    }
-    return;
-  }
-  if(a==="createOwnedClub"){createOwnedClub();return}
-  if(a==="clubTransfer"){transferModal();return}
-  if(a==="customPlayer"){customPlayer();return}
-  if(a==="buyPlayer"){
-    const pl=REAL_PLAYERS.find(x=>x.id===b.dataset.player);if(!pl)return;
-    if(game.player.money<pl.value)return toast("Uang tidak cukup.");
-    game.player.money-=pl.value;
-    if(game.player.business.club){
-      game.player.business.club.squad.push(clone(pl));
-    }else{
-      game.player.career.club=pl.club;
-    }
-    saveGame();closeModal();render();toast(`${pl.name} direkrut.`);
-    return;
-  }
-
-  if(a==="toggleGod"){
-    game.player.godMode=!game.player.godMode;saveGame();render();return;
-  }
-  if(a==="adminMax"){adminMax();return}
-  if(a==="unlockAll"){unlockAll();return}
-  if(a==="giveTrophy"){giveTrophy();return}
-  if(a==="adminPartner"){adminPartner();return}
-  if(a==="resetCurrent"){
-    if(confirm("Reset karakter ini?")){
-      game.player=createDefaultPlayer();game.world=freshWorld();seedSeasonEvents();
-      saveGame();render();
-    }
-    return;
-  }
+document.addEventListener("click",e=>{
+ let b=e.target.closest("[data-a]");if(!b)return;let a=b.dataset.a;
+ if(a==="nav"){screen=b.dataset.screen;closeModal();render()}
+ else if(a==="mobile"){mobile=!mobile;render()}
+ else if(a==="advance")advanceDays(+b.dataset.days||1)
+ else if(a==="start-match")startMatch()
+ else if(a==="match-choice")matchChoice(+b.dataset.i)
+ else if(a==="train")train(b.dataset.stat)
+ else if(a==="offers")offers()
+ else if(a==="accept")acceptTransfer(+b.dataset.i)
+ else if(a==="club")clubModal(b.dataset.club)
+ else if(a==="league"){screen="clubs";render()}
+ else if(a==="national")nationalModal(b.dataset.national)
+ else if(a==="new-business")newBusiness()
+ else if(a==="create-biz")createBiz()
+ else if(a==="upgrade-biz"){let s=S(),x=s.finance.businesses[+b.dataset.i];if(x){s.finance.cash-=x.revenue*2;x.level++;x.revenue=Math.floor(x.revenue*1.35);save();render()}}
+ else if(a==="sponsor")sponsor(b.dataset.name)
+ else if(a==="comments")commentsModal(b.dataset.id)
+ else if(a==="comment-add")addComment(b.dataset.id)
+ else if(a==="like-post"){let p=S().social.posts.find(x=>x.id===b.dataset.id);if(p){p.likes++;S().social.likes++;save();render()}}
+ else if(a==="share"){let p=S().social.posts.find(x=>x.id===b.dataset.id);if(p){p.shares++;S().social.followers+=3;save();render()}}
+ else if(a==="chat-partner")chatModal(+b.dataset.i)
+ else if(a==="chat-send")chatSend(+b.dataset.i)
+ else if(a==="new-child")newChild()
+ else if(a==="child-action")childAction(+b.dataset.i,b.dataset.type)
+ else if(a==="close")closeModal()
+ else if(a==="club-buy")screen="clubmarket",render()
+ else if(a==="club-create-player")createPlayerModal()
+ else if(a==="edit-player")createPlayerModal(+b.dataset.i)
+ else if(a==="save-created-player")saveCreatedPlayer(b.dataset.i)
+ else if(a==="club-train"){let c=S().football.ownedClub;if(c){c.players.forEach(p=>p.ovr=clamp(p.ovr+1,40,99));c.rating=clamp(c.rating+1,1,99);save();render();toast("Squad trained.")}}
+ else if(a==="club-sponsor"){S().football.ownedClub.sponsor=pick(SPONSORS)[0];save();render()}
+ else if(a==="buy-player")buyPlayer(b.dataset.player)
+ else if(a==="month"){let s=S();s.cal.m=clamp(s.cal.m+(+b.dataset.d),1,12);save();render()}
+ else if(a==="load-slot"){DB.active=+b.dataset.i;if(!DB.slots[DB.active])DB.slots[DB.active]=fresh();save();screen="dashboard";render()}
+ else if(a==="new-slot"){DB.slots[+b.dataset.i]=fresh();DB.active=+b.dataset.i;save();screen="dashboard";render()}
+ else if(a==="delete-slot"){if(confirm("Delete slot?")){DB.slots[+b.dataset.i]=null;save();render()}}
 });
-
-document.addEventListener("submit",async e=>{
-  e.preventDefault();
-
-  if(e.target.id==="loginForm"){
-    const email=e.target.loginEmail.value.trim().toLowerCase();
-    if(!email)return;
-    if(!game.saves)game.saves=[null,null,null];
-    game.email=email;
-    game.isAdmin=ADMIN_EMAILS.includes(email);
-    game.screen="slots";
-    saveGame();render();
-    return;
-  }
-
-  if(e.target.id==="createForm"){
-    const f=new FormData(e.target);
-    const p=createDefaultPlayer();
-    p.name=f.get("name").trim();
-    p.age=Number(f.get("age"));
-    p.gender=f.get("gender");
-    p.country=f.get("country");
-    p.position=f.get("position");
-    p.background=f.get("background");
-
-    const file=document.getElementById("characterPhoto")?.files?.[0];
-    if(file)p.photo=await compressImage(file);
-
-    game.player=p;
-    game.world=freshWorld();
-    seedSeasonEvents();
-    if(!game.saves)game.saves=[null,null,null];
-    game.saves[game.slot]=clone({
-      version:VERSION,email:game.email,isAdmin:game.isAdmin,
-      screen:"dashboard",slot:game.slot,world:game.world,player:game.player
-    });
-    game.screen="dashboard";
-    saveGame();render();toast("Character berhasil dibuat.");
-    return;
-  }
-
-  if(e.target.id==="chatForm"){
-    const f=new FormData(e.target);
-    partnerMessage(f.get("partnerId"),f.get("message").trim());
-    return;
-  }
-
-  if(e.target.id==="businessForm"){
-    const f=new FormData(e.target);
-    const capital=Number(f.get("capital"));
-    if(capital<=0||game.player.business.cash<capital)return toast("Business cash tidak cukup.");
-    game.player.business.cash-=capital;
-    const company={
-      id:uid("biz"),name:f.get("name").trim(),category:f.get("category"),
-      city:f.get("city"),cash:capital,level:1,employees:3,
-      revenue:Math.max(100000,Math.round(capital*.03)),
-      profit:Math.max(50000,Math.round(capital*.011)),
-      valuation:capital*2,branches:0
-    };
-    game.player.business.companies.push(company);
-    saveGame();closeModal();render();toast(`${company.name} resmi berdiri.`);
-    return;
-  }
-
-  if(e.target.id==="ownedClubForm"){
-    const f=new FormData(e.target);
-    const budget=Number(f.get("budget"));
-    if(game.player.business.cash<budget)return toast("Business cash tidak cukup.");
-    game.player.business.cash-=budget;
-    game.player.business.club={
-      id:uid("ownedclub"),name:f.get("name").trim(),country:f.get("country"),
-      city:f.get("city"),stadium:f.get("stadium"),color:f.get("color"),
-      budget,squad:[],academy:[],value:budget
-    };
-    saveGame();closeModal();render();toast(`${f.get("name")} berhasil didirikan.`);
-    return;
-  }
-
-  if(e.target.id==="customPlayerForm"){
-    const f=new FormData(e.target);
-    const pl={
-      id:uid("customplayer"),name:f.get("name").trim(),age:Number(f.get("age")),
-      country:f.get("country"),position:f.get("position"),ovr:Number(f.get("ovr")),
-      potential:Number(f.get("potential")),value:Number(f.get("value")),salary:Number(f.get("salary")),
-      club:game.player.business.club?.name||"Free Agent",stats:makeStats(Number(f.get("ovr"))),
-      form:70,morale:75,injury:0
-    };
-    if(game.player.business.club){
-      game.player.business.club.squad.push(pl);
-      saveGame();closeModal();render();toast(`${pl.name} masuk squad klub.`);
-    }else{
-      saveGame();closeModal();toast(`${pl.name} dibuat sebagai custom player.`);
-    }
-    return;
-  }
-
-  if(e.target.id==="postForm"){
-    const f=new FormData(e.target);
-    postNow(f.get("text").trim(),f.get("tag"));
-    return;
-  }
-
-  if(e.target.id==="adminForm"){
-    const f=new FormData(e.target);
-    game.player.money=Math.max(0,Number(f.get("money")));
-    game.player.fame=Math.max(0,Number(f.get("fame")));
-    game.player.followers=Math.max(0,Number(f.get("followers")));
-    game.player.energy=clamp(Number(f.get("energy")),0,100);
-    game.player.health=clamp(Number(f.get("health")),0,100);
-    game.player.manualOvr=clamp(Number(f.get("manualOvr")),1,99);
-    saveGame();render();toast("Admin values updated.");
-    return;
-  }
+document.addEventListener("submit",e=>{
+ if(e.target.id==="postForm")createPost(e);
+ if(e.target.id==="profileForm"){e.preventDefault();let s=S();s.player.name=document.getElementById("pname").value.trim()||"Player";s.player.age=+document.getElementById("page").value||18;s.player.country=document.getElementById("pcountry").value.trim()||"Indonesia";s.player.position=document.getElementById("ppos").value;save();render();toast("Profile saved.")}
 });
-
-/* =========================
-   PARTNER PHOTO / EDIT
-   ========================= */
-
-function partnerPhoto(id){
-  openModal(`<h2>Change Partner Photo</h2>
-  <form id="partnerPhotoForm">
-    <input type="hidden" name="id" value="${id}">
-    <div class="field"><label>Photo</label><input name="photo" type="file" accept="image/*" required></div>
-    <button class="btn primary">Save Photo</button>
-  </form>`);
-}
-
-function editPartner(id){
-  const p=game.player.partners.find(x=>x.id===id);if(!p)return;
-  openModal(`<h2>Edit Partner</h2>
-  <form id="editPartnerForm">
-    <input type="hidden" name="id" value="${p.id}">
-    <div class="form-grid">
-      <div class="field"><label>Name</label><input name="name" value="${esc(p.name)}"></div>
-      <div class="field"><label>Age</label><input name="age" type="number" value="${p.age}"></div>
-      <div class="field"><label>Country</label><select name="country">${PARTNER_COUNTRIES.map(x=>`<option ${x===p.country?"selected":""}>${x}</option>`).join("")}</select></div>
-      <div class="field"><label>Occupation</label><input name="occupation" value="${esc(p.occupation)}"></div>
-      <div class="field"><label>Personality</label><select name="personality">${PERSONALITIES.map(x=>`<option ${x===p.personality?"selected":""}>${x}</option>`).join("")}</select></div>
-      <div class="field"><label>Border</label><select name="border">${game.player.inventory.borders.map(x=>`<option ${x===p.border?"selected":""}>${esc(x)}</option>`).join("")}</select></div>
-    </div>
-    <button class="btn primary">Save Partner</button>
-  </form>`);
-}
-
-/* =========================
-   IMAGE COMPRESSION
-   ========================= */
-
-function compressImage(file,max=720,quality=.82){
-  return new Promise((resolve,reject)=>{
-    const reader=new FileReader();
-    reader.onload=()=>{
-      const img=new Image();
-      img.onload=()=>{
-        const scale=Math.min(1,max/Math.max(img.width,img.height));
-        const c=document.createElement("canvas");
-        c.width=Math.max(1,Math.round(img.width*scale));
-        c.height=Math.max(1,Math.round(img.height*scale));
-        const ctx=c.getContext("2d");
-        ctx.drawImage(img,0,0,c.width,c.height);
-        resolve(c.toDataURL("image/jpeg",quality));
-      };
-      img.onerror=reject;
-      img.src=reader.result;
-    };
-    reader.onerror=reject;
-    reader.readAsDataURL(file);
-  });
-}
-
-document.addEventListener("submit",async e=>{
-  if(e.target.id==="partnerPhotoForm"){
-    e.preventDefault();
-    const f=new FormData(e.target);
-    const p=game.player.partners.find(x=>x.id===f.get("id"));
-    const file=e.target.querySelector('input[type="file"]').files[0];
-    if(!p||!file)return;
-    p.photo=await compressImage(file);
-    saveGame();closeModal();render();toast("Foto pasangan diperbarui.");
-  }
-
-  if(e.target.id==="editPartnerForm"){
-    e.preventDefault();
-    const f=new FormData(e.target);
-    const p=game.player.partners.find(x=>x.id===f.get("id"));
-    if(!p)return;
-    p.name=f.get("name").trim()||p.name;
-    p.age=Number(f.get("age"))||p.age;
-    p.country=f.get("country");
-    p.occupation=f.get("occupation").trim()||p.occupation;
-    p.personality=f.get("personality");
-    p.border=f.get("border");
-    saveGame();closeModal();render();toast("Partner profile updated.");
-  }
-});
-
-/* =========================
-   SEARCH HANDLERS
-   ========================= */
-
-document.addEventListener("input",e=>{
-  if(e.target.id==="clubSearch"){
-    const q=e.target.value.toLowerCase();
-    document.querySelectorAll(".club-row").forEach(row=>{
-      row.style.display=row.dataset.name.includes(q)?"flex":"none";
-    });
-  }
-  if(e.target.id==="partnerSearch"){
-    const q=e.target.value.toLowerCase();
-    const root=document.getElementById("partnerCatalogList");
-    if(!root)return;
-    root.innerHTML=PARTNER_CATALOG.filter(x=>
-      `${x.name} ${x.country} ${x.occupation} ${x.rarity}`.toLowerCase().includes(q)
-    ).slice(0,120).map(catalogPartner).join("");
-  }
-});
-
-/* =========================
-   NEWS
-   ========================= */
-
-function newsFeed(){
-  const p=game.player;
-  return [
-    {title:`${p.career.club} preparing for next match`,text:"Squad training intensity meningkat menjelang pertandingan."},
-    {title:"Transfer Market is heating up",text:"Klub-klub besar mulai bergerak menjelang transfer window."},
-    {title:"Sponsor market update",text:"Brand besar mencari athlete dengan engagement tinggi."},
-    {title:`${p.followers.toLocaleString("id-ID")} followers`,text:"Fanbase kamu terus tumbuh dari performa dan RV-Gram."},
-    {title:"International football window",text:"National teams mulai memanggil pemain untuk pertandingan regional dan kontinental."}
-  ];
-}
-
-/* =========================
-   SAVE SLOT SERIALIZATION
-   ========================= */
-
-function syncCurrentToSlot(){
-  if(!game.saves)game.saves=[null,null,null];
-  if(game.player){
-    game.saves[game.slot]={
-      version:VERSION,email:game.email,isAdmin:game.isAdmin,
-      screen:"dashboard",slot:game.slot,world:game.world,player:game.player
-    };
-  }
-}
-
-const originalSaveGame=saveGame;
-saveGame=function(){
-  syncCurrentToSlot();
-  try{
-    localStorage.setItem(SAVE_KEY,JSON.stringify(game));
-  }catch(e){
-    toast("LocalStorage penuh. Coba kurangi foto besar atau hapus save.");
-  }
-};
-
-/* =========================
-   MIGRATION / BOOT
-   ========================= */
-
-function migrate(){
-  if(!game.saves)game.saves=[null,null,null];
-  if(!game.world)game.world=freshWorld();
-  if(!game.version)game.version=VERSION;
-
-  if(game.player){
-    const d=createDefaultPlayer();
-    game.player={...d,...game.player};
-    game.player.stats={...d.stats,...(game.player.stats||{})};
-    game.player.career={...d.career,...(game.player.career||{})};
-    game.player.business={...d.business,...(game.player.business||{})};
-    game.player.business.companies=game.player.business.companies||[];
-    game.player.partners=game.player.partners||[];
-    game.player.children=game.player.children||[];
-    game.player.social=game.player.social||d.social;
-    game.player.social.posts=game.player.social.posts||[];
-    game.player.inventory={...d.inventory,...(game.player.inventory||{})};
-  }
-}
-migrate();
-
-if(game.player && !game.world.events.length)seedSeasonEvents();
-
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal()});
 render();
-
-/* autosave every 20 seconds */
-setInterval(()=>{
-  if(game.player)saveGame();
-},20000);
-
-/* keyboard shortcut */
-document.addEventListener("keydown",e=>{
-  if(e.key==="Escape"&&modal)closeModal();
-});
-
-/*
-  END OF RV LIFE V11 WORLD REBUILD
-*/
 </script>
 </body>
 </html>
